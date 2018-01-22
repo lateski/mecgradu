@@ -49,22 +49,52 @@ Reunalaskennan idea on samankaltainen kuin 80- ja 90-luvulla olleissa keskusyksi
 
 
 \subsection{Johdanto}
+Reunalaskenta vai reunapalvelu?
+MCC vai MEC?
+Pilvi vai palvelinkeskus
 
 
-
-\subsection{Reunalaskennan perusteet}
+\section{Reunalaskennan perusteet}
 Motivaatio
 
 Mistä reunalaskenta koostuu? (Suurimmat toimijat, keskeisimmät toiminnot)
 
-\subsubsection{Suurimmat osatoimijat}
+Mikä on MEC.
+Laskentateho ja riippuvuus akusta ovat mobiililaitteille keskeisiä ominaisuuksia. Reunalaskenta
+
+Mobiililaitteiden yleisiä ominaisuuksia ovat resurssien vähyys ja akkuvirran rajallisuus. Mobiililaitteiden käyttö on myös usein riippuvaista langattomista verkkoyhteyksistä.
+Palveluiden toiminta mobiililaitteilla on siis riippuvainen näiden kolmen ominaisuuden asettamista rajoista.
+Laskentaresurssien lisääminen johtaisin lyhyempään käyttöaikaan akkuvirralla. Suurempi akku mahdollistaa pidemmän käyttöajan, mutta se tekisi laitteesta suuremman. Akun kokoa ja laskentaresurssien määrää pyritäänkin tasapainottamaan.
+Voidaan pyrkiä minimoimaan laitteen virrankulutus esimerkiksi laittamalla laitteeseen heikkotehoisempi suoritin. Tämä näkyy siinä, millaisia palveluita mobiililaitteella voidaan tarjota.
+Esimerkiksi kuvankäsittelyä tai muuta raskaampaa laskentaa vaativaa toiminnallisuutta ei voida tällaisella laitteella tehdä. 
+Seuraava vaihtoehto olisi lähettää laskentaa tehokkaammille laitteille pilveen. Laskennan siirtäminen vie aikaa ja tällöin ei voida tarjota kovin reaaliaikaisia palveluita.
+Siirrettyyn laskentaan kuluva aika koostuu pääasiassa verkon viiveestä, siirrosta ja itse laskennasta. 
+Kokonaisuudessa siirtämiseen ja laskentaan kuluvan ajan määrään vaikuttaa pilven sijainti, verkon ruuhkaisuus, verkon kapasiteetti, sekä käytössä olevan laskentakapasiteetin määrä.
+Reunalaskenta on konsepti, jonka avulla laskenta voidaan tuoda lähemmäksi käyttäjää.
+
+Reunalaskennassa (MEC,Mobile Edge Computing vai MCC Mobile Cloud Computing?) on tarkoitus tuoda palvelinresursseja lähemmäksi käyttäjää ? reunalle.
+Tässä kontekstissa reunalla tarkoitetaan käyttäjän ja pilven väliin jäävää tilaa. TCP/IP-mallissa sovellustasolla olevia toimintoja ei siis esiinny tällä välillä.
+Reunalaskenta siis mahdollistaa palveluiden tuottamisen lähempänä käyttäjää. Lähempänä on hieman harhaan johtava termi, koska mikä tahansa pilveä lähempänä oleva palvelu on lähempänä, eikä siis välttämättä konkreettisesti lähellä. 
+
+Reunalaskennasta ei vielä ole olemassa kokonaisvaltaista arkkitehtuuria. Ongelmakenttä jakautuu kahteen osaan. Laitteiden fyysiseen sijoitteluun ja sovellustason toimintaan. Molemmat osat ovat toisistaan riippuvaisia.
+Arkkitehtuuri on myös riippuvainen tarjottavista palveluista. Toiset arkkitehtuurit tukevat toisia palvleuita paremmin kuin toiset, kompromisseilta on siis vaikea välttyä.
+
+Mobiililaite liikkuu usein käyttäjänsä mukana langattomasta verkosta toiseen.
+
+Mitä reunalaskenta on?
+Mitkä ovat mobiilin ongelmat nykyisellään?
+Mitkä ovat reunalaskennan haasteet?
+
+
+
+\subsection{Suurimmat osatoimijat}
 eNodeB on televerkossa tukiasemakontekstin kokonaisuus. Sen tehtäviin kuuluu teleradiotoiminnan järjestäminen. Mukaan lukien puhelinkeskuksien kanssa kommunikointi.
 
 UE (User Equipment) on yleisnimitys laitteelle joka hyödyntää pilven (cloud) ja reunan (edge) palveluita tietoliikenneyhteyksien avulla. Usein käyttäjälaitteen esimerkkinä toimii jokin mobiililaite kuten puhelin, mutta myös esimerkiksi auto. 
 
 Edge cloud on yleisnimitys reunapalveluiden tarjoamiseen tarkoitettuille toimijoille. Riippuen arkkitehtuurista reunapilvi koostuu yksittäisistä toimijoista tai reunaa lähellä olevista klustereista. Edgen on mahdollista tarjota palveluita pienemmillä viiveillä ja suuremmilla tiedonsiirtokapasiteeteillä verrattuna perinteisiin pilvipalveluihin. 
 
-\subsubsection{Keskisimmät toiminnot}
+\subsection{Keskisimmät toiminnot}
 
 Reunalaskennan keskeisin tarkoitus on laskennan siirtäminen reunalla toimivalle reunalaskentaklusterille. Reunaa voidaan lähestyä pilven ja käyttäjälaitteiden puolelta. Käyttäjälaitteiden, kuten älypuhelimien laskentateho on suhteellisen heikkoa, lisäksi ne ovat akkuvirrasta riippuvaisia. 
 Mobiililaitteen käyttöajan pidentämiseksi voidaan pyrkiä tekemään mahdollisimman vähän akkuakuluttavaa laskentaa paikallisesti, siirtämällä sitä reunalaskentaklusterille (Etsi se lähde jossa verrataan tietokoneita ja mobiililaitteita - eroa oli yhden kertaluokan verran).
