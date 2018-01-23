@@ -1,5 +1,7 @@
 *.aux
 *.log
 *.toc
-*.pdf
 *.synctex.gz
+*.bbl
+*.blg
+*.dvi
