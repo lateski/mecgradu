@@ -232,7 +232,7 @@ Tässä tutkielmassa reunasolmulla viitataan yksittäiseen reunalla sijaitsevaan
 palvelinklusteriin, joka tuottaa asiakkaille reunapalveluita. Edge Cloud koostuu reunasolmujen joukosta.
 
 Asiakaskohtaiselle reunainstanssille ei ole mitään vakiintunutta nimeä.
-Cloudlet on yksi ehdotettu toteutustekniikka tällaiselle asiakaskohtaiselle reunalla sijaitsevalle virtuaali-instanssille \cite{RefWorks:doc:5a65a533e4b0451a693fbf8e}.
+Cloudlet on yksi ehdotettu toteutustekniikka tällaiselle asiakaskohtaiselle reunalla sijaitsevalle virtuaali-instanssille \cite{satya09}.
 
 \section{Ominaisuudet}
 
@@ -310,6 +310,20 @@ Molempiin ratkaisuihin liittyy omat haasteensa. Etenkin voidaan olettaa että l�
 \section{Esitetyt ratkaisut}
 Reunalaskennasta löytyy valtavasti artikkeleita, joissa esitetään reunalaskentaan liittyvien haasteiden ratkaisuja. Ratkaisut ovat yksittäisi tapauksia eivätkä sinällään arkkitehtuuriratkaisuja. 
 \subsection{Cloudlet}
+Minkä ongelman cloudlet ratkaisee?
+Miten cloudlet toimii?
+Mitkä ovat cloudletin ongelmat?
+
+Virtuaalikoneisiin pohjautuva cloudlet\cite{satya09} on yksi tunnetuimmista reunapalveluiden konsepteista. Cloudletit ovat pohjimmiltaan tavallisia virtuaalikoneinstansseja.
+Käyttäjäkohtaisien virtuaalikoneiden ylläpitäminen jokaisella reunasolmulla on kuitenkin mahdoton ajatus resurssien näkökulmasta.
+Cloudlet ratkaisee ongelman siten että jokainen cloudlet pohjautuu cloudlet-pohjaan.
+Pohja on tietynlainen lähtötila virtuaalikoneelle, kuin "puhdas-asennus".
+Käyttäjän käyttäessä cloudlettiä, sen tilaan tulee muutoksia jotka "likaavat" puhtaan asennuksen.
+Kun käyttäjä lopettaa cloudletin käyttämisen, saatetaan haluta tallentaa cloudletin tila käyttäjän paluuta varten. Cloudletin virtuaali-instanssia ei tallenneta kokonaisena vaan ainaostaan käyttäjän siihen tekemät muutokset. Käyttäjän tekemät muutokset saadaan erotettua vertaamalla käyttäjän cloudlet-instanssia cloudlet-pohjaan. 
+Käyttäjäkohtaisien muutoksien tallentaminen vie huomattavasti vähemmän tallennustilaa, sekä siirrettäessä säästävät verkkokapasiteettiä pienemmästä koostaan johtuen.
+Tämä kuitenkin tarkoittaa että jokaisella reunasolmulla tulee olla cloudlet-pohja saatavilla ja käyttäjien cloudlettien on pohjauduttava johonkin rajalliseen määrään erilaisia cloudlet pohjia.
+
+
 \subsection{FMC – Follow me cloud}
 \subsection{Small Cell Cloud (SCeNB)}
 \subsection{MobiScud ja SMORE}
