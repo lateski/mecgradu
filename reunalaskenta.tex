@@ -244,6 +244,12 @@ Lisäksi pilven tai konesalien suunnasta asiaa lähestyttäessä runkoverkko tuk
 
 
 \subsection{Etälaskenta}
+Etälaskennan toteuttamiseksi tarvitaan vastaukset seuraaviin kysymyksiin. Mitä siirretään ja minne siirretään?
+
+MOCAssa oli selitetty kuinka muodostetaan yhteys in-network cloudiin.
+
+Etälaskenta voidaan karkeasti jakaa kahteen tyyppiin: Binääriseen ja osittaiseen \cite{mao17}. \textit{Onkohan ok lainata surveytä?}. Binäärisessä ohjelmasta suoritetaan selkeitä kokonaisuuksia joko reunasolmulla tai asiakaslaitteella. Osittaisessa etälaskennassa suoritusta siirretään dynaamisesti reunasolmulle. 
+
 Offloading on varmaan samankaltainen termi.
 Reunalla suoritettava etälaskenta saattaa siirtää ohjelman suorituksen kokonaan tai osittain asiakaslaitteelta reunasolmulle. Laskennan tulos lähetetään takaisin asiakaslaitteelle ja sitä käytetään osana muuta laskentaa. 
 Laskennan hallinta suoritetaan asiakaslaitteella. Etälaskentaa motivoi raskaiden operaatioiden siirtäminen asiakaslaitteelta reunalle. Erityisesti mobiililaitteilla akkuvirran säästäminen on keskinen tekijä. Etälaskennan kannattavuus puhtaasti akkuvirran näkökulmasta muuttuu kannattavaksi, kun suoritettavan ohjelman lähettäminen ja tuloksen vastaanottaminen kuluttavat vähemmän akkua kuin ohjelman suorittaminen paikallisesti asiakaslaitteella.
@@ -251,6 +257,8 @@ Todellisuudessa pelkästään akkuvirran säästäminen ei riitä, sillä muuten
 Reunalle on teoriassa nopeampi yhteys ja nopeampi vastaus. Voitaisiin siis laskea että suoritusajassa mitaten ohjelman siirtäminen reunalle on kannattavaa kun suoritettavan ohjelman lähettäminen palvelimelle, sen suorittaminen ja tuloksen vastaanottaminen kestävät vähemmän aikaa kuin ohjelman suorittaminen paikallisesti. 
 Ongelmana on että suorituksien aikavaatimus ei ole eksakti vaan ainoastaan arivoitavissa. Lisäksi suoritusaikainen aika-arvion tekeminen vie myös aikaa. 
 Ajan ja akkuvirran säästämiseksi tehtävät toimet ovat siis keskeisimmät haasteet etälaskentaa toteutettaessa. Näiden käsittelyä ei tämän enempää tässä tutkielmassa käsitellä niiden monimutkaisuuden vuoksi.
+
+
 \subsection{Etäinstanssi}
 Etäinstanssissa asiakaslaitteella on yhteys reunalle. Asiakaslaitteelle tulee ainoastaan näkymä palvelun tilasta omalle laitteelleen. Vastaavasti kuin ottaisi SSH tai VNC yhteyden toiselle laitteelle. 
 
@@ -280,11 +288,16 @@ Migraation kesto on riippuvainen siirrettävän datan määrästä, sekä
 Mikäli käyttäjä haluaa keskeyttää reunapalvelun käytön saatetaan tila tai laskenta siirtää käyttäjän laitteelle tai jättää reunalle odottamaan.
 
 \cite{ha2015adaptive} Tukivat että migraatio virtuaalikone-aihioilla + muutoksien siirroilla aiheuttaa noin 1s downtimen hitaahkolla verkolla. Tavoitteena oli minimoida siirrettävän datan määrä ja tutkia handoff+ migraation aiheuttaman käyttökatkoksen pituutta. Testi tehtiin cloudleteillä.
+
+MobiScudissa ja SMOREssa esitetään että käytetään livemigraatiota, mutta ei sen tarkemmin pureuduta ongelmaan. Todetaan vain että käytetään live migraatiota
 \subsection{Integraatio mobiiliverkkoihin}
+SMOREssa ratkaisu on että SMORE nuuskii/monitoroi LTE/EPC kommunikointia ja injektoituu väliin.
+
 \subsection{IP-verkko}
 Service discovery IP-verkossa.
 \subsection{Kommunikaatio asiakaslaitteen (UE) ja Reunasolmun kanssa}
 \subsection{Hallinta}
+Sisältää palveluiden etsimisen (Service Discovery) ja palveluihin ohjauksen esim Software Defined Networkingin avulla (SDN).
 
 \section{Reunan rakenne}
 Rakenteeseen vaikuttaa ehkä eniten seuraavat kaksi valintaa
