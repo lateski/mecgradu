@@ -314,22 +314,34 @@ Minkä ongelman cloudlet ratkaisee?
 Miten cloudlet toimii?
 Mitkä ovat cloudletin ongelmat?
 
-Virtuaalikoneisiin pohjautuva cloudlet\cite{satya09} on yksi tunnetuimmista reunapalveluiden tuottamisen konsepteista.
-Cloudletin ideana on hyödyntää tavanomaisia virtuaalikone-instansseja, joita suoritetaan reunasolmussa. 
-Cloudlet on ajateltu käyttäjäkohtaiseksi ja yhdellä reunasolmulla voidaan saman aikaisesti suorittaa usean käyttäjän cloudletteja.
+Cloudlet on reunasolmulla suoritettava virtuaalikone-teknologiaan perustuva ratkaisu. \cite{satya09}
+Virtuaalikoneisiin pohjautuva cloudlet on yksi tunnetuimmista reunapalveluiden tuottamisen konsepteista.
+Cloudletin ideana on hyödyntää muokattuja virtuaalikone-instansseja, joita voidaan suorittaa reunasolmussa. 
+Cloudletillä tarkoitetaan järjestelmää, joka suorittaa reunasolmulla virtuaalikoneiden hallintaan liittyviä toimia.
+Yhdellä reunasolmulla voidaan siis suorittaa usean eri käyttäjän virtuaalikoneita. 
 
-Virtuaalikoneiden käyttö cloudlettien perustana mahdollistaa helpon tavan jakaa reunasolmun resursseja ja pitää asikaskohtaiset instanssit toisistaan erillään. 
-Suoritusaikana cloudletin käytössä alevat resurssit voidaan rajata samoin kuin perinteisenkin virtuaalikoneen.
-Käyttäjäkohtaisien virtuaalikoneiden säilöminen reunasolmulla on kuitenkin mahdoton ajatus resurssien näkökulmasta.
-Etenkin tilanteessa jossa käyttäjä haluaisi siirtää cloudlettinsä toiselle reunasolmulle jouduttaisiin koko virtuaalikoneen kuva siirtämään verkon yli reunasolmulta toiselle. 
-Cloudlet ratkaisee ongelman siten että jokainen cloudlet pohjautuu cloudlet-pohjaan.
-Pohja on tietynlainen lähtötila virtuaalikoneelle – kuin "puhdas-asennus".
-Käyttäjän käyttäessä cloudlettiä, sen tilaan tulee muutoksia jotka "likaavat" puhtaan asennuksen.
-Kun käyttäjä lopettaa cloudletin käyttämisen, halutaan cloudletin tila tallentaa käyttäjän paluuta varten. Cloudletin virtuaali-instanssia ei tallenneta kokonaisena vaan siitä tallennetaan ainoastaan käyttäjän siihen tekemät muutokset. Käyttäjän tekemät muutokset saadaan erotettua vertaamalla käyttäjän cloudlet-instanssia cloudlet-pohjaan. 
-Muutokset tallennetaan tiedostoon joka voidaan pakata tiedostokoon minimoimiseksi.  
-Käyttäjäkohtaisien muutoksien tallentaminen vie huomattavasti vähemmän tallennustilaa, kuin kokonaisen virtuaalikonekuvan tallentaminen.
-Pienen tiedostokoon ansiosta käyttäjän cloudlet-kuvake on huomattavasti helpommin siirrettävissä.
-Tiedostokoko on kertaluokkaa pienempi kuin kokonainen virtuaalikoneen kuva.
+Reunan luonteesta johtuen cloudletin oletetaan ylläpitävän ainoastaan sellaisia palveluita jotka käyttävät reunaa hetkellisesti tai väliaikaisesti \citep{satya09}. Cloudlettiä ei ole siis tarkoitettu pidempiaikaiseen tallennukseen, vaan enemminkin suoritusaikaisten tarpeiden täyttämiseen. 
+
+Cloudletin keskeisimmäksi rakennuspalikaksi on valittu virtuaalikone. Verrattuna prosessi tai sovellus tason virtualisointiin, virtuaalikoneiden käyttö ei aseta rajoitteita palvelun toteuttamiseen käytettävään ohjelmointikieleen \cite{satya09}.
+Lisäksi virtuaalikoneiden käyttö cloudlettien perustana mahdollistaa helpon tavan jakaa reunasolmun resursseja ja pitää asikaskohtaiset instanssit toisistaan erillään. 
+
+Tavallisen virtuaalikone-kuvan suuruus tallennettuna on noin 8 gigatavua.
+Koska reunasolmujen pääasiallinen idea on tarjota suoritusympäristö palveluille,
+ei näin suuren tiedoston tallentaminen reunasolmulle jokaista käyttäjää kohden ole tarkoituksenmukaista.
+Ja kuten jo aiemmin mainittu, reunasolmujen resurssit oletetaan rajallisiksi verrattuna palvelinsaliympäristöön.
+Täten pidempiaikainen tiedostojen tallennus on parempi tehdä keskitettyihin ratkaisuihin.
+Sen lisäksi että tallentaminen reunasolmuille ei ole mahdollista, kokonaisen virtuaalikoneen siirtäminen verkon yli olisi huomattavan hidasta ja se tukkisi verkon.
+Siirrettävyys korostuu etenkin tilanteessa jossa siirrettäviä virtuaalikoneita olisi useita.
+
+Cloudletin keskeisimpiä oivalluksia onkin käyttää virtuaalikoneissa yhteistä pohjaa. 
+Yhteisen pohjan käyttäminen mahdollistaa sen että jokaisesta virtuaalikoneesta voidaan tallentaa vain pohjaan tehdyt muutokset.
+Muutokset sisältävää tiedostoa kutsutaan pinnoitteeksi.
+Pinnoitteen ja pohjan yhdistämiseen käytetään dynaamista virtuaalikone synteesiä.
+Dynaamisuudella tarkoitetaan sitä, että käyttäjän alkaessa käyttämään cloudlet infrastruktuuri rakentaa
+käyttäjän muutokset sisältävästä pinnoitteesta ja virtuaalikone-pohjasta, suoritettavan virtuaalikoneen. 
+Dynaaminen virtuaalikoneiden syntetisointi edellyttää että cloudletiltä löytyy oikeanlainen virtuaalikonepohja.
+Kun virtuaalikone halutaan sulkea cloudlet tallentaa virtuaalikoneeseen tehdyt muutokset pinnoitteeksi ja pakkaa tiedoston. 
+Satayanaran ensimmäisessä cloudletteja käsittelevässä julkaisussa \cite{satya09} muutoksien tallentaminen pinnoitteeksi tuottaa noin 100-200 megatavun kokoisen tiedoston. Tämän kokoinen tiedosto on nykyisillä tiedosiirtonopeuksilla siirrettävissä inhimillisessä ajassa, jopa langattomien yhteyksien yli.
 
 Cloudlettejä voi olla useita erilaisia, siispä cloudlet toiminta edellyttää että jokaisella reunasolmulla tulee olla oikean cloudlet-pohja saatavilla ja käyttäjien cloudlettien on pohjauduttava johonkin rajalliseen määrään erilaisia cloudlet pohjia.
 
