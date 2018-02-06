@@ -174,7 +174,7 @@ Tämä laite saattaisia turvautua reunalaskentaan esimerkiksi jos akku on vähis
 \item Mikä on MEC?
 \item Reunalaskenta vai reunapalvelu?
 \item MCC vai MEC?
-\item Pilvi vai palvelinkeskus
+\item Pilvi vai palvelinkeskus, palvelinresursseja.
 \item Mitä reunalaskenta on?
 \item Miksei siirretä laskentaa pilveen?
 \item Mitkä ovat mobiilin ongelmat nykyisellään?
@@ -361,9 +361,26 @@ Perusteluina asiakaslaitteen käyttölle tallennusmediana voisi olla tapaus, jos
 
 \subsection{FMC – Follow me cloud}
 \subsection{Small Cell Cloud (SCeNB)}
-SCC (Small Cell Cloud) perusidea on reunapalvleuiden integroiminen osaksi olemassa 
-olevaa LTE-verkkoinfrastruktuuria. Paveluita tuotettaisiin tukiasemiin (Base Station) sijoitetuilla palvelinresursseilla. Televerkkojen käyttö palvelun tarjoamiseen rajoittaa Täten palvelun kohteena on pääasiassa
-älypuhelit ja muut televerkossa toimivat laitteet. 
+SCC (Small Cell Cloud, pienisoluinen pilvi?) perusidea on reunapalveluiden integroiminen osaksi olemassa olevaa LTE-verkkoinfrastruktuuria. 
+Reunaopalveluita tuotettaisiin tukiasemiin (Base Station) sijoitetuilla palvelinresursseilla.
+Koska palveluiden tuottamiseen käytettäisiin matkapuhelinverkkoa, rajaisi se myös asiakaslaitteet älypuhelimiin ja muihin tätä verkkoa käyttäviin laitteisiin.
+Palveluiden liian tiukka sitominen kuulostaa kuitenkin erikoiselta. Etenkin kun muistissa on WAP palveluiden katoaminen.
+LTE mahdollistaa heterogeenisten verkkojen luomisen. Matkapuhelinverkkojen tapauksessa tällä tarkoitetaan sitä, että yksittäisen solun sisällä saattaa olla pienempiä soluja.
+Verkko saattaa siis koostua useammasta kerroksesta erikokoisia soluja. 
+Kun solut ovat muuttumassa pienemmiksi tukiasemat tulevat fyysisesti lähemmäksi käyttäjää.
+
+SCC tarkoituksena on hyödyntää solujen pienentymistä, tuomalla niihin reunapalveluiden tuottamisen mahdollistavaa teknologiaa.
+SCC reunalaskentapalvelut tuotetaan SCeNBce klustereissa. 
+SCeNBce (Small-cell eNodeB computing-enhanced välillä myös cloud enabled) on palvelinresursseilla terästetty eNodeB tukiasema \cite{lobillo15scc}.
+Verrattuna cloudletteihin, SCeNBce:ssä palvelinresurssit ovat tiiviisti osana tukiasemaa.
+SCM (Small Cell Manager) on SCC arkkitehtuurin hallinnasta vastaava komponentti. Sen tehtävänä on 
+
+SCC:n arkkitehtuurin kompastuskivenä saattaa olla niiden ylläpidettävyys, jossa matkapuhelinverkko-operaattori on vastuussa reunasolmun ylläpidosta, koska se on tiukasti sidoksissa tukiasemaan\cite{lobillo15scc}.
+Tukiasemaan tiukasti sidotulla ratkaisulla on kuitenkin mahdollista hyödyntää laajemmin tukiaseman ominaisuuksia, kuten radioyhteyksiä toisiin tukiasemiin.
+SCeNBce tukiasemien hankkiminen vaatii operaattoreilta investointeja sekä lisää ylläpitotyön määrää. (Näiden vuoksi ehkä kantsis miettii, että miksi se on niin tiukasti kiinni siinä televerkossa. Muutenkin useampi operaattori samalla alueella tarkoittaa että jokaisella on myös omat reunapalvelut, joka taas meinaa kokonaiskuvassa että sama palvelu pitää duplikoida monelle operaattorille.)
+
+ 
+ 
 \subsection{MobiScud ja SMORE}
 \subsection{Concert}
 \subsection{ETSI reference architecture}
