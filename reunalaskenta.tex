@@ -361,12 +361,15 @@ Perusteluina asiakaslaitteen käyttölle tallennusmediana voisi olla tapaus, jos
 
 \subsection{FMC – Follow me cloud}
 \subsection{Small Cell Cloud (SCeNB)}
-Small Cell Cloud (SCC, pienisoluinen pilvi?) perusidea on reunapalveluiden integroiminen osaksi LTE-verkkoinfrastruktuuria. 
+SCC (Small Cell Cloud, pienisoluinen pilvi?) perusidea on reunapalveluiden integroiminen osaksi olemassa olevaa LTE-verkkoinfrastruktuuria. 
 Reunaopalveluita tuotettaisiin tukiasemiin (Base Station) sijoitetuilla palvelinresursseilla.
+Koska palveluiden tuottamiseen käytettäisiin matkapuhelinverkkoa, rajaisi se myös asiakaslaitteet älypuhelimiin ja muihin tätä verkkoa käyttäviin laitteisiin.
+Palveluiden liian tiukka sitominen kuulostaa kuitenkin erikoiselta. Etenkin kun muistissa on WAP palveluiden katoaminen.
 LTE mahdollistaa heterogeenisten verkkojen luomisen. Matkapuhelinverkkojen tapauksessa tällä tarkoitetaan sitä, että yksittäisen solun sisällä saattaa olla pienempiä soluja.
 Verkko saattaa siis koostua useammasta kerroksesta erikokoisia soluja. 
 Kun solut ovat muuttumassa pienemmiksi tukiasemat tulevat fyysisesti lähemmäksi käyttäjää.
 
+SCC:ssä reunapalveluiden tuottamiseen käytettäisiin olemassa  matkapuhelinverkkoa, rajaisi se myös asiakaslaitteet älypuhelimiin ja muihin tätä verkkoa käyttäviin laitteisiin. Lisäksi ehdotetun järjestelmän mukaan reunasolmujen palvelimet jakavat resursseja tukiaseman kanssa. Tällaisella järjestelyllä on sekä hyvät ja huonot puolensa. \cite{puente15seamless} esittelevät julkaisussaan ratkaisun, jossa reunasolmun ja asiakaslaitteen välisen liikenne on erotettu kaikesta muusta mobiiliverkon liikenteestä. Koska tukiasemat eivät käsittele IP kerrosta, täytyy liikenteen tukiasemassa sijaitsevalle reunapalvelulle ohjata jollain toisella tavalla \cite{puente15seamless}. 
 Koska palveluiden tuottamiseen käytettäisiin matkapuhelinverkkoa, rajaisi se myös asiakaslaitteet älypuhelimiin ja muihin tätä verkkoa käyttäviin laitteisiin.
 Reunapalveluiden sitominen tiukasti matkapuhelinverkkoon vaikuttaa erikoiselta.
 Ratkaisulla on hyvät ja huonot puolensa. Reunapalveluiden tarjoamisen muihin verkkoihin, esimerkiksi WiFi yhteydellä ei onnistu suoraan ehdotetulla 
