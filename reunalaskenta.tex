@@ -281,7 +281,7 @@ Päällimmäisenä erona on migraatioon käytettävän kaistan suuruus. Palvelin
 Reunasolmujen välillä olevien yhteyksien nopeudet saattavat vaihdella suuresti.
 Pitkä kopiointiaika johtaa pidempään käyttökatkokseen ja täten palvelun laadun heikkenemiseen. Kopiointiajan minimoimiseksi on pyrittävä pitämään siirrettävän datan määrä mahdollisimman pienenä. Reunasolmujen migraatiotarpeeseen vaikuttaa suuresti käyttäjien liikkuminen verkossa. Voidaan kuvitella tilanne jossa aamulla kaupungin keskustaan saapuvat työmatkailijat aiheuttavat "migraatiotulvan", joka ruuhkauttaa reunasolmujen käytössä olevat kaistat.  
 
-Virtuaalikone-aihioihin perustuvassa järjestelmässä ainoastaan virtuaalikoneeseen tehdyt muutokset siirretään \cite{RefWorks:doc:5a65a533e4b0451a693fbf8e}. Näin säästetään migraation aikana siirrettävän datan määrä.
+Virtuaalikone-aihioihin perustuvassa järjestelmässä ainoastaan virtuaalikoneeseen tehdyt muutokset siirretään \cite{satya09}. Näin säästetään migraation aikana siirrettävän datan määrä.
 Mikäli on tiedossa, minne käyttäjä on siirtymässä, voitaisiin migraatio tehdä suoraan kohteena olevalle reunasolmulle.
 Palvelun laadun takaamiseksi migraation ennakointi on tärkeää. Mitä aikaisemmin aie siirtyä toiselle reunasolmulle tiedetään sen paremmin siihen keretään valmistautumaan. 
 Migraation kesto on riippuvainen siirrettävän datan määrästä, sekä
@@ -295,7 +295,7 @@ SMOREssa ratkaisu on että SMORE nuuskii/monitoroi LTE/EPC kommunikointia ja inj
 
 \subsection{IP-verkko}
 Service discovery IP-verkossa.
-\subsection{Kommunikaatio asiakaslaitteen (UE) ja Reunasolmun kanssa}
+\subsection{Kommunikaatio asiakaslaitteen Reunasolmun kanssa}
 \subsection{Hallinta}
 Sisältää palveluiden etsimisen (Service Discovery) ja palveluihin ohjauksen esim Software Defined Networkingin avulla (SDN).
 
@@ -304,7 +304,7 @@ Rakenteeseen vaikuttaa ehkä eniten seuraavat kaksi valintaa
 \begin{itemize}
 \item Kerroksittain
 \item Lähelle vähän vai kauemmaksi enemmän
-\end{list}
+\end{itemize}
 Molempiin ratkaisuihin liittyy omat haasteensa. Etenkin voidaan olettaa että lähelle hajalleen aiheuttaisi huomattavasti enemmän ylläpitotyötä.
 
 \section{Esitetyt ratkaisut}
@@ -335,7 +335,7 @@ Siirrettävyys korostuu etenkin tilanteessa jossa siirrettäviä virtuaalikoneit
 
 Cloudletin keskeisimpiä oivalluksia onkin käyttää virtuaalikoneissa yhteistä pohjaa. 
 Yhteisen pohjan käyttäminen mahdollistaa sen että jokaisesta virtuaalikoneesta voidaan tallentaa vain pohjaan tehdyt muutokset.
-Muutokset sisältävää tiedostoa kutsutaan pinnoitteeksi.
+Muutokset sisältävää tiedostoa kutsutaan pinnoitteeksi (VM overlay).
 Pinnoitteen ja pohjan yhdistämiseen käytetään dynaamista virtuaalikone synteesiä.
 Dynaamisuudella tarkoitetaan sitä, että käyttäjän alkaessa käyttämään cloudlet infrastruktuuri rakentaa
 käyttäjän muutokset sisältävästä pinnoitteesta ja virtuaalikone-pohjasta, suoritettavan virtuaalikoneen. 
@@ -353,34 +353,32 @@ Cloudlettien välinen migraatio ja handoff.
 Cloudlettien väliselle migraatiolle voi olla useita eri syitä.
 Migraatio tilanteessa jossa virtuaalikone siirretään paikasta toiseen odottamaan käyttöönottoa on keskeisin.
 Pelkän pinnoitteen siirtäminen riittää, mikäli tarvittava virtuaalikonepohja löytyy kohteena olevasta cloudletistä.
-On kuitenkin huomattava että pinnoiteen tallettamiseen voi olla kannattavaa käyttää myös asikkaan laitetta, mikäli se vain on mahdollista.
+On kuitenkin huomattava että pinnoiteen(VM overlay) tallettamiseen voi olla kannattavaa käyttää myös asikkaan laitetta, mikäli se vain on mahdollista.
 Perusteluina asiakaslaitteen käyttölle tallennusmediana voisi olla tapaus, jossa asiakas matkustaa ulkomaille ja pinnoite tulisi siirtää hyvin kaukana sijaitsevalta palvelimelta kohteena olevalle cloudletille. Tällöin saattaisi olla nopeampaa siirtää pinnoite suoraa asiakaslaitteelta.
 
 \chapter*{RAW – Handoff} 
 
 
 \subsection{FMC – Follow me cloud}
-\subsection{Small Cell Cloud (SCeNB)}
-SCC (Small Cell Cloud, pienisoluinen pilvi?) perusidea on reunapalveluiden integroiminen osaksi olemassa olevaa LTE-verkkoinfrastruktuuria. 
+\subsection{Small Cell Cloud}
+Small Cell Cloud (SCC, pienisoluinen pilvi?) perusidea on reunapalveluiden integroiminen osaksi LTE-verkkoinfrastruktuuria. 
 Reunaopalveluita tuotettaisiin tukiasemiin (Base Station) sijoitetuilla palvelinresursseilla.
-Koska palveluiden tuottamiseen käytettäisiin matkapuhelinverkkoa, rajaisi se myös asiakaslaitteet älypuhelimiin ja muihin tätä verkkoa käyttäviin laitteisiin.
-Palveluiden liian tiukka sitominen kuulostaa kuitenkin erikoiselta. Etenkin kun muistissa on WAP palveluiden katoaminen.
 LTE mahdollistaa heterogeenisten verkkojen luomisen. Matkapuhelinverkkojen tapauksessa tällä tarkoitetaan sitä, että yksittäisen solun sisällä saattaa olla pienempiä soluja.
 Verkko saattaa siis koostua useammasta kerroksesta erikokoisia soluja. 
 Kun solut ovat muuttumassa pienemmiksi tukiasemat tulevat fyysisesti lähemmäksi käyttäjää.
 
-SCC:ssä reunapalveluiden tuottamiseen käytettäisiin olemassa  matkapuhelinverkkoa, rajaisi se myös asiakaslaitteet älypuhelimiin ja muihin tätä verkkoa käyttäviin laitteisiin. Lisäksi ehdotetun järjestelmän mukaan reunasolmujen palvelimet jakavat resursseja tukiaseman kanssa. Tällaisella järjestelyllä on sekä hyvät ja huonot puolensa. \cite{puente15seamless} esittelevät julkaisussaan ratkaisun, jossa reunasolmun ja asiakaslaitteen välisen liikenne on erotettu kaikesta muusta mobiiliverkon liikenteestä. Koska tukiasemat eivät käsittele IP kerrosta, täytyy liikenteen tukiasemassa sijaitsevalle reunapalvelulle ohjata jollain toisella tavalla \cite{puente15seamless}. 
-Koska palveluiden tuottamiseen käytettäisiin matkapuhelinverkkoa, rajaisi se myös asiakaslaitteet älypuhelimiin ja muihin tätä verkkoa käyttäviin laitteisiin.
+SCC tarkoituksena on hyödyntää solujen pienentymistä, tuomalla niihin reunapalveluiden tuottamisen mahdollistavaa teknologiaa.
+SCC reunalaskentapalvelut tuotetaan SCeNBce klustereissa. 
+SCeNBce (Small-cell eNodeB computing-enhanced välillä myös cloud enabled) on palvelinresursseilla varustettu eNodeB tukiasema \cite{lobillo15scc}.
+Verrattuna cloudletteihin, SCeNBce:ssä palvelinresurssit ovat tiiviisti osana tukiasemaa.
+
+SCM (Small Cell Manager) on SCC arkkitehtuurissa hallinnasta vastaava komponentti. Normaalisti LTE verkossa keskeinen hallinnosta vastaava komponentti on Mobility Management Entity (MME). Sen tehtäviin kuuluu on hoitaa muunmuassa MME:ltä toiselle tapahtuvat handoverit ja asiakkaiden autentikointi. Täten on luonnollista että SCM liitetään MME:n yhteyteen, jossei suorasti niin ainakin jonkin yhteyden välityksellä. Eräs ehdotettu tapa toteuttaa SCM onkin integroida se suoraan MME:n yhteyteen jolloin tämä komponentti vastaa sekä reunapalveluista ja LTE-verkon hallinnasta\citep{lobillo15scc}. SCM tehtävänä on organisoida resurssien utilisointia SCeNBce klustetereiden välillä. Tähän kuuluu esimerkiksi palvelinresurssien sammuttaminen mikäli ne eivät ole käytössä ja mahdollisesti yliutilisoidulta SCeNBce:ltä kuorman siirtäminen toiselle SCeNBce:lle. Tämän lisäksi esimerkiksi virtuaalikoneiden migraatiopäätöksien tekeminen on SCM tehtävä.
+
+Koska SCC:n tapauksessa palveluiden tuottamiseen käytettäisiin matkapuhelinverkkoa, rajaisi se myös asiakaslaitteet älypuhelimiin ja muihin tätä verkkoa käyttäviin laitteisiin.
 Reunapalveluiden sitominen tiukasti matkapuhelinverkkoon vaikuttaa erikoiselta.
 Ratkaisulla on hyvät ja huonot puolensa. Reunapalveluiden tarjoamisen muihin verkkoihin, esimerkiksi WiFi yhteydellä ei onnistu suoraan ehdotetulla 
 
-SCC tarkoituksena on hyödyntää solujen pienentymistä, tuomalla niihin reunapalveluiden tuottamisen mahdollistavaa teknologiaa.
-SCC reunalaskentapalvelut tuotetaan SCeNBce klustereissa. 
-SCeNBce (Small-cell eNodeB computing-enhanced välillä myös cloud enabled) on palvelinresursseilla terästetty eNodeB tukiasema \cite{lobillo15scc}.
-Verrattuna cloudletteihin, SCeNBce:ssä palvelinresurssit ovat tiiviisti osana tukiasemaa.
-SCM (Small Cell Manager) on SCC arkkitehtuurin hallinnasta vastaava komponentti. Sen tehtävänä on 
-
-SCC:n arkkitehtuurin kompastuskivenä saattaa olla niiden ylläpidettävyys, jossa matkapuhelinverkko-operaattori on vastuussa reunasolmun ylläpidosta, koska se on tiukasti sidoksissa tukiasemaan\cite{lobillo15scc}.
+SCC:n arkkitehtuurin haasteena saattaa olla niiden ylläpidettävyys, jossa matkapuhelinverkko-operaattori on vastuussa reunasolmun ylläpidosta, koska se on tiukasti sidoksissa tukiasemaan\cite{lobillo15scc}.
 Tukiasemaan tiukasti sidotulla ratkaisulla on kuitenkin mahdollista hyödyntää laajemmin tukiaseman ominaisuuksia, kuten radioyhteyksiä toisiin tukiasemiin.
 SCeNBce tukiasemien hankkiminen vaatii operaattoreilta investointeja sekä lisää ylläpitotyön määrää. (Näiden vuoksi ehkä kantsis miettii, että miksi se on niin tiukasti kiinni siinä televerkossa. Muutenkin useampi operaattori samalla alueella tarkoittaa että jokaisella on myös omat reunapalvelut, joka taas meinaa kokonaiskuvassa että sama palvelu pitää duplikoida monelle operaattorille.)
 
