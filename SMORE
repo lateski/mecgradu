@@ -1,7 +1,7 @@
 SMORE
 SMORE (Software defined network Mobile Offloading aRchitecturE) on toinen televerkkoihin suunniteltu MEC ratkaisu.
-SMORE:n keskeisin sisältö on lisätä verkkoon SDN (Software Defined Networking) hyödyntäviä ratkaisuja.
-SDN käyttöönotolla tavoitellaan sitä, että televerkon toimintaan ei muuten tarvitsisi tehdä muutoksia.
+SMORE:n keskeisin sisältö on lisätä verkkoon SDN (Software Defined Networking) hyödyntäviä ratkaisuja reunalaskennan toteuttamiseksi.
+SDN käyttöönotolla tavoitellaan sitä, että televerkon toimintaan ei muuten tarvitsisi tehdä muutoksia. Millekkään olemassa olevalle komponentille ei siis tulisi lisää vastuita.
 SMORE:lla on kaksi keskeistä toimintoa joita varten SDN on käytössä. Ensimmäisenä on mobiiliverkon kontrollitasolla (control-plane) viestien monitorointi. Toisena toimintona on monitoroinnin pohjalta tehtävät päätökset siirtää osa tietoliikenteestä reunalaskenta toiminnallisuudelle.
 Kontrollitasolla monitoroivaa komponenttia kutsutaan SMORE monitoriksi (SMORE monitor) ja tietoliikenteen ohjauspäätöksistä vastaava komponentti on SMORE kontrolleri (SMORE controller).
 SMORE monitori tarkkailee asiakaslaitteen ja LTE/EPC:n välistä liikennettä ja poimii siitä olennaisimman osan tietokantaansa. SMORE monitorin toiminnallisuus on hyvin kevyt eikä sen tehtävä ole kuin kerätä tietoliikenteestä tarvittavat metatiedot.
