@@ -1,10 +1,24 @@
 SMORE
 SMORE (Software defined network Mobile Offloading aRchitecturE) on toinen televerkkoihin suunniteltu MEC ratkaisu.
-SMORE:n keskeisin sisältö on lisätä verkkoon SDN (Software Defined Networking) hyödyntäviä ratkaisuja reunalaskennan toteuttamiseksi.
-SDN käyttöönotolla tavoitellaan sitä, että televerkon toimintaan ei muuten tarvitsisi tehdä muutoksia. Millekkään olemassa olevalle komponentille ei siis tulisi lisää vastuita.
-SMORE:lla on kaksi keskeistä toimintoa joita varten SDN on käytössä. Ensimmäisenä on mobiiliverkon kontrollitasolla (control-plane) viestien monitorointi. Toisena toimintona on monitoroinnin pohjalta tehtävät päätökset siirtää osa tietoliikenteestä reunalaskenta toiminnallisuudelle.
-Kontrollitasolla monitoroivaa komponenttia kutsutaan SMORE monitoriksi (SMORE monitor) ja tietoliikenteen ohjauspäätöksistä vastaava komponentti on SMORE kontrolleri (SMORE controller).
-SMORE monitori tarkkailee asiakaslaitteen ja LTE/EPC:n välistä liikennettä ja poimii siitä olennaisimman osan tietokantaansa. SMORE monitorin toiminnallisuus on hyvin kevyt eikä sen tehtävä ole kuin kerätä tietoliikenteestä tarvittavat metatiedot.
-Tarkkailtaviin tapahtumiin kuuluvat muunmuassa asiakaslaitteen liittyminen verkkoon (attach), sekä asiakaslaitteen siirtyminen verkossa (handoff).
-Asiakaslaitteen 
+SMORE:n keskeisin sisältö on lisätä televerkon infrastruktuuriin SDN (Software Defined Networking) hyödyntäviä ratkaisuja reunalaskennan toteuttamiseksi.
+SDN käyttöönotolla tavoitellaan sitä, jotta televerkon toimintaan ei tarvitsisi tehdä muutoksia. Minkään olemassa olevan komponentin toiminta ei siis muutu.
+SMORE:lla on kaksi keskeistä toimintoa joita varten SDN on käytössä. 
+Ensimmäisenä on mobiiliverkon kontrollitasolla (control-plane) tapahtuva viestien monitorointi. 
+Toisena toimintona on monitoroinnin pohjalta tehtävät päätökset ohjata haluttu osa tietoliikenteestä reunalaskentayksiköille.
+Kontrollitasolla viestejä monitoroiva komponentti on SMORE monitori (SMORE monitor) ja tietoliikenteen ohjauspäätöksistä vastaava komponentti on SMORE kontrolleri (SMORE controller).
+
+SMORE monitori tarkkailee asiakaslaitteen ja LTE/EPC:n välistä liikennettä.
+Asiakaslaitteen liittyessä mobiiliverkkoon, asiakaslaite ja LTE/EPC:n sisäiset komponenti muodostavat tunneleita ja asiakaslaitteeseen liitetään erilaisia tunneleita koskevia osoite ja metatietoja.
+SMORE monitorin tehtävänä on poimia asiakaslaitteen liittyessä ja yhteydenmuodostuksen aikana asiakaslaitteisiin liittyviä tietoja.
+Asiakaslaitteen lähettäessä liittymispyynnön (attach request) SMORE monitori poimii pyynnöstä asiakaslaitteen IMSI (international Mobile Subscriber Identity) ja TAI:n (Tracking Area Identifier). 
+Tämän jälkeen SMORE monitori poimii MME:n asiakaslaitteelle lähettämästä liittymispyynnön hyväksymis -viestistä ("attatch accept") monitori poimii asiakaslaitteelle annetun IP-osoitteen, SGW:n IP-osoitteen, SGW:n TEID:n ja asiakaslaitteen GUTI:n (Globally Unique Temporary Id).
+Tämän jälkeen eNodeB neuvottelee asiakaslaitteen kanssa radioyhteydestä ja tämän lopputulos välitetään MME:lle. SMORE monitor poimii eNodeB:n ja MME:n välisestä kommunikaatiosta eNodeB:n IP-osoitteen ja eNodeB:n TEID:n. 
+Kun kaikki edellä mainitut tiedot on saatu poimittua SMORE monitor välittää ne SMORE kontrollerille.
+SMORE kontrolleri voi näiden tietojen perusteella välittää SDN:lle tarpeelliset muutokset tietoliikenteen ohjaamiseksi reunalaskenta yksikölle. 
+
+Toinen tilanne josta SMORE kontrolleri on kiinnostunut on handover, eli mikäli asiakaslaite siirtyy mobiiliverkossa eNodeB:den välillä. SMORE kontrollerin on tässä tapauksessa kiinnostunut mobiiliverkossa tapahtuvista muutoksista. 
+Handover alkaa kun tällä hetkellä käytössä oleva eNodeB päättää, että on aika siirtää asiakaslaitteen yhteys toiselle eNodeB:lle (kohde).
+Alkuperäinen eNodeB välittää pyynnön kohteena olevalle eNodeB:lle joka oletettavasti hyväksyy sen. Tämän jälkeen, kohteena oleva eNodeB pyytää MME:ltä reitityksen muutosta. Tässä välissä oleva SMORE monitor poimii reitityksen muutosta koskevan tiedon ja välittää ne SMORE kontrollerille.
+Tämän tiedon pohjalta SMORE kontroller voi tehdä SDN muutokset siten että vanhat reititykset voidaan poistaa ja korvata uusilla.
+
 
