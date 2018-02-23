@@ -1,4 +1,14 @@
 ETSI (European Telecommunications Standards Institute) on eurooppalainen telealan standardointijärjestö.
-ETSI on alkanut standardoimaan etenkin telepuolella tapahtuvan reunalaskennan toimintoja. Standardien sisällöt elävät vielä, mutta viitekehys on jo kasassa. 
+ETSI on alkanut standardoimaan etenkin telepuolella tapahtuvan reunalaskennan toimintoja. 
+ETSIn MEC spesifikaation määrittelee reunapalvelun tuottamiseksi vaadittavat ominaisuudet jotka palvelun tulee toteuttaa, sekä listaa mahdollisia, mutta ei vaadittuja toimintoja näiden lisäksi. 
+Vaadittuja toimintoja ovat muunmuassa asiakaslaitteen mahdollisuus liikkua mobiiliverkossa, siten että yhteys reunapalveluun säilyy ja liikenteen ohjaukseen liittyvien reitityksien tekeminen reunapalveluiden saavuttamiseksi. Lisäksi sallitaan liikenteen dekapselointi ja uudelleenkapselointi. \cite{etsitechreq}
+
+ETSI:n mukaisen viitekehyksen \cite{etsirefarch} komponenttien jaon perusteella voidaan tehdä
+komponenttikohtaisia vastuiden jakoja. Viitekehyksen mukaan reunalaskennan toimijat voidaan jakaa kolmeen toimialueeseen: system, host ja network (olisko sovellus, isäntä ja verkko?)
+
+Referenssi arkkitehtuurissa reuna-isännällä tarkoitetaan sitä entiteettiä joka tarjoaa virtualisointi-infrastruktuurin sekä reunalaskennan toteuttamiseen vaadittavat resurssit (laskenta, tallennus ja verkko).
+Reuna-alustalla tarkoiteen sitä entiteettiä joka mahdollistaa reunapalveluiden käyttämisen. . Reuna-alusta siis mahdollistaa reunapalveluiden saavuttamisen, eli käytännössä tarjoaa rajapinnan asiakaslaitteen suuntaan. Tähän kuuluu siis palvelurekisterin ylläpitäminen, reitityssääntöjen ylläpitäminen, sekä liikenteen välittäminen reunapalveluille. Reuna-alusta voi myös itse tarjota  palveluita.
+Esimerkkinä tällaisesta voisi olla tunnistautumispalvelu. 
+Reuna-applikaatioilla tarkoitetaan reuna-alustalla suoritettavia virtuaalikoneita, jotka suorittavat reunapalveluiden tuottamiseksi tarkoitettuja ohjelmistoja.
 
 
