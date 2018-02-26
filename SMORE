@@ -22,3 +22,4 @@ Alkuperäinen eNodeB välittää pyynnön kohteena olevalle eNodeB:lle joka olet
 Tämän tiedon pohjalta SMORE kontroller voi tehdä SDN muutokset siten että vanhat reititykset voidaan poistaa ja korvata uusilla.
 
 
+MobiScud on seuraava iteraatio SMORE:sta. MobiScud on hyvin saman kaltainen kuin SMORE, mutta on kuitenkin erilaisista oletuksista liikkelle lähtevä arkkitehtuuri. MobiScud olettaa että teleoperaattori on hajauttanut verkkoinfrastruktuuriaan ja lähelle RAN rajapintaa on mahdollista sijoittaa palvelinresursseja. MobiScud rakentuu edelleen SMORE:sta tuttujen monitorin ja kontrollerin päälle. Sillä erotuksella että MobiScud kontrolleri ja monitori sijaitsevat lähempänä eNodeB:tä kuin LTE/EPC (Evolved Packet Core). Käytännössä siis RAN ja EPC:n väliin. Suurimpana erona on myös useamman MC (MobiScud Controller)
