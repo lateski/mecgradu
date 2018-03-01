@@ -1,13 +1,20 @@
 ETSI (European Telecommunications Standards Institute) on eurooppalainen telealan standardointijärjestö.
-ETSI on alkanut standardoimaan etenkin telepuolella tapahtuvan reunalaskennan toimintoja. 
-ETSIn MEC spesifikaation määrittelee reunapalvelun tuottamiseksi vaadittavat ominaisuudet jotka palvelun tulee toteuttaa, sekä listaa mahdollisia, mutta ei vaadittuja toimintoja näiden lisäksi. 
-Vaadittuja toimintoja ovat muunmuassa asiakaslaitteen mahdollisuus liikkua mobiiliverkossa, siten että yhteys reunapalveluun säilyy ja liikenteen ohjaukseen liittyvien reitityksien tekeminen reunapalveluiden saavuttamiseksi. Lisäksi sallitaan liikenteen dekapselointi ja uudelleenkapselointi. \cite{etsitechreq}
+ETSI on aloittanut reunalaskennan arkkitehtuurin ja sen touteuttamiseksi vaadittavien toimintojen standardoimisen.
+ 
+ETSIn MEC spesifikaation määrittelee reunapalvelun tuottamiseksi vaadittavat ominaisuudet jotka palvelun tulee toteuttaa, sekä listaa mahdollisia, mutta ei vaadittuja toimintoja. 
+Listaamalla vaaditut toiminnot stanrardi pyrkii yhtenäistämään reunalaskennan konsepteja.  
+Vaatimukset on jaettu useampaan eri luokkaan, sen mukaan mihin toiminnallisuuteen vaatimus liittyy.
+Luokat ovat yleiset vaatimukset (generic requirements), palvelu vaatimukset (service requirements), hallinta vaatimukset (operation and management requirements) ja viimeisenä luokkana turvallisuus, säätely ja laskutus vaatimukset. \cite{etsitechreq}
 
-ETSI:n mukaisen viitekehyksen \cite{etsirefarch} komponenttien jaon perusteella voidaan tehdä
-komponenttikohtaisia vastuiden jakoja. Viitekehyksen mukaan reunalaskennan toimijat voidaan jakaa kolmeen toimialueeseen: system, host ja network (olisko sovellus, isäntä ja verkko?)
+(tähän väliin voisi lisätä tarkemmat kuvaukset vaatimuksista)
 
-Referenssi arkkitehtuurissa reuna-isännällä tarkoitetaan sitä entiteettiä joka tarjoaa virtualisointi-infrastruktuurin sekä reunalaskennan toteuttamiseen vaadittavat resurssit (laskenta, tallennus ja verkko).
-Reuna-alustalla tarkoiteen sitä entiteettiä joka mahdollistaa reunapalveluiden käyttämisen. . Reuna-alusta siis mahdollistaa reunapalveluiden saavuttamisen, eli käytännössä tarjoaa rajapinnan asiakaslaitteen suuntaan. Tähän kuuluu siis palvelurekisterin ylläpitäminen, reitityssääntöjen ylläpitäminen, sekä liikenteen välittäminen reunapalveluille. Reuna-alusta voi myös itse tarjota  palveluita.
+Vaadittuja toimintoja ovat muunmuassa asiakaslaitteen mahdollisuus liikkua mobiiliverkossa. Asiakas laitteen liikkuminen siten että yhteys reunapalveluun säilyy vaikka tukiasema vaihtuisi. Määritellään liikenteen ohjaukseen liittyvien reitityksien tekeminen reunapalveluiden saavuttamiseksi. Lisäksi sallitaan liikenteen dekapselointi ja uudelleenkapselointi. 
+
+ETSI on esittänyt MEC viitekehyksen ja MEC referenssiarkkitehtuurin \cite{etsirefarch}. Viitekehyksessä (Lisää kuva) on esitetty ohjelmatason toimijat. Viitekehyksen mukaan reunalaskennan toimijat voidaan jakaa kolmeen toimialueeseen: system, host ja network (olisko sovellus, isäntä ja verkko?). 
+
+Referenssiarkkitehtuurissa on esitetty funktionaaliset entiteetit. Funktionaalisten entiteettien toiminta on kuvattu 
+Referenssiarkkitehtuurissa reuna-isännällä (edge-host) tarkoitetaan entiteettiä, joka tarjoaa virtualisointi-infrastruktuurin, sekä reunalaskennan toteuttamiseen vaadittavat resurssit (laskenta, tallennus ja verkko).
+Reuna-alustalla (Mobile edge platform) tarkoiteen sitä entiteettiä joka mahdollistaa reunapalveluiden käyttämisen. Reuna-alusta siis mahdollistaa reunapalveluiden saavuttamisen, eli käytännössä tarjoaa rajapinnan asiakaslaitteen suuntaan. Tähän kuuluu siis palvelurekisterin ylläpitäminen, reitityssääntöjen ylläpitäminen, sekä liikenteen välittäminen reunapalveluille. Reuna-alusta voi myös itse tarjota  palveluita.
 Esimerkkinä tällaisesta voisi olla tunnistautumispalvelu. 
 Reuna-applikaatioilla tarkoitetaan reuna-alustalla suoritettavia virtuaalikoneita, jotka suorittavat reunapalveluiden tuottamiseksi tarkoitettuja ohjelmistoja.
 

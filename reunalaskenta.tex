@@ -234,6 +234,9 @@ palvelinklusteriin, joka tuottaa asiakkaille reunapalveluita. Edge Cloud koostuu
 Asiakaskohtaiselle reunainstanssille ei ole mitään vakiintunutta nimeä.
 Cloudlet on yksi ehdotettu toteutustekniikka tällaiselle asiakaskohtaiselle reunalla sijaitsevalle virtuaali-instanssille \cite{satya09}.
 
+\subsection{SDN ja NFV}
+SDN ja NFV ovat keskeisiä toimijoita reunalaskennan toteuttamisessa.
+
 \section{Ominaisuudet}
 
 Reunalaskennan keskeisin tarkoitus on laskennan siirtäminen reunalla toimivalle reunalaskentaklusterille. Reunaa voidaan lähestyä pilven ja käyttäjälaitteiden puolelta. Käyttäjälaitteiden, kuten älypuhelimien laskentateho on suhteellisen heikkoa, lisäksi ne ovat akkuvirrasta riippuvaisia. 
@@ -402,42 +405,68 @@ Reititystaulun avulla voidaan ohjata IP-osoitte muuntaa DRB liikkenneväyläksi 
 
  
 \subsection{SMORE ja MobiScud}
-SMORE (Software defined network Mobile Offloading aRchitecturE) \cite{cho2014smore} on toinen televerkkoihin suunniteltu MEC ratkaisu.
-SMORE:n keskeisin sisältö on lisätä televerkon infrastruktuuriin SDN (Software Defined Networking) hyödyntäviä ratkaisuja reunalaskennan toteuttamiseksi.
-SDN käyttöönotolla tavoitellaan sitä, jotta televerkon toimintaan ei tarvitsisi tehdä muutoksia. Minkään olemassa olevan komponentin toiminta ei siis muutu.
-SMORE:lla on kaksi keskeistä toimintoa joita varten SDN on käytössä. 
+SMORE (Software defined network Mobile Offloading aRchitecturE) on toinen televerkkoihin suunniteltu MEC ratkaisu.
+SMORE:n keskeisin sisältö on ottaa SDN (Software Defined Networking) käyttöön reunapalveluiden saavuttamiseksi. SDN käyttöönotolla tavoitellaan sitä, että televerkon toimintaan ei tarvitsisi tehdä muutoksia. Minkään olemassa olevan komponentin toiminta ei siis muutu. 
+SMORE:n toiminta on jaettu kahteen osaa, joita varten SDN on käytössä. 
 Ensimmäisenä on mobiiliverkon kontrollitasolla (control-plane) tapahtuva viestien monitorointi. 
-Toisena toimintona on monitoroinnin pohjalta tehtävät päätökset ohjata haluttu osa tietoliikenteestä reunalaskentayksiköille.
-Kontrollitasolla viestejä monitoroiva komponentti on SMORE monitori (SMORE monitor) ja tietoliikenteen ohjauspäätöksistä vastaava komponentti on SMORE kontrolleri (SMORE controller).
+Toisena toimintona on monitoroitujen tietojen pohjalta tehtävät SDN hallintatoimenpiteet. Näiden avulla voidaan ohjata haluttu osa tietoliikenteestä haluttuihin reunalaskentayksikköihin.
+Kontrollitasolla viestejä monitorointia suorittaa SMORE monitori (SMORE monitor) ja tietoliikenteen ohjauspäätöksistä vastaava komponentti on SMORE kontrolleri (SMORE controller).
+
+Tietojen välitys SMORE kontrollerin ja SMORE monitorin välillä on toteutettu yhteisen tietokannan kautta. SMORE monitor tallentaa poimitut tiedot tietokantaan ja antaa tiettyjen tapahtumien yhteydessä SMORE kontrollerille herätteen tehdä asianmukaiset muutokset SMORE:n SDN reitityksiin. Herätteitä laukaisevat tapahtumat ovat asikkaan liittyminen verkkoon ja asikkaan liikkuminen verkossa.
 
 SMORE monitori tarkkailee asiakaslaitteen ja LTE/EPC:n välistä liikennettä.
 Asiakaslaitteen liittyessä mobiiliverkkoon, asiakaslaite ja LTE/EPC:n sisäiset komponenti muodostavat tunneleita ja asiakaslaitteeseen liitetään erilaisia tunneleita koskevia osoite ja metatietoja.
 SMORE monitorin tehtävänä on poimia asiakaslaitteen liittyessä ja yhteydenmuodostuksen aikana asiakaslaitteisiin liittyviä tietoja.
 Asiakaslaitteen lähettäessä liittymispyynnön (attach request) SMORE monitori poimii pyynnöstä asiakaslaitteen IMSI (international Mobile Subscriber Identity) ja TAI:n (Tracking Area Identifier). 
-Tämän jälkeen SMORE monitori poimii MME:n asiakaslaitteelle lähettämästä liittymispyynnön hyväksymis -viestistä ("attatch accept") monitori poimii asiakaslaitteelle annetun IP-osoitteen, SGW:n IP-osoitteen, SGW:n TEID:n ja asiakaslaitteen GUTI:n (Globally Unique Temporary Id).
-Tämän jälkeen eNodeB neuvottelee asiakaslaitteen kanssa radioyhteydestä ja tämän lopputulos välitetään MME:lle. SMORE monitor poimii eNodeB:n ja MME:n välisestä kommunikaatiosta eNodeB:n IP-osoitteen ja eNodeB:n TEID:n. 
-Kun kaikki edellä mainitut tiedot on saatu poimittua SMORE monitor välittää ne SMORE kontrollerille.
-SMORE kontrolleri voi näiden tietojen perusteella välittää SDN:lle tarpeelliset muutokset tietoliikenteen ohjaamiseksi reunalaskenta yksikölle. 
+Tämän jälkeen SMORE monitori poimii MME:n asiakaslaitteelle lähettämästä liittymispyynnön hyväksymis -viestistä (attach accept) monitori poimii asiakaslaitteelle annetun IP-osoitteen, SGW:n IP-osoitteen, SGW:n TEID:n ja asiakaslaitteen GUTI:n (Globally Unique Temporary Id).
+Tämän jälkeen eNodeB neuvottelee asiakaslaitteen kanssa radioyhteydestä ja tämän lopputulos välitetään MME:lle. SMORE monitor poimii eNodeB:n ja MME:n välisestä kommunikaatiosta eNodeB:n IP-osoitteen ja eNodeB:n TEID:n.
+Kun edellä mainitut tiedot on tallennettu SMORE:n tietokantaan, SMORE monitor lähettää SMORE kontrollerille herätteen päivittää SDN reitityksiä. 
 
-Toinen tilanne josta SMORE kontrolleri on kiinnostunut on handover, eli mikäli asiakaslaite siirtyy mobiiliverkossa eNodeB:den välillä. SMORE kontrollerin on tässä tapauksessa kiinnostunut mobiiliverkossa tapahtuvista muutoksista. 
+Toinen tapahtuma josta SMORE kontrolleri on kiinnostunut on handover, eli mikäli asiakaslaite siirtyy mobiiliverkossa eNodeB:den välillä. SMORE kontrollerin on tässä tapauksessa kiinnostunut mobiiliverkossa tapahtuvista muutoksista. 
 Handover alkaa kun tällä hetkellä käytössä oleva eNodeB päättää, että on aika siirtää asiakaslaitteen yhteys toiselle eNodeB:lle (kohde).
 Alkuperäinen eNodeB välittää pyynnön kohteena olevalle eNodeB:lle joka oletettavasti hyväksyy sen. Tämän jälkeen, kohteena oleva eNodeB pyytää MME:ltä reitityksen muutosta. Tässä välissä oleva SMORE monitor poimii reitityksen muutosta koskevan tiedon ja välittää ne SMORE kontrollerille.
 Tämän tiedon pohjalta SMORE kontroller voi tehdä SDN muutokset siten että vanhat reititykset voidaan poistaa ja korvata uusilla.
 
+
+\subsubsection{MobiScud}
+MobiScud on SMORE:n ideoita ammentava versio reunalaskentapalveluiden tuottamisesta mobiiliverkoissa.
+MobiScud:in perustoiminnallisuus on hyvin samankaltainen kuin SMORE:ssa. MobiScud painottaa enemmän käyttäjän tarvetta liikkua verkossa. Lisäksi MobiScud käyttää hyödykseen oletusta mobiiliverkkojen hajautettua rakennetta. 
+
+Kuten SMORE, MobiScud käyttää hyödykseen SDN:n tarjoamia ominaisuuksia ja siten olettaa sen käyttöönottoa palveluntarjoajan infrastruktuurissa. Lisäksi MobiScudin toiminnallisuudet on ajateltu toteutettavan Network Function Virtualisantionin (NFV) avulla. 
+MobiScud Controller (MC) koostuu kahdesta loogisesta kokonaisuudesta: monitorista ja kontrollerista. Näiden toimintaperiaate on käytännössä identtinen SMORE:n vastaavan nimisiin toimijoihin. MC:n sijaintia ei kuitenkaan ole keskitetty kuten SMORE:ssa vaan sen oletetaan sijaitsevan hajautettna RAN ja EPC välissä.
+Käyttäjän ja reuna-infrastruktuurin välinen yhteys toteutetaan hyvin samalla tavalla kuin SMORE:ssa. 
+
+MobiScudin reunapalvelut on ajateltu toteutettavan hyvin cloudletmäisesti. Mahdollisimman lähellä reunaa sijaitsevassa "pilvessä" on palvelinresursseja, joita käyttäjät hyödyntävät yksityisien virtuaalikoneinstanssien muodossa (Private Virtual Machinem, PVM). 
+
+MobiScudin tavoitteena on tarjota asiakkaalle mahdollisimman nopea yhteys asiakkaan ja PVM:n välille. MobiScud hyödyntää televerkon omia kontrollitason viestejä asiakkaan liikkumisen seuraamiseen. Kun handoverista tulee viesti MC:n monitoroivalle entiteetille, alkaa MC organisoimaan reunalaskentaan liittyviä muutoksia. 
+
+Asiakkaan siirtyessä tukiasemalta toiselle PVM:n siirto aloitetaan livemigraationa kohteena olevalle "pilvelle". Livemigraation ollessa käynnissä kohteena olevan pilven MC huolehtii että asiakaslaitteella on edelleen yhteys alkuperäiseen sijaintiinsa. Tämä hoidentaan SDN reititysmuutoksilla. Kun PVM:n livemigraatio on saatu suoritettua alkuperäisen sijainnin MC ilmoittaa tästä kohdesijainnin MC:lle, joka puolestaa päivittää SDN reititykset ohjaamaan siirretylle PVM:lle.
+
+MobiScudin testeissä livemigraation ja SDN reitityksien avulla RTT (round trip time) saatiin pidettyä pienenä. Kuitenkin yhteyksissä aiheutui noin kahden sekunnin mittaisia katkoksia sillä hetkellä kun livemigraation viimeiset muutokset lähetetään. Yhteyskatkoksen pituuteen vaikuttavat monet asiat ja artikkelissa huomautetaankin että nykyinen toteutus oli optimoimaton ja vaatii jatkotutkimuksia.
+
+
 \subsection{Concert}
 \subsection{ETSI MEC}
 ETSI (European Telecommunications Standards Institute) on eurooppalainen telealan standardointijärjestö.
-ETSI on alkanut standardoimaan etenkin telepuolella tapahtuvan reunalaskennan toimintoja. 
-ETSIn MEC spesifikaation määrittelee reunapalvelun tuottamiseksi vaadittavat ominaisuudet jotka palvelun tulee toteuttaa, sekä listaa mahdollisia, mutta ei vaadittuja toimintoja näiden lisäksi. 
-Vaadittuja toimintoja ovat muunmuassa asiakaslaitteen mahdollisuus liikkua mobiiliverkossa, siten että yhteys reunapalveluun säilyy ja liikenteen ohjaukseen liittyvien reitityksien tekeminen reunapalveluiden saavuttamiseksi. Lisäksi sallitaan liikenteen dekapselointi ja uudelleenkapselointi. \cite{etsitechreq}
+ETSI on aloittanut reunalaskennan arkkitehtuurin ja sen touteuttamiseksi vaadittavien toimintojen standardoimisen.
+ 
+ETSIn MEC spesifikaation määrittelee reunapalvelun tuottamiseksi vaadittavat ominaisuudet jotka palvelun tulee toteuttaa, sekä listaa mahdollisia, mutta ei vaadittuja toimintoja. 
+Listaamalla vaaditut toiminnot stanrardi pyrkii yhtenäistämään reunalaskennan konsepteja.  
+Vaatimukset on jaettu useampaan eri luokkaan, sen mukaan mihin toiminnallisuuteen vaatimus liittyy.
+Luokat ovat yleiset vaatimukset (generic requirements), palvelu vaatimukset (service requirements), hallinta vaatimukset (operation and management requirements) ja viimeisenä luokkana turvallisuus, säätely ja laskutus vaatimukset. \cite{etsitechreq}
 
-ETSI:n mukaisen viitekehyksen \cite{etsirefarch} komponenttien jaon perusteella voidaan tehdä
-komponenttikohtaisia vastuiden jakoja. Viitekehyksen mukaan reunalaskennan toimijat voidaan jakaa kolmeen toimialueeseen: system, host ja network (olisko sovellus, isäntä ja verkko?)
+(tähän väliin voisi lisätä tarkemmat kuvaukset vaatimuksista)
 
-Referenssi arkkitehtuurissa reuna-isännällä tarkoitetaan sitä entiteettiä joka tarjoaa virtualisointi-infrastruktuurin sekä reunalaskennan toteuttamiseen vaadittavat resurssit (laskenta, tallennus ja verkko).
-Reuna-alustalla tarkoiteen sitä entiteettiä joka mahdollistaa reunapalveluiden käyttämisen. . Reuna-alusta siis mahdollistaa reunapalveluiden saavuttamisen, eli käytännössä tarjoaa rajapinnan asiakaslaitteen suuntaan. Tähän kuuluu siis palvelurekisterin ylläpitäminen, reitityssääntöjen ylläpitäminen, sekä liikenteen välittäminen reunapalveluille. Reuna-alusta voi myös itse tarjota  palveluita.
+Vaadittuja toimintoja ovat muunmuassa asiakaslaitteen mahdollisuus liikkua mobiiliverkossa. Asiakas laitteen liikkuminen siten että yhteys reunapalveluun säilyy vaikka tukiasema vaihtuisi. Määritellään liikenteen ohjaukseen liittyvien reitityksien tekeminen reunapalveluiden saavuttamiseksi. Lisäksi sallitaan liikenteen dekapselointi ja uudelleenkapselointi. 
+
+ETSI on esittänyt MEC viitekehyksen ja MEC referenssiarkkitehtuurin \cite{etsirefarch}. Viitekehyksessä (Lisää kuva) on esitetty ohjelmatason toimijat. Viitekehyksen mukaan reunalaskennan toimijat voidaan jakaa kolmeen toimialueeseen: system, host ja network (olisko sovellus, isäntä ja verkko?). 
+
+Referenssiarkkitehtuurissa on esitetty funktionaaliset entiteetit. Funktionaalisten entiteettien toiminta on kuvattu 
+Referenssiarkkitehtuurissa reuna-isännällä (edge-host) tarkoitetaan entiteettiä, joka tarjoaa virtualisointi-infrastruktuurin, sekä reunalaskennan toteuttamiseen vaadittavat resurssit (laskenta, tallennus ja verkko).
+Reuna-alustalla (Mobile edge platform) tarkoiteen sitä entiteettiä joka mahdollistaa reunapalveluiden käyttämisen. Reuna-alusta siis mahdollistaa reunapalveluiden saavuttamisen, eli käytännössä tarjoaa rajapinnan asiakaslaitteen suuntaan. Tähän kuuluu siis palvelurekisterin ylläpitäminen, reitityssääntöjen ylläpitäminen, sekä liikenteen välittäminen reunapalveluille. Reuna-alusta voi myös itse tarjota  palveluita.
 Esimerkkinä tällaisesta voisi olla tunnistautumispalvelu. 
 Reuna-applikaatioilla tarkoitetaan reuna-alustalla suoritettavia virtuaalikoneita, jotka suorittavat reunapalveluiden tuottamiseksi tarkoitettuja ohjelmistoja.
+
 
 \subsection{Yhteenveto}
 
