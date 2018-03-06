@@ -25,7 +25,8 @@ Lisäksi kuvataan että reunapalveluiden toimintaa ei haluta rajoittaa pelkäst�
 
 \subsubsection(Viitekehys ja referenssiarkkitehtuuri)
 
-ETSI on esittänyt MEC viitekehyksen ja MEC referenssiarkkitehtuurin \cite{etsirefarch}. Viitekehyksessä (Lisää kuva) on esitetty ohjelmatason toimijat. Viitekehyksen mukaan reunalaskennan toimijat voidaan jakaa kolmeen toimialueeseen: system, host ja network (olisko sovellus, isäntä ja verkko?). 
+ETSIn esittämän viitekehys esittää reunalaskentaan liittyvät entiteetit. Nämä entiteetit on jaettu kolmeen tasoon: järjestelmä, isäntä ja verkko(system, host ja network). 
+Verkkokerros edustaa 
 
 Referenssiarkkitehtuurissa on esitetty funktionaaliset entiteetit. Funktionaalisten entiteettien toiminta on kuvattu 
 Referenssiarkkitehtuurissa reuna-isännällä (edge-host) tarkoitetaan entiteettiä, joka tarjoaa virtualisointi-infrastruktuurin, sekä reunalaskennan toteuttamiseen vaadittavat resurssit (laskenta, tallennus ja verkko).
