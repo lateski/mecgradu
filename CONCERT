@@ -1,0 +1,16 @@
+Concert
+Nykyinen televerkko koostuu joukosta laitteita, joilla on hyvin spesifit tehtävät. Concert on arkkitehtuuri ehdotus seuraavan sukupolven televerkoille. Se esittää uudenlaista toiminnallisuuksien toteuttamismallia, joka korvaisi valmistajakohtaisia telelaitteita ( kuten tukiasemat) virtualisoiduilla ja ohjelmistopohjaisilla ratkaisuilla. NFV ja SDN käyttöönotto toimii siis tämänkin ehdotuksen selkärankana.
+Verkon toimintojen virtualisointi mahdollistaa niiden siirtämisen kauemmaksi, joka osaltaan vähentää hajautettavan laitteiston määrää. CONCERTin ideana on, että hajautetuksi jäisi telelaitteistosta ainoastaan välttämättömin osa, eli radiorajapinnan mahdollistava RIE (Radio Interfacing Equipment) ja hierarkisesti jaetut reunalaskentaresurssit. Televerkon muita toiminnallisuuksia voitaisiin keskittää ja virtualisoida. 
+
+Conductor on CONCERT arkkitehtuurissa toiminnallisessa keskiössä ja se vastaa päällysverkon hallinnasta. Conductorin tehtävänä on toimia virtualisoitujen entiteettien ja fyysisten resurssien välisenä yhteyskäytävänä. Myös keskitetty reunalaskentaresurssien jakamiseen liittyvät tehtävät, sekä SDN hallinta on keskitetty conductorille. 
+Ongelmana on kuitenkin että liiallinen keskittäminen siirtää hallintaa kauemmaksi, joka osaltaa johtaa kasvaviin latensseihin ja heikentää palvelun laatua. Vaikka conductor onkin yksittäinen looginen entiteetti, sen toiminnallisuuksia on mahdollista porrastaa ja hajauttaa paremman skaalautuvuuden takaamiseksi. 
+
+Reunalaskennan osalta CONCERTissa resurssit on jaettu hierarkisesti kolmeen tasoon, siten että lähimpänä käyttäjää on \italic{paikalliset} palvelimet, jotka on tarkoitettu kaikkein tiukimman aikavaatimuksen sovelluksille. Seuraavat kaksi tasoa, \italic{alueellinen} ja \italic{keskus (central)}, kasvattavat palvelinresurssien määrää, mutta ovat kauempana reunasta. Reunalaskentayksiköt voivat olla yhteydessä toisiinsa, jolloin ne mahdollistavat nopeat M2M (Machine-to-Mahcine) yhteydet. Tämä mahdollistaisi muunmuassa autojen välisen kommunikaation reunaverkon välityksellä. 
+
+Toistaiseksi CONCERT on korkean tason suunnitelma ja se käyttää hyväkseen vielä olemassa olemattomia teknologisia ratkaisuja kuten tukiasemien virtualisointia. Arkkitehtuuri mahdollistaa erilaisien ratkaisujen toteuttamisen, eikä aseta tiukkoja rajoitteita resurssien sijoittelun suhteen.
+
+Tietokerroksella (data plane) 
+lähtökohtana 5g, ei korjata 4g. Pyrkii ratkaisemaan 
+
+-Concertin toiminta nojaa jossain määrin siihen että infrastruktuuri virtualisoidaan. 
+-Asioiden virtualisointi ja looginen hajauttaminen vaatii suuren määrän yhteyksiä virtualisoitujen instanssien välille.
