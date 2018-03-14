@@ -1,0 +1,12 @@
+Mobiiliverkko
+MEC ehdotuksia tarkasteltaessa, olemassa olevien mobiiliverkkojen arkkitehtuurit ovat keskeisessä asemassa. Useat reunalaskentaa käsittelevät ehdotukset on tarkoitettu integroitaviksi osaksi olemassa olevaa mobiiliverkkoarkkitehtuuria. Erityisesti asiakaslaitteiden ollessa mobiililaitteita, reunalaskenta ratkaisujen integroiminen osaksi mobiiliverkkoa on väistämätöntä, mikäli tavoitellaan mahdollisimman pieniä viiveitä. Seuraavaksi käydään pääpiirteittäin läpi 4G mobiiliverkon arkkitehtuurin funktionaaliset osat.
+
+Yksinkertaistettuna mobiiliverkko koostuu kahdesta osasta: radiorajapinnasta ja mobiilinverkon runkoverkosta (puhelinkeskuksesta?). 3GPP kehittämässä LTE standardissa radiorajapinnan sisältävä osuus on nimeltään E-UTRAN (Evolved UMTS Terrestrial Radio Access Network) ja runkoverkon osuus EPC (Evolved Packet Core). 
+
+E-UTRAN sisältää verkon puolella ainoana funktionaalisena osana eNodeB tyyppisiä tukiasemia. Tukiasema on asiakaslaitetta lähimpänä sijaitseva funktionaalinen verkon osa ja täten se on houkutteleva kohde MEC arkkitehtuureille. Tukiasemaa voikin ajatella \textit{reunan} viimeisenä etappina ennen asiakaslaitetta. Tämä tutkielma käsittelee pääasiassa raktaisuja, jotka keskittyvät LTE verkkoihin kohdistuvia ratkaisuja, joten tukiasemista puhuttaessa tarkoitetaan nimenomaan E-UTRAN mukaista eNodeB:tä. 
+
+ENodeB:n tehtävänä on kommunikoida radioyhteyttä käyttäen asiakaslaitteen kanssa ja välittää molemminsuuntaista liikennettä EPC:n (Evolved packet core) suuntaan S1 rajapinnan kautta. ENodeB:t voidaan yhdistää toisiinsa X2 rajanpintaa käyttäen. Käyttäjäliikenteen välittämisen lisäksi eNodeB:n tehtäviin kuuluu handoverin aikainen tilan siirtäminen kohteena olevalle eNodeB:lle. Handoverin toiminta laajenee myös MEC puolelle ja handoveria toimintaa käsitellään tarkemmin kappaleessa XYZ.
+
+EPC edustaa matkapuhelinverkon ydintä. EPC:n pääkomponentit ovat MME (Mobility Management Entity), SGW (Serving Gateway) ja PGW (PDN gateway) \cite{etsilte}. 
+
+MME on hallinnollinen komponentti, sen tehtäviin kuuluu EPC:n sisäinen kommunikaatio, sekä käytettävän PGW:n ja SGW:n valitseminen. Lisäksi handovereissa joissa eNodeB:n lisäksi MME vaihtuu, MME hoitaa oman tilansa siirtämisen kohteena olevalle MME:lle. Yhdessä MME:n kanssa SGW toimii kytkinpisteenä eNodeB:n välittämille asiakkaslaitteen yhteyksille. SGW reitittää asiakkaan liikenteen joko PGW:lle tai muihin televerkon palveluihin. PGW toimii asiakkaan ulkoverkon yhteyksien kiintopisteenä, esimerkiksi IP-verkon yhdyskäytävänä. 
