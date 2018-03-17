@@ -2,4 +2,4 @@ Perinteinen tietoliikenneverkko koostuu joukosta yksittäisen funktion omaavia l
 Tällaisia laitteita ovat esimerkiksi kytkin, palomuuri ja reititin. Näiden laitteiden joukko muodostaa hajautetun rakenteen, jossa jokainen laite täytyy konfiguroida erikseen ympäristöön sopivaksi. 
 Tämän lisäksi perinteisessä tietoliikenteessä data- ja kontrolli-taso ovat tiukasti toisistaan riippuvaisia. Data-tasolla tarkoitetaan itse pakettien siirtoon käytettävää tasoa, eli tietoliikennettä ohjaavia laitteistoja. Kontrolli-tasolla tarkoitetaan datan reitittämiseksi käytettävää logiikkaa, kuten esimerkiksi reititystauluja. Kontrolli-taso on nykyisessä tietoliikenneverkossa hyvin staattinen tai ainakin sen muuttaminen on työlästä ja riskialtista sen hajautetun rakenteen vuoksi. 
 
-SDN (Software-defined networking) on ratkaisu jossa data- ja kontrolli-tasot erotetaan toisistaan. SDN:ssä data- ja kontrolli-taso on erotettu toisistaan. 
+SDN (Software-defined networking) on ratkaisu jossa data- ja kontrolli-tasot erotetaan toisistaan. Kontrollitason päätökset on siirretty keskitettyyn yhteen pisteeseen.
