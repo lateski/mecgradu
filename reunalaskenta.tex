@@ -248,8 +248,8 @@ palvelinklusteriin, joka tuottaa asiakkaille reunapalveluita. Edge Cloud koostuu
 Asiakaskohtaiselle reunainstanssille ei ole mitään vakiintunutta nimeä.
 Cloudlet on yksi ehdotettu toteutustekniikka tällaiselle asiakaskohtaiselle reunalla sijaitsevalle virtuaali-instanssille \cite{satya09}.
 
-\subsection{SDN ja NFV}
 \input{SDN}
+\input{NFV}
 
 \section{Ominaisuudet}
 
@@ -364,9 +364,9 @@ Satayanaran ensimmäisessä cloudletteja käsittelevässä julkaisussa \cite{sat
 
 Cloudlettejä voi olla useita erilaisia, siispä cloudlet toiminta edellyttää että jokaisella reunasolmulla tulee olla oikean cloudlet-pohja saatavilla ja käyttäjien cloudlettien on pohjauduttava johonkin rajalliseen määrään erilaisia cloudlet pohjia.
 
-\chapter*{Hallinta}
+\subsubsection*{Hallinta}
 
-\chapter{RAW – Migraatio}
+\subsubsection*{RAW – Migraatio}
 
 Cloudlettien välinen migraatio ja handoff. 
 Cloudlettien väliselle migraatiolle voi olla useita eri syitä.
@@ -375,10 +375,10 @@ Pelkän pinnoitteen siirtäminen riittää, mikäli tarvittava virtuaalikonepohj
 On kuitenkin huomattava että pinnoiteen(VM overlay) tallettamiseen voi olla kannattavaa käyttää myös asikkaan laitetta, mikäli se vain on mahdollista.
 Perusteluina asiakaslaitteen käyttölle tallennusmediana voisi olla tapaus, jossa asiakas matkustaa ulkomaille ja pinnoite tulisi siirtää hyvin kaukana sijaitsevalta palvelimelta kohteena olevalle cloudletille. Tällöin saattaisi olla nopeampaa siirtää pinnoite suoraa asiakaslaitteelta.
 
-\chapter*{RAW – Handoff} 
+\subsubsection*{RAW – Handoff} 
 
 
-\subsection{FMC – Follow me cloud}
+\subsection*{FMC – Follow me cloud}
 \subsection{Small Cell Cloud}
 Small Cell Cloud (SCC, pienisoluinen pilvi?) perusidea on reunapalveluiden integroiminen osaksi LTE-verkkoinfrastruktuuria. 
 Reunaopalveluita tuotettaisiin tukiasemiin (Base Station) sijoitetuilla palvelinresursseilla.

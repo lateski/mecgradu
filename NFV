@@ -1,0 +1,9 @@
+\subsection{Network Function Virtualization}
+NFV (Network function virtualization) lähtee liikkeelle ongelmasta, jossa nykyisen verkkolaitteiston käyttöikä on lyhyttä ja toiminnot ovat hajautettuina useisiin proprietary (omisteisiin?) laitteisiin \cite{nfvwhite}. NFV:n tavoitteena on verkkolaitteiston virtualisoiminen, siten että nykyisten laitteiden toiminnallisuudet toteutetaan ohjelmallisesti ja voidaan suorittaa tavallisella palvelinlaitteistolla hyperviisorien päällä.
+Laitteistosidonnaisten toimintojen korvaaminen virtualisoiduilla toiminnoilla mahdollistaa verkkotoiminnallisuuksien käyttöönoton ilman erillisen laitteiston asennusta. Tämä vähentäisi laitteistosta aiheutuvia kuluja ja säästäisi sähköä sekä kaappitilaa. 
+
+NFV on soveltuva mille tahansa data-tason prosessoinnille ja kontrolli-tason toiminnoille \cite{nfvwhite}. NFV siis soveltuu toteutustavaksi monille erilaisille verkkoitoiminnoille mobiiliverkoissa ja perinteisissä tietoliikenneverkoissa. Esimerkkeinä käyttökohteista ETSI:n NFV whitepaperissä on esitetty muunmuassa reitittimet, palomuurit, kuormantasaajat, eNodeB:t ja MME:t. 
+
+Mobiiliverkossa toimivan reunalaskennan näkökulmasta NFV:n potentiaali on ilmeinen. Jos suurin osa mobiiliverkon toiminnoista voitaisiin virtualisoida ja siirtää tavalliselle palvelinlaitteistolle, voisi reunalaskentaa suorittaa samalla laitteistolla, eikä se vaatisi puhtaasti erillisiä resursseja. 
+
+NFV:n haasteet? Periaatteessa vielä hyvin epäkypsä tekniikka, mutta suunniteltu 5G integraatio.
