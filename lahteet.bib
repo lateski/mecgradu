@@ -61,7 +61,6 @@
 	publisher={ACM},
 	address={New York, NY, USA},
 	pages={30–35},
-	abstract={Mobile Edge Computing (MEC) is an emerging network paradigm that provides cloud and IT services at the point of access of the network. Such proximity to the end user translates into ultra-low latency and high bandwidth, while, at the same time, it alleviates traffic congestion in the network core. Due to the need to run servers on edge nodes (e.g., an LTE-A macro eNodeB), a key element of MEC architectures is to ensure server portability and low overhead. A possible tool that can be used for this purpose is Docker, a framework that allows easy, fast deployment of Linux containers. This paper addresses the suitability of Docker in MEC scenarios by quantifying the CPU consumed by Docker when running two different containerized services: multiplayer gaming and video streaming. Our tests, run with varying numbers of clients and servers, yield different results for the two case studies: for the gaming service, the overhead logged by Docker increases only with the number of servers; conversely, for the video streaming case, the overhead is not affected by the number of either clients or servers.},
 	url={http://doi.acm.org/10.1145/3094405.3094411},
 	doi={10.1145/3094405.3094411}
 }
@@ -72,8 +71,6 @@
 	publisher={ACM},
 	address={New York, NY, USA},
 	pages={37–42},
-	abstract={Virtually all of the rapidly increasing data traffic consumed by mobile users requires some kind of processing, normally performed at cloud servers. A recent thrust, mobile edge computing, moves such processing to servers within the cellular mobile network. The large temporal and spatial variations to which mobile data usage is subject could make the reduced latency that edge clouds offer come at an unacceptable cost in redundant and underutilized infrastructure. We present some first empirical results on this question, based on large scale sampled crowd-sourced traces from several major cities spanning multiple operators and identifying the applications in use. We find opportunities to obtain both high server utilization and low application latency, but the best approaches will depend on the individual network operator's deployment strategy and geographic specifics of the cities we study.},
-	url={http://doi.acm.org/10.1145/3010079.3010080},
 	doi={10.1145/3010079.3010080}
 }
 @inproceedings{RefWorks:doc:59d4b224e4b015703b881ab9,
@@ -83,7 +80,6 @@
 	publisher={ACM},
 	address={New York, NY, USA},
 	pages={43–48},
-	abstract={Mobile Edge Computing (MEC) is an emerging technology that aims at pushing applications and content close to the users (e.g. at base stations, access points, aggregation networks) to reduce latency, improve quality of experience, and ensure highly efficient network operation and service delivery It principally relies on virtualization-enabled MEC servers with limited capacity at the edge of the network. One key issue is to dimension such systems in terms of server size, server number and server operation area to meet MEC goals. In this paper, we propose a graph-based algorithm that, taking into account a maximum MEC server capacity, provides a partition of MEC clusters, which consolidates as many communications as possible at the edge. We use a dataset of mobile communications to evaluate it with real world spatio-temporal human dynamics. In addition to quantifying macroscopic MEC benefits, the evaluation shows that our algorithm provides MEC area partitions that largely offload the core, thus pushing the load at the edge (e.g., with 10 small MEC servers around 55% of the traffic stay at the edge), and that are well balanced through time.},
 	url={http://doi.acm.org/10.1145/3098208.3098216},
 	doi={10.1145/3098208.3098216}
 }
@@ -218,15 +214,36 @@ Framework and Reference Architecture },
   howpublished = "\url{https://portal.etsi.org/NFV/NFV_White_Paper.pdf}",
   note = "[Verkkoaineisto, Luettu 2018-03-19]"
 }
+@misc{etsinfv5g,
+	author = {ETSI},
+  title = {Network Functions Virtualisation},
+  year={2017},
+  howpublished = "\url{http://portal.etsi.org/NFV/NFV_White_Paper_5G.pdf}",
+  note = "[Verkkoaineisto, Luettu 2018-03-19]"
+}
+	
+@article{nfvedge, 
+	author={K. K. Nguyen and M. Cheriet}, 
+	journal={IEEE Internet Computing}, 
+	title={Virtual Edge-Based Smart Community Network Management}, 
+	year={2016}, 
+	volume={20}, 
+	number={6}, 
+	pages={32-41},  
+	doi={10.1109/MIC.2016.127}, 
+	ISSN={1089-7801}, 
+	month={Nov},
+}
 
-@ARTICLE{nfvedge, 
-author={K. K. Nguyen and M. Cheriet}, 
-journal={IEEE Internet Computing}, 
-title={Virtual Edge-Based Smart Community Network Management}, 
-year={2016}, 
-volume={20}, 
-number={6}, 
-pages={32-41},  
-doi={10.1109/MIC.2016.127}, 
-ISSN={1089-7801}, 
-month={Nov},}
+@article{taleb2013follow,
+	author={T. Taleb and A. Ksentini}, 
+	journal={IEEE Network}, 
+	title={Follow me cloud: interworking federated clouds and distributed mobile networks}, 
+	year={2013}, 
+	volume={27}, 
+	number={5}, 
+	pages={12-19}, 
+	keywords={3G mobile communication;IP networks;cloud computing;3GPP mobile network;FMC 		application;FMC service;Follow-Me Cloud concept;IP service;UE mobility;cloud service;data anchor gateway;distributed mobile network;federated cloud;load balancing;service migration;session-service ID;Cloud computing;Distributed databases;IP networks;Logic gates;Mobile communication;Mobile computing;Object recognition}, 
+	doi={10.1109/MNET.2013.6616110}, 
+	ISSN={0890-8044}, 
+	month={September},}

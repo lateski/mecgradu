@@ -378,7 +378,7 @@ Perusteluina asiakaslaitteen käyttölle tallennusmediana voisi olla tapaus, jos
 \subsubsection*{RAW – Handoff} 
 
 
-\subsection*{FMC – Follow me cloud}
+\input{FMC}
 \subsection{Small Cell Cloud}
 Small Cell Cloud (SCC, pienisoluinen pilvi?) perusidea on reunapalveluiden integroiminen osaksi LTE-verkkoinfrastruktuuria. 
 Reunaopalveluita tuotettaisiin tukiasemiin (Base Station) sijoitetuilla palvelinresursseilla.
@@ -401,7 +401,7 @@ SCC:n arkkitehtuurin haasteena saattaa olla niiden ylläpidettävyys, jossa matk
 Tukiasemaan tiukasti sidotulla ratkaisulla on kuitenkin mahdollista hyödyntää laajemmin tukiaseman ominaisuuksia, kuten radioyhteyksiä toisiin tukiasemiin.
 SCeNBce tukiasemien hankkiminen vaatii operaattoreilta investointeja sekä lisää ylläpitotyön määrää. (Näiden vuoksi ehkä kantsis miettii, että miksi se on niin tiukasti kiinni siinä televerkossa. Muutenkin useampi operaattori samalla alueella tarkoittaa että jokaisella on myös omat reunapalvelut, joka taas meinaa kokonaiskuvassa että sama palvelu pitää duplikoida monelle operaattorille.)
 
-\subsubsection{Kommunikointi reunapalveluun}
+\subsubsection{Kommunikointi reunapalveluun} \label{GTP}
 SCC pohjaisessa järjestelmässä tavallinen verkkoon menevä tietoliikenne ja reunapalvelulle menevä tietoliikenne on ehdotettu eroteltavaksi toisistaan \cite{puente15seamless}.
 Eristyksen seurauksena LTE-A arkkitehtuuriin ei tarvitse koskea muutoin kuin lisäyksien osalta. 
 Liikenne SCeNBce:llä tarjottuihin reunapalveluihin on tehtävä tarkoitusta varten olevan rajapinnan kautta.
