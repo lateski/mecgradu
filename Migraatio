@@ -1,0 +1,32 @@
+Migraation toiminnot eri arkkitehtuureissa.
+
+# Yleistä
+Migraation tarpeina toimivat käyttäjän liikkuminen. Jotta käyttäjän yhteys reunalle pysyisi mahdollisimman hyvänä nopeana on laskenta myös siirrettävä lähemmäksi. 
+
+“Dynamic service placement for mobile micro-clouds with predicted future costs"
+
+-Tämä vaatiin ymmärrystä siitä että laskentaa suoritetaan usein virtuaalikoneina tai kontteina eikä niinkään yksittäisinä atomisina toimituksina.
+
+# SCC
+-Ennakointi 
+-Ehdotettu että alkuperäinen laskeva yksikkö ohjaa liikenteen suoritusta tekevälle solulle
+Path Selection Using Handover in Mobile Networks with Cloud-enabled Small Cells
+
+# Concert 
+Todetaan vain että VM:iä voidaan siirrellä LCM (Location-aware computing management) päätöksien seurauksena.
+
+# Follow me cloud
+Siirretään datacentteristä toiseen ja lisäksi siirretään tunnelia
+(huom tästä useampia ratkaisuja
+
+#Mobiscud
+Siirretään ensin asiakas ja SDN avulla reititetään tiedot uusiksi. Tämän jälkeen kun VM on siirretty niin siirretään SDN avulla reitti lähemmäksi
+
+# SMORE
+Hoidetaan enodeB viestien seuraamisella. 
+
+
+Eri tyyppejä
+-Sidotaan normaaliin handoveriin
+-Matemaattinen analyysi kannattavuudelle
+

@@ -1,0 +1,22 @@
+Tässä on tarkoitus kuvata reunasolmun ja asiakaslaitteen välistä kommunikaatioväylää. 
+Kommunikaatioväylän tehtävänä on välittää asiakaslaitteen ja reuna-alustan välistä
+tietoliikennettä molempiin suuntiin. Reunalaskennan luonteesta johtuen tavallisessa
+tietoliikennettä joudutaan ohjaamaan hieman perinteisistä tavoista eroavilla metodeilla.
+Käytännössä tämä tarkoittaa monessa ratkaisussa tietoliikennevirtojen haarauttamista 
+reunasolmulle tarkoitettuun tietoliikenteeseen ja perinteiseen internettiin suuntautuvaan
+tietoliikenteeseen. 
+
+Lähes kaikkien reunalaskentaan liittyvien arkkitehtuurien alustana toimii
+mobiiliverkon jo olemassa oleva infrastruktuuri. Mobiiliverkon, eli tässä tapauksessa E-UTRAN:nin
+ja EPC:n, tehtäväksi on jäänyt asiakaslaitteen tietoliikennevirtojen ohjaaminen "ulos"
+internettiin, käyttäen EPC:n yhdyskäytäviä. 
+Tähän on kuitenkin tulossa muutos. 
+Reunalaskennan tehokkaan toiminnan vuoksi on mahdollista että laskentaa suorittavat yksiköt ovat
+osana mobiiliverkon infrastruktuuria. Tämän kaltainen muutos vaatii jonkinlaisen
+ohjausmekaniikan toteuttamista mobiiliverkkoon. 
+
+Asiakaslaitteen tietoliikenteen kohde on normaalisti
+määräytynyt IP-osoitteen perusteella. Koska EPC ja E-UTRAN eivät käsittele liikennettä
+tällä tasolla, on löydettävä muita keinoja ohjata liikennettä. 
+
+

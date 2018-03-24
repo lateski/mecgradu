@@ -333,6 +333,22 @@ Seuraavaksi käydään läpi ehdotettuja arkkitehtuureja ja lopuksi tarkastellaa
 dokumentaatioiden esittämä reunalaskennan referenssiarkkitehtuuri ja
 reunalaskennalle asetetut vaatimukset.
 
+% Taulukko toiminnoista
+\begin{array}{cccccc}
+Arkkitehtuuri & Hallinta & SDN & NFV & Mobiiliverkko & Migraatio \\ 
+FMC & FCM Controller & Ei tai riippuu versiosta & Ei & Kyllä & todo \\ 
+SCC & SCM Small Cell Manager & Oma toteutus & Oma toteutus & Ainoastaan & todo \\ 
+SMORE/MobiScud & Smore Controller & Kyllä & EI & Aionoastaan & todo \\ 
+Concert & Conductor & Kyllä & Kyllä & 5G & todo \\ 
+ETSI & - & - & - &  & •
+\end{array} 
+
+\begin{table}
+	\caption{Reunalaskenta-arkkitehtuurien ominaisuudet}
+	\label{table:features}
+	
+\end{table}
+
 \input{cloudlet}
 
 \input{FMC}

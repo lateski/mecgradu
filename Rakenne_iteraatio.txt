@@ -1,0 +1,45 @@
+Mitkä ovat reunalaskennan ominaisuudet?
+Reunalaskennan osilla tarkoitetaan arkkitehtuurisia päätöksiä joilla on vaikutusta kokonaisuuteen. 
+-Kommunikointi asiakaslaitteen ja reunan välillä
+--Mobiiliverkko?
+--
+-Reunan hallinnollinen toiminta
+--Re
+
+Reunapalvelun käyttämiseen liittyvät toiminnallisuudet
+-Reunan kanssa kommunikointi (exl. mitä sinne kommunikoidaan)
+-Reunapalvelun toteuttaminen (esim. cloudlet)
+-Reunapalvelun hallinnointi
+
+Miten käsitellä ominaisuudet?
+
+Kommunikaatio reunan kanssa
+-Ratkaistavat ongelmat
+>Nopeus
+--Mitkä vaikuttaa nopeuteen?
+>Kuinka haarauttaa tietoliikenne reunalle ja sallia tiedon kulku läpi
+--Miten nykyään ohjataan tietoliikenne haluuttuun paikkaan?
+--SDN ja NVF keskeisiä toimijoita
+>Asiakkaan liikkuminen (yhteistä migraation kanssa)
+--Voidaan selittää mm SDN flowien hyödyntämistä sillä välin kun asiakas on siirtynyt pois optimialueelta
+--
+
+
+
+Hallinto
+-Ratkaistavat ongelmat
+>Resurssien varaaminen reunasolmuilta
+
+Migraatio (Voidaan käsitellä hallinnon alla?)
+>Miksi on kriittinen?
+>Miten voidaan toteuttaa?
+>Mitkä vaikeuttavat toimintaa?
+
+
+Rakenne
+-Ratkaistavat ongelmat
+-Missä reunasolmu sijaitsee
+-Hierarkia
+
+
+
