@@ -30,3 +30,16 @@ Eri tyyppejä
 -Sidotaan normaaliin handoveriin
 -Matemaattinen analyysi kannattavuudelle
 
+
+Nykyinen kappalejako
+-Sekava alkukappale
+-Livemigraation erot reunalla ja palvelinsalissa (tää ihan ok)
+-Cloudlet aihiot
+-siirtoaika
+
+Tavoite kappalejako
+-Alkukappale
+--Mitä migraatio on ja miten se liittyy handoveriin
+-Miten migraatio toimii
+-Migraation uudethaasteet reunalla vs palvelinsali
+-Ehdotettujen migraatioratkaisujen nopeudet

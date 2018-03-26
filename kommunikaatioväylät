@@ -1,0 +1,30 @@
+Kommunikaatio reunan kanssa. Miten arkkitehtuuri toteuttaa asiakaslaitteen
+ja reunasolmun välisen kommunikaation
+
+# Yleistä 
+-3GPP on ehdottanut jo LIPA ja SIPTO (Local IP Access ja Selected IP Traffic Offload) ratkaisuksia runkoverkon rasituksen keventämiseen. [3gpp, smore, SCC]
+
+## SCC
+-Todetaan että pitää erottaa reunalle suuntautuva ja pilveen suuntautuva liikenne
+-Vaaditaan erillinen gateway joka hyödyntää nfv ja sdn toiminnallisuuksia. ja ei sipto lipo , vaikka nekin olisivat speksin mukaan mahdollisia. Tämä säästää ylimääräisten fyysisten laitteiden lisäämisen.
+-Paketit ohjataan oikeaan pisteeseen käyttämällä hyödyksi TEID (Tunnel Endpoint ID)
+-Paketit paketoidaan SCeNBce:llä uusiksi IP/UE TEID taulua käyttäen.
+Lisäksi tukiasemille oletetaan mahdollisuus L-GW (Local Gateway) jossa liikennettä voidaan suoraan tukiasemalta siirtää ulkoverkkoon
+
+## CONCERT
+-Koko arkkitehtuuri perustuu siihen että NFV ja SDN otetaan käyttöön laajamittaisesti koko
+mobiiliinfrastruktuuriin. 
+-Infrastruktuuri siirtyy kokonaan pois perinteisestä 4G verkosta ja kaikki funktionaaliset entiteetit keskitetään. 
+
+## SMORE
+-SDN 
+
+## MobiScud 
+-Edelleen SDN "middlenetwork"
+
+## FMC
+- Ei haluta koskea mobiiliverkkoon rakenteena, vaan hyödynnetään operaattorien tarvetta hajauttaa p-Gw
+-Reititys reunalaitteille tapahtuisi erillisen mappauksen kautta.
+
+## Cloudlet
+- Olettaa DNS SD jonka jälkeen kommunikaatio tavallisten IP pohjaisten yhteyksien kautta. Ei varsinaisesti ota kantaa. 

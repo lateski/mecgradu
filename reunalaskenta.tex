@@ -281,33 +281,7 @@ Ajan ja akkuvirran säästämiseksi tehtävät toimet ovat siis keskeisimmät ha
 Etäinstanssissa asiakaslaitteella on yhteys reunalle. Asiakaslaitteelle tulee ainoastaan näkymä palvelun tilasta omalle laitteelleen. Vastaavasti kuin ottaisi SSH tai VNC yhteyden toiselle laitteelle. 
 
 -Tarkista oliko jossain järkevää lähdettä tähän
-\subsection{Migraatio}
-Reunalaskennan migraatiolla tarkoitetaan asiakaslaitteeseen liittyvän tilan tai laskennan siirtämistä reunasolmulta toiselle.
-Handoff/-over on mobiiliverkoissa yleisesti ilmenevä tilanne jossa, mobiililaitteen yhteys siirtyy tukiasemalta toiselle.
-Reunalaskennassa handover tehdään reunasolmulta toiselle. Reunalaskennan
-toteutustavasta riippuen, saatetaan tarvita niin sanottu live migraatio. Live migraatiossa suorituksen alla oleva sovellus tai virtuaalikone siirretään suoritusalustalta toiselle.
-Tavallisesti live migraatiota käytetään palvelinkeskusympäristössä virtuuaalikoneiden siirtämiseen suorituksen aikaiseen siirtämiseen. Live migraation tavoitteena on minimoida virtuaalikoneen käyttöön kohdistuva käyttökatkon kesto.
-Live migraatio toimii siten, että siirrettävää virtuaalikonetta aletaan kopioimaan kohdelaitteelle.
-Koska kyseessä on suoritusaikainen kopiointi, tilan kopiointi sisältää tallennustilan ja muistin kopioinnin.
-Mikäli palvelinkeskuksessa on jaettu levypalvelin, riittää ainoastaan muistin kopiointi. Tämä huomiona lähinnä siksi, että voidaan olettaa että reunasolmuilla ei ole jaettua levypalvelinta, jolloin joudutaan kopioimaan myös tallennustila. 
-Kun virtuaalikoneen tila on saatu kopioitua uudelle alustalle, joudutaan kopioimaan kopioinnin aikana virtuaalikoneen tilaan tapahtuneet muutokset.
-Kopiointia jatketaan iteroiden, kunnes päästään tilaan, jossa muutoksien määrä kopio-iteraatiota kohden ei enää pienene.
-Tällöin alkuperäinen virtuaalikone pysäytetään ja viimeisten muutoksien kopioinnin aikana virtuaalikone ei ole käytettävissä. Tämän jälkeen migratoitu virtuaalikoneinstanssi on käytettävissä uudella alustalla. \cite{ha2015adaptive}
-
-Reunalaskennan ja perinteisen palvelinympäristön vaatimukset live migraatiota kohtaan ovat hieman erilaiset.
-Päällimmäisenä erona on migraatioon käytettävän kaistan suuruus. Palvelinsaleissa yhteysnopeudet ovat suuria ja etäisyydet verrattain lyhyitä. Lisäksi palvelinsaliympäristössä migraatioita on mahdollista tehdä koordinoidusti ilman aikarajoitteita.
-Reunasolmujen välillä olevien yhteyksien nopeudet saattavat vaihdella suuresti.
-Pitkä kopiointiaika johtaa pidempään käyttökatkokseen ja täten palvelun laadun heikkenemiseen. Kopiointiajan minimoimiseksi on pyrittävä pitämään siirrettävän datan määrä mahdollisimman pienenä. Reunasolmujen migraatiotarpeeseen vaikuttaa suuresti käyttäjien liikkuminen verkossa. Voidaan kuvitella tilanne jossa aamulla kaupungin keskustaan saapuvat työmatkailijat aiheuttavat "migraatiotulvan", joka ruuhkauttaa reunasolmujen käytössä olevat kaistat.  
-
-Virtuaalikone-aihioihin perustuvassa järjestelmässä ainoastaan virtuaalikoneeseen tehdyt muutokset siirretään \cite{satya09}. Näin säästetään migraation aikana siirrettävän datan määrä.
-Mikäli on tiedossa, minne käyttäjä on siirtymässä, voitaisiin migraatio tehdä suoraan kohteena olevalle reunasolmulle.
-Palvelun laadun takaamiseksi migraation ennakointi on tärkeää. Mitä aikaisemmin aie siirtyä toiselle reunasolmulle tiedetään sen paremmin siihen keretään valmistautumaan. 
-Migraation kesto on riippuvainen siirrettävän datan määrästä, sekä
-Mikäli käyttäjä haluaa keskeyttää reunapalvelun käytön saatetaan tila tai laskenta siirtää käyttäjän laitteelle tai jättää reunalle odottamaan.
-
-\cite{ha2015adaptive} Tukivat että migraatio virtuaalikone-aihioilla + muutoksien siirroilla aiheuttaa noin 1s downtimen hitaahkolla verkolla. Tavoitteena oli minimoida siirrettävän datan määrä ja tutkia handoff+ migraation aiheuttaman käyttökatkoksen pituutta. Testi tehtiin cloudleteillä.
-
-MobiScudissa ja SMOREssa esitetään että käytetään livemigraatiota, mutta ei sen tarkemmin pureuduta ongelmaan. Todetaan vain että käytetään live migraatiota
+\input{livemig}
 \subsection{Integraatio mobiiliverkkoihin}
 MEC ratkaisut ovat jakautuneet kahteen erilliseen ratkaisumalliin. 
 SMOREssa ratkaisu on että SMORE nuuskii/monitoroi LTE/EPC kommunikointia ja injektoituu väliin.
@@ -334,14 +308,6 @@ dokumentaatioiden esittämä reunalaskennan referenssiarkkitehtuuri ja
 reunalaskennalle asetetut vaatimukset.
 
 % Taulukko toiminnoista
-\begin{array}{cccccc}
-Arkkitehtuuri & Hallinta & SDN & NFV & Mobiiliverkko & Migraatio \\ 
-FMC & FCM Controller & Ei tai riippuu versiosta & Ei & Kyllä & todo \\ 
-SCC & SCM Small Cell Manager & Oma toteutus & Oma toteutus & Ainoastaan & todo \\ 
-SMORE/MobiScud & Smore Controller & Kyllä & EI & Aionoastaan & todo \\ 
-Concert & Conductor & Kyllä & Kyllä & 5G & todo \\ 
-ETSI & - & - & - &  & •
-\end{array} 
 
 \begin{table}
 	\caption{Reunalaskenta-arkkitehtuurien ominaisuudet}
