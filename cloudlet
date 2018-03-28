@@ -1,4 +1,4 @@
-\subsection{Cloudlet}
+\subsection{Cloudlet} \label{cloudlet}
 Minkä ongelman cloudlet ratkaisee?
 Miten cloudlet toimii?
 Mitkä ovat cloudletin ongelmat?
@@ -37,7 +37,7 @@ Cloudlettejä voi olla useita erilaisia, siispä cloudlet toiminta edellyttää 
 
 \subsubsection*{Hallinta}
 
-\subsubsection*{RAW – Migraatio}
+\subsubsection{VM handoff kuten arkittelissa} \label{vmhandoff}
 
 Cloudlettien välinen migraatio ja handoff. 
 Cloudlettien väliselle migraatiolle voi olla useita eri syitä.
