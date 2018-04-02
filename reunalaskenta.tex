@@ -277,19 +277,13 @@ Ongelmana on että suorituksien aikavaatimus ei ole eksakti vaan ainoastaan ariv
 Ajan ja akkuvirran säästämiseksi tehtävät toimet ovat siis keskeisimmät haasteet etälaskentaa toteutettaessa. Näiden käsittelyä ei tämän enempää tässä tutkielmassa käsitellä niiden monimutkaisuuden vuoksi.
 
 
-\subsection{Etäinstanssi}
-Etäinstanssissa asiakaslaitteella on yhteys reunalle. Asiakaslaitteelle tulee ainoastaan näkymä palvelun tilasta omalle laitteelleen. Vastaavasti kuin ottaisi SSH tai VNC yhteyden toiselle laitteelle. 
+%\subsection{Etäinstanssi}
+%Etäinstanssissa asiakaslaitteella on yhteys reunalle. Asiakaslaitteelle tulee ainoastaan näkymä palvelun tilasta omalle laitteelleen. Vastaavasti kuin ottaisi SSH tai VNC yhteyden toiselle laitteelle. 
 
--Tarkista oliko jossain järkevää lähdettä tähän
 \input{livemig}
 \input{integraatiomobiiliverkko}
 
-
-\subsection{IP-verkko}
-Service discovery IP-verkossa.
-\subsection{Kommunikaatio asiakaslaitteen Reunasolmun kanssa}
-\subsection{Hallinta}
-Sisältää palveluiden etsimisen (Service Discovery) ja palveluihin ohjauksen esim Software Defined Networkingin avulla (SDN).
+\input{hallinto}
 
 \section{Reunan rakenne}
 Rakenteeseen vaikuttaa ehkä eniten seuraavat kaksi valintaa
@@ -298,6 +292,7 @@ Rakenteeseen vaikuttaa ehkä eniten seuraavat kaksi valintaa
 \item Lähelle vähän vai kauemmaksi enemmän
 \end{itemize}
 Molempiin ratkaisuihin liittyy omat haasteensa. Etenkin voidaan olettaa että lähelle hajalleen aiheuttaisi huomattavasti enemmän ylläpitotyötä.
+\cite{mao17} 
 
 \section{Esitetyt ratkaisut}
 Reunalaskennan toteuttamiseksi on esitetty useita erilaisia ratkaisuja.
@@ -306,13 +301,6 @@ Seuraavaksi käydään läpi ehdotettuja arkkitehtuureja ja lopuksi tarkastellaa
 dokumentaatioiden esittämä reunalaskennan referenssiarkkitehtuuri ja
 reunalaskennalle asetetut vaatimukset.
 
-% Taulukko toiminnoista
-
-\begin{table}
-	\caption{Reunalaskenta-arkkitehtuurien ominaisuudet}
-	\label{table:features}
-	
-\end{table}
 
 \input{cloudlet}
 
@@ -328,6 +316,13 @@ reunalaskennalle asetetut vaatimukset.
 
 \subsection{Yhteenveto}
 
+% Taulukko toiminnoista
+
+\begin{table}
+	\caption{Reunalaskenta-arkkitehtuurien ominaisuudet}
+	\label{table:features}
+	
+\end{table}
  
 \bibliographystyle{apalike}
 
