@@ -1,0 +1,24 @@
+\subsection{Hallinta}
+
+%Reunalaskenta-arkkitehtuurissa hallinnalla tarkoitetaan sellaisia toimia, jotka mahdollistavat, ylläpitävät ja säätelevät asiakaslaitteen ja reunasolmun välistä kommunikaatiota. Hallinnosta vastaavana entiteetin tai entiteettien keskeinen tehtävä on erilaisiin tapahtumiin reagoiminen. Yleisimmin arkkitehtuurien yhteydessä käsiteltävät tapahtumat ovat reunalaskennan aloittaminen, laskennan migraatio ja kommunikaatioväylän avaaminen. Tämän lisäksi hallinnollisiin toimiin oletetaan reunalaskennan resurssien varaaminen sekä niiden optimointi. Näitä ei kuitenkaan korkealla arkkitehtuuritasolla kuvata.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%Reunan hallinta
+%Mitä tarkoitetaan hallinnalla?
+Reunan hallinta koostuu joukosta hallinnollisia toimia toteuttavia entiteettejä. Tämän tutkielman yhteydessä hallinnolliset toimet rajautuvat pääasiassa niihin toimintoihin, jotka jotka mahdollistavat, ylläpitävät tai säätelevät asiakaslaitteen ja reunasolmun välistä kommunikaatiota. Arkkitehtuuritasolla keskeisimmät hallinnolliset toimijat liittyvätkin juuri reunasolmujen saavutettavuuden varmistamiseen.
+Tämän tukielman esittelyjen ulkopuolelle jäävät siis ne hallinnolliset toimijat, jotka esiintyvät arkkitehtuurikuvauksissa pääasiassa mainintana. Esimerkiksi virtuaalikoneisiin pohjautuvien järjestelmien resurssien oikeanlainen utilisointi \cite{yousaf16fine, taleb2017multi} on keskeinen haaste johon arkkitehtuuritasolla ei oteta juurikaan kantaa ja sen suunnittelu jätetään järjestelmän toteuttajan vastuulle.
+
+Pääasiassa hallinnollisten toimijoiden rooli esiintyy reunalaskenta-arkkitehtuurissa passiivisena tarkkailijana, jonka tehtävä on reagoida mobiiliverkon tapahtumiin. 
+Esimerkki tällaisesta tapahtumasta on mobiiliverkossa tapahtuva handover, johon hallinnollinen entiteetti saattaa haluta reagoida esimerkiksi aloittamalla reunalaskennan migraation lähemmäksi käyttäjää. 
+%Mihin tässä tutkielmassa ei paneuduta?
+
+Arkkitehtuurien esittelyiden yhteydessä hallinnosta vastaava entieetti esitellään kaikissa arkkitehtuureissa. Hallinnosta vastaavat entiteetit arkkitehtuureittain ovat SCM (Small Cell Cloud Manager) Small Cell Cloudissa \cite{lobillo15scc, gambetti15dist}, conductor CONCERT:ssa \cite{liu2014concert}, FMC Controller FMC:ssä \cite{taleb2013follow}, MC (MobiScud Controller) MobiScud:ssa \cite{wang2015mobiscud}, ja edge orchestrator ETSI MEC refenssiarkkitehtuurissa \cite{etsirefarch}. \textit{Tarkista onko kaikki}
+
+%Hajautettu & Keskitetty
+Hallinnollisten toimien osalta arkkitehtuuri voi olla hajautettu tai keskitetty. 
+Hajautetuissa malleissa lähestytään vertaisverkko -tyylistä ratkaisua. Siinä hallinnolliset entiteetit organisoivat hallinnolliset toimet keskenään. Hajautetussa mallissa hallinnolliset entiteetit usein vastaavat jostain osajoukosta reunasolmuja ja esimerkiksi virtuaalikoneiden migraation yhteydessä hoitavat hallinnollisen vastuun siirtämisen vertaiselleen. 
+Tämä muistuttaa eNodeB:n kaltaista ratkaisua, jossa handoverin yhteydessä vastuu asiakaslaitteen yhteydestä siirtyy handoverin kohteena olevalle eNodeB:lle. 
+Hallinnollisten toimien ollessa keskitettynä yhdelle entiteetille. Esimerkiksi SCM:n \cite{lobillo15scc} tapauksessa oletetaan, että SCM:llä on saatavillaan kokonaiskuva verkon tilasta ja sen pohjalta SCM voi tehdä päätöksiä esimerkiksi resurssien käyttöönotosta sekä reunalaskennan migraatiosta. 
+
