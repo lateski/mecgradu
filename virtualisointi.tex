@@ -1,0 +1,29 @@
+\subsection{Virtuaalikoneet ja kontit}
+
+%miten virtuaalikone toimii
+Virtualisoinnilla tarkoitetaan tietokoneohjelmiston suorittamista ohjelmallisesti toteutetun rajapinnan päällä. 
+Toisin sanoen virtualisointi erottaa suoritettan ohjelmiston suorittavasta laitteistosta.
+Usein virtualisoitava ohjelmisto on kokonainen käyttöjärjestelmä, jolloin suoritettavaa instanssia kutsutaan virtuaalikoneeksi. 
+Virtualisointi mahdollistaa laitteiston resurssien jakamisen useamman toisistaan erillään olevan virtuaalikoneen kesken.
+Juurikin resurssien jakamisen mahdollisuus yhdessä palvelinlaitteiston suorituskyvyn kasvun kanssa on johtanut virtuaalikoneiden käytön yleistymiseen palvelinsaliympäristössä.
+
+Virtuaalikoneen ja laitteiston välillä toimivaa ohjelmistoa kutsutaan hypervisoriksi. Hypervisorin pääasiallinen tehtävänä on tarjota rautatason resursseja virtuaalikoneiden käytettäväksi. 
+Yksi hypervisorin tehtävistä on virtuaalikoneiden luominen. Sen avulla voidaan määrittä virtuaalikoneen käytössä olevat resurssit, esimerkiksi virtuaalikoneen käytettävissä olevan muistin tai prosessorien määrä. Hypervisorilla on myös monia muita toiminnallisuuksia, joita ei tässä tutkielmassa käydä läpi tämän enempää. 
+
+%virtuaalikoneet reunalla
+Virtuaalikoneet ovat vahvasti esillä reunalaskenta-arkkitehtuurien yhteydessä. 
+ETSI:n reunalaskennan referenssiarkkitehtuurissa \cite{etsirefarch} virtuaalikoneet esitetään reunapalvelun tuottamisen välineenä ja Taleb et al. \cite{taleb2017multi} esittävät kirjallisuuskatsauksessaan virtuaalikoneet yhdeksi reunalaskennan mahdollistavista teknologioista.
+Virtuaalikoneiden dynaamisuus verrattuna tavallisesti suoritettavaan ohjelmistoon on reunalaskennan näkökulmsta haluttu ominaisuus. 
+Virtuaalikoneet tarjoavat myös helpon tavan jakaa reunasolmun resursseja usean toisistaan erillisen palvelun välillä.
+Toisena etuna on virtuaalikoneiden vahva eristys muusta järjestelmästä ja muista virtuaalikoneista.
+
+Virtuaalikoneet eivät aseta rajoitteita tarjottavan palvelun tyypille ja niiden avulla onkin mahdollista tarjota monia erilaisia palvelumalleja.
+Yksi ehdotetuista palvelumalleista on käyttäjäkohtaisen virtuaalikoneet \cite{satya09,wang2015mobiscud}. 
+
+%mitä se mahdollistaa
+Tulevissa kappaleissa perehdytään tarkemmin virtuaalikoneiden hyödyntämistä osana reunapalveluita.
+Kappaleessa \ref{livemigraatio} käsittellään virtuaalikoneiden siirtelyä suorituslaitteistolta toiselle, ilman että itse järjestelmän suorittamista tarvitsee keskeyttää siirron ajaksi. 
+Kappaleessa \ref{cloudlet} käsitellään cloudletiksi nimettyä  virtuaalikoneisiin pohjautuvaa reunapalvelun tuottamisjärjestelmää.
+
+
+
