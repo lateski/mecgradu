@@ -1,4 +1,4 @@
-\subsection{Virtuaalikoneet ja kontit}
+\subsection{Virtuaalikoneet}
 
 %miten virtuaalikone toimii
 Virtualisoinnilla tarkoitetaan tietokoneohjelmiston suorittamista ohjelmallisesti toteutetun rajapinnan päällä. 
@@ -25,5 +25,19 @@ Tulevissa kappaleissa perehdytään tarkemmin virtuaalikoneiden hyödyntämistä
 Kappaleessa \ref{livemigraatio} käsittellään virtuaalikoneiden siirtelyä suorituslaitteistolta toiselle, ilman että itse järjestelmän suorittamista tarvitsee keskeyttää siirron ajaksi. 
 Kappaleessa \ref{cloudlet} käsitellään cloudletiksi nimettyä  virtuaalikoneisiin pohjautuvaa reunapalvelun tuottamisjärjestelmää.
 
+\subsubsection*{Säiliöt}
+Koska virtuaalikoneet eivät jaa ohjelmisto- tai käyttöjärjestelmäresursseja, saattavat samat kirjastot olla ladattuna muistiin useamman kerran – jokaiselle virtuaalikoneelle omansa.
+Onkin siis huomattava, että kokonaisen käyttöjärjestelmän virtualisointi on hyvin resurssi-intensiivistä. Tällöin yksittäisen virtuaalikoneen käyttäminen esimerkiksi yksittäisen kevyen palvelinsovelluksen suorittamiseksi voitaisiin ajatella resurssien tuhlaamiseksi. 
 
+Käyttöjärjestelmä-tason virtualisointi mahdollistaa sovelluksien suorittamisen omalla eristetyllä muistialueellaan. 
+Tälle toiminnallisuudelle on useita nimityksiä, mutta tässä tutkielmassa käytetään termiä säiliö (container).
+Säiliö on virtuaalikonetta kevyempi ratkaisu. 
+Tämä johtuu siitä että säiliön suoritus tapahtuu isäntäjärjestelmän päällä ja täten se kykenee hyödyntämään isäntäjärjestelmän toimintoja kuten käyttöjärjestelmäkutsuja.
+Rajusti yksinkertaistaen säiliö on vain tiukat rajat sisältävä suoritusympäristö sovellukselle.
 
+Säiliöiden käyttöä on ehdotettu myös reunalaskentaympäristöön \cite{pahl2015containers}. Säiliöiden eduiksi laskettakoon jo edellä mainittu keveys. Se näkyy sekä säiliön käyttöönottossa, että pienempänä yleisrasitteena sovelluksia suoritettaessa.
+Säiliöiden nykyinen hallinnointimenetelmä ei kuitenkaan ole täysin yhteensopiva reunalaskentaympäristön asettamille vaatimuksille ja täten se vaatisi oman hallinnointijärjestelmän kehittämisen \cite{farris2017providing}.
+
+Kaiken kaikkiaan säiliöt esittävät hyvän kandidaatin virtuaalikoneiden korvaajaksi. 
+Tässä tutkielmassa reunalaskennan käsittelyä jatketaan virtuaalikoneita hyödyntävien ratkaisujen parissa.
+Joskaan tämä ei tarkoita, etteikö suuri osa esiteltävistä ratkaisuista olisi sovellettavissa myös säiliöihin. 
