@@ -123,7 +123,7 @@
 
 \mainmatter       % clear page, start arabic page numbering
 
-\section{Huomioita}
+\section*{Huomioita}
 \begin{itemize}
 \item reuna
 \item reunasolmu
@@ -167,7 +167,7 @@ Seuraavana askeleena kohti itsenäisempää suoriutumista olisi asiakaslaite, jo
 Viimeisenä toimijana olisi kokonaan itsenäinen asiakaslaite, joka tarvitsisi reunalta ainoastaan palveluita täydentäviä ominaisuuksia.
 Tämä laite saattaisia turvautua reunalaskentaan esimerkiksi jos akku on vähissä, tai laitteella itsellään ei ole kaikea tarvittavaa tietoa laskennan suorittamiseksi.
 
-\subsection{a}
+\subsection*{a}
 \begin{itemize}
 \item Mistä reunalaskenta koostuu? (Suurimmat toimijat, keskeisimmät toiminnot)
 \item Mikä on MEC?
@@ -207,26 +207,9 @@ Ongelmakentän voi jakaa karkeasti kahteen osaan. Fyysiseen arkkitehtuuriin ja s
 Arkkitehtuuriratkaisut ovat riippuvaisia tarjottavista palveluista. Toiset arkkitehtuuriratkaisut tukevat toisia palveluita paremmin kuin toiset, kompromisseilta on siis vaikea välttyä.
 
 
-\section{Suurimmat osatoimijat}
-\input{mobiiliverkko}
-\subsection{Asiakaslaite}
-UE (User Equipment) on yleisnimitys asiakaslaitteelle, joka hyödyntää pilven (cloud) ja reunan (edge) palveluita tietoliikenneyhteyksien avulla.
-Usein käyttäjälaitteen esimerkkinä toimii jokin mobiililaite kuten puhelin, mutta myös esimerkiksi auto. 
+\subsection{Toimijat}
+\input{edgetoimijat}
 
-\subsection{Edge cloud}
-Edge cloud on yleisnimitys reunapalveluiden tarjoamiseen tarkoitettuille toimijoille.
-Riippuen arkkitehtuurista reunapilvi koostuu yksittäisistä toimijoista tai reunaa lähellä olevista klustereista.
-Edgen on mahdollista tarjota palveluita pienemmillä viiveillä ja suuremmilla tiedonsiirtokapasiteeteillä verrattuna perinteisiin pilvipalveluihin. 
-
-\subsection{Cloud}
-
-\subsection{Reuna-alusta – Edge platform}
-
-Tässä tutkielmassa reunasolmulla viitataan yksittäiseen reunalla sijaitsevaan
-palvelinklusteriin, joka tuottaa asiakkaille reunapalveluita. Edge Cloud koostuu reunasolmujen joukosta.
-
-Asiakaskohtaiselle reunainstanssille ei ole mitään vakiintunutta nimeä.
-Cloudlet on yksi ehdotettu toteutustekniikka tällaiselle asiakaskohtaiselle reunalla sijaitsevalle virtuaali-instanssille \cite{satya09}.
 \section{Mahdollistavat teknologiat}
 Seuraavaksi käsitellään reunalaskennan mahdollistavat teknologiat SDN, NFV ja virtualisointi. Tähän esiteltäväksi valittujen teknologioiden joukko perustuu tämän tutkielman kappaleessa \ref{ratkaisut} esitettyjen arkkitehtuuriratkaisujen yhteydessä esiintyneisiin teknologioihin.
 Edellä mainittujen teknologioiden lisäksi reunalaskentaa käsittelevien julkaisujen yhteydessä on esitetty myös muita teknologioita kuten verkon viipalointi (network slicing) \cite{taleb2017multi}, jonka käsittely sivuutetaan tämän tutkielman yhteydessä.
