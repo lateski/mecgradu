@@ -156,6 +156,8 @@ Satyanarayana \cite{RefWorks:doc:5a65a2cee4b0cb152cfb50e7} esitti artikkelissaan
 Nykyään mobiililaitteilla on mahdollista hyödyntää langattomia yhteyksiä.
 Suurin osa palvelinresursseista ja palveluiden tuottamiseen käytettävästä tiedosta  on keskittyneenä pilveen. Käytännössä minkä tahansa palvelun käyttäminen mobiililaitteella edellyttää yhteyttä näihin pilvipalveluihin. Pilvipalveluiden ylläpitäminen  
 
+ Satyanara etal. argumentoivat julkaisussaan että verkon lantenssia ei voida enää juurikaan pienentää. Ratkaisuksi jää palveluiden tuominen lähemmäksi.
+
 Toinen painopiste on siinä että tieto seuraa käyttäjää. Esimerkiksi pöytäkoneelta mobiililaitteeseen.(Satyanarayanan, 2001).
 Cyber foraging, on termi jota käytetään kuvaamaan paradigmaa jossa laite etsii ympäristöstä hyödynnettävää tietoa ja avustajia/korvikkeita. Avustajan (surrogate) rooli on täydentää lähtökohtaisesti resurssirajallista laitetta, esimerkiksi suorittamalla laskentaa, jotta asiakaslaite voisi esimerkiksi säästää akkua.
 Tähän toimintaan liittyy kuitenkin useita haasteita. Esimerkiksi kuinka asiakaslaite löytää avustajan? Mitäs jos avustaja on ruuhkautunut? Kuinka avustaja alustetaan ja kauanko siinä kestää? 
@@ -208,6 +210,12 @@ Arkkitehtuuriratkaisut ovat riippuvaisia tarjottavista palveluista. Toiset arkki
 
 
 \subsection{Toimijat}
+Tässä kappalessa esitellään tämän tutkielman kannalta tärkeät toimijat.
+Reunaan kuuluvien toimijoiden lisäksi on hyvä tietää reunan sijoittuminen muiden  reunan ulkopuolisten toimijoiden suhteen. Tässä yhteydessä muut toimijat on rajattu reunajärjestelmän osalta oleellisiin toimijoihin. 
+
+Perinteinen asiakas-palvelin -malli koostuu vain kahdesta toimijasta. Reunajärjestelmän lisääminen tähän malliin luo omanalaisen hierarkian joka, muistuttaa enemmänkin asiakas-reuna-palvelin muotoista järjestelmää.
+Seuraavaksi käydään läpi hieman tarkemmin mitä nämä osat sisältävät ja mikä niiden keskeisin rooli reunajärjestelmän kontekstissa on. 
+ 
 \input{edgetoimijat}
 
 \section{Mahdollistavat teknologiat}
@@ -227,6 +235,8 @@ Esimerkiksi verkkoliikenne mobiililaitteen ja kohdepalvelimen välillä on merki
 
 Lisäksi pilven tai konesalien suunnasta asiaa lähestyttäessä runkoverkko tukkeutuu. Siirtämällä osan palveluvastuusta reunalle, runkoverkon rasitteen tulisi ainakin periaatteessa pienentyä. 
 
+\subsection{Kommunikaatio}
+Reunan keskeisin haaste kommunikaatiossa on asiakaslaitteen ja reunasolmun välisen kommunikaation ylläpitäminen.
 
 \subsection{Etälaskenta}
 Etälaskennan toteuttamiseksi tarvitaan vastaukset seuraaviin kysymyksiin. Mitä siirretään ja minne siirretään?
@@ -260,6 +270,7 @@ Rakenteeseen vaikuttaa ehkä eniten seuraavat kaksi valintaa
 \end{itemize}
 Molempiin ratkaisuihin liittyy omat haasteensa. Etenkin voidaan olettaa että lähelle hajalleen aiheuttaisi huomattavasti enemmän ylläpitotyötä.
 \cite{mao17} 
+\input{rakenne}
 
 \section{Esitetyt ratkaisut}
 Reunalaskennan toteuttamiseksi on esitetty useita erilaisia ratkaisuja.

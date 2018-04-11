@@ -1,23 +1,67 @@
+
+
+%Tähän voisi laittaa kuvan komponenttien asemmoitumisesta toisiinsa.
 \subsubsection{Asiakaslaite}
+Asiakaslaite (user equipment) on yleisnimitys laitteelle, joka on reunan tai pilven tarjoamien palveluiden asiakas. 
+Asiakaslaitteen tyyppiä ei ole rajattu ja asiakaslaite voi olla esimerkiksi älypuhelin, älylasit tai vaikka verkkoyhteydellä varustettu auto. 
+Yhdistävänä tekijänä on siis jonkinlainen yhteys reuna- tai pilvipalveluihin. Yleisesti yhteys on tyypiltään langaton. 
+Tässä tutkielmassa asiakaslaitteella tarkoitetaan älypuhelinta, jollei toisin mainita.
+
+Verkkohierarkian näkökulmasta asiakaslaitteet ovat lehtisolmuja. Tämä tarkoittaa että asiakaslaitteet toimivat ainoastaan palveluiden kuluttajina eivätkä siis tarjoa itse palveluita. Myöskään kulutettavien palveluiden tyypillä ei ole juurikaan merkitystä, kun asiaa käsitellään infrastruktuuri/arkkitehtuuritasolla.
+
+Esimerkkinä asiakaslaitteen toiminnasta reunapalvelua hyödyntäen voisi olla ajoneuvo, joka käyttää reunapalveluita tiedon välittämiseen muille lähistöllä oleville ajoneuvoille.
 
 
+%Asiakaslaite on yleisnimitys laitteelle, joka hyödyntää reunan tai pilven tarjoamia palveluita jonkin tietoliikenneyhteyden avulla.
+%Reunalaskentaa käsittelevässä kirjallisuudessa asikaslaitteeseen viitataan usein UE (User Equipment) termillä. 
+%Se mitä konkreettista laitetta asiakaslaitteella tarkoitetaan riippuu kontekstista. 
+%Tässä tutkielmassa asiakaslaitteella tarkoitetaan älypuhelinta jollei toisin mainita. 
+%Esimerkkinä jostain toisesta asiakaslaitteesta on auto, joka on varustettu mobiiliverkkoyhteydellä. Auto voi käyttää reunapalveluita esimerkiksi kommunikoidakseen muiden lähistöllä olevien autojen kanssa.
+%Asiakaslaitteet verkkoyhteyksien muodostaman hierarkian "lehtisolmuja" joka tarkoittaa että ne eivät enää tarjoa palveluitaan muille asiakaslaitteille. 
 
-UE (User Equipment) on yleisnimitys asiakaslaitteelle, joka hyödyntää pilven (cloud) ja reunan (edge) palveluita tietoliikenneyhteyksien avulla.
-Usein käyttäjälaitteen esimerkkinä toimii jokin mobiililaite kuten puhelin, mutta myös esimerkiksi auto. 
 
-\subsubsection{Edge cloud}
-Edge cloud on yleisnimitys reunapalveluiden tarjoamiseen tarkoitettuille toimijoille.
-Riippuen arkkitehtuurista reunapilvi koostuu yksittäisistä toimijoista tai reunaa lähellä olevista klustereista.
-Edgen on mahdollista tarjota palveluita pienemmillä viiveillä ja suuremmilla tiedonsiirtokapasiteeteillä verrattuna perinteisiin pilvipalveluihin. 
+\subsubsection{Reuna}
+Reuna koostuu useista toiminnallisista entiteeteistä, jotka voidaan jakaa sekä fyysisiin, että loogiisin entiteetteihin. On kuitenkin hyvä ymmärtää koko reunan käsittävä reuna-alue, joka esitellään ensimmäisenä. Tämän jälkeen esitellään reunasolmu, joka on reunajärjestelmän keskeisin fyysinen rakennuspalanen. Lopuksi esitellään pääasiassa ohjelmallisen tason toimivat toimijat reuna-alusta ja reunasovellus.
 
-\subsubsection{Cloud}
+\paragraph{Reuna-alue} 
+Reuna-alue tai reuna ei ole mikään tarkasti rajattu alue, vaan reunalla usein tarkoitetaan jonkin tietyn kontekstin mukaista reunaa. 
+Yleisesti reunalla voidaan viitataan alueeseen, joka ulottuu asiakaslaitteelta runkoverkkoon asti. Reunalle ei siis ole tarkkaa määritelmää.
+Reuna-alue rajautuu siinä esiintyvien toimijoiden mukaan jollekkin välille. 
+Esimerkiksi mobiiliverkon tukiasemien yhteyteen rakennettua reunajärjestelmää käsiteltäessä, reunalla tarkoitetaan ainoastaan reunajärjestelmän asiakaslaitteita palvelevien osien muodostamaa vyöhykettä. 
+Yleisenä nyrkkisääntönä voidaan pitää verkkoyhteyksien viivettä, suhteessa muuhun internettiin, koska reuna-alueella viiveiden tulisi siis olla muuta internettiä nopeampia. Toisin sanoen palveluiden tulisi sijaita lähempänä.
+
+
+\paragraph{Reunasolmu} 
+Tämän tutkielman kontekstissa reunasolmulla (mobile edge host) tarkoitetaan yksittäistä reunalaskentaa suorittavaa entiteettiä. Reunasolmu voi koostua esimerkiksi mobiilitukiaseman ja palvelinlaitteiston muodostamasta kokonaisuudesta. Reunasolmu sisältää vähintään reunasovelluksien suorittamiseen tarvittavan laitteiston, sekä toiminnallisesti reunasovelluksien suorittamiseen tarvittavat hallinnolliset toimet. 
+Kuten aiemmin mainittu, reunajärjestelmä koostuu joukosta reunasolmuja, jotka on hajautettu maantieteellisesti.
+Reunasolmut siis eroavat toisistaan vähintään sijainnin perusteella, mutta voivat erota myös käytettävissä olevien laskenta ja tallennus resurssien osalta.
+Reunasolmun sijaintiin vaikuttaa käytössä oleva reuna-arkkitehtuuri.
+%Kuten juuri mainittu, reunasolmujen sijaintiin vaikuttaa käytettävä reuna-arkkitehtuuri. 
+Teoriassa reunasolmu voi sijainta asiakaslaitteesta \textit{yhden hypyn päässä}, jolloin asiakaslaitteella olisi suora yhteys reunasolmuun, mutta on myös mahdollista, että reunasolmu sijaitsee kauempana esimerkiksi runkoverkon reunalla. 
+Laskentaresurssien osalta reunasolmu voi olla mitä tahansa vähäisillä laskenta ja tallennus resursseilla varustetun WiFi-tukiaseman ja kokonaisen palvelinklusterin väliltä. 
+
+\paragraph{Reuna-alusta}
+(Edge platform) on ohjelmistotason toimija, joka tarjoaa rajapinnan reunasovelluksien suorittamista varten. Toisin sanoen siis tarjoaa reunasovelluksille toimintaympäristön.
+Reuna-alustan tehtävät eivät rajaudu ainoastaan yksittäiseen reunasolmuun, vaan sen lisäksi se hoitaa hallinnollisia tehtäviä kuten tietoliikenteen ohjausta. Lisäksi reuna-alustan tehtäviin voidaan lukea reunasovelluksia suorittaviin virtuaalikoneisiin liittyvät hallinnolliset toimet. Esimerkiksi myöhemmin kappaleessa \ref{livemigraatio} esiteltävä virtuaalikoneiden migraatio reunasolmulta toiselle on reuna-alustan vastuulla.
+Reunasovelluksien lisäksi reuna-alusta voi itsessään tarjota jonkinlaista toiminnallisuutta, joka ei suoranaisesti ole reunasovellus vaan esimerkiksi kommunikaatioväylä laitteelta-laitteelle (machine-to-machine) esimerkiksi ajoneuvojen väliselle viestinnälle. 
+
+\paragraph{Reunasovellus}
+(Edge application) on yksittäinen reunasolmulla suoritettava ohjelmisto, jonka kuluttajana voi toimia asiakaslaite tai toinen reunasovellus. Reunasovellus ei ota kantaa millaista palvelua sillä tuotetaan ja sen rajoitteet asettaa pääasiassa käytössä oleva reuna-alusta. Reunasovelluksen tuottama palvelu voi olla käyttäjäkohtainen, esimerkiksi virtuaalikone johon käyttäjä voi ottaa etäyhteyden tai tukevaa laskentaa, esimerkiksi kasvojen tunnistusta suorittava palvelinohjelma. Esimerkki ei-käyttäjäkohtaisesta reunasovelluksesta olisi pelipalvelin, jota voivat käyttää reunasolmun lähistöllä olevat pelaajat. 
+
+\subsubsection{Pilvi}
+Pilvellä tarkoitetaan internetin ytimen läheisyydessä sijaitsevaa aluetta.
+Pilven voidaan ajatella laajenevan kohti reunaa ja olemaan sen kanssa myös osittain limittäin.
+Tavallisessa asiakas-palvelin -mallissa palvelun tuottavan palvelimen voidaan ajatella sijaitsevan pilvessä. Kun mukaan otetaan reunajärjestelmä, palveluiden tuottaminen hajautuu reunan ja pilven kesken.
+
+
+%Asiakaskohtaiselle reunainstanssille ei ole mitään vakiintunutta nimeä.
+%Cloudlet on yksi ehdotettu toteutustekniikka tällaiselle asiakaskohtaiselle reunalla sijaitsevalle virtuaali-instanssille \cite{satya09}.
 
 \input{mobiiliverkko}
 
-\subsubsection{Reuna-alusta – Edge platform}
+\subsection{Reuna-arkkitehtuuri}
+%Määrittele mikä on reuna-arkkitehtuuri
+Tämän tutkielman puitteissa arkkitehtuurilla tarkoitetaan reuna-alustan ja reunasolmujen muodostamaa järjestelmää. Reuna-alustan toiminnallisuuksia voisi eritellä vielä tarkemmin, etenkin reunasovelluksien hallinnan osalta. Cloudlet on konkreettinen toteutus reuna-alustan reunasovelluksia hallinnoivasta osasta, mutta se ei kata kuin yhden reunasolmun kerrallaan. Tämän lisäksi olemassa on reunasolmujen välisestä hallinnasta vastaava kerros, tosin tämä kerros voi olla ulkoistettu erillisille hallinnolliselle toimijalle, jolloin hallinnollinen osa reuna-alustasta on varsinaisten reunasolmujen ulkopuolella. 
 
-Tässä tutkielmassa reunasolmulla viitataan yksittäiseen reunalla sijaitsevaan
-palvelinklusteriin, joka tuottaa asiakkaille reunapalveluita. Edge Cloud koostuu reunasolmujen joukosta.
+Reunasovelluksien toimintaa ei käsitellä tarkemmin. Taxonomy paperissa on hyvä jaottelu erilaisista sovelluksista. Tämä aihepiiri laajenee sovelluksien jakamiseen osittain reunalla suoritettaviin (offloading) tai mobiilisovelluksen suoritusta tukeviin sovelluksiin. 
 
-Asiakaskohtaiselle reunainstanssille ei ole mitään vakiintunutta nimeä.
-Cloudlet on yksi ehdotettu toteutustekniikka tällaiselle asiakaskohtaiselle reunalla sijaitsevalle virtuaali-instanssille \cite{satya09}.
