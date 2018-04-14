@@ -20,7 +20,7 @@ Esimerkkinä asiakaslaitteen toiminnasta reunapalvelua hyödyntäen voisi olla a
 %Asiakaslaitteet verkkoyhteyksien muodostaman hierarkian "lehtisolmuja" joka tarkoittaa että ne eivät enää tarjoa palveluitaan muille asiakaslaitteille. 
 
 
-\subsubsection{Reuna}
+\subsubsection{Reuna} \label{reunatoimijat}
 Reuna koostuu useista toiminnallisista entiteeteistä, jotka voidaan jakaa sekä fyysisiin, että loogiisin entiteetteihin. On kuitenkin hyvä ymmärtää koko reunan käsittävä reuna-alue, joka esitellään ensimmäisenä. Tämän jälkeen esitellään reunasolmu, joka on reunajärjestelmän keskeisin fyysinen rakennuspalanen. Lopuksi esitellään pääasiassa ohjelmallisen tason toimivat toimijat reuna-alusta ja reunasovellus.
 
 \paragraph{Reuna-alue} 
@@ -50,8 +50,8 @@ Reunasovelluksien lisäksi reuna-alusta voi itsessään tarjota jonkinlaista toi
 
 \subsubsection{Pilvi}
 Pilvellä tarkoitetaan internetin ytimen läheisyydessä sijaitsevaa aluetta.
-Pilven voidaan ajatella laajenevan kohti reunaa ja olemaan sen kanssa myös osittain limittäin.
-Tavallisessa asiakas-palvelin -mallissa palvelun tuottavan palvelimen voidaan ajatella sijaitsevan pilvessä. Kun mukaan otetaan reunajärjestelmä, palveluiden tuottaminen hajautuu reunan ja pilven kesken.
+Pilven voidaan ajatella laajenevan kohti reunaa. Koska pilven ja reunan raja ei ole selkeä ne voivat olla limittäin.
+Tavallisessa asiakas-palvelin -mallissa palvelun tuottavan palvelimen voidaan ajatella sijaitsevan pilvessä. Kun mukaan otetaan reunajärjestelmä, palveluiden tuottaminen hajautuu reunan ja pilven kesken. Reunanjärjestelmän ei ole tarkoitus korvata pilveä vaan täydentää sitä. 
 
 
 %Asiakaskohtaiselle reunainstanssille ei ole mitään vakiintunutta nimeä.
@@ -61,7 +61,16 @@ Tavallisessa asiakas-palvelin -mallissa palvelun tuottavan palvelimen voidaan aj
 
 \subsection{Reuna-arkkitehtuuri}
 %Määrittele mikä on reuna-arkkitehtuuri
-Tämän tutkielman puitteissa arkkitehtuurilla tarkoitetaan reuna-alustan ja reunasolmujen muodostamaa järjestelmää. Reuna-alustan toiminnallisuuksia voisi eritellä vielä tarkemmin, etenkin reunasovelluksien hallinnan osalta. Cloudlet on konkreettinen toteutus reuna-alustan reunasovelluksia hallinnoivasta osasta, mutta se ei kata kuin yhden reunasolmun kerrallaan. Tämän lisäksi olemassa on reunasolmujen välisestä hallinnasta vastaava kerros, tosin tämä kerros voi olla ulkoistettu erillisille hallinnolliselle toimijalle, jolloin hallinnollinen osa reuna-alustasta on varsinaisten reunasolmujen ulkopuolella. 
+
+
+Tässä tutkielmassa käsiteltävät arkkitehtuurit ovat pääasiassa tyypiltään oletusarkkitehtuureja (framework). 
+Tämänkaltaisen arkkitehturin tarkoituksena on jakaa järjestelmä toiminnallisiin osiin fyysisellä ja ohjelmallisella tasolla \cite{ohark}. Se siis kuvaa järjestelmän rakenneosien tehtävät.
+Oletusarkkitehtuuria voidaan hyödyntää varsinaista toteutettavaa järjestelmää suunniteltaessa.
+
+Kappaleessa \ref{reunatoimijat} kuvattujen reunan toimijoiden osalta reuna-arkkitehtuurit keskittyvät kuvaamaan reunasolmun ja reuna-alustan tehtäviä. Lisäksi reuna-arkkitehtuurit kuvaavat koko järjestelmän osana toista järjestelmää, jolloin reunajärjestelmä itsessään on komponentti suuremmassa järjestelmässä. Tällä tasolla tarkasteltu arkkitehtuuri jättää avoimeksi reunasovelluksien toiminnan ja keskittyy kuvaamaan reunasovelluksien sijaintia järjestelmässä.
+
+Tämän tutkielman puitteissa arkkitehtuurilla tarkoitetaan reuna-alustan ja reunasolmujen muodostamaa järjestelmää. Reuna-alustan toiminnallisuuksia voisi eritellä vielä tarkemmin, etenkin reunasovelluksien hallinnan osalta. Cloudlet on konkreettinen toteutus reuna-alustan reunasovelluksia hallinnoivasta osasta, mutta se ei kata kuin yhden reunasolmun kerrallaan. 
+Tämän lisäksi olemassa on reunasolmujen välisestä hallinnasta vastaava kerros, tosin tämä kerros voi olla ulkoistettu erillisille hallinnolliselle toimijalle, jolloin hallinnollinen osa reuna-alustasta on varsinaisten reunasolmujen ulkopuolella. 
 
 Reunasovelluksien toimintaa ei käsitellä tarkemmin. Taxonomy paperissa on hyvä jaottelu erilaisista sovelluksista. Tämä aihepiiri laajenee sovelluksien jakamiseen osittain reunalla suoritettaviin (offloading) tai mobiilisovelluksen suoritusta tukeviin sovelluksiin. 
 
