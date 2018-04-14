@@ -210,11 +210,14 @@ Arkkitehtuuriratkaisut ovat riippuvaisia tarjottavista palveluista. Toiset arkki
 
 
 \subsection{Keskeiset käsitteet}
-Tässä kappalessa esitellään tämän tutkielman kannalta tärkeät toimijat.
-Reunaan kuuluvien toimijoiden lisäksi on hyvä tietää reunan sijoittuminen muiden  reunan ulkopuolisten toimijoiden suhteen. Tässä yhteydessä muut toimijat on rajattu reunajärjestelmän osalta oleellisiin toimijoihin. 
+Tässä kappalessa esitellään (mobiilin) reuna-arkkitehtuurin keskeiset käsitteet ja toimijat. 
+Koska reunajärjestelmä sijoittuu osaksi olemassa olevaa hierarkiaa, esitellään myös reunan läheisyydessä sijaitsevat toimijat.
+Reunan itsensä lisäksi käsitellään siis asiakaslaitteet ja pilvi, niiltä osin kuin ne liittyvät reunajärjestelmän käyttöön tai toimintaan.
+Lähes kaikki tässä tutkielmassa esiteltävät reuna-arkkitehtuurit sijoittuvat mobiiliverkkoon. Tästä syystä esitellään LTE-mobiiliverkon toimijat ja siihen kuuluvat käsittet. 
+Lopuksi määritellään mitä tässä tutkielmassa tarkoitetaan reuna-arkkitehtuurilla.
 
-Perinteinen asiakas-palvelin -malli koostuu vain kahdesta toimijasta. Reunajärjestelmän lisääminen tähän malliin luo omanalaisen hierarkian joka, muistuttaa enemmänkin asiakas-reuna-palvelin muotoista järjestelmää.
-Seuraavaksi käydään läpi hieman tarkemmin mitä nämä osat sisältävät ja mikä niiden keskeisin rooli reunajärjestelmän kontekstissa on. 
+%Perinteinen asiakas-palvelin -malli koostuu vain kahdesta toimijasta. Reunajärjestelmän lisääminen tähän malliin luo omanalaisen hierarkian joka, muistuttaa enemmänkin asiakas-reuna-palvelin muotoista järjestelmää.
+%Seuraavaksi käydään läpi hieman tarkemmin mitä nämä osat sisältävät ja mikä niiden keskeisin rooli reunajärjestelmän kontekstissa on. 
  
 \input{edgetoimijat}
 
@@ -262,7 +265,7 @@ Ajan ja akkuvirran säästämiseksi tehtävät toimet ovat siis keskeisimmät ha
 
 \input{hallinta}
 
-\section{Reunan rakenne}
+\section{Reunan rakenne} \label{rakenne}
 Rakenteeseen vaikuttaa ehkä eniten seuraavat kaksi valintaa
 \begin{itemize}
 \item Kerroksittain
