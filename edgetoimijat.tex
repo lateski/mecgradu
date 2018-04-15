@@ -47,20 +47,36 @@ Reunasolmun sijaintiin vaikuttaa käytössä oleva reuna-arkkitehtuuri.
 Reunan rakennetta ja  reunasolmujen sijaintia käsitellään tarkemmin luvussa \ref{rakenne}.
 
 \paragraph{Reuna-alusta}
-Reuna-alusta (Edge platform) on ohjelmistotason toimija. Se tarjoaa rajapinnan reunasovelluksien suorittamista varten. Toisin sanoen se siis tarjoaa reunasovelluksille toimintaympäristön.
+Reuna-alusta (Edge platform) on ohjelmistotason toimija. Se tarjoaa rajapinnan reunasovelluksien suorittamista varten\cite{etsirefarch}. Toisin sanoen se siis tarjoaa reunasovelluksille toimintaympäristön.
 Reuna-alustan tehtävät eivät rajaudu ainoastaan yksittäiseen reunasolmuun, vaan sen lisäksi se hoitaa hallinnollisia tehtäviä kuten tietoliikenteen ohjausta. Lisäksi reuna-alustan tehtäviin voidaan lukea reunasovelluksia suorittaviin virtuaalikoneisiin liittyvät hallinnolliset toimet. Esimerkkinä reuna-alustan tehtävistä on kappaleessa \ref{livemigraatio} esiteltävä virtuaalikoneiden live migraatio reunasolmulta toiselle.
 Reunasovelluksien lisäksi reuna-alusta voi itsessään tarjota palveluita, jotka eivät suoranaisesti ole reunasovelluksia vaan esimerkiksi nopea kommunikaatioväylä laitteelta-laitteelle (machine-to-machine), jota voi käyttää vaikka ajoneuvojen väliseen viestintään.
 
 \paragraph{Reunasovellus}
-Reunasovelluksella (Edge application) tarkoitetaan yksittäistä reunasolmulla suoritettava ohjelmistoa, jonka kuluttajana voi toimia asiakaslaite tai toinen reunasovellus. Reunasovellus ei ota kantaa millaista palvelua sillä tuotetaan ja sen rajoitteet asettaa pääasiassa käytössä oleva reuna-alusta. 
+Reunasovelluksella (Edge application) tarkoitetaan yksittäistä reunasolmulla suoritettava ohjelmistoa \cite{etsirefarch}, jonka kuluttajana voi toimia asiakaslaite tai toinen reunasovellus. Reunasovellus ei ota kantaa millaista palvelua sillä tuotetaan ja sen rajoitteet asettaa pääasiassa käytössä oleva reuna-alusta. 
 
 Reunasovelluksen tuottama palvelu voi olla tyypiltään yhteiskäyttöinen tai käyttäjäkohtainen, esimerkiksi käyttäjäkohtainen virtuaalikone johon käyttäjä voi ottaa etäyhteyden. Esimerkki yhteiskäyttöisestä reunasovelluksesta olisi pelipalvelin, jota voivat käyttää reunasolmun lähistöllä olevat pelaajat. 
 
 \subsubsection{Pilvi}
-%kirjoita uusiksi
-Pilvellä tarkoitetaan internetin ytimen läheisyydessä sijaitsevaa aluetta.
-Pilven voidaan ajatella laajenevan kohti reunaa. Koska pilven ja reunan raja ei ole selkeä ne voivat olla limittäin.
-Tavallisessa asiakas-palvelin -mallissa palvelun tuottavan palvelimen voidaan ajatella sijaitsevan pilvessä. Kun mukaan otetaan reunajärjestelmä, palveluiden tuottaminen hajautuu reunan ja pilven kesken. Reunanjärjestelmän ei ole tarkoitus korvata pilveä vaan täydentää sitä. 
+%pilven alk peräinen määritelmä
+\cite{armbrust2010view} määrittelevät artikkelissan pilven. 
+Pilvellä viitataan sekä pilvessä tuotettaviin palveluihin, että itse järjestelmään, pilvi-alustaan, joka mahdollistaa palveluiden tuottamisen.
+Artikkelin mukaan pilven tuottamisen yhtenä keskeisimmistä mahdollistajista on toiminut edullisille sijainnelle rakennetut suuret tietokonekeskukset.
+Toisin sanottuna pilvipalvelut tuotetaan tietokonekeskuksissa, jotka ovat keskitettyjä ja sijaitsevat kauempana asutuksesta. 
+
+Keskeinen osa pilvi paradigmaa on myös tapa jolla palveluita tuotetaan.
+Pilvi-alusta tarjoaa asiakkailleen mahdollisuuden skaalata palveluitaan näennäisesti äärettömyyksiin.
+Tämän lisäksi aika, jossa käytössä olevien resurssien lisäys tai poisto voidaan tehdä on huomattavasti lyhyempi, verrattuna perinteiseen tietokonekeskukseen jossa palvelun tuottaja omistaisi itse laitteiston.
+Tässä tutkielmassa pilvellä viitataan kuitenkin enemmänkin järjestelmän rakenteeseen ja sijaintiin, kuin palveluiden tuottamiseen käytettävään malliin.
+
+Reunan ei ole tarkoitus korvata pilveä, vaan täydentää sitä. Pilven ja reunan välinen raja ei ole tarkka. Pilvella tarkoitetaan suhteessa reunaan kaumpana sijaitsevia palveluita. Pilvi ulottuu verkon ytimestä kohti asiakaslaitetta ja saattaa olla osittain päällekkäin reunan kanssa. Kuten aiemmin mainittu niin reuna lähestyy verkon ydintä asiakaslaitteen suunnasta.  
+
+
+%tässä tutkielmassa tarkoitetaan enemmänkin sijaintia ja rakennetta, kuin palveluiden tuottamiseen käytettävää mallia
+% Reunan reuna on pilveä tukeva palvelu
+
+%Pilvellä tarkoitetaan internetin ytimen läheisyydessä sijaitsevaa aluetta.
+%Pilven voidaan ajatella laajenevan kohti reunaa. Koska pilven ja reunan raja ei ole selkeä ne voivat olla limittäin.
+%Tavallisessa asiakas-palvelin -mallissa palvelun tuottavan palvelimen voidaan ajatella sijaitsevan pilvessä. Kun mukaan otetaan reunajärjestelmä, palveluiden tuottaminen hajautuu reunan ja pilven kesken. Reunanjärjestelmän ei ole tarkoitus korvata pilveä vaan täydentää sitä. 
 
 
 %Asiakaskohtaiselle reunainstanssille ei ole mitään vakiintunutta nimeä.
