@@ -73,13 +73,16 @@ Reunan ei ole tarkoitus korvata pilveä, vaan täydentää sitä. Myöskään pi
 \subsection{Reuna-arkkitehtuuri}
 %Määrittele mikä on reuna-arkkitehtuuri
 
-\cite{ohark}
-Tässä tutkielmassa käsiteltävät arkkitehtuurit koostuvat oletusarkkitehtuurin (framework) tai sovellusaluemallin (domain model) tyylisistä jaotteluista. 
-Reuna-arkkitehtuurit kuvaavat järjestelmän toiminnallisia osia korkealla tasolla. 
-Yleensä toiminnalliset osat on jaettu loogisiin kokonaisuuksiin, eli toimintoihin perustuviin kokoniasuuksiin. Reuna-arkkitehtuurit asettavat rajoitteita myös fyysiselle sijoittumiselle, jolloin osa toimijoista on jaoteltu fyysisiin komponentteihin. Joskin kappaleessa \ref{nfv} esiteltävä NFV tekee asioiden jakamisen fyysisin kokonaisuuksiin hieman dynaamisempaa. 
-Oletusarkkitehtuuria voidaan hyödyntää varsinaista toteutettavaa järjestelmää suunniteltaessa ja sovellusaluemallit kuvaavat järjestelmän osia suhteessa myös reunajärjestelmää ympäröiviin toimijoihin.
-Kappaleessa \ref{reunatoimijat} esitetyn jaon mukaan tässä tutkielmassa reuna-arkkitehtuurilla keskitytään reunasolmun ja reuna-alustan toiminnalliseen määrittelyyn.
-Reuna-arkkitehtuuri jättää avoimeksi reunasovelluksien toiminnan.
+
+Tässä tutkielmassa käsiteltävät arkkitehtuurit koostuvat oletusarkkitehtuurin (framework) tai suunnittelumallin (design model) tyylisistä arkkitehtuurikuvauksista. 
+Oletusarkkitehtuuri jakaa järjestelmän jonkin tehtävän toteuttaviin kokonaisuuksiin, kuten komponentteihin ja moduuleihin \cite{ohark}. 
+Suunnittelumallit puolestaan kuvaavat tarkemmin järjestelmän komponentteja, sekä niiden toimintoja. Suunnitelumallit ovat kuitenkin ainoastaan osajoukko suunnittelupäätöksistä \cite{ohark2}, joten ne jättävät osan päätöksistä toteuttajalle. Lisäksi suunnittelumallit kuvaavat järjestelmää ainoastaan jollain tietyllä abstraktiotasolla ja koko järjestelmän kattavaan kuvaamiseen tarvittaisiin useita sisäkkäisiä ja hierarkisia suunnittelumalleja. Tämän tutkielman yhteydessä läpikäydy arkkitehtuurit ovat, ETSI:n referenssiarkkitehtuuria \cite{etsirefarch} lukuunottamatta, korkean tason luonnehdintoja järjestelmän ja sen osien toiminnasta.
+ 
+Reuna-arkkitehtuurissa toiminnalliset osat on jaettu loogisiin kokonaisuuksiin, eli tehtävien mukaan kasattuihin komponentteihin. Reuna-arkkitehtuurit asettavat rajoitteita myös toimintojen fyysiselle sijoittumiselle, jolloin osa toimijoista on jaoteltu fyysisiin komponentteihin. Joskin kappaleessa \ref{nfv} esiteltävä NFV tekee toimintojen fyysisestä sijoittumisesta dynaamisempaa ja vähemmän fyysiseen sijaintiin sidonnaista. 
+%Oletusarkkitehtuuria voidaan hyödyntää varsinaista toteutettavaa järjestelmää suunniteltaessa ja sovellusaluemallit kuvaavat järjestelmän osia suhteessa myös reunajärjestelmää ympäröiviin toimijoihin.
+Kappaleessa \ref{reunatoimijat} käsiteltyjen reunan keskeisten käsitteiden mukaan tässä tutkielmassa reuna-arkkitehtuurit keskittyvät reunasolmun ja reuna-alustan toiminnalliseen määrittelyyn. 
+Tämän lisäksi reunajärjestelmää käsitellään alijärjestelmänä, eli osana suurempaa kokonaisjärjestelmää, joka koostuu muun muassa mobiiliverkosta.
+Reuna-arkkitehtuurit eivät siis ota kantaa reunasovelluksien toimintaan.
 
 %Tämän tutkielman puitteissa arkkitehtuurilla tarkoitetaan reuna-alustan ja reunasolmujen muodostamaa järjestelmää. Reuna-alustan toiminnallisuuksia voisi eritellä vielä tarkemmin, etenkin reunasovelluksien hallinnan osalta. Cloudlet on konkreettinen toteutus reuna-alustan reunasovelluksia hallinnoivasta osasta, mutta se ei kata kuin yhden reunasolmun kerrallaan. 
 %Tämän lisäksi olemassa on reunasolmujen välisestä hallinnasta vastaava kerros, tosin tämä kerros voi olla ulkoistettu erillisille hallinnolliselle toimijalle, jolloin hallinnollinen osa reuna-alustasta on varsinaisten reunasolmujen ulkopuolella. 
