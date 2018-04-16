@@ -12,13 +12,6 @@ Verkkohierarkian näkökulmasta asiakaslaitteet ovat lehtisolmuja. Tämä tarkoi
 Konkreettinen esimerkki asiakaslaitteesta, joka hyödyntää reunapalvelua, voisi olla jokin ajoneuvo.
 Ajoneuvolla on mobiiliyhteys reunapalveluun jonka tarkoitus on välittää tietoa liikenteestä muille ajoneuvoille. Esimerkiksi tilanteessa jossa edellä on ruuhkaa, voitaisiin muille lähistöllä oleville ajoneuvoille välittää tieto tästä, jolloin voidaan valita jokin toinen reitti määränpäähän.
 
-%Asiakaslaite on yleisnimitys laitteelle, joka hyödyntää reunan tai pilven tarjoamia palveluita jonkin tietoliikenneyhteyden avulla.
-%Reunalaskentaa käsittelevässä kirjallisuudessa asikaslaitteeseen viitataan usein UE (User Equipment) termillä. 
-%Se mitä konkreettista laitetta asiakaslaitteella tarkoitetaan riippuu kontekstista. 
-%Tässä tutkielmassa asiakaslaitteella tarkoitetaan älypuhelinta jollei toisin mainita. 
-%Esimerkkinä jostain toisesta asiakaslaitteesta on auto, joka on varustettu mobiiliverkkoyhteydellä. Auto voi käyttää reunapalveluita esimerkiksi kommunikoidakseen muiden lähistöllä olevien autojen kanssa.
-%Asiakaslaitteet verkkoyhteyksien muodostaman hierarkian "lehtisolmuja" joka tarkoittaa että ne eivät enää tarjoa palveluitaan muille asiakaslaitteille. 
-
 
 \subsubsection{Reuna} \label{reunatoimijat}
 Reuna koostuu useista toiminnallisista entiteeteistä, jotka voidaan jakaa sekä fyysisiin, että loogiisin kokonaisuuksiin. 
@@ -68,15 +61,8 @@ Pilvi-alusta tarjoaa asiakkailleen mahdollisuuden skaalata palveluitaan näennä
 Tämän lisäksi aika, jossa käytössä olevien resurssien lisäys tai poisto voidaan tehdä on huomattavasti lyhyempi, verrattuna perinteiseen tietokonekeskukseen jossa palvelun tuottaja omistaisi itse laitteiston.
 Tässä tutkielmassa pilvellä viitataan kuitenkin enemmänkin järjestelmän rakenteeseen ja sijaintiin, kuin palveluiden tuottamiseen käytettävään malliin.
 
-Reunan ei ole tarkoitus korvata pilveä, vaan täydentää sitä. Pilven ja reunan välinen raja ei ole tarkka. Pilvella tarkoitetaan suhteessa reunaan kaumpana sijaitsevia palveluita. Pilvi ulottuu verkon ytimestä kohti asiakaslaitetta ja saattaa olla osittain päällekkäin reunan kanssa. Kuten aiemmin mainittu niin reuna lähestyy verkon ydintä asiakaslaitteen suunnasta.  
+Reunan ei ole tarkoitus korvata pilveä, vaan täydentää sitä. Myöskään pilven ja reunan välinen raja ei ole tarkka. Tässä tutkielmassa pilvellä tarkoitetaan suhteessa reunaa kaumpana sijaitsevia palveluita. Pilvi ulottuu verkon ytimestä kohti asiakaslaitetta ja saattaa olla osittain päällekkäin reunan kanssa. Kuten aiemmin mainittu, reuna lähestyy verkon ydintä asiakaslaitteen suunnasta.  
 
-
-%tässä tutkielmassa tarkoitetaan enemmänkin sijaintia ja rakennetta, kuin palveluiden tuottamiseen käytettävää mallia
-% Reunan reuna on pilveä tukeva palvelu
-
-%Pilvellä tarkoitetaan internetin ytimen läheisyydessä sijaitsevaa aluetta.
-%Pilven voidaan ajatella laajenevan kohti reunaa. Koska pilven ja reunan raja ei ole selkeä ne voivat olla limittäin.
-%Tavallisessa asiakas-palvelin -mallissa palvelun tuottavan palvelimen voidaan ajatella sijaitsevan pilvessä. Kun mukaan otetaan reunajärjestelmä, palveluiden tuottaminen hajautuu reunan ja pilven kesken. Reunanjärjestelmän ei ole tarkoitus korvata pilveä vaan täydentää sitä. 
 
 
 %Asiakaskohtaiselle reunainstanssille ei ole mitään vakiintunutta nimeä.
@@ -87,15 +73,16 @@ Reunan ei ole tarkoitus korvata pilveä, vaan täydentää sitä. Pilven ja reun
 \subsection{Reuna-arkkitehtuuri}
 %Määrittele mikä on reuna-arkkitehtuuri
 
+\cite{ohark}
+Tässä tutkielmassa käsiteltävät arkkitehtuurit koostuvat oletusarkkitehtuurin (framework) tai sovellusaluemallin (domain model) tyylisistä jaotteluista. 
+Reuna-arkkitehtuurit kuvaavat järjestelmän toiminnallisia osia korkealla tasolla. 
+Yleensä toiminnalliset osat on jaettu loogisiin kokonaisuuksiin, eli toimintoihin perustuviin kokoniasuuksiin. Reuna-arkkitehtuurit asettavat rajoitteita myös fyysiselle sijoittumiselle, jolloin osa toimijoista on jaoteltu fyysisiin komponentteihin. Joskin kappaleessa \ref{nfv} esiteltävä NFV tekee asioiden jakamisen fyysisin kokonaisuuksiin hieman dynaamisempaa. 
+Oletusarkkitehtuuria voidaan hyödyntää varsinaista toteutettavaa järjestelmää suunniteltaessa ja sovellusaluemallit kuvaavat järjestelmän osia suhteessa myös reunajärjestelmää ympäröiviin toimijoihin.
+Kappaleessa \ref{reunatoimijat} esitetyn jaon mukaan tässä tutkielmassa reuna-arkkitehtuurilla keskitytään reunasolmun ja reuna-alustan toiminnalliseen määrittelyyn.
+Reuna-arkkitehtuuri jättää avoimeksi reunasovelluksien toiminnan.
 
-Tässä tutkielmassa käsiteltävät arkkitehtuurit ovat pääasiassa tyypiltään oletusarkkitehtuureja (framework). 
-Tämänkaltaisen arkkitehturin tarkoituksena on jakaa järjestelmä toiminnallisiin osiin fyysisellä ja ohjelmallisella tasolla \cite{ohark}. Se siis kuvaa järjestelmän rakenneosien tehtävät.
-Oletusarkkitehtuuria voidaan hyödyntää varsinaista toteutettavaa järjestelmää suunniteltaessa.
+%Tämän tutkielman puitteissa arkkitehtuurilla tarkoitetaan reuna-alustan ja reunasolmujen muodostamaa järjestelmää. Reuna-alustan toiminnallisuuksia voisi eritellä vielä tarkemmin, etenkin reunasovelluksien hallinnan osalta. Cloudlet on konkreettinen toteutus reuna-alustan reunasovelluksia hallinnoivasta osasta, mutta se ei kata kuin yhden reunasolmun kerrallaan. 
+%Tämän lisäksi olemassa on reunasolmujen välisestä hallinnasta vastaava kerros, tosin tämä kerros voi olla ulkoistettu erillisille hallinnolliselle toimijalle, jolloin hallinnollinen osa reuna-alustasta on varsinaisten reunasolmujen ulkopuolella. 
 
-Kappaleessa \ref{reunatoimijat} kuvattujen reunan toimijoiden osalta reuna-arkkitehtuurit keskittyvät kuvaamaan reunasolmun ja reuna-alustan tehtäviä. Lisäksi reuna-arkkitehtuurit kuvaavat koko järjestelmän osana toista järjestelmää, jolloin reunajärjestelmä itsessään on komponentti suuremmassa järjestelmässä. Tällä tasolla tarkasteltu arkkitehtuuri jättää avoimeksi reunasovelluksien toiminnan ja keskittyy kuvaamaan reunasovelluksien sijaintia järjestelmässä.
-
-Tämän tutkielman puitteissa arkkitehtuurilla tarkoitetaan reuna-alustan ja reunasolmujen muodostamaa järjestelmää. Reuna-alustan toiminnallisuuksia voisi eritellä vielä tarkemmin, etenkin reunasovelluksien hallinnan osalta. Cloudlet on konkreettinen toteutus reuna-alustan reunasovelluksia hallinnoivasta osasta, mutta se ei kata kuin yhden reunasolmun kerrallaan. 
-Tämän lisäksi olemassa on reunasolmujen välisestä hallinnasta vastaava kerros, tosin tämä kerros voi olla ulkoistettu erillisille hallinnolliselle toimijalle, jolloin hallinnollinen osa reuna-alustasta on varsinaisten reunasolmujen ulkopuolella. 
-
-Reunasovelluksien toimintaa ei käsitellä tarkemmin. Taxonomy paperissa on hyvä jaottelu erilaisista sovelluksista. Tämä aihepiiri laajenee sovelluksien jakamiseen osittain reunalla suoritettaviin (offloading) tai mobiilisovelluksen suoritusta tukeviin sovelluksiin. 
+%Reunasovelluksien toimintaa ei käsitellä tarkemmin. Taxonomy paperissa on hyvä jaottelu erilaisista sovelluksista. Tämä aihepiiri laajenee sovelluksien jakamiseen osittain reunalla suoritettaviin (offloading) tai mobiilisovelluksen suoritusta tukeviin sovelluksiin. 
 
