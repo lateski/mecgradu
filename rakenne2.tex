@@ -5,40 +5,33 @@ Ensimmäiseksi käsitellään reuna-arkkitehtuurien vaikutuksen toteutettavaan j
 Tämän jälkeen esitellään reunan fyysisen rakenteen eri mallit, jossa keskeisessä osassa ovat reunasolmujen sijainnit.
 Lopuksi käydään läpi reunan rakenteen merkitystä järjestelmän toiminnalle.
 
-\subsection{Arkkitehtuurin vaikutus rakenteeseen}
-%hallinnon sijainti
-%integraatio mobiiliverkkoon
-%hallinnoivan järjestelmän omistajuus.
 
 \subsection{Rakennetyypit}
-Kirjoita meta
+Tässä kappaleessa käsitellään reunasolmujen muodostaman järjestelmän rakennetta. Rakenteet jakautuvat kahteen päätyyppiin: litteään ja hierarkiseen.
+Litteä rakenne edustaa perinteisempää lähestymistapaa reunasolmujen asetteluun. Hierarkinen rakenne puolestaan uudempaa ajatusmallia, jossa reunasolmut delegoivat tehtäviä suhteessa tehokkaammille reunasolmuille. 
+
+Reunan rakenteeseen vaikuttaa useampi tekijä. Myöhemmässä kappaleessa \ref{cloudlet} käsiteltävien cloudlettien yhteydessä visioitu operaattoreista riippumattomat reunasolmut mahdollistaisivat esimerkiksi kauppakeskuksien ja yksityishenkilöiden hankkia omat reunalaskentaa suorittavat yksiköt. Tällaisessa tilanteessa keskeiseksi kysymykseksi nouseekin reunapalveluiden tuottamiseen käytettävä liiketoimintamalli. Yksinkertaisuuden vuoksi tässä kappaleessa aihetta käsitellään, kuin reunan rakenne olisi yhden entiteetin, esimerkiksi operaattorin, käsissä. 
 
 \subsubsection{Litteä rakenne}
 Litteällä rakenteella tarkoitetaan että jokainen reunasolmu on hierarkisesti samalla tasolla toisiinsa nähden. Litteän järjestelmän keskeisin päätös on valita taso, jolle reunasolmut sijoitetaan. (Voisiko sanoa että tällainen järjestelmä on reunavyöhyke)
 
-Yksinkertainen esimerkki tällaisesta toteutuksesta olisi reunajärjestelmä, jossa reunasolmut sijoitettaisiin mobiiliverkon tukiasemien yhteyteen. Esimerkin järjestelmä  toteuttaisi äärimmäistä hajautusta ja lisäksi se olisi fyysisesti erittäin lähellä asiakaslaitetta. Tällaisessa rakenteessa kuitenkin on ilmeisiä ongelmia. Järjestelmän käyttö olisi teoriassa mahdollista ainaostaan niiden tukiasemien ympäristössä, joissa reunajärjestelmä sijaitsee \cite{hassuautokuva}. Tämän seurauksena reunalaskennan laajamittainen käyttöönotto olisi riippuvainen tukiasemiin sijoitettavien reunasolmujen hankinnasta.
+Yksinkertainen esimerkki tällaisesta toteutuksesta olisi reunajärjestelmä, jossa reunasolmut sijoitettaisiin mobiiliverkon tukiasemien yhteyteen. Esimerkin järjestelmä  toteuttaisi äärimmäistä hajautusta ja lisäksi se olisi fyysisesti erittäin lähellä asiakaslaitetta. Tällaisessa rakenteessa kuitenkin on ilmeisiä ongelmia. Järjestelmän käyttö olisi teoriassa mahdollista ainaostaan niiden tukiasemien ympäristössä, joissa reunajärjestelmä sijaitsee. Tämän seurauksena reunalaskennan laajamittainen käyttöönotto olisi riippuvainen tukiasemiin sijoitettavien reunasolmujen hankinnasta. Mikäli oletetaan että siellä missä laskennan tarve on suurin, on myös eniten ihmisiä. Tästä yleensä seuraa että tällaisessa tilanteessa lähelle tuotu reunalaskenta on kalliimpaa, jo käytettävien tilojen hintojen vuoksi \cite{mao17}.
 
 Vaihtoehtoinen ratkaisu olisi siirtää reunasolmuja kauemmaksi tukiasemista. Esimerkiksi siten että yksi reunasolmu vastaisikin useamman tukiaseman kautta tulevasta reunalaskennasta. Mobiiliverkko kontekstissa, reunasolmu sijaitsisi siis joko tukiasemien ja EPC:n välillä tai vasta EPC:n takana.  
 Useamman tukiaseman niputtamista yhden reunasolmun vastuulle kutsutaan klusteroinniksi. 
-Keskeisenä haasteena klusteroinnissa on valita oikean kokoiset klusterit ja sijoittaa oikea määrä resursseja kuhunkin klusteriin.
+Keskeisenä haasteena klusteroinnissa on valita oikean kokoiset klusterit ja sijoittaa oikea määrä resursseja kuhunkin klusteriin \cite{malandrino2016close}.
+Klusterin suuruus ja viive todennäköisesti korreloivat jolloin on varottava tekemästä klustereista tarpeettoman suuria.
 Reunasolmujen siirtäminen kauemmaksi asiakaslaitteista pitäisi siis mahdollistaa helpompi ja edullisempi käyttöönotto, koska tarvitaan suhteessa vähemmän reunasolmuja ja reunasolmujen ylläpito on näin ollen edullisempaa.
 Kompromissina on kuitenkin suurempi viive reunasolmujen ja asiakaslaitteiden välillä. 
 Onkin siis tärkeää että reunasolmuja ei viedä liian kauas reunasta, jolloin palvelun laatu heikkenee \cite{mao17}. 
 
+
 Kuitenkin riippumatta litteän rakenteen sijainnista, sen pohjimmaisena ongelmana on resurssien kiinteys. Ympäristössä jossa reunalaskennan määrä vaihtelee, seuraa tilanne jossa reunasolmu on joko ylikuormitettuna tai alikuormitettuna suhteessa käytössä oleviin resursseihin \cite{tong2016hierarchical}. Jotta reunasolmut pystyisivät suoriutumaan kaikesta reunalaskennasta, reunasolmujen resurssit jouduttaisiin mitoittamaan rasitus-huippujen mukaan. Tästä seuraa lähes jatkuvaa alikuormitusta, joka tarkoittaa että reunajärjestelmän kustannukset olisivat korkeammat kuin olisi tarpeen. 
 Tämän ongleman ratkaisuksi on esitetty hierarkista järjestelmää.
 
-\paragraph{kirjoittajan huomioita}
-\begin{list}{•}{•}
-\item \cite{malandrino2016close} esittävät tosielämän klusterointia joka pyrkii yhdistämään sekä viiveen että resurssien utilisaatiota. 
-\item \cite{mao17} kertoo että lähelle tuotu laskenta on kalliimpaa johtuen siitä että on todennäköistä että siellä missä laskentaa tarvitaan eniten, on myös paljon ihmisiä, joka myös näkyy esim tilavuokrissa.
-\item Lisäksi Mao et al esittävät että kauemmaksi sijoitetut palvelimet laskevat palvelun laatua. 
-\item  Itseasiassa kauas viedyt hajautetut rakenteen alkavat muistuttaa fog tyyppistä palvelua
-\item In 2012, Flavio Bonomi and his colleagues introduced the term fog computing to refer to this dispersed cloud infrastructure. F. Bonomi et al., “Fog Computing and
-Its Role in the Internet of Things,”
-Proc. 1st Edition MCC Workshop
-Mobile Cloud Computing (MCC 12),
-\end{list}
+
+%In 2012, Flavio Bonomi and his colleagues introduced the term fog computing to refer to this dispersed cloud infrastructure. F. Bonomi et al., “Fog Computing and Its Role in the Internet of Things,”Proc. 1st Edition MCC Workshop Mobile Cloud Computing (MCC 12)
+
 
 \subsubsection{Hierarkinen rakenne}
 Hierarkinen rakenne on parannusehdostus reunalaskennan oletetulle litteälle rakenteelle \cite{tong2016hierarchial}
@@ -49,20 +42,37 @@ Ylemmällä tasolla sijaitsevalla reunasolmulla on vastuullaan useampi alemman t
 Hierarkisen rakenteen keskeisenä tavoitteena on reunajärjestelmän resurssien käyttöasteen parantaminen \cite{tong2016hierarchial}. Ylemmillä kerroksilla sijaitsevat resurssit ovat suuremman joukon käytössä, hieman kuten litteässä mallissa tukiasemia klusteroitaessa. 
 Hierarkisessa rakenteessa on kuitenkin riskinsä. Järjestelmän voidaan olettaa monimutkaistuvan jos laskentaa tehdään useassa kerroksessa. Ja etenkin järjestelmän ylempien kerroksien etäisyys asiakaslaitteisiin kasvaa, joka voi potentiaalisesti johtaa viiveiden kasvuun ja palvelun laadun heikkenemiseen.
 
-
-\subsubsection{Vertailu}
->johdanto vertailuun
-
 Tong et al \cite{tong2016hierarchical} esittävät tukimuksessaan vertailua litteälle ja erilaisille hierarkisille rakenteille. Tilanteessa jossa järjestelmään on jaettavissa kiinteä määrä resursseja, kolmeen kerrokseen jaettu järjestelmä vaikutti optimaalisimmalta.
-Vertailun mittarina käytettiin aikaa joka reunapalvelulla kului vastata annettuihin laskennallisiin tehtäviin. Kolmikerrokisen mallin etuina oli laskentaresurssien määrä ylemmillä kerroksilla, jolloin etenkin ruuhkaisissa tilanteissa se suoriutui tehtävistään nopeammin. Lisäksi todettiin että ylemmillä tasoilla sijaitseva tehokkaampi laskenta pysty kompensoimaan siirtämisestä aiheutuvaa viivettä. 
-
-Hierarkinen rakenne vaatii vielä tutkimusta. Etenkin tilanteissa joissa viiveet kerroksien välillä ja siirrettävän tiedon määrä on suurempi.
+Vertailun mittarina käytettiin aikaa joka reunapalvelulla kului vastata annettuihin laskennallisiin tehtäviin. Kolmikerrokisen mallin etuina oli laskentaresurssien määrä ylemmillä kerroksilla. Tällöin etenkin ruuhkaisissa tilanteissa se suoriutui tehtävistään nopeammin kuin litteä. Lisäksi tutkimuksessa todettiin, että ylemmillä tasoilla sijaitseva tehokkaampi laskenta pystyy kompensoimaan siirtämisestä aiheutuvaa viivettä. Huomattakoon kuitenkin että tutkimuksessa käytettävä kuorma oli tyypiltään hienojakoista ja pientä. 
 
 
+\subsubsection{Yhteenveto}
+Hierarkinen järjestelmä on potentiaalinen vaihtoehto litteälle rakenteelle. Koska reunalaskennalle on monia hyvin erilaisia sovelluskohteita, hierarkinen rakenne vaatii tarkempaa tutkimusta erilaisilla reunalaskennan tyypeillä. Litteän rakenteen heikkoina puolina voidaan pitää sen kyvyttömyyttä sopeutua kuorman epätasaisuuseen, sekä järjestelmän ylläpidon kustannuksia, mikäli järjestelmää päätetään hajauttaa aggressiivisesti. Litteä järjestelmä on rakenteeltaan yksinkertainen ja se tukee esimerkiksi olemassa olevaa mobiiliverkon tukiasemien rakennetta. 
 
 
+\subsection{Arkkitehtuurin vaikutus rakenteeseen}
+Edellisessä kappaleessa järjestelmän rakenteen oletettiin olevan vapaa sijoittamaan reunasolmut haluamiinsa paikkoihin. 
+Todellisuudessa reuna-arkkitehtuurit kuitenkin asettavat joitakin rajoitteita reunsolmujen sijaintien suhteen. Seuraavaksi käsittelemme keskeisimmät vaikuttavat tekijät reuna-arkkitehtuurissa. 
+
+%mobiiliverkko
+Koska mobiiliverkko on usein asiakaslaitetta lähimpänä sijaitseva verkko, reuna-arkkitehtuurit ovat pyrkineet muodostamaan integraation sen kanssa.
+Mobiiliverkon ja reunajärjestelmän integraatioissa voidaan puhua integraation sitovuudesta. 
+Tällä tarkoitetaan kuinka sidoksissa reunajärjestelmä on mobiiliverkon rakenteeseen.
+Monet ehdotetuista reuna-arkkitehtuureista ovat pyrkineet pitämään sidonnaisuutta mahdollisimman vähäisenä, jotta reunajärjestelmän käyttöönotto ei vaatisi mobiiliverkon uusimista.
+Mutta mobiiliverkosta saatava tieto esimerkiksi tukiasemien handoverit ovat reunajärjestelmän kannalta oleellista tietoa, kun päätetään asiakaslaitteen laskennan suorittavasta reunasolmusta.
+Tämä tarkoittaa siis että on lähes pakollista sijoittaa hallinnollisia toimia mobiiliverkon yhteyteen.
+Reunasolmujen sijoitteluun on yleensä enemmän vapauksia, etenkin tilanteessa jossa reunasolmulla ei itsellään ole hallinnollisia tehtäviä.
+Ehdotettujen reuna-arkkitehtuurien keskuudessa on huomattavia eroja reunasolmunen mahdollisten sijaintien suhteen. Näitä käydään tarkemmin läpi luvussa \ref{ratkaisut}, jossa jokaisen arkkitehtuuriehdotuksen toiminnallisuus esitellään. 
+
+Reuna-arkkitehtuurin riippuvuutta ympäröiviin järjestelmiin voidaan yrittää pienentää esimerkiksi ottamalla käyttöön SDN. SDN mahdollistaa tietoliikennevirtojen ohjaamisen siten että reunajärjestelmän tietoliikennevirrat eivät vaikuta mobiiliverkon toimintaan. SDN pohjaiset ratkaisut rakentavat läpinäkyvän kerroksen tukiasemien (E-UTRAN) ja EPC:n välille.
 
 
+%arkkitehtuurin asettamat rajoitteet
+%hallinnon sijainti
+%integraatio mobiiliverkkoon
+%hallinnoivan järjestelmän omistajuus.
+
+%mobiili
 
 
 
