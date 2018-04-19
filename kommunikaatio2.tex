@@ -1,0 +1,50 @@
+\subsection{Kommunikaatio}
+Reunalaskennan toimiminen vaatii asiakaslaitteen ja reunajärjestelmän välille kommunikaatioväylän.
+Kommunikaatioväylän tehtävänä on välittää asiakaslaitteen ja reuna-alustan välistä tietoliikennettä molempiin suuntiin.
+Reunan ja asiakaslaitteen välinen kommunikaation toteutuminen vaatii suunnittelupäätöksiä, joihin reuna-arkkitehtuurit ottavat kantaa. 
+Johtuen edellisessä kappaleessa käsitellystä reunajärjestelmän integroinnista mobiiliverkkoon, tietoliikenne reunajärjestelmän ja asiakaslaitteen välillä joudutaan ohjaamaan hieman perinteisistä tavoista eroavilla metodeilla. 
+
+Tavallisesti mobiiliverkko ohjaa kaiken asiakkaslaitteelta lähtevän tietoliikenteen mobiiliverkosta ulos internettiin P-GW:n kautta. 
+Mobiiliverkko ei käsittele asiakkaan tietoliikennettä IP-tasolla, vaan asiakkaan tietoliikenne EPC:n ja tukiasemien välillä tunneloidaan GTP:n (GPRS Tunnelling Protocol) avulla \cite{lobillo15scc}.
+Toisin sanoen mobiiliverkko on asiakaslaitteen tietoliikenteen näkökulmasta näkymätön.
+Koska reuna-arkkitehtuurien ehdotus on integroida reunajärjestelmän toimijat mobiiliverkon sisään, joudutaan mobiiliverkon sisäisiä tietoliikenteen ohjausmetodeja muokkaamaan.
+Ensimmäinen ratkaistava ongelmana on siis, että kuinka asiakaslaitteen tietoliikenne voidaan ohajata mobiiliverkon sisällä sijaitsevalle reunajärjestelmälle.
+Toinen ratkaistava ongelma on yhteyden säilyttäminen tilanteessa, jossa asiakaslaitteen ja mahdollisesti myös reunasolmun sijainti vaihtuvat.
+%lisää metateksti loppukappaleen sisällöstä
+
+\subsubsection*{Tietoliikenteen haarauttaminen}
+%Perustoiminnallisuus eli pakettin tarkkailu "sisääntuloväylällä" jolloin voidaan ohajata tietoliikennettä
+Ensimmäiseen ongelmaan on ehdotettu erilaisia ratkaisuja, joiden toimintamalli rippuu pääasiassa siitä, kuinka tiukasti reunajärjestelmä on integroitu osaksi mobiiliverkkoa.
+Ongelman ratkaisussa on otettava huomioon, että tietoliikennettä on aina kahteen suuntaan. Tämän lisäksi asiakaslaitteen tietoliikenne pitää jatkossa haarauttaa suuntautumaan joko reunajärjestelmälle tai internettiin. 
+Koska perinteisesti asiakaslaitteen tietoliikenne on voitu ohjata P-GW:n kautta ulos verkkoon, ei mobiiliverkon sisällä ole valmiiksi mekanismia jonka avulla tietoliikennettä voisi ohjata.
+Yleinen tähän ongelmaan ehdotettu ratkaisumalli on perustunut ajatukseen tietoliikennettä tarkkailevasta entiteetistä.
+Tällaisella entiteetillä olisi mahdollisuus tarkkailla asiakaslaitteiden tietoliikenteen kohdetta, esimerkiksi kohde IP-osoitetta, ja ohjata paketit tarvittaessa reunajärjestelmälle.
+Kaiken muun tietoliikenteen se antaisi kulkea normaalia reittiä pitkin.
+
+LIPA (Local IP Access) ja SIPTO (Selected IP Traffic Offload) ovat ehdotuksia mobiiliverkkoon tehtävästä reititysratkaisusta \cite{samdanis2012traffic,3gpplipa}.
+LIPA ja SIPTO lisäisivät tukiasemien yhteyteen L-GW:n (Local Gateway), jonka mahdollistaisi asiakaslaitteen tietoliikentee ohjaamisen tukiaseman yhteydestä esimerkiksi reunasolmulle. tietoliikenne internettiin, ilman että tietoliikenteen tarvitsee kulkea EPC:n kautta. 
+L-GW:n tarkoitus olisi siis mahdollistaa nopeammat yhteydet tukiaseman läheisyydessä sijaitsevaan verkkoon. Tätä olisi mahdollista hyödyntää reunalaskennassa, mutta se monimutkaistaisi olemassa olevan mobiiliverkon toiminnallisuutta \cite{cho2014smore}.
+LIPA:a ja SIPTO:a ei varsinaisesti ole ehdotettu minkään reuna-arkkitehtuurin yhteydessä ratkaisuksi edellä kuvattuun ongelmaan. 
+
+Reuna-arkkitehtuureissa tietoliikenteen tarkkailua mahdollistava toiminnallisuus on ehdotettu toteutettavan SDN, NFV tai jollain ratkaisu spesifillä toiminnallisuudella. 
+SDN:n käyttö ratkaisuna tarjoaa tavan reitittää liikennettä mobiiliverkon sisällä. Se lisäksi mahdollistaa reitityksien muokkaamisen jolloin tiettyjen yhteyksien reittiä voidaan dynaamisesti muokata. SMORE:n yhteydessä esitetyssä ratkaisussa  E-UTRAN ja EPC:n välille sijoitetaan SDN kerros, jossa eNodeB ja EPC:n välistä tietoliikennettä voidaan monitoroida. 
+Koska tällä välillä oleva tietoliikenne on GTP tunneloitua, paketteja joudutaan purkamaan ja uudelleen paketoimaan. 
+Tilanteessa jossa paketin suunta on asiakaslaitteelta reunalle, paketin tunnelointi joudutaan purkamaan ja varsinainen paketti välitetään reunapalvelulle. 
+Reunalta asiakaslaitteelle suuntautuvat paketit joudutaan uudelleen kapseloimaan GTP:n mukaisiksi.
+Uudelleen kapselointi vaatii erinäisten mobiiliverkon sisäisten tunnisteiden seurantaa ja hyödyntämistä.
+Tarkempi kuvaus toiminnasta annetaan SMORE:n käsittelyn yhteydessä kappalessa \ref{smore}.
+Ratkaisu spesifien toiminnallisuuksien yhteydessä noudatetaan hyvin samankaltaista toimintamallia. Esimerkiksi Small Cell Cloud (käsitellään kappaleessa \ref{scc}) ratkaisun yhteydessä pakettien monitorointi on sijoitettu tukiasemiin, josta GTP tunnelointi alkaa. Täten paketit voidaan monitoroida ja välittää tarpeen mukaan reunasolmuille, ennen GTP tunnelointia.
+
+Monitorointia suorittavalla entiteetillä on myös muuta käyttöä kuin asiakasliikenteen ohjaaminen reunalle. Kontrollitason pakettien tarkkailu paljastaa esimerkiksi tukiasemien välisen handoverin alkamisen, jota voidaan hyödyntää laskennan live migraation käynnistämiseen.
+
+\subsubsection*{Yhteyden säilyvyys}
+
+
+Toiseen ongelmaan, eli liikkuvuuden varmistamiseen sekä asiakaslaitteen siirtyessä että laskennan siirtyessä.
+
+%tällaisella entiteetillä voi olla myös muuta käyttöä, kuten tukiasema handoverin tarkkailu, jolla voidaan laukaista reunalaskennan migraatio.
+
+%LIPTO SIPO 
+
+
+

@@ -6,16 +6,20 @@ Tämän jälkeen esitellään reunan fyysisen rakenteen eri mallit, jossa keskei
 Lopuksi käydään läpi reunan rakenteen merkitystä järjestelmän toiminnalle.
 
 
+
 \subsection{Rakennetyypit}
 Tässä kappaleessa käsitellään reunasolmujen muodostaman järjestelmän rakennetta. Rakenteet jakautuvat kahteen päätyyppiin: litteään ja hierarkiseen.
 Litteä rakenne edustaa perinteisempää lähestymistapaa reunasolmujen asetteluun. Hierarkinen rakenne puolestaan uudempaa ajatusmallia, jossa reunasolmut delegoivat tehtäviä suhteessa tehokkaammille reunasolmuille. 
 
 Reunan rakenteeseen vaikuttaa useampi tekijä. Myöhemmässä kappaleessa \ref{cloudlet} käsiteltävien cloudlettien yhteydessä visioitu operaattoreista riippumattomat reunasolmut mahdollistaisivat esimerkiksi kauppakeskuksien ja yksityishenkilöiden hankkia omat reunalaskentaa suorittavat yksiköt. Tällaisessa tilanteessa keskeiseksi kysymykseksi nouseekin reunapalveluiden tuottamiseen käytettävä liiketoimintamalli. Yksinkertaisuuden vuoksi tässä kappaleessa aihetta käsitellään, kuin reunan rakenne olisi yhden entiteetin, esimerkiksi operaattorin, käsissä. 
 
+\paragraph*{reunavyöhyke}
+Määritellään reunavyöhyke alueeksi jolla reunajärjestelmä sijaitsee, käytetään sitä myös vertailussa järjestelmien vertailuun. Reunavyöhyke voi olla kapea tai lavea, joka vastaa suurinpiirtein litteää ja hierarkista.
+
 \subsubsection{Litteä rakenne}
 Litteällä rakenteella tarkoitetaan että jokainen reunasolmu on hierarkisesti samalla tasolla toisiinsa nähden. Litteän järjestelmän keskeisin päätös on valita taso, jolle reunasolmut sijoitetaan. (Voisiko sanoa että tällainen järjestelmä on reunavyöhyke)
 
-Yksinkertainen esimerkki tällaisesta toteutuksesta olisi reunajärjestelmä, jossa reunasolmut sijoitettaisiin mobiiliverkon tukiasemien yhteyteen. Esimerkin järjestelmä  toteuttaisi äärimmäistä hajautusta ja lisäksi se olisi fyysisesti erittäin lähellä asiakaslaitetta. Tällaisessa rakenteessa kuitenkin on ilmeisiä ongelmia. Järjestelmän käyttö olisi teoriassa mahdollista ainaostaan niiden tukiasemien ympäristössä, joissa reunajärjestelmä sijaitsee. Tämän seurauksena reunalaskennan laajamittainen käyttöönotto olisi riippuvainen tukiasemiin sijoitettavien reunasolmujen hankinnasta. Mikäli oletetaan että siellä missä laskennan tarve on suurin, on myös eniten ihmisiä. Tästä yleensä seuraa että tällaisessa tilanteessa lähelle tuotu reunalaskenta on kalliimpaa, jo käytettävien tilojen hintojen vuoksi \cite{mao17}.
+Yksinkertainen esimerkki tällaisesta toteutuksesta olisi reunajärjestelmä, jossa reunasolmut sijoitettaisiin mobiiliverkon tukiasemien yhteyteen. Esimerkin järjestelmä  toteuttaisi äärimmäistä hajautusta ja lisäksi se olisi fyysisesti erittäin lähellä asiakaslaitetta. Tällaisessa rakenteessa on kuitenkin ilmeisiä ongelmia. Järjestelmän käyttö olisi teoriassa mahdollista ainaostaan niiden tukiasemien ympäristössä, joissa reunajärjestelmä sijaitsee. Tämän seurauksena reunalaskennan laajamittainen käyttöönotto olisi riippuvainen tukiasemiin sijoitettavien reunasolmujen hankinnasta. Mikäli oletetaan että siellä missä laskennan tarve on suurin, on myös eniten ihmisiä. Tästä yleensä seuraa että tällaisessa tilanteessa lähelle tuotu reunalaskenta on kalliimpaa, jo käytettävien tilojen hintojen vuoksi \cite{mao17}.
 
 Vaihtoehtoinen ratkaisu olisi siirtää reunasolmuja kauemmaksi tukiasemista. Esimerkiksi siten että yksi reunasolmu vastaisikin useamman tukiaseman kautta tulevasta reunalaskennasta. Mobiiliverkko kontekstissa, reunasolmu sijaitsisi siis joko tukiasemien ja EPC:n välillä tai vasta EPC:n takana.  
 Useamman tukiaseman niputtamista yhden reunasolmun vastuulle kutsutaan klusteroinniksi. 

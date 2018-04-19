@@ -208,6 +208,8 @@ Reunalaskennalle ei vielä ole olemassa kokonaisvaltaista arkkitehtuuria.
 Ongelmakentän voi jakaa karkeasti kahteen osaan. Fyysiseen arkkitehtuuriin ja sovellustason arkkitehtuuriin. Nämä ovat toisistaan riippuvaisia.
 Arkkitehtuuriratkaisut ovat riippuvaisia tarjottavista palveluista. Toiset arkkitehtuuriratkaisut tukevat toisia palveluita paremmin kuin toiset, kompromisseilta on siis vaikea välttyä.
 
+\subsubsection*{Reunalaskennan muodot}
+Esimerkiksi etälaskenta (offload) tai reunapalvelu.
 
 \subsection{Keskeiset käsitteet}
 Tässä kappalessa esitellään (mobiilin) reuna-arkkitehtuurin keskeiset käsitteet ja toimijat. 
@@ -240,11 +242,8 @@ Esimerkiksi verkkoliikenne mobiililaitteen ja kohdepalvelimen välillä on merki
 
 Lisäksi pilven tai konesalien suunnasta asiaa lähestyttäessä runkoverkko tukkeutuu. Siirtämällä osan palveluvastuusta reunalle, runkoverkon rasitteen tulisi ainakin periaatteessa pienentyä. 
 
-\subsection{Kommunikaatio}
-Reunan keskeisin haaste kommunikaatiossa on asiakaslaitteen ja reunasolmun välisen kommunikaation ylläpitäminen.
 
-\subsection{Etälaskenta}
-pitäisiköhän siirtää keskeisiin käsitteisiin?
+
 
 %Etälaskennan toteuttamiseksi tarvitaan vastaukset seuraaviin kysymyksiin. Mitä siirretään ja minne siirretään?
 %
@@ -266,6 +265,8 @@ pitäisiköhän siirtää keskeisiin käsitteisiin?
 
 \input{livemig}
 \input{integraatiomobiiliverkko}
+
+\input{kommunikaatio2}
 
 \input{hallinta}
 
