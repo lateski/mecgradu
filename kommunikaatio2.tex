@@ -54,6 +54,7 @@ Asiakaslaitteen ja reunapalvelun yhteyden tunnistamiseen on ehdotettu toisenlais
 Follow Me Cloud (FMC) \cite{taleb2013follow} reuna-arkkitehtuurin yhteydessä ehdotetaan ratkaisuksi asiakaslaitetunnisteeseen ja palvelutunnisteeseen perustuvaa sessio/palvelu tunniste (Session/Service ID) konseptia.
 FMC:ssä edellä mainituista tunnisteista generoidaan tunnus, jonka avulla asiakaslaitteeseen liittyvät palvelu tai muu sessio voidaan tunnistaa.
 Sessio/palvelu tunnisteen avulla asiakaslaite ja reunapalvelu voidaan yhdistää IP-osoitteiden muutoksista riippumatta.
+Tunnisteen lisääminen vaatii järjestelmään entiteetin, joka ylläpitää listaa käytössä olevista tunnisteista, sekä tarjoaa niiden aksessointiinjonkin menetelmän. Tämä saattaa monimutkaistaa palveluiden saavutettavuutta. 
 
 Asiakaslaitteen ja reunapalvelun välisen yhteyden säilyttäminen on hyvin riippuvainen reuna-arkkitehtuurin muista suunnittelupäätöksistä. Asiakaslaitteiden ja reunapalveluiden väliseen kommunikaatioon vaikuttavat esimerkiksi reunajärjestelmän virtuaalikoneiden migraatio politiikka sekä muut palveluiden tuottamiseen liittyvät valinnat
 
