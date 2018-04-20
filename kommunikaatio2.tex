@@ -2,7 +2,7 @@
 Reunalaskennan toimiminen vaatii asiakaslaitteen ja reunajärjestelmän välille kommunikaatioväylän.
 Kommunikaatioväylän tehtävänä on välittää asiakaslaitteen ja reuna-alustan välistä tietoliikennettä molempiin suuntiin.
 Reunan ja asiakaslaitteen välinen kommunikaation toteutuminen vaatii suunnittelupäätöksiä, joihin reuna-arkkitehtuurit ottavat kantaa. 
-Johtuen edellisessä kappaleessa käsitellystä reunajärjestelmän integroinnista mobiiliverkkoon, tietoliikenne reunajärjestelmän ja asiakaslaitteen välillä joudutaan ohjaamaan hieman perinteisistä tavoista eroavilla metodeilla. 
+Edellisessä kappaleessa käsiteltiin reunajärjestelmän integrointia osaksi mobiiliverkkoa. Juurikin tapauksessa jossa reunajärjestelmä sijaitsee osana mobiiliverkkoa, joudutaan tietoliikenteen ohjaus reunajärjestelmän ja asiakaslaitteen välillä toteuttamaan hieman perinteisistä metodeista poikkeavilla tavoilla.
 
 Tavallisesti mobiiliverkko ohjaa kaiken asiakkaslaitteelta lähtevän tietoliikenteen mobiiliverkosta ulos internettiin P-GW:n kautta. 
 Mobiiliverkko ei käsittele asiakkaan tietoliikennettä IP-tasolla, vaan asiakkaan tietoliikenne EPC:n ja tukiasemien välillä tunneloidaan GTP:n (GPRS Tunnelling Protocol) avulla \cite{lobillo15scc}.
@@ -35,12 +35,31 @@ Uudelleen kapselointi vaatii erinäisten mobiiliverkon sisäisten tunnisteiden s
 Tarkempi kuvaus toiminnasta annetaan SMORE:n käsittelyn yhteydessä kappalessa \ref{smore}.
 Ratkaisu spesifien toiminnallisuuksien yhteydessä noudatetaan hyvin samankaltaista toimintamallia. Esimerkiksi Small Cell Cloud (käsitellään kappaleessa \ref{scc}) ratkaisun yhteydessä pakettien monitorointi on sijoitettu tukiasemiin, josta GTP tunnelointi alkaa. Täten paketit voidaan monitoroida ja välittää tarpeen mukaan reunasolmuille, ennen GTP tunnelointia.
 
-Monitorointia suorittavalla entiteetillä on myös muuta käyttöä kuin asiakasliikenteen ohjaaminen reunalle. Kontrollitason pakettien tarkkailu paljastaa esimerkiksi tukiasemien välisen handoverin alkamisen, jota voidaan hyödyntää laskennan live migraation käynnistämiseen.
+Monitorointia suorittavalla entiteetillä on myös muuta käyttöä kuin asiakasliikenteen ohjaaminen reunalle. Kontrollikerroksen pakettien tarkkailu paljastaa esimerkiksi tukiasemien välisen handoverin alkamisen, jota voidaan hyödyntää reunalaskennan live migraation käynnistämiseen.
 
-\subsubsection*{Yhteyden säilyvyys}
+\subsubsection*{Liikkuvuuden vaikutus}
+
+Toinen ongelma liittyy tilanteeseen jossa asiakaslaite siirtyy sijainnista toiseen. Tavoitetilana on että tietoliikenneyhteys asiakaslaitteen ja reunasolmun välillä säilyy liikkumisesta huolimatta.  
+Mobiiliverkossa toimivan asiakaslaitteen liikkuminen fyysisesti paikasta toiseen tarkoittaa usein että asiakaslaitteen yhteydelle tehdään handover.
+Verkkoyhteys siis siirtyy kulkemaan toisen tukiaseman kautta. 
+Asiakaslaitteen tietoverkkoyhteyksien kannalta handover on käytännössä huomaamaton.
+
+Reunalaskenta-arkkitehtuurien yhteydessä on esitetty ratkaisuja, jotka säilyttävät asiakaslaitteen yhteyden reunasolmuun handoverin yhteydessä. Ratkaisukenttää kuitenkin monimutkaistaa jos myös reunalaskennan sijaintia halutaan siirtää, kuten live migraatio kappaleessa \ref{livemigraatio} käsiteltiin.
+Tilanteessa jossa ainoastaan asiakaslaitteen sijainti muuttuu yhteyden säilyttäminen vaatii reunasolmun sijainnista riippuen vain vähäisiä toimia. Esimerkiksi MobiScud arkkitehtuurissa yhteyden ylläpito handoverin yhteydessä tehdään siten että SDN reitityssääntöjä (oikeasti flow rule) päivitetään jotta asiakaslaitteen yhteys reunasolmuun säilyy. 
+
+Asiakaslaitteen liikkumiesesta saattaa seurata palvelun laadun heikkenemistä. Esimerkiksi asiakaslaitteen ja reunasolmun välisen etäisyyden kasvaessa viiveet kasvavat.
+Kuten aiemmin mainittu, yleinen reuna-arkkitehtuurien ehdottama ratkaisu palvelun laadun varmistamiseksi on reunapalvelun tuottavan virtuaalikoneen live migraatio toiselle reunasolmulle.
+Migraation seurauksena virtuaalikoneen IP-osoite todennäköisesti vaihtuu ja koska palveluiden tavoittamiseen käytetään tavallisesti IP-osoitteisiin pohjautuvia yhteyksiä, aiheuttaa tämä muutos haasteita palvelun jatkuvuuden kannalta.
+Asiakaslaitteen ja reunapalvelun yhteyden tunnistamiseen on ehdotettu toisenlaisia ratkaisuja.
+Follow Me Cloud (FMC) \cite{taleb2013follow} reuna-arkkitehtuurin yhteydessä ehdotetaan ratkaisuksi asiakaslaitetunnisteeseen ja palvelutunnisteeseen perustuvaa sessio/palvelu tunniste (Session/Service ID) konseptia.
+FMC:ssä edellä mainituista tunnisteista generoidaan tunnus, jonka avulla asiakaslaitteeseen liittyvät palvelu tai muu sessio voidaan tunnistaa.
+Sessio/palvelu tunnisteen avulla asiakaslaite ja reunapalvelu voidaan yhdistää IP-osoitteiden muutoksista riippumatta.
+
+Asiakaslaitteen ja reunapalvelun välisen yhteyden säilyttäminen on hyvin riippuvainen reuna-arkkitehtuurin muista suunnittelupäätöksistä. Asiakaslaitteiden ja reunapalveluiden väliseen kommunikaatioon vaikuttavat esimerkiksi reunajärjestelmän virtuaalikoneiden migraatio politiikka sekä muut palveluiden tuottamiseen liittyvät valinnat
 
 
-Toiseen ongelmaan, eli liikkuvuuden varmistamiseen sekä asiakaslaitteen siirtyessä että laskennan siirtyessä.
+%Yhteenvetoon Reuna-arkkitehtuurien yleisenä tavoitteena on toiminnallisuuksien toteuttaminen siten että se rajoittaisi mahdollisimman vähän mahdollisten reunapalveluiden toimintaa. 
+
 
 %tällaisella entiteetillä voi olla myös muuta käyttöä, kuten tukiasema handoverin tarkkailu, jolla voidaan laukaista reunalaskennan migraatio.
 
@@ -48,3 +67,4 @@ Toiseen ongelmaan, eli liikkuvuuden varmistamiseen sekä asiakaslaitteen siirtye
 
 
 
+%määrittele mobiiliverkko alkukappaleessa siten että sillä tarkoitetaaan tässä tutkielmassa e-utran ja EPC:n muodostamaa kokonaisuutta.
