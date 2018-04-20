@@ -65,7 +65,7 @@ Eräs toimintamalli on säilöä reunasolmulla ainoastaan suosituimpien pohjien 
 
 %\subsubsection*{Hallinta}
 
-\subsubsection{VM handoff} \label{vmhandoff}
+\subsubsection*{VM handoff} \label{vmhandoff}
 
 Cloudlet ympäristössä suoritusaikaista virtuaalikoneen siirtoa kutsutaan termillä \textit{VM handoff} \cite{ha2015adaptive}. Cloudletiltä toiselle tehtävä live migraatio muistuttaa toiminnaltaan mobiiliverkon tutkiasemien välistä handoffia, mutta sovellettuna virtuaalikoneisiin.
 Kappaleessa \ref{livemigraatio} esitettyjen live migraation metriikkojen osalta VM handoff eroaa palvelinsalista. VM handoff tavoittelee mahdollisimman lyhyttä migraation kestoa, verrattuna palvelinsalien mahdollisimman lyhyeen katkon kestoon.
@@ -81,7 +81,7 @@ VM handoff on kuitenkin erittäin resurssi-intensiivinen toimenpide, eikä tutki
 Tutkimuksessa ei oteta kantaa useamman virtuaalikoneen siirtäminen samanaikaisestsi. 
 %migraatiotulva
 %Kpl jossa oikei toteutuksia
-\subsubsection{Yhteenveto}
+\subsubsection*{Yhteenveto}
 Cloudlet kattaa reuna-arkkitehtuurista vain pienen osan, joka keskittyy yksittäisellä reunasolmulla suoritettavaan reuna-alustaan. Cloudletin keskeinen toiminnallisuus sisältää virtuaalikoneita hyödyntävän toimintaympäristön joka tukee laskennan suoritusaikaista siirtoa cloudletiltä toiselle VM handoff tekniikalla. 
 Cloudlet jättää toimintaympäristön avoimeksi eikä siis sitoudu esimerkiksi mobiiliverkkoihin.
 Cloudlet ei myöskään esitä keinoja, joilla tietoliikenne ohjataan virtuaalikoneelle tai kuinka yhteys siirrettyyn virtuaalikoneeseen säilytetään. 
