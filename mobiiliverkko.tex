@@ -1,7 +1,7 @@
 \subsubsection{Mobiiliverkko}
-\begin{figure}[htb]
-\includegraphics[scale=0.5]{EUTRAN}
-\caption{Mobiiliverkon rakenne} \label{mobiarch}
+\begin{figure}[tb]
+\includegraphics[width = \textwidth]{EPC.eps}
+\caption{Yksinkertaistettu LTE-tyyppisen mobiiliverkon rakenne.} \label{fig:mobiarch}
 \end{figure}
 
 Tässä tutkielmassa käsiteltävät reuna-arkkitehtuurit sisältävät yhdistävänä tekijänä tavoitteen toimia mobiiliverkon yhteydessä. 
@@ -9,14 +9,14 @@ Täten reuna-arkkitehtuurien suunnittelupäätöksiä tarkasteltaessa on tarpeen
 Yksinkertaisuuden vuoksi tämän tutkielman puitteissa mobiiliverkoksi oletetaan LTE:n mukainen arkkitehtuuri, joka koostuu E-UTRAN tyyppisestä radioverkosta ja EPC tyyppisestä runkoverkosta.
 Seuraavaksi käydään läpi mobiiliverkon arkkitehtuurin tämän tutkielman kannalta merkitykselliset osat ja toiminnot.
 
-Korkealla tasolla mobiiliverkko koostuu kahdesta osasta: radioverkosta ja runkoverkosta. 3GPP kehittämässä LTE standardissa radioverkon sisältävä osuus on nimeltään E-UTRAN (Evolved UMTS Terrestrial Radio Access Network) ja runkoverkon osuus on nimeltään EPC (Evolved Packet Core). Kuva \ref{mobiarch} sisältää yleisnäkymän mobiiliverkon osiin sekä niiden välisiin yhteyksiin.
+Korkealla tasolla mobiiliverkko koostuu kahdesta osasta: radioverkosta ja runkoverkosta. 3GPP kehittämässä LTE standardissa radioverkon sisältävä osuus on nimeltään E-UTRAN (Evolved UMTS Terrestrial Radio Access Network) ja runkoverkon osuus on nimeltään EPC (Evolved Packet Core). Kuva \ref{fig:mobiarch} sisältää yleisnäkymän mobiiliverkon osiin sekä niiden välisiin yhteyksiin.
 
 E-UTRAN tehtävänä on toimia rajapintana asiakaslaitteen ja EPC:n välillä. Asiakaslaitteiden suuntaan E-UTRAN tarjoaa radioyhteyden ja yhtenä E-UTRAN tehtävänä onkin radioresurssien hallinointi. 
 E-UTRAN sisältää verkon puolella pääasiallisena toimijana eNodeB tyyppisiä tukiasemia \cite{etsieutran}, myös muutamia erilaisia tukiasema variaatioita olemassa, mutta ne jätetään käsittelemättä.
 Tukiasema on asiakaslaitetta lähimpänä sijaitseva funktionaalinen verkon osa ja sen seurauksena se on houkutteleva kohde reunalaskenta ratkaisuille. Tukiasemaa voikin ajatella \textit{reunan} viimeisenä etappina ennen asiakaslaitetta. 
 
 ENodeB:n tehtävänä on kommunikoida radioyhteyttä käyttäen asiakaslaitteen kanssa ja välittää molemminsuuntaista liikennettä EPC:n (Evolved packet core) suuntaan. ENodeB on EPC:n suuntaan yhteydessä S1 rajapinnan kautta. ENodeB:t ovat myös yhteydessä toisiinsa X2 rajapintaa käyttäen. 
-X2 rajapintaa käytetään tukiasemien väliseen kommunikointiin, jonka tarkoituksena on mahdollistaa muun muassa handoverin yhteydessä tehtävää asiakaskontekstin siirtoa ja erinäisiä muita hallinnollisia toimintoja \cite{3gpplte}.  
+X2 rajapintaa käytetään tukiasemien väliseen kommunikointiin. X2 tarkoituksena on mahdollistaa muun muassa handoverin yhteydessä tehtävää asiakaskontekstin siirtoa ja erinäisiä muita hallinnollisia toimintoja \cite{3gpplte}.  
 Handoverilla tarkoitetaan asiakaslaitteen radioyhteyden siirtoa toiselle tukiasemalle. Handover käsitellään tarkemmin kappaleessa \ref{livemigraatio}.
 
 Mobiiliverkossa käytävä kommunikaatio voidaan jakaa kahteen kerrokseen: kontrollikerrokseen ja tietoliikennekerrokseen.
