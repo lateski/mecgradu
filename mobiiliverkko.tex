@@ -9,24 +9,33 @@ Täten reuna-arkkitehtuurien suunnittelupäätöksiä tarkasteltaessa on tarpeen
 Yksinkertaisuuden vuoksi tämän tutkielman puitteissa mobiiliverkoksi oletetaan LTE:n mukainen arkkitehtuuri, joka koostuu E-UTRAN tyyppisestä radioverkosta ja EPC tyyppisestä runkoverkosta.
 Seuraavaksi käydään läpi mobiiliverkon arkkitehtuurin tämän tutkielman kannalta merkitykselliset osat ja toiminnot.
 
-Korkealla tasolla mobiiliverkko koostuu kahdesta osasta: radioverkosta ja runkoverkosta. 3GPP kehittämässä LTE standardissa radioverkon sisältävä osuus on nimeltään E-UTRAN (Evolved UMTS Terrestrial Radio Access Network) ja runkoverkon osuus on nimeltään EPC (Evolved Packet Core). Kuva \ref{fig:mobiarch} sisältää yleisnäkymän mobiiliverkon osiin sekä niiden välisiin yhteyksiin.
+Korkealla tasolla tarkasteltuna mobiiliverkko koostuu kahdesta osiosta: radioverkosta ja runkoverkosta. 3GPP kehittämässä LTE standardissa radioverkon sisältävä osuus on nimeltään E-UTRAN (Evolved UMTS Terrestrial Radio Access Network) ja runkoverkon osuus on nimeltään EPC (Evolved Packet Core).
+E-UTRAN ja EPC väliset yhteydet on kuvattu kuvassa \ref{fig:mobiarch}.
 
-E-UTRAN tehtävänä on toimia rajapintana asiakaslaitteen ja EPC:n välillä. Asiakaslaitteiden suuntaan E-UTRAN tarjoaa radioyhteyden ja yhtenä E-UTRAN tehtävänä onkin radioresurssien hallinointi. 
-E-UTRAN sisältää verkon puolella pääasiallisena toimijana eNodeB tyyppisiä tukiasemia \cite{etsieutran}, myös muutamia erilaisia tukiasema variaatioita olemassa, mutta ne jätetään käsittelemättä.
-Tukiasema on asiakaslaitetta lähimpänä sijaitseva funktionaalinen verkon osa ja sen seurauksena se on houkutteleva kohde reunalaskenta ratkaisuille. Tukiasemaa voikin ajatella \textit{reunan} viimeisenä etappina ennen asiakaslaitetta. 
+E-UTRAN tehtävänä on toimia rajapintana asiakaslaitteen ja EPC:n välillä. 
+E-UTRAN sisältää verkon puolella pääasiallisena toimijana eNodeB (Evolved nodeB) tyyppisiä tukiasemia \cite{etsieutran}.
+Tukiasemista on olemassa muutamia erilaisia variaatioita olemassa, mutta tässä tutkielmassa käsitellään ainoastaan perustapausta.
+Tukiasema on asiakaslaitetta lähimpänä sijaitseva funktionaalinen verkon osa ja sen seurauksena se on houkutteleva kohde reunalaskennan ratkaisuille. Tietoliikenteen näkökulmasta tukiaseman voi ajatella \textit{reunan} viimeisenä etappina ennen asiakaslaitetta. 
 
-ENodeB:n tehtävänä on kommunikoida radioyhteyttä käyttäen asiakaslaitteen kanssa ja välittää molemminsuuntaista liikennettä EPC:n (Evolved packet core) suuntaan. ENodeB on EPC:n suuntaan yhteydessä S1 rajapinnan kautta. ENodeB:t ovat myös yhteydessä toisiinsa X2 rajapintaa käyttäen. 
-X2 rajapintaa käytetään tukiasemien väliseen kommunikointiin. X2 tarkoituksena on mahdollistaa muun muassa handoverin yhteydessä tehtävää asiakaskontekstin siirtoa ja erinäisiä muita hallinnollisia toimintoja \cite{3gpplte}.  
+ENodeB tarjoaa asiakaslaitteiden suuntaan radioyhteyden.
+EPC:n suuntaan eNodeB:t ovat yhteydessä S1 rajapinnan avulla.
+Lisäksi eNodeB:t voivat olla toisiinsa yhteydessä X2 rajapinnan kautta.
+S1:stä käytetään eNodeB:n ja EPC:n väliseen kommunikointiin. Tämä sisältää sekä hallinnollisen viestinnän, että asiakkaan tietoliikenteen kuljettamisen.
+X2 rajapintaa puolestaan käytetään tukiasemien väliseen kommunikointiin. 
+ENodeB välisten X2 yhteyksien tavoittenaa on nopeuttaa tukiasemien välistä kommunikaatiota, esimerkiksi handoverin yhteydessä tehtävää asiakaskontekstin siirtoa varten \cite{3gpplte}.
 Handoverilla tarkoitetaan asiakaslaitteen radioyhteyden siirtoa toiselle tukiasemalle. Handover käsitellään tarkemmin kappaleessa \ref{livemigraatio}.
+
+Mobiiliverkon runkona toimiva EPC koostuu useista loogisista komponenteista.
+Tämä siis tarkoittaa että toiminnallisuudet voivat fyysisesti sijaita samassa laitteessa. 
+Tässä tukielmassa on tarpeen ymmärtää perusteet seuraavista alikomponentista: MME (Mobility Management Entity), S-GW (Serving Gateway) ja PDN GW (P-GW, Packet data network gateway) \cite{etsilte}.
+\begin{itemize}
+\item \textbf{S-GW} eli palveluyhdyskäytävä toimii asiakaslaitteen EPC:n sisäisenä kiintopisteenä.  S-GW reitittää asiakaslaitteen liikennettä P-GW:n ja E-UTRAN välillä.
+\item \textbf{P-GW} eli pakettiverkon yhdyskäytävä tehtävänä on toimia asiakaslaitteen ja mobiiliverkon ulkopuolisten IP-verkkojen yhteyspisteenä.
+\item \textbf{MME} on EPC:n hallinnollinen entiteetti joka vastaa muun muassa asiakaslaitteen tunnistamisesta ja handoveriin liittyvistä toimista EPC:n sisällä. Toisin kuin S-GW ja P-GW, MME ei käsittele asiakaslaitteiden tietoliikennettä.
+\end{itemize}
+\cite{3gppepc}
 
 Mobiiliverkossa käytävä kommunikaatio voidaan jakaa kahteen kerrokseen: kontrollikerrokseen ja tietoliikennekerrokseen.
 Kontrollikerroksella välitettävät viestit ovat tarkoitettu hallinnollisiin toimitoihin mobiiliverkon sisällä. 
-Tietoliikennekerros välittää asiakkaan tietoliikennettä internetin ja asiakaslaitteen välillä.
+Tietoliikennekerros välittää pääasiassa asiakkaan tietoliikennettä internetin ja asiakaslaitteen välillä.
 
-EPC koostuu kolmesta alikomponentista, jotka ovat MME (Mobility Management Entity), SGW (Serving Gateway) ja PDN GW (PGW, Packet data network gateway) \cite{etsilte}.
-SGW eli palveluyhdyskäytävä on asiakaslaitteen kiintopiste EPC:n sisällä.
-SGW reitittää asiakkaan tietoliikenteen PGW:n ja E-UTRAN välillä. 
-PGW:n tehtävänä on toimia IP tason reitittimenä EPC:n ja ulkoisen verkon välillä. 
-PGW toimii asiakkaan ulkoverkon IP yhteyksien väylänä, kuin verkkokorttina. 
-MME on EPC:n hallinnollinen komponentti ja se toimii ainoastaan kontrollikerroksessa. Sen tehtäviin kuuluu muun muassa asiakaslaitteiden identifiointi ja handovereihin liittyvät tilapäivitykset.
-\cite{3gppepc}
