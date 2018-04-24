@@ -5,9 +5,9 @@ Reunan ja asiakaslaitteen välinen kommunikaation toteutuminen vaatii suunnittel
 Edellisessä kappaleessa käsiteltiin reunajärjestelmän integrointia osaksi mobiiliverkkoa. Juurikin tapauksessa jossa reunajärjestelmä sijaitsee osana mobiiliverkkoa, joudutaan tietoliikenteen ohjaus reunajärjestelmän ja asiakaslaitteen välillä toteuttamaan hieman perinteisistä metodeista poikkeavilla tavoilla.
 
 Tavallisesti mobiiliverkko ohjaa kaiken asiakkaslaitteelta lähtevän tietoliikenteen mobiiliverkosta ulos internettiin P-GW:n kautta. 
-Mobiiliverkko ei käsittele asiakkaan tietoliikennettä IP-tasolla, vaan asiakkaan tietoliikenne EPC:n ja tukiasemien välillä tunneloidaan GTP:n (GPRS Tunnelling Protocol) avulla \cite{lobillo15scc}.
+Mobiiliverkko ei käsittele asiakkaan tietoliikennettä IP-tasolla, vaan asiakkaan tietoliikenne EPC:n ja tukiasemien välillä tunneloidaan GTP:n (GPRS Tunnelling Protocol) avulla \cite{puente15seamless}.
 Toisin sanoen mobiiliverkko on asiakaslaitteen tietoliikenteen näkökulmasta näkymätön.
-Koska reuna-arkkitehtuurien ehdotus on integroida reunajärjestelmän toimijat mobiiliverkon sisään, joudutaan mobiiliverkon sisäisiä tietoliikenteen ohjausmetodeja muokkaamaan.
+Koska reuna-arkkitehtuurien tavoitteena on integroida reunajärjestelmän toimijat mobiiliverkon yhteyteen, joudutaan mobiiliverkon sisäisiä tietoliikenteen ohjausmetodeja muokkaamaan.
 Ensimmäinen ratkaistava ongelmana on siis, että kuinka asiakaslaitteen tietoliikenne voidaan ohajata mobiiliverkon sisällä sijaitsevalle reunajärjestelmälle.
 Toinen ratkaistava ongelma on yhteyden säilyttäminen tilanteessa, jossa asiakaslaitteen ja mahdollisesti myös reunasolmun sijainti vaihtuvat.
 %lisää metateksti loppukappaleen sisällöstä
