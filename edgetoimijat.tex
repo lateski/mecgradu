@@ -51,18 +51,21 @@ Reunasovelluksien lisäksi reuna-alusta voi itsessään tarjota palveluita, jotk
 \paragraph{Reunasovellus}
 Reunasovelluksella (Edge application) tarkoitetaan yksittäistä reunasolmulla suoritettava ohjelmistoa \cite{etsirefarch}, jonka kuluttajana voi toimia asiakaslaite tai toinen reunasovellus. Reunasovellus ei ota kantaa millaista palvelua sillä tuotetaan ja sen rajoitteet asettaa pääasiassa käytössä oleva reuna-alusta. 
 
-Reunasovelluksen tuottama palvelu voi olla tyypiltään yhteiskäyttöinen tai käyttäjäkohtainen, esimerkiksi käyttäjäkohtainen virtuaalikone johon käyttäjä voi ottaa etäyhteyden. Esimerkki yhteiskäyttöisestä reunasovelluksesta olisi pelipalvelin, jota voivat käyttää reunasolmun lähistöllä olevat pelaajat. 
+Reunasovelluksen tuottama palvelu voi olla tyypiltään yhteiskäyttöinen tai käyttäjäkohtainen, esimerkiksi käyttäjäkohtainen virtuaalikone johon käyttäjä voi ottaa etäyhteyden. Esimerkki yhteiskäyttöisestä reunasovelluksesta olisi pelipalvelin, jota voivat käyttää reunasolmun lähistöllä olevat pelaajat.
 
 \paragraph{Reunalaskennan tyypit}
-Reunalaskennan tyypit ovat etälaskenta ja asiakaslaitetta tukevat reunapalvelut.
+Reunalaskennan tyyppejä ovat etälaskenta (offloading) ja asiakaslaitetta tukevat erilliset reunapalvelut.
 Arkkitehtuuritasolla reunalaskennan tyyppiin ei otetea juurikaan kantaa. 
-Jotkin suunnittelupäätökset voivat vaikuttaa siihen millaisia reunalaskennan tyyppejä reunajärjestelmä lopulta tukee tai painottaa.
-Etälaskenta voidaan jakaa kokonaan reunalla suoritettaviin ja osittain reunalla suoritettaviin \cite{mach17mobile}.
-Kokonaan reunalla suoritettavat laskenta on tyypiltään sellaista että sitä ei voi jakaa useamman instanssin suoritettavaksi.
+Jotkin suunnittelupäätökset voivat kuitenkin vaikuttaa siihen millaisia reunalaskennan tyyppejä reunajärjestelmä lopulta tukee tai painottaa.
+Etälaskennalla tarkoitetaan työyksiköiden siirtämistä ulkoiselle laskentaa suorittavalle instanssille, joka palauttaa asiakaslaitteelle laskennan lopputuloksen. 
+Reunajärjestelmässä suoritettava etälaskenta voidaan jakaa kahteen alakategoriaan: kokonaan reunalla suoritettaviin ja osittain reunalla suoritettaviin sovelluksiin\cite{mach17mobile}.
+Kokonaan reunalla suoritettava laskenta on tyypiltään sellaista, että sitä ei voi jakaa useamman instanssin suoritettavaksi.
 Tällöin vaihtoehdoksi jää suorittaa laskenta kokonaan paikallisesti tai siirtää se reunasolmulle suoritettavaksi.
-Osittainen etälaskenta on vaihtoehto sovelluksille, jotka on mahdollista pilkkoa suoritettaviin työyksikköihin. Sovelluksen työyksiköt jakautuvat usein niihin jotka on mahdollista siirtää reunalle suoritettavaksi, sekä niihin joita ei ole mahdollista siirtää. 
-Esimerkiksi valokuvan ottaminen ja lähettäminen ovat työyksiköitä, joita ei ole mahdollista tehdä muuten kuin paikallisesti \cite{mach17mobile}.
-Päätös laskennan siirrosta on riippuvainen laskennan tavoitteesta. Tavoitteina voidaan pitää esimerkiksi asiakaslaitteen virransäästön maksimointia tai laskennan suorituksen viiveen minimointia.
+Osittainen etälaskenta on vaihtoehto sovelluksille, jotka on mahdollista pilkkoa suoritettaviin työyksikköihin. 
+Sovelluksen työyksiköt jakautuvat usein niihin jotka on mahdollista siirtää reunalle suoritettavaksi, sekä niihin joita ei ole mahdollista siirtää. 
+Esimerkiksi valokuvan ottaminen on työyksikkö, jota ei ole mahdollista tehdä muuten kuin paikallisesti \cite{mach17mobile}.
+Päätös etälaskennan tekemistä on riippuvainen laskennan tavoitteesta. 
+Tavoitteina voi olla esimerkiksi asiakaslaitteen virransäästön maksimointia tai laskennan suorituksen keston minimointia.
 Reunapalvelu puolestaan on asiakaslaitteella suoritettavan sovelluksen toimintaa tukeva palvelu. Sen voi ajatella esimerkiksi pelipalvelimeksi, joka suorittaa pelimekaniikan simuloinnin ja asiakaslaitteelle jää tehtäväksi ainoastaan visuaalisen representaation esittäminen.  
 
 
