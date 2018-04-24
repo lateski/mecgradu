@@ -53,6 +53,20 @@ Reunasovelluksella (Edge application) tarkoitetaan yksittäistä reunasolmulla s
 
 Reunasovelluksen tuottama palvelu voi olla tyypiltään yhteiskäyttöinen tai käyttäjäkohtainen, esimerkiksi käyttäjäkohtainen virtuaalikone johon käyttäjä voi ottaa etäyhteyden. Esimerkki yhteiskäyttöisestä reunasovelluksesta olisi pelipalvelin, jota voivat käyttää reunasolmun lähistöllä olevat pelaajat. 
 
+\paragraph{Reunalaskennan tyypit}
+Reunalaskennan tyypit ovat etälaskenta ja asiakaslaitetta tukevat reunapalvelut.
+Arkkitehtuuritasolla reunalaskennan tyyppiin ei otetea juurikaan kantaa. 
+Jotkin suunnittelupäätökset voivat vaikuttaa siihen millaisia reunalaskennan tyyppejä reunajärjestelmä lopulta tukee tai painottaa.
+Etälaskenta voidaan jakaa kokonaan reunalla suoritettaviin ja osittain reunalla suoritettaviin \cite{mach17mobile}.
+Kokonaan reunalla suoritettavat laskenta on tyypiltään sellaista että sitä ei voi jakaa useamman instanssin suoritettavaksi.
+Tällöin vaihtoehdoksi jää suorittaa laskenta kokonaan paikallisesti tai siirtää se reunasolmulle suoritettavaksi.
+Osittainen etälaskenta on vaihtoehto sovelluksille, jotka on mahdollista pilkkoa suoritettaviin työyksikköihin. Sovelluksen työyksiköt jakautuvat usein niihin jotka on mahdollista siirtää reunalle suoritettavaksi, sekä niihin joita ei ole mahdollista siirtää. 
+Esimerkiksi valokuvan ottaminen ja lähettäminen ovat työyksiköitä, joita ei ole mahdollista tehdä muuten kuin paikallisesti \cite{mach17mobile}.
+Päätös laskennan siirrosta on riippuvainen laskennan tavoitteesta. Tavoitteina voidaan pitää esimerkiksi asiakaslaitteen virransäästön maksimointia tai laskennan suorituksen viiveen minimointia.
+Reunapalvelu puolestaan on asiakaslaitteella suoritettavan sovelluksen toimintaa tukeva palvelu. Sen voi ajatella esimerkiksi pelipalvelimeksi, joka suorittaa pelimekaniikan simuloinnin ja asiakaslaitteelle jää tehtäväksi ainoastaan visuaalisen representaation esittäminen.  
+
+
+
 \subsubsection{Pilvi}
 %pilven alk peräinen määritelmä
 \cite{armbrust2010view} määrittelevät artikkelissan pilven. 
