@@ -25,12 +25,13 @@ Ajoneuvolla on mobiiliyhteys reunapalveluun jonka tarkoitus on välittää tieto
 Reuna koostuu useista toiminnallisista entiteeteistä, jotka voidaan jakaa sekä fyysisiin, että loogiisin kokonaisuuksiin. 
 Tässä kappaleessa lähdemme liikkeelle määrittelemällä reuna-alueen, joka edustaa reunan toimialuetta, sekä reunaa yleisenä käsitteenä.
 Tämän jälkeen esitellään reunasolmu, joka on reunajärjestelmän keskeisin fyysinen rakennuspalanen.
-Kuvassa \ref{fig:reunajarjestelma} on esitetty esimerkkitilanne reunajärjestelmästä, sisältäen reunalaskennan toiminnan kannalta tärkeät entiteetit
+Kuvassa \ref{fig:reunajarjestelma} on esitetty esimerkkitilanne reunajärjestelmästä, sisältäen reunalaskennan toiminnan kannalta tärkeät entiteetit.
 Lopuksi esitellään pääasiassa ohjelmallisen tason toimivat toimijat reuna-alusta ja reunasovellus.
 
 \paragraph{Reuna-alue} 
 Tietyissä yhteyksissä reunalla viitataan alueeseen, joka alkaa asiakaslaitteen yhteyspisteestä. Se voi olla esimerkiksi WLAN-tukiasema tai mobiiliverkon tukiasema. Tästä ensimmäisestä yhteyspisteestä reuna-alue laajenee kohti runkoverkkoa ja pilveä.
 Kuvassa \ref{fig:asiakasedgecloud} reuna on kuvattu alkavan mobiiliverkon tukiasemasta.
+Joidenkin näkemyksien mukaan myös asiakaslaitteet luetaan osaksi reunaa \cite{garcia}, mutta tämän tutkielman puitteissa asiakaslaitteet luetaan omaksi osakseen reuna-alueen ympärillä.
 Reunan laajuudelle ei siis ole tarkkaa määritelmää, vaan termiä usein sovelletaan käytettävän kontekstin mukaan siten, että reuna-alue rajautuu kontekstissa esiintyvien toimijoiden mukaan edellä manitulle välille.
 Esimerkiksi mobiiliverkon tukiasemien yhteyteen rakennettua reunajärjestelmää käsiteltäessä, reunalla tarkoitetaan ainoastaan reunajärjestelmän asiakaslaitteita palvelevien osien muodostamaa vyöhykettä. 
 Kuten jo aiemmin mainittu, reunan keskeisenä etuna muihin palveluihin voidaan pitää reunapalveluiden ja asiakaslaitteen välisen viiveen vähäisyyttä.
