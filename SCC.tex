@@ -2,24 +2,27 @@
 
 \subsection{Small Cell Cloud} \label{scc}
 
-Small Cell Cloud (SCC) on reunalaskentaratkaisu mobiiliverkkoon.
-Idean premisseinä toimii laskentaresurssien lisääminen mobiiliverkon tukiasemiin ja mobiiliverkon solujen pienenminen.
-Näillä toimilla voitaisiin vastata kasvaviin tietoliikenne määriin, sekä tarjota reunalaskentaa.
+Small Cell Cloud (SCC) on reuna-arkkitehtuuri ehdotus LTE tyyppiseen mobiiliverkkoon.
+Idean premisseinä toimivat laskentaresurssien lisääminen mobiiliverkon tukiasemiin ja mobiiliverkon solujen pienenminen.
+Näillä toimilla voitaisiin vastata tietoliikenteen määrän kasvuun sekä tarjota reunalaskentaa uutena palveluna.
 SCC:n ratkaisuympäristönä toimii LTE verkko, jonka kehitystä ehdotettu ratkaisu pyrkii myötäilemään.
-Pienemmät solut tarkoittavat että tukiasemat sijaitsevat asiakasta lähempänä, joka puolestaa implikoi asiakaslaitteille nopeampaa tiedonsiirtoväylää radiorajapinnassa \cite{lobillo15scc}.
+Pienemmät solut tarkoittavat että tukiasemat sijaitsevat lähempänä asiakasta, joka puolestaa implikoi asiakaslaitteille nopeampaa tiedonsiirtoväylää radiorajapinnassa \cite{lobillo15scc}.
 Seuraavaksi käsitellään SCC:n toiminnallisuus aloittaen läpikäynti toimijoista. Lopuksi käsitellään tietoliikenneratkaisuja joita SCC:n yhteydessä on ehdotettu.
 
 SCC:ssä laskentaresurssit on sijoitettu eNodeB tukiasemiin. SCC:n tapauksessa puhutaan SCeNBce:stä (Small-cell eNodeB computing-enhanced), eli laskentaresursseilla varustetusta piensolutukiasemasta \cite{lobillo15scc}.
-Laskentaresurssit ovat tiukasti integroituina osaksi tukiasemaa \cite{puente15seamless}.
-Ajatuksena on että tukiaseman toiminnot suoritettaisiin osittain samalla laitteistolla kuin reunasovellukset.
-Tämänkaltainen menettely mahdollistaa tukiaseman ja reuna-alustan yhteistoiminnallisuutta, joka tarjoaisi esimerkiksi työkaluja reunalaskennan optimointiin etälaskennan tapauksessa.
-Lisäksi jaetuilla resursseilla vältyttäisiin erillisen laitteiston lisäämiseltä \cite{puente15seamless}.
+Reunalaskentaan käytettävät resurssit ovat integroituina osaksi tukiasemaa \cite{puente15seamless}.
+Ajatuksena on että tukiaseman toiminnot suoritettaisiin samalla laitteistolla kuin reunasovellukset.
+Tämänkaltainen menettely mahdollistaa tukiaseman ja reuna-alustan yhteistoiminnallisuutta.
+Yhteistoiminta mahdollistaa esimerkiksi radiorajapinnasta saatavien tietojen hyödyntämisen osana etälaskennan kannattavuuden päättelyä.
+Lisäksi yhteisillä jaetuilla resursseilla vältyttäisiin erillisen laitteiston lisäämiseltä \cite{puente15seamless}.
 
-SCC:n hallinnasta vastaava entiteetti on Small Cell Manager (SCM) \cite{lobillo15scc}.
+SCC:n hallinnollisista toimista vastaava entiteetti on Small Cell Manager (SCM) \cite{lobillo15scc}.
 SCM olisi MME:n kaltainen itsenäinen toimija, mutta vastaisi reunalaskentaan liittyvistä hallinnollisista toimista.
-Sen tehtävänä on vastata muun muassa asiakaslaitteiden pyyntöihin reunaresursseista osoittamalla käytettävissä oleva virtuaalikone \cite{dolezal2016performance}.
+Tarkoituksena on että SCM on tietoinen reunasolmujen resurssien tilasta ja on kykenevä tekemään päätöksia reunasovelluksien siirtämisestä sijainnista toiseen. 
+Lisäksi SCM:n tehtävänä on vastata muun muassa asiakaslaitteiden pyyntöihin laskentaresursseista osoittamalla käytettävissä oleva virtuaalikone \cite{dolezal2016performance}.
 SCM voi myös sähkön säästämiseksi sulkea SCeNBce:n reunalaskentatoiminnallisuuden.
 SCM:n sijoittelu mobiiliverkon sisällä on jätetty toteuttajan vastuulle, mutta ehdotettuja sijainteja ovat muun muassa MME:n yhteydessä ja täysin itsenäisenä toimijana \cite{lobillo15scc}.
+SCM toteutusvaihtoehdot sisältävät sekä hajautettuja että keskitettyjä malleja.
 
 SCC ympäristössä perustoiminnallisuus menisi siten että reunalaskentaa tahtova asiakaslaite välittäisi pyynnön SCeNBce:lle joka edelleen välittäisi pyynnön SCM:lle.
 SCM toimii reuna-alustan roolissa ja valitsee SCeNBce:lle virtuaalikoneen, jolla reunlaskentaa voidaan suorittaa. \cite{dolezal2016performance}
@@ -37,23 +40,24 @@ Laskentaresurssien sijoittaminen tukiasemaan tekee resursseista hyvin paikallise
 %SCeNBce tukiasemien hankkiminen vaatii operaattoreilta investointeja sekä lisää ylläpitotyön määrää. (Näiden vuoksi ehkä kantsis miettii, että miksi se on niin tiukasti kiinni siinä televerkossa. Muutenkin useampi operaattori samalla alueella tarkoittaa että jokaisella on myös omat reunapalvelut, joka taas meinaa kokonaiskuvassa että sama palvelu pitää duplikoida monelle operaattorille.)
 
 \subsubsection{Kommunikointi reunapalveluun} \label{GTP}
-Kuten kappaleessa \ref{kommunikaatio} käsiteltiin, tavallisesti asiakaslaitteen tietoliikenne kulkee mobiiliverkon läpi koskemattomana. 
-SCC:n kommunikaatiototeutus reunalaskennan kanssa on esitelty julkaisussa \cite{puente15seamless}, johon tämä kappale pohjautuu.
+Kuten kappaleessa \ref{kommunikaatio} käsiteltiin, tavallisesti asiakaslaitteen tietoliikenne kulkee mobiiliverkon läpi koskemattomana GTP tunnelin sisällä. 
+SCC:n asiakaslaitteen ja reunalaskennan välisen tietoliikenteen reititys on esitelty julkaisussa \cite{puente15seamless}, johon tämä kappale pohjautuu.
 SCC:n tapauksessa asikaslaitteen liikenne haluttaisiin ohjata kohteesta riippuen joko tukiasemassa sijaitsevalle reunasolmulle tai normaalia reittiä pitkin ulkoverkkoon.
 SCC:ssä on päädytty lisäämään SCeNBce tukiasemaan tietoliikennettä monitoroiva toiminnallisuus.
 
 Kommunikaatio asiakaslaitteen ja tukiaseman välillä suoritetaan DRB väylällä (Data Radio Bearer).
 Perinteisesti tukiasema identifioi asiakaslaitteet radiorajapinnassa DRB ID:n (Data Radio Bearer ID) avulla.
-Tämän jälkeen asiakaslaitteen tietoliikenne on kapseloitu GTP tunneliin, jonka tunnisteena toimii TEID (Tunnel Endopoint ID).
-Asiakaslaitteen tietoliikenteen siirto vaatii siis DRB ID:n ja TEID:n sisältävän muunnostaulukon tukiasemaan.
+Tämän jälkeen asiakaslaitteen tietoliikenne on tukiasema kapseloi asiakkaan tietoliikenteen GTP tunneliin, jonka tunnisteena toimii TEID (Tunnel Endopoint ID).
+Asiakaslaitteen tietoliikenteen välitys tukiaseman sisällä vaatii siis DRB ID:n ja TEID:n sisältävän muunnostaulun käyttämistä.
 Tätä samaa periaatetta voi hyödyntää reunasolmulle suuntautuvan tietoliikenteen identifiointiin.
 
-Tukiasemaan lisättävän monitori valvoo asiakaslaitteen lähettämien pakettien kohde IP-osoitetta, ja mikäli kyseessä on reunapalvelun IP-osoite, monitori ohjaa paketin reunapalvelulle.
+Tukiasemaan lisättävän monitoritoiminnallisuus tarkkailee asiakaslaitteen lähettämien pakettien kohde IP-osoitetta, ja mikäli kyseessä on reunapalvelun IP-osoite, monitori ohjaa paketin reunapalvelulle.
 Samalla paketista voidaan poimia asiakaslaitteen IP-osoite, joka kirjataan muunnostauluun asiakasta vastaavan TEID:n ja DRB ID:n kanssa.
-Kun reunapalvelun tahtoo välittää tietoliikennettä asiakaslaitteen suuntaan, munnostaulusta poimitaan asiakaslaitteen IP-osoitetta vastaava DRB ID ja reunapalvelun paketit kapseloidaan DRB väylälle sopiviksi.
+Toiseen suuntaan tietoliikenne toimii siten että reunapalvelun asiakaslaitteelle lähettämästä tietoliikenteestä poimitaan kohde IP. Kohde IP:tä vastaava DRB ID poimitaan muunnostaulusta reunapalvelun paketit kapseloidaan DRB väylälle sopiviksi.
 Tällaisen toiminnallisuuden toteuttamisen seurauksena kommunikaatio on asiakaslaitteen ja reunapalvelun näkökulmasta kuin mikä tahansa muukin IP-pohjainen kommunikaatio.
 
-Kommunikaation yhteydessä ei oteta kantaa tilanteeseen jossa asiakaslaite siirtyisi toiselle tukiasemalle. Myöskään reunalaskennan siirtämiseen asiakaslaitteen siirtymisen myötä ei otetan kantaa.
+Asiakaslaiteen ja reunasolmun välisen kommunikaation säilymiseen, tilanteessa, jossa asiakaslaite siirtyy toiselle tukiasemalle, ei oteta kantaa. 
+Tällaisen toiminnallisuuden tarve kuitenkin on, sillä SCM esittelyn yhteydessä mainittiin reunasovelluksien, eli virtuaalikoneiden, siirtelyn mahdollisuus.
 %SCC pohjaisessa järjestelmässä tavallinen verkkoon menevä tietoliikenne ja reunapalvelulle menevä tietoliikenne on ehdotettu eroteltavaksi toisistaan \cite{puente15seamless}.
 %Eristyksen seurauksena LTE-A arkkitehtuuriin ei tarvitse koskea muutoin kuin lisäyksien osalta. 
 %Liikenne SCeNBce:llä tarjottuihin reunapalveluihin on tehtävä tarkoitusta varten olevan rajapinnan kautta.
