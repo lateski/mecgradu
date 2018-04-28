@@ -1,24 +1,67 @@
 \subsection{Vertailu}
-Seuraavaksi vertaillaan edellä esitettyjä reuna-arkkitehtuuri ehdotuksia niiden ominasuuksien ja rakenteen osalta, sekä analysoidaan ominaisuusjoukon vaikutusta kuhunkin järjestelmään.
-Lopuksi arvioidaan reuna-arkkitehtuurien yhdenmukaisuutta ETSI:n MEC spesifikaation kanssa.
+Seuraavaksi käydään läpi edellä esitettyjen reuna-arkkitehtuuri ehdotuksien ominaisuuksia ja käsitellään niiden vaikutuksia itse toteutettavaan järjestelmään.
+Kunkin arkkitehtuuriehdotuksen ominaisuusjoukko ohjaa toteutusta erilaisiin ratkaisuihin. Taulukossa \ref{table:features} on tiivistetysti kottu kunkin arkkitehtuuriratkaisun ominaisuudet.
+Lopuksi käsitellään reuna-arkkitehtuurien yhteneväisyyksiä ja eroja ETSI:n MEC spesifikaation kanssa.
 
-Reuna-arkkitehtuurien ominaisuuksien vertailu aloitetaan live migraatiosta.
-\par
-Live migraatio on toiminnallisuuksista se joka mahdollistaa suurempien palvelukokonaisuuksien siirtämisen reunajärjestelmässä. Syitä reunalaskennan siirtämiselle voi olla useita ja ehkä yleisin pinnalle noussut syy on asiakaslaitteen liikkuminen verkossa. Muita syitä live migraatiolle voi olla esimerkiksi laskennan siirtäminen enemmän resursseja sisältävälle reunapalvelulle tai ylikuormituksen välttäminen nykyisellä reunasolmulla.
-%migraatio edellyttää reunasolmujen olemista samalla palveluntarjoajalla.
+On tärkeää ymmärtää että käsiteltyjen ominaisuuksien välillä on riippuvuksia. Tämän seurauksena jonkin ominaisuuden toteuttaminen tietyllä tavalla saattaa estää tai rajoittaa joidenkin toiminnallisuuksien toteuttamista. 
 
-Live migraatio toiminnallisuuden puuttumisen voi tulkita ainakin kahdella tavalla. Joko se tarkoittaa, että reunalaskenta on muodoltaa etälaskentaa, joka on niin hienojakoista, että migraatiolle ei ole tarvetta. Tällöin etälaskenta rajoittuu pieniin työyksiköihin joista odotetaan välitöntä tulosta asiakaslaitteelle. 
-Toinen vaihtoehto on että tarjolla olevat reunasovellukset ovat tyypiltään yleiskäyttöisiä, esimerkiksi pelipalvelimia.
+Kaikkein eniten muiden ominaisuuksien toteuttamiseen vaikuttava ominaisuus vaikuttaa olevat tapa jolla mobiilijärjestelmä integroidaan osaksi mobiiliverkkoa ja mobiiliverkon toimintoja.
+Kaikki muut ominaisuudet vaikuttavat olevan riippuvaisia integraation tyylistä. 
 
-Lähes kaikki reuna-arkkitehtuurit tiedostivat tarpeen live migraatiolle. Ainoastaan SCC ei sisältänyt edes mainintaa reunasovelluksien siirtelystä reunasolmulta toiselle.
+SCC:n tapauksessa integraatio on \textit{suora}. SCC on liitetty osaksi mobiiliverkkoa niin sanotusti natiiveilla yhteyksillä. SCC:ssä reunasolmut ja reuna-alusta toimivat yhdessä mobiiliverkon toimijoiden kanssa.
+Tämä tarjoaa paremmat mahdollisuudet hyödyntää mobiiliverkon jo olemassa olevia toimintoja, kuten asiakaslaitteen tunnistamista sekä mobiilliverkon tapahtumien kuten handoverin käsittelyä. 
+SCC:n tapauksessa reunasolmut ovat yhdistettyinä tukiasemiin, jolloin reunajärjestelmän toteuttajalla ei ole mahdollisuutta asetella resursseja hierarkisesti. SCC:n reunaresurssit ovat siis litteässä rakenteessa, sekä hyvin kapealla reunavyöhykkeellä.
+
+Joskin SCC:hen verrattuna hyvin erilainen, CONCERT on toinen suoran integraation arkkitehtuuriehdotus.
+CONCERT:n yhteydessä NFV:n hyödyntäminen on keskeisessä osassa.
+Reunalaskennan ja mobiiliverkon hallinnoivat entiteetin yhdistettäisiin, jolloin molemmat olisivat tietoisia toisistaan.
+NFV:n avulla reunajärjestelmä ja mobiiliverkon toiminnot voisivat jakaa laskentaresursseja. CONCERT ehdottaa resurssien jakamista hierarkisesti kolmeen kerrokseen.
+CONCERT edellyttää käytännössä kaikkie mobiiliverkon toimintojen uusimista, tämän vuoksi se tähtääkin seuraavan sukupolven verkkoihin.
+
+Järjestelmät joissa reunajärjestelmä on erotuttu mobiiliverkosta SDN:n avulla integroituvat mobiiliverkkoon \textit{läpinäkyvästi}. 
+Tällaisia ratkaisuja olivat SMORE ja MobiScud.
+SDN avustetun integraation tavoittena on luoda mobiiliverkon sisälle SDN kerros jonka läpi paketit kulkevat.
+Tässä SDN kerroksessa reunajärjestelmän on mahdollista monitoroida paketteja. Monitoroinnin tehtävänä on erottaa reunalaskennalle tarkoitetut paketit ja lisäksi seurata mobiiliverkon tapahtumia. 
+Molemmissa ratkaisuissa SDN kerroksen ehdotettiin eNodeB:n ja EPC:n välille, jossa asiakasliikenne kulkee GTP tunneloituna.
+Eli SDN kerroksen tehtäväksi tulee myös GTP paketoinnin purkaminen ja paketointi liikenteessä joka kulkee asiakaslaitteen ja reunasolmun välillä. 
+ENodeB:n ja EPC:n välillä SDN kerroksessa on mahdollista monitoroida mobiiliverkon kontrollikerrosta. Tämän seurauksena  monitoroinnin avulla on mahdollista seurata muun muassa handover tapahtumia, joiden perusteella voidaan esimerkiksi migratoida tukiasemia tai muokata SDN kerroksen reitityksiä, jotta asiakaslaitteen yhteys reunapalveluun säilyy. 
+On kuitenkin huomattava että etenkin GTP tunneloitujen pakettien purku tai paketointi aiheuttavat jonkin verran viivettä pakettien välittämiseen.
+Koska SDN kerrokseen pohjautuva ratkaisu on hyvin löyhästi sidoksissa mobiiliverkkoon, antaa se huomattavasti enemmän mahdollisuuksia reunasolmujen sijoitteluun. 
+MobiScud tai SMORE eivät ottaneet kantaa reunasolmujen sijoitteluun. Tällöin reunasolmujen sijoitteluun liittyvät yksityiskohdat jäävät toteuttajan vastuulle.
+
+FMC arkkitehtuuri ehdotuksen mukainen integraatio, jossa reunajärjestelmä ei sisällä minkäänlaisia yhteyksiä varsinaiseen mobiiliverkkoon, on tyypiltään \textit{epäsuora}.
+FMC arkkitehtuurin ehtona on mobiiliverkon tietoliikenneväylien hajautuminen, siten että mobiiliverkon P-GW:t eivät olisi niin keskitteyinä. 
+Lisäksi mobiiliverkkoon tulisi lisätä mekanismi jolla asiakkaan sijainti voidaan yhdistää optimaaliseen tietoliikenneväylään mobiiliverkon sisällä.
+Hajautuksen lisäksi varsinaiset reunaresurssit eivät sijaitsisi mobiiliverkossa vaan P-GW:n ulkopuolella tai välittömässä yhteydessä.
+Idean voikin jossain määrin ajatella mobiiliverkon viemiseksi lähemmäksi palveluita.
+Reunalaskennan hallinnolliset toimet ovat myös sijoitettuina mobiiliverkon ulkopuolelle.
+Vaikka järjestelmä edellyttää mobiiliverkolle kohtalaisia muutoksia, mahdollistaa FMC ulkopuolisen tahon ylläpitää mobiiliverkon palveluita.
+Rakenteen osalta FMC:n mahdollistaa teoriassa sekä hierarkisen että litteän sijoittelun reunaresursseille.
+FMC yhteydessä esitettyjen esimerkkien puitteissa litteä malli vaikuttaa todennäköisemmältä vaihtoehdolta. 
+FMC keskittyy tarjoamaan mahdollisimman nopean reitin asiakaslaitteen ja reunasolmun välille.
+Reunaresurssien sijoittelu ei ole FMC:n vaikutuspiirissä.
 
 
-\par
-Reuna-arkkitehtuurin kommunikaatio
+=============
 
-\par
-Reuna-arkkitehtuurin 
-
+%
+%Reuna-arkkitehtuurien ominaisuuksien vertailu aloitetaan live migraatiosta.
+%\par
+%Live migraatio on toiminnallisuuksista se joka mahdollistaa suurempien palvelukokonaisuuksien siirtämisen reunajärjestelmässä. Syitä reunalaskennan siirtämiselle voi olla useita ja ehkä yleisin pinnalle noussut syy on asiakaslaitteen liikkuminen verkossa. Muita syitä live migraatiolle voi olla esimerkiksi laskennan siirtäminen enemmän resursseja sisältävälle reunapalvelulle tai ylikuormituksen välttäminen nykyisellä reunasolmulla.
+%%migraatio edellyttää reunasolmujen olemista samalla palveluntarjoajalla.
+%
+%Live migraatio toiminnallisuuden puuttumisen voi tulkita ainakin kahdella tavalla. Joko se tarkoittaa, että reunalaskenta on muodoltaa etälaskentaa, joka on niin hienojakoista, että migraatiolle ei ole tarvetta. Tällöin etälaskenta rajoittuu pieniin työyksiköihin joista odotetaan välitöntä tulosta asiakaslaitteelle. 
+%Toinen vaihtoehto on että tarjolla olevat reunasovellukset ovat tyypiltään yleiskäyttöisiä, esimerkiksi pelipalvelimia.
+%
+%Lähes kaikki reuna-arkkitehtuurit tiedostivat tarpeen live migraatiolle. Ainoastaan SCC ei sisältänyt edes mainintaa reunasovelluksien siirtelystä reunasolmulta toiselle.
+%
+%
+%\par
+%Reuna-arkkitehtuurin kommunikaatio
+%
+%\par
+%Reuna-arkkitehtuurin 
+%
 
 % Taulukko toiminnoista
 
