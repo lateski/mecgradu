@@ -7,22 +7,40 @@ On tärkeää huomata että käsiteltyjen ominaisuuksien välillä on riippuvuks
 
 
 Reuna-arkkitehtuurien keskeisin ominaisuus on tapa jolla järjestelmä integroituu osaksi mobiiliverkkoa. Kaikki muut ominaisuudet vaikuttavat olevan riippuvaisia tästä.
-Kappaleessa \ref{integraatio} esitellyn jaon mukaan SCC ja CONCERT edustavat suoraa integraatiota, SMORE ja MobiScud edustavat läpinäkyvää integraatiota ja FMC edustaa epäsuoraa.
+Kappaleessa \ref{integraatio} esitellyn jaon mukaan SCC ja CONCERT edustavat suoraa integraatiota, SMORE ja MobiScud edustavat läpinäkyvää integraatiota ja FMC edustaa epäsuoraa integraatiota.
 
-SCC liittyy mobiiliverkon toimintoihin niin sanotusti natiivien yhteyksien avulla, joka edellyttää uusia rajapintoja hallinnollisten tarpeiden täyttämiseen. Lisäksi SCC edellyttää reunaresurssien integrointia osaksi tukiaseman toimintoja. 
+SCC liittyy mobiiliverkon toimintoihin niin sanotusti natiivien yhteyksien avulla, joka edellyttää uusia rajapintoja mobiiliverkon nykyisiin komponentteihin. Tavoitteena on SCC:n hallinnollisten tarpeiden täyttämiseen. Lisäksi SCC edellyttää reunaresurssien integrointia osaksi tukiasemaa. 
 Tukiasemaan sidottujen reunaresurssien vuoksi SCC:n rakenne on litteä. 
 SCC:n mukaan uudistetun tukiaseman, eli SCeNBce:n, tehtäviin kuuluu reunapalveluille tarkoitetun tietoliikenteen ohjaaminen. Tämä tarkoittaa että SCeNBce monitoroi tietoliikennettä ja ohjaa esimerkiksi kohde IP:n perusteella reunapalvelulle tarkoitetut paketit.
 
 CONCERT on toinen suoran integraation reunajärjestelmä. Ehdotuksen tavoitteena on NFV:n laajamittainen käyttöönotto, jonka seurauksena mobiiliverkon ja reunajärjestelmä voisivat jakaa laskentaresursseja. Järjestelmä rakentuu kolmeen kerrokseen hierarkisesti sijoitettujen resurssien varaan. Nämä resurssit ovat reunalaskennan ja mobiiliverkon toiminnallisuuksien käytettävissä. 
-Mobiiliverkon ja reunalaskennan hallinnolliset toimet on yhdistetty Conductor nimiselle entiteetille. Conductor sisältää useita alitoimintoja joiden tehtäviin kuuluu muun muassa resurssien jakaminen kullekkin toiminnallisuudelle. CONCERT ottaa hallinnollisiin tehtäviin ainoastaan yleisellä tasolla ja yksityiskohdat jätetään avoimeksi. Oletettavaa on että CONCERT:ssa mobiiliverkon ja reunajärjestelmän reititys tapahtuu samassa kontekstissa, jolloin järjestelmä ei vaadi erillistä toiminnallisuutta reunasolmuille suuntautuvan tietoliikenteen ohjaamiseen. 
+Mobiiliverkon ja reunalaskennan hallinnolliset toimet on yhdistetty Conductor nimiselle entiteetille. Conductor sisältää useita alitoimintoja joiden tehtäviin kuuluu muun muassa resurssien jakaminen kullekkin toiminnallisuudelle. CONCERT ottaa hallinnollisiin tehtäviin kantaa ainoastaan yleisellä tasolla ja yksityiskohdat jätetään avoimeksi. Oletettavaa on että CONCERT:ssa mobiiliverkon ja reunajärjestelmän reititys tapahtuu samassa kontekstissa, jolloin järjestelmä ei vaadi erillistä toiminnallisuutta reunasolmuille suuntautuvan tietoliikenteen ohjaamiseen. 
 
-MobiScud ja SMORE edustavat läpinäkyvää integraatiota. SDN-kerros eNodeB ja EPC:n komponenttien välillä mahdollistaa tietoliikenteen monitoroinnin sekä ohjaamisen. Koska varsinaiset reunasolmut eivät ole riippuvaisi mobiiliverkosta, on niiden sijoittelu täysin vapaa.
+MobiScud ja SMORE edustavat läpinäkyvää integraatiota.
+SDN-kerros eNodeB ja EPC:n komponenttien välillä mahdollistaa tietoliikenteen monitoroinnin sekä ohjaamisen.
+SDN-kerros mahdollistaa mobiiliverkon nykyisten toimintojen säilyttämisen.
+Koska tietoliikenne reunasolmuille ohjataan SDN-kerroksen sisällä, reunasolmujen sijoittelu riippuvaista mobiiliverkosta. 
+Täten reunasolmujen sijoittelu täysin vapaa.
 Koska SDN-kerros sijaitsee eNodeB:n ja EPC:n välillä joudutaan asiakaslaitteen ja reunasolmun välistä liikennettä muokkaamaan. Kyseisellä välillä tietoliikenne on GTP tunneloitua.
 Riippuen onko paketti menossa reunasolmulle vai tulossa reunasolmulta, joudutaan tunnelointi purkamaan tai paketoimaan. Tämä saattaa johtaa merkittävään viiveeseen yhdessä monitoroinnin kanssa.
+MobiScudissa SDN-kerros sijaitsee eNodeB:n välittömässä läheisyydessä, kun taas SMORE:ssa sen oletetaan sijaitsevan useamman eNodeB:n yhteyspisteessä. 
 
-Ainoa epäsuoraa integraatiota edustava ratkaisu on FMC. FMC:n tehtävänä on viedä mobiiliverkon yhteydet nopeammin ulkoverkossa sijaitseville palvelinresursseille. Mobiiliverkon ulkopuolelle sijoitetut resurssit mahdollistavat sen että reunajärjestelmää ylläpitää jokin ulkoinen taho.
-FMC ei siis suoranaisesti ota kantaa tapaan jolla reunaresurssit on järjestetty. Mutta on perusteltua olettaa että ne sijaitsisivat mobiiliverkon P-GW:n läheisyydessä.
+Ainoa epäsuoraa integraatiota edustava ratkaisu on FMC. FMC:n tavoitteena on viedä mobiiliverkon yhteydet nopeammin ulkoverkossa sijaitseville palvelinresursseille. Mobiiliverkon ulkopuolelle sijoitetut resurssit mahdollistavat sen että reunajärjestelmää ylläpitää jokin ulkoinen taho.
+FMC ei siis suoranaisesti ota kantaa tapaan jolla reunaresurssit on järjestetty. Mutta on perusteltua olettaa että ne sijaitsisivat mobiiliverkon P-GW komponenttien läheisyydessä.
 FMC:n tapa mahdollistaa reunapalvelun ja asiakaslaitteen välinen kommunikaatio perustuu sessiotunnistesiin. Se mahdollistaa asiakaslaitteen ja reunpalvelun IP-osoitteiden vaihtumisen, ilman että viitteet asiakaslaitteen ja reunapalvelun välillä katkeavat. Järjestelmä ei siis edellytä tavallisesta poikkeavaa mekaniikkaa tietoliikenteen reitittämiseksi.
+
+Hallinnollisten toimien toteuttaminen on myös osittain riippuvaista integraatiosta. Suoran integraation järjestelmissä hallinnollisella entiteetillä on oma rajapinta mobiiliverkon toimintojen kanssa. 
+Toisaalta se edellyttää olemassa olevaan järjestelmään rajapinnan toteuttamisen, mutta lisäksi tarjoaa helpon keinon tehdä hallinnollisia toimia mobiiliverkon sisällä. 
+Läpinäkyvässä järjestelmässä hallinnollinen entiteetti on riippuvainen mobiiliverkon viestien monitoroinnin kautta saatavasta tiedosta. 
+MobiScud ja SMORE tarkkailevat SDN-kerroksen avulla mobiiliverkon kontrollitason viestintää. 
+Sen avulla on mahdollista reagoida esimerkiksi mobiiliverkon handover signalointiin. Tällöin voidaan esimerkiksi muokata SDN-kerroksen reitityksiä jotta asiakaslaitteen yhteys reunasolmuun säilyisi.
+MobiScud ja Smore tarkkailevat SDN-kerroksen avulla kontrollikerroksella muun muassa mobiiliverkon sisäisten kontrolliviestien kautta. Esimerkiksi monitoroimalla handover tapahtumia voi poimia tietoja, joiden avulla suoritetaan SDN kerroksen sisäisä reitityksiä.
+Vaikka läpinäkyvät integraatiot ovat loogisesti erillään mobiiliverkosta, edellyttävät ne pääsyä mobiiliverkon sisäisiin tietoliikenneväyliin.
+Todennäköisintä onkin siis että järjestelmää ylläpitää mobiiliverkon operaattori, eikä mikään ulkoinen taho. 
+Epäsuoraa integraatiota edustavassa FMC:ssä hallinnolliset toiminnot edellyttävät tietoja mobiiliverkosta. Tieto on tyypiltään staattista joten aktiivista tiedosiirtoa mobiiliverkon ja FMC:n välille ei tarvita. FMC:n hallinnollisista toiminnoista vastaava FMC Controller sijaitsee mobiiliverkon ulkopuolella. FMC vastaa pääasiassa mobiiliverkon ulkopuolisten yhteyksien jatkuvuudesta.
+Koska FMC:ssä asiakaslaitteen ja reunapalvelun välinen yhteys perustuu erilliseen sessiotunnisteeseen, edellyttää palveluiden käyttö erillistä toiminnallisuutta reunasolmuihin ja asiakaslaitteisiin. FMC Controller ylläpitää tämän tunnuksen toiminnallisuutta
+
+\subsubsection*{Yhteensoppivuus ETSI MEC vaatimuksiin}
 %Reuna-arkkitehtuurien ominaisuuksien vertailu aloitetaan live migraatiosta.
 %\par
 %Live migraatio on toiminnallisuuksista se joka mahdollistaa suurempien palvelukokonaisuuksien siirtämisen reunajärjestelmässä. Syitä reunalaskennan siirtämiselle voi olla useita ja ehkä yleisin pinnalle noussut syy on asiakaslaitteen liikkuminen verkossa. Muita syitä live migraatiolle voi olla esimerkiksi laskennan siirtäminen enemmän resursseja sisältävälle reunapalvelulle tai ylikuormituksen välttäminen nykyisellä reunasolmulla.
@@ -45,7 +63,7 @@ FMC:n tapa mahdollistaa reunapalvelun ja asiakaslaitteen välinen kommunikaatio 
 \begin{landscape}
     \noindent
 \begin{table}[!ht]
-\caption{Reunalaskenta-arkkitehtuurien ominaisuudet}
+\caption{Reunalaskenta-arkkitehtuurien ominaisuudet tiivistetysti}
 \label{table:features}
 \begin{tabularx}{\linewidth}{|c|c|c|p{3cm}|c|p{5cm}|}
 \hline 
@@ -65,8 +83,3 @@ CONCERT & Suora & Hierarkinen & Live migraatio & Conductor & SDN reititys mobiil
 \end{tabularx} 
 \end{table}
 \end{landscape}
-\begin{table}
-	
-	
-\end{table}
- 
