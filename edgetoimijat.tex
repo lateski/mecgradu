@@ -23,16 +23,17 @@ Ajoneuvolla on mobiiliyhteys reunapalveluun jonka tarkoitus on välittää tieto
 
 \subsubsection{Reuna} \label{reunatoimijat}
 Reuna koostuu useista toiminnallisista entiteeteistä, jotka voidaan jakaa sekä fyysisiin, että loogiisin kokonaisuuksiin. 
-Tässä kappaleessa lähdemme liikkeelle määrittelemällä reuna-alueen, joka edustaa reunan toimialuetta, sekä reunaa yleisenä käsitteenä.
-Tämän jälkeen esitellään reunasolmu, joka on reunajärjestelmän keskeisin fyysinen rakennuspalanen.
-Kuvassa \ref{fig:reunajarjestelma} on esitetty esimerkkitilanne reunajärjestelmästä, sisältäen reunalaskennan toiminnan kannalta tärkeät entiteetit.
+Tässä kappaleessa lähdetään liikkeelle määrittelemällä reuna-alue, joka edustaa reunan toimialuetta, sekä reunaa yleisenä käsitteenä.
+Tämän jälkeen määritellään reunasolmu, joka on reunajärjestelmän keskeisin fyysinen rakennuspalanen.
 Lopuksi esitellään pääasiassa ohjelmallisen tason toimivat toimijat reuna-alusta ja reunasovellus.
+Kuvassa \ref{fig:reunajarjestelma} on esitetty esimerkkitilanne reunajärjestelmästä, sisältäen reunalaskennan toiminnan kannalta tärkeät entiteetit.
 
 \paragraph{Reuna-alue} 
 Tietyissä yhteyksissä reunalla viitataan alueeseen, joka alkaa asiakaslaitteen yhteyspisteestä. Se voi olla esimerkiksi WLAN-tukiasema tai mobiiliverkon tukiasema. Tästä ensimmäisestä yhteyspisteestä reuna-alue laajenee kohti runkoverkkoa ja pilveä.
-Kuvassa \ref{fig:asiakasedgecloud} reuna on kuvattu alkavan mobiiliverkon tukiasemasta.
-Joidenkin näkemyksien mukaan myös asiakaslaitteet luetaan osaksi reunaa \cite{garcia}, mutta tämän tutkielman puitteissa asiakaslaitteet luetaan omaksi osakseen reuna-alueen ympärillä.
-Reunan laajuudelle ei siis ole tarkkaa määritelmää, vaan termiä usein sovelletaan käytettävän kontekstin mukaan siten, että reuna-alue rajautuu kontekstissa esiintyvien toimijoiden mukaan edellä manitulle välille.
+Kuvassa \ref{fig:asiakasedgecloud} reuna on kuvattu alkavan mobiiliverkon tukiasemasta tai WLAN-tukiasemasta.
+Joidenkin näkemyksien mukaan myös asiakaslaitteet luetaan osaksi reunaa, tällöin niihin viitataan termillä reuna laite (edge device) \cite{garcia}.
+Tämän tutkielman puitteissa asiakaslaitteet luetaan omaksi osakseen reuna-alueen ympärillä.
+Reunan laajuudelle ei siis ole yksiselitteistä määritelmää, vaan termiä usein sovelletaan käytettävän kontekstin mukaan siten, että reuna-alue rajautuu kontekstissa esiintyvien toimijoiden mukaan edellä manitulle välille.
 Esimerkiksi mobiiliverkon tukiasemien yhteyteen rakennettua reunajärjestelmää käsiteltäessä, reunalla tarkoitetaan ainoastaan reunajärjestelmän asiakaslaitteita palvelevien osien muodostamaa vyöhykettä. 
 Kuten jo aiemmin mainittu, reunan keskeisenä etuna muihin palveluihin voidaan pitää reunapalveluiden ja asiakaslaitteen välisen viiveen vähäisyyttä.
 Yleisenä nyrkkisääntönä reunalle voidaankin pitää verkkoyhteyksien viivettä suhteessa muuhun internettiin, koska reuna-alueella viiveiden tulisi siis olla muuta internettiä nopeampia. Toisin sanoen reunan palveluiden tulisi sijaita lähempänä kuin pilvessä sijaitsevien palveluiden.

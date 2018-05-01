@@ -1,0 +1,17 @@
+\subsection{Motivaatio}
+Reunalaskennan tavoitteena on tarjota etälaskentaa (offload) ja muita palveluita lyhyillä viiveillä. 
+Etälaskenta mahdollistaa kevyempien ja vähemmän energiaa kuluttavien asiakaslaitteiden valmistamisen, tinkimättä laitteilla tarjottavien palveluiden laadusta.
+Palveluiden tarjoaminen lyhyillä viiveillä tarjoaa mahdollisuuden reaaliaikaiseen käyttökokemukseen, siitä huolimatta että palvelu on toteutettu asiakaslaitteen ulkopuolella. 
+
+Reunajärjestelmiä voi käsitellä monella eri tasolla. Yksi haarautumispiste on  konteksti, jossa reunalaskentaa tarjotaan. ETSI:n MEC standardi ottaa nykyään huomioon mobiiliverkon lisäksi muut verkot, kuten WiFi:n ja kiinteät yhteydet \cite{taleb2017multi}. Tässä tutkielmassa pääpaino on mobiiliverkkoihin suuntautuvissa ratkaisuissa.
+
+Motiivina reunajärjestelmän liittämiseksi osaksi mobiiliverkkoa, toimii mobiiliverkon ja reunalaskennan yhteinen kohderyhmä sekä mobiiliverkon jo olemassa oleva hajautettu infrastruktuuri.
+Mobiiliverkossa asiakaslaite voi liikkua verkon puitteissa paikasta toiseen ilman että yhteys mobiiliverkon palveluihin katkeaa missään vaiheessa. Mobiiliverkon palveluiden toimintaa voi siis kutsua saumattomaksi. 
+Täten onkin realistista olettaa että reunalaskentaan pätee yhtäläiset palveluvaatimukset kuin mobiiliverkkoon.
+
+Reunajärjestelmän näkökulmasta mobiiliverkko on uhka ja mahdollisuus. Mobiiliverkko tarjoaa infrastruktuurin ,jota reunajärjestelmä voi parhaansa mukaan pyrkiä hyödyntämään. Mobiiliverkon toimintojen muuttaminen on sen hajautetun rakenteen vuoksi työlästä ja kallista. Koska reunajärjestelmä on itse myös hajautettu järjestelmä, ei mobiiliverkon osittaista päivittämistä voida pitää ylitsepääsemättömänä esteenä. 
+Mikäli reunajärjestelmän rakentaisi pääosin erilliseksi järjestelmäksi mobiiliverkon yhteyteen, tarkoittaisi se että ylläpidettävänä on kaksi hajautettua järjestelmää. Tämäkin epäilemättä aihettaa kuluja.
+Reunajärjestelmän toteuttaminen olemassa olevan järjestelmän yhteyteen vaatii kompromisseja.
+
+Reunajärjestelmän muuttujina ovat muun muassa reunalaskennan toiminnan jouhevuus, tarpeellisten investointien määrä, järjestelmän joustavuus ja muutoksien tarve olemassa oleviin toimintoihin.
+Reuna-arkkitehtuuriehdotukset pyrkivät ottamaan nämä muuttujat huomioon.
