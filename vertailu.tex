@@ -1,3 +1,9 @@
+\begin{figure}[tb]
+\centering
+\includegraphics[scale=0.5]{riippuvuudet.eps}
+\caption{Reuna-arkkitehtuurien ominaisuuksien yleiset riippuvuudet} \label{fig:riippuvuudet}
+\end{figure}
+
 \subsection{Vertailu}
 Seuraavaksi käydään läpi edellä esitettyjen reuna-arkkitehtuuriehdotuksien ominaisuuksia ja käsitellään niiden vaikutuksia itse toteutettavaan järjestelmään.
 Kunkin arkkitehtuuriehdotuksen ominaisuusjoukko ohjaa toteutusta erilaisiin ratkaisuihin. Taulukossa \ref{table:features} on tiivistetysti koottu kunkin arkkitehtuuriratkaisun ominaisuudet.
@@ -7,6 +13,9 @@ On tärkeää huomata että käsiteltyjen ominaisuuksien välillä on riippuvuks
 
 
 Reuna-arkkitehtuurien keskeisin ominaisuus on tapa jolla järjestelmä integroituu osaksi mobiiliverkkoa. Kaikki muut ominaisuudet vaikuttavat olevan riippuvaisia tästä.
+Kuvassa \ref{fig:riippuvuudet} on esitetty ominaisuuksien väliset riippuvuudet.
+Rakenne on tyypiltään implisiittinen ominaisuus. Se ei siis pääsääntöisesti ole reuna-arkkitehtuurin määrittelemä, vaan sen toteutus on riippuvainen reuna-arkkitehtuurin muista ominaisuuksista.
+
 Kappaleessa \ref{integraatio} esitellyn jaon mukaan SCC ja CONCERT edustavat suoraa integraatiota, SMORE ja MobiScud edustavat läpinäkyvää integraatiota ja FMC edustaa epäsuoraa integraatiota.
 
 SCC liittyy mobiiliverkon toimintoihin niin sanotusti natiivien yhteyksien avulla, joka edellyttää uusia rajapintoja mobiiliverkon nykyisiin komponentteihin. Tavoitteena on SCC:n hallinnollisten tarpeiden täyttämiseen. Lisäksi SCC edellyttää reunaresurssien integrointia osaksi tukiasemaa. 
