@@ -1,5 +1,5 @@
 \subsection{Network Function Virtualization} \label{nfv}
-NFV (Network function virtualization) lähtee liikkeelle ongelmasta, jossa nykyisen verkkolaitteiston käyttöikä on lyhyttä ja toiminnot ovat hajautettuina useisiin proprietary (omisteisiin?) laitteisiin \cite{nfvwhite}. 
+NFV (Network function virtualization) lähtee liikkeelle ongelmasta, jossa nykyisen verkkolaitteiston käyttöikä on lyhyttä ja toiminnot ovat hajautettuina useisiin suljettuihin (proprietary) laitteisiin \cite{nfvwhite}. 
 
 NFV:n tarkoituksena on eriyttää verkkolaitteisto ja verkkotoiminnot. Tämä toteutuisi siten, että erillistä verkkolaitteistoa ei enää tarvittaisi ja nykyisten verkkolaitteiden toiminnallisuudet toteutettaisiin tavallisella palvelinlaitteistolla ohjelmatasolla. Periaate on hyvin samankaltainen kuin perinteisten palvelimien siirtyminen virtuaalikoneita hyödyntävään ympäristöön.
 Virtualisoidulla verkkotoiminnallisuudella (jossain yhteyksissä VNF, Virtualized network function) tarkoitetaan ohjelmallisesti toteutettua verkkotoimintoa. Tämä mahdollistaa verkkotoiminnallisuuksien suorittamisen tavallisella palvelinlaitteistoilla hyprvisorin päällä. 
@@ -8,7 +8,12 @@ Verkkotoimintojen toteuttaminen virtuaalisina, mahdollistaisi useamman toiminnon
 
 NFV on soveltuva mille tahansa data-tason prosessoinnille ja kontrolli-tason toiminnoille \cite{nfvwhite}. NFV siis soveltuu toteutustavaksi monille erilaisille verkkoitoiminnoille mobiiliverkoissa ja perinteisissä tietoliikenneverkoissa. Esimerkkeinä käyttökohteista ETSI:n NFV whitepaperissä on esitetty muunmuassa reitittimet, palomuurit, kuormantasaajat, eNodeB:t ja MME:t. ETSI on pohtinut NFV:n laajamittaisen käyttöönoton mahdollisuuksia 5G-verkkoingrastruktuurissa ja mainitsee reunalaskennan yhtenä sen käyttötapauksena \cite{etsinfv5g}.
 
-Yksi NFV:hen pohjautuvista ideoista on C-RAN (Cloud Radio Acceess network), joka pyrkii virtualisoimaan tukiasemat. Käytännössä tukiaseman fyysiseen sijaintiin vietäisiin kuituyhteys ja RRH (Remote radio head). RRH sisältää radiosignalointiin tarvittavan laitteiston, sekä laitteiston joka muuttaa radion ja kuituyhteyden välillä olevaa tietoliikennettä analogisen ja digitaalisen muodon välillä. Kuituyhteys välittää signaalin virtualisoidulle BBU:lle (Baseband Unit), joka hoitaa kaikki tukiaseman digitaaliset toimet.\cite{C-RANpaperi}. Kappaleessa \ref{concert} esitellään reuna-arkkitehtuuri joka rakentuu C-RAN tyyliseen verkkoon.
+Yksi NFV:hen pohjautuvista ideoista on C-RAN (Cloud radio acceess network), joka pyrkii virtualisoimaan tukiaseman toinnot. Käytännössä tukiaseman fyysiseen sijaintiin vietäisiin kuituyhteys ja RRU (Remote radio unit).
+RRU sisältäisi radiosignalointiin tarvittavan laitteiston sekä laitteiston joka muuttaa radion ja kuituyhteyden välillä olevaa tietoliikennettä analogisen ja digitaalisen muodon välillä.
+Kuituyhteys välittää signaalin ohjelmallisesti toteutetulle BBU:lle (Baseband Unit), joka hoitaa kaikki tukiaseman toiminnot\cite{chih2014recent}.
+BBU:t voitaisiin virtualisoida ja suorittaa keskitetysti palvelinsaleissa.
+Toistaiseksi tukiaseman resurssit on mitoitettu suurimman mahdollisen kuorman mukaan. Virtualisoinnin avulla BBU:n resurssit olisivat paremmin skaalattavissa.
+Kappaleessa \ref{concert} esitellään reuna-arkkitehtuuri, joka rakentuu C-RAN tyyliseen verkkoon.
 
 Mobiiliverkossa toimivan reunalaskennan näkökulmasta NFV:n potentiaali on ilmeinen. Jos suurin osa mobiiliverkon toiminnoista voitaisiin virtualisoida ja siirtää tavalliselle palvelinlaitteistolle, voisi reunalaskentaa suorittaa samalla laitteistolla, eikä se vaatisi erillistä laitteistoa omille toiminnoilleen.
 NFV:n haasteena on toteutuksien puute. 
