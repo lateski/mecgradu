@@ -1,10 +1,8 @@
 \subsection{Live migraatio} \label{livemigraatio}
-\begin{quotation}
-Tarkista käsitelläänkö myös tapaus jossa virtuaalikonetta ei liikuteta vaan ainoastaan varmistetaan yhteyden säilyminen?
-\end{quotation}
+
 %Alkukappale
 %% Mitä migraatio on ja miten se liittyy handoveriin
-Live migraatio, eli suorituksen aikanen siirto, tarkoittaa ohjelman tai virtuaalikoneen siirtämistä laitteistolta toiselle, siten että ohjelman tai virtuaalikoneen käyttö ei keskeydy. 
+Live migraatio, eli suorituksen aikanen siirto, tarkoittaa virtualisoidun ohjelman tai virtuaalikoneen siirtämistä laitteistolta toiselle, siten että ohjelman tai virtuaalikoneen käyttö ei keskeydy siirron ajaksi. 
 Useimmiten tällaista toiminnallisuutta käytetään palvelinkeskuksissa virtuaalikoneiden
 siirtelyyn. Palvelinkeskuksissa siirtämiseen käytetään nopeita sisäisiä yhteyksiä,
 jolloin tiedon siirtoon käytettävät väylät ovat nopeita. Syitä live migraation
@@ -14,17 +12,19 @@ laitteiston huoltoon ottaminen \cite{soni2013comparative}.
 
 Reunalaskentaan sovellettuna live migraation tehtävänä on laskentaa tai palvelua suorittavan virtuaalikoneen siirtäminen reunasolmujen välillä.
 Syyt joiden vuoksi reunalaskentaympäristössä tehdään live migraatiota koskevat pääasiassa asiakaslaitteen liikkumista verkossa, jolloin virtuaalikone siirretään asiakaslaitetta lähimpänä olevalle  reunasolmulle. 
-Reunalaskentaa suoritettaessa voi myös tulla tilanne, jossa laskentaa suorittavalla reunasolmulla ei ole resursseja laskennan suorittamiseksi. Tällöin asiakkaan virtuaalikone joudutaan siirtämään toiselle reunasolmulle, jolla on enemmän resursseja.  
+Reunalaskentaa suoritettaessa voi myös tulla tilanne, jossa laskentaa suorittavalla reunasolmulla ei ole resursseja laskennan suorittamiseksi. Tällöin asiakkaan virtuaalikone saatetaan joutua joudutaan siirtämään toiselle reunasolmulle, jolla on enemmän resursseja.  
 
 
 \subsubsection*{Handover/handoff}%omaan kappaleeseensa?
-Virtuaalikoneille tehtävän live migraation ja mobiiliverkossa suoritettavan handoverin ideat ovat samankaltaisia.
-Handoverilla tarkoitetaan asiakaslaitteen yhteyden siirtämistä tukiasemalta toiselle tukiasemalle. 
-Handover tehdään yleensä tilanteessa, jossa asiakaslaite on liikkunut mobiiliverkossa siten että se on lähempänä toista tukiasemaa. Handover voidaan myös tehdä mikäli tukiasema on ruuhkautunut. \cite{lähde}
+Virtuaalikoneille tehtävän live migraation ja mobiiliverkossa suoritettavan handoverin ideat ovat samankaltaisia. Molemmissa tavoitteena asiakasta palvelevan entiteetin siirtäminen ilman että asiakas huomaa siirtoa.
+Handoverilla tarkoitetaan asiakaslaitteen radioyhteyden siirtämistä tukiasemalta toiselle tukiasemalle. 
+LTE:ssä handover päätös tehdään eNodeB:ssä asiakaslaitteen välittämän mittaustuloksen perusteella. 
+Handover voidaan tehdä esimerkiksi tilanteessa jossa asiakaslaitteen ympäristössä on toinen tukiasema, joka voisi palvella asiakaslaitetta paremmin \cite[s.~96]{etsilte}.
 LTE:ssä yhteys on tyypiltään tunnelimainen ja handoverissa tunnelin toinen pää siirretään toiselle tukiasemalle.
 Yhteyden siirron alkaessa tukiasema välittää kohteena olevalle tukiasemalle asiakaslaitetta koskevat tilatiedot. Kun tilatiedot on välitetty, asiakaslaitteen ja tukiaseman välinen yhteys katkaistaan ja asiakaslaite muodostaa yhteyden uudelle tukiasemalle.
 Asiakaslaitteen tietoliikennettä puskuroidaan S-GW:n toimesta sillä välin kun yhteys on katkaistuna. Yleensä handover on niin nopea toimenpide, että laitteen käyttäjä ei sitä huomaa.
-Handover on nopea toimenpide koska sen aikana siirrettävän tiedon määrä on vähäinen ja se koostuu pääasiassa erilaisista asiakaslaitteen ja tunneleiden tunnisteista.
+Handover on nopea toimenpide koska sen aikana siirrettävän tiedon määrä on vähäinen.
+Handoverin sisältämä asiakaskonteksti koostuu pääasiassa erilaisista asiakaslaitteen ja tunneleiden tunnisteista.
 
 \subsubsection*{Live migraation toiminta}%Miten migraatio toimii
 Live migraatiossa virtuaalikone siirretään palvelimelta toiselle palvelimelle, ilman että virtuaalikoneen käyttö keskeytyy. 
@@ -36,7 +36,7 @@ Tätä jatketaan kunnes muutoksia sisältävien muistisivujen määrä ei vähen
 Tässä vaiheessa lähtöpisteenä oleva virtuaalikone pysäytetään ja loput virtuaalikoneen muistisivut ja tilatiedot siirretään kohdelaitteelle. Tämän jälkeen virtuaalikone käynnistetään uudessa sijainnissa. 
 
 Live migraatioon liittyy myös erilaisia optimointeja ja lähestymistapoja joita ei tässä tutkielmassa sen tarkemmin avata. 
-Konesali ympäristössä on myös yleistä että varsinaista tallennustilaa ei ole tarpeen siirtää, koska se on toteutettu levypalvelimen avulla, jolloin ainoastaan yhteys täytyy siirtää. Mikäli näin ei ole, myös tallennustila tulee siirtää laitteelta toiselle.
+Palvelinsaliympäristössä on myös yleistä että varsinaista tallennustilaa ei ole tarpeen siirtää, koska se on toteutettu levypalvelimen avulla, jolloin ainoastaan yhteys täytyy siirtää. Mikäli näin ei ole, myös tallennustila tulee siirtää laitteelta toiselle.
 
 Live migraation suorituskykyä mitataan seuraavilla metriikoilla \cite{soni2013comparative}:
 
@@ -48,26 +48,38 @@ Live migraation suorituskykyä mitataan seuraavilla metriikoilla \cite{soni2013c
 	\item Suorituskyvyn alentuma: Siirrettävän virtuaalikoneen suorituskyvyn heikentyminen siirron aikana
 \end{itemize}
 
-Näistä kolme ensimmäistä ovat keskeisimpiä \cite{farris2017lightweight}. Tavoitteena perinteisessä live migraatiossa on mahdollisimman lyhyt käyttökatko. \cite{ha2015adaptive}
+Näistä kolme ensimmäistä ovat keskeisimpiä \cite{farris2017lightweight}. Tavoitteena perinteisessä live migraatiossa on mahdollisimman lyhyt käyttökatko \cite{ha2015adaptive}.
 
 %Migraation uudethaasteet reunalla vs palvelinsali
 \subsubsection*{Reunalaskennassa}
 Reunalaskentaympäristössä suoritettavan live migraation toiminnallisuus on pääpiirteittäin sama kuin edellä kuvattu.
-Reunalaskennassa live migraatiolla viitataa asiakaslaitteen käyttämän palvelun tai ohjelmiston suoritusaikaista siirtämistä reunasolmulta toiselle. Tavoitteena on usein reunalaskennan siirtäminen asiakasta lähempänä sijaitsevalle reunasolmulle. Reunalla tehtävän live migraation keskeisenä erona palvelinsaliympäristöön on juurikin suoritusympäristö. 
+Reunalaskennassa live migraatiolla viitataan reunasovelluksen suoritusaikaiseen siirtoon reunasolmujen välillä.
+Live migraation tavoitteena on taata asiakaslaitteen parempi palvelu.
+Keinona tuon tavoitteen saavuttamiseksi on esimerkiksi reunasovelluksen siirtäminen asiakasta lähempänä sijaitsevalle reunasolmulle. Reunalla tehtävän live migraation erona palvelinsaliympäristöön on juurikin suoritusympäristö. 
 
 Päällimmäisenä erona on palvelinsaleissa tehtävään migraatioon on käytettävien yhteyksien nopeus. Reunasolmujen väliset yhteydet ovat oletettavasti hitaampia ja nopeus saattaa vaihdella\cite{ha2017you}.
-Hitaat yhteyden johtavat pitkään siirtoaikaan, joka puolestaa johtaa pidempään käyttökatkokseen ja täten palvelun laadun heikkenemiseen.
-Siirtoajan minimoimiseksi on siis pyrittävä pitämään siirrettävän datan määrä mahdollisimman pienenä.
+Hitaat yhteyden johtavat pitkään siirtoaikaan, joka puolestaa johtaa pidempään käyttökatkokseen ja täten palvelun laadun heikkenemiseen. 
+Reunajärjestelmissä ei myöskään oletettavasti ole jaettua levyplalvelinta, vaan reunalaskennan yhteydessä live migraatio sisältää myös massamuistin siirron.
+
+Esimerkkitilanteessa jossa asiakaslaite on siirtynyt alkuperäisen reunasolmun kantaman ulkopuolelle reunasovelluksen käyttö voi jatkua reititysmuutoksen avulla. Asiakaslaitteen siirtyessä kauemmaksi alkuperäisestä reunasolmusta, viiveet kasvavat ja palvelun laatu heikkenee. Reunajärjestelmä aloittaa asiakasta palvelevan reunasovelluksen migraation lähempänä sijaitsevalle reunasolmulle.
+Huomion arvoinen seikka on että asiakkaan palvelun laatu pysyy heikentyneenä niin kauan kuin live migraatio on käynnissä ja alkuperäisen reunasolmun edelleen palvellessa asiakasta. 
+Toisin sanoen reunalaskennassa live migraation kannalta on tärkeää minimoida live migraatioon kuluva kokonaisaika. 
+Kokonaisajan minimoimiseksi joudutaan todennäköisimmin luistamaan katkoksen kestosta. 
+Etenkin hitailla yhteyksillä tiedon siirtoon kuluva aika on kertaluokkaa suurempi kuin katkoksen kesto \cite{ha2017you}.
+Siirtoajan minimoimiseksi on pyrittävä pitämään siirrettävän datan määrä mahdollisimman pienenä \cite{ha2015adaptive}.
+
+
 
 % Tämän lisäksi reunasolmuilla ei ole nykyisten ratkaisuehdotusten mukaan käyttössään yhteistä levypalvelinta, eli myös tallennustila joudutaan muodossa tai toisessa siirtämään live migraation yhteydessä. 
 
 
 Palvelinsaleja ja reunalaskentaympäristöä erottaa myös se, että palvelinsaliympäristössä virtuaalikoneiden live migraatiot voidaan pääsääntöisesti tehdä koordinoidusti ilman tiukkkoja aikarajoitteita. 
-Reunalaskentaympäristössä migraatiopäätös perustuu usein johonkin ulkoiseen tapahtumaan. Todennäköisintä onkin että migraatiopäätös tehdään samankalataisin perustein kuin edellä esitelty handover. Keskeisin syy migraatiolle oletettavasti on asiakaslaitteen liikkuminen verkossa. Asiakaslaitteiden liikkumiseen pohjautuva migraatio yhdistettynä heikkoihin tietoliikenneyhteyksiin on kuitenkin ongelmallinen. Voidaan esimerkiksi kuvitella tilanne jossa aamulla kaupungin keskustaan saapuvat työmatkailijat aiheuttavat "migraatiotulvan", joka ruuhkauttaa reunasolmujen käytössä olevat tietoliikenneyhteydet.
+Reunalaskentaympäristössä migraatiopäätös perustuu usein johonkin ulkoiseen tapahtumaan. Todennäköisintä onkin että migraatiopäätös tehdään samankalataisin perustein kuin edellä esitellyn handoverin. Keskeisin syy migraatiolle oletettavasti on asiakaslaitteen liikkuminen verkossa, mutta syynä voi olla myös esimerkiksi reunasolmun ruuhkautuminen. Asiakaslaitteiden liikkumiseen pohjautuva migraatio yhdistettynä heikkoihin tietoliikenneyhteyksiin on kuitenkin ongelmallinen. Voidaan esimerkiksi kuvitella tilanne jossa aamulla kaupungin keskustaan saapuvat työmatkailijat aiheuttavat "migraatiotulvan". Suuri määrä migraatioita saattaa ruuhkauttaa reunasolmujen käytössä olevat tietoliikenneyhteydet ja käyttää suuren osan käytössä olevista resursseista. 
 
 
 %ratkaisuja
 %ratkaisuja cloudlet
-Lähes kaikki läpikäydyt reunalaskenta-arkkitehtuurit tiedostivat tarpeen laskennan migraatiolle, mutta kovin monessa sen tarkempaa toiminnallisuutta ei määritelty.
-Cloudletit ovat yksi tunnetuimpia reunasolmujen välisten migraatioiden ratkaisumalleja. Cloudlettien live migraatio ratkaisuja on käsitelty tarkemmin tulevassa kappaleessa \ref{vmhandoff}. 
-MobiScud:n yhteydessä käytettiin Xen hyperviisorin migraatiotoiminnallisuutta suoraan sovellettuna reunalaskentaympäristöön\cite{wang2015mobiscud}.
+Lähes kaikki läpikäydyt reunalaskenta-arkkitehtuurit tiedostivat tarpeen reunasovelluksien migraatiolle, mutta kovin harvassa määriteltiin täsmällisiä toimia sen toteuttamiseksi.
+Cloudlettien ympärillä tehdyn tutkimuksen yhteydessä on esitetty migraatioratkaisua, joka lyhentäisi migraation kestoa merkittävästi. Cloudlet ratkaisu käsitellään tarkemmin kappaleessa \ref{vmhandoff}. 
+Onkin realistista olettaa, että varsinaiseen reunajärjestelmään toteutettava live migraatio toiminnallisuus optimoitaisiin reunaympäristöön sopivaksi, kuten cloudlettien yhteydessä on pyritty tekemään. 
+%MobiScud:n yhteydessä käytettiin Xen hyperviisorin migraatiotoiminnallisuutta suoraan sovellettuna reunalaskentaympäristöön\cite{wang2015mobiscud}.
