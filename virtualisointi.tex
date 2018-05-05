@@ -1,4 +1,4 @@
-\subsection{Virtuaalikoneet ja kontit}
+\subsection{Virtualisointi}
 
 %miten virtuaalikone toimii
 Virtualisoinnilla tarkoitetaan tietokoneohjelmiston suorittamista ohjelmallisesti toteutetun rajapinnan päällä. 
@@ -12,18 +12,23 @@ Yksi hypervisorin tehtävistä on virtuaalikoneiden luominen. Sen avulla voidaan
 
 %virtuaalikoneet reunalla
 Virtuaalikoneet ovat vahvasti esillä reunalaskenta-arkkitehtuurien yhteydessä. 
-ETSI:n reunalaskennan referenssiarkkitehtuurissa \cite{etsirefarch} virtuaalikoneet esitetään reunapalvelun tuottamisen välineenä ja Taleb et al. \cite{taleb2017multi} esittävät kirjallisuuskatsauksessaan virtuaalikoneet yhdeksi reunalaskennan mahdollistavista teknologioista.
-Virtuaalikoneiden dynaamisuus verrattuna tavallisesti suoritettavaan ohjelmistoon on reunalaskennan näkökulmsta haluttu ominaisuus. 
+ETSI:n reunalaskennan referenssiarkkitehtuurissa \cite{etsirefarch} virtuaalikoneet esitetään reunapalvelun tuottamisen välineenä ja Taleb et al. esittävät kirjallisuuskatsauksessaan virtuaalikoneet yhdeksi reunalaskennan mahdollistavista teknologioista  \cite{taleb2017multi}.
+Virtuaalikoneiden dynaamisuus verrattuna tavallisesti suoritettavaan ohjelmistoon on reunalaskennan näkökulmasta haluttu ominaisuus. 
 Virtuaalikoneet tarjoavat myös helpon tavan jakaa reunasolmun resursseja usean toisistaan erillisen palvelun välillä.
-Toisena etuna on virtuaalikoneiden vahva eristys muusta järjestelmästä ja muista virtuaalikoneista.
+Toisena etuna on virtuaalikoneiden vahva eristys (isolation) muusta järjestelmästä ja muista virtuaalikoneista.
 
 Virtuaalikoneet eivät aseta rajoitteita tarjottavan palvelun tyypille ja niiden avulla onkin mahdollista tarjota monia erilaisia palvelumalleja.
 Yksi ehdotetuista palvelumalleista on käyttäjäkohtaisen virtuaalikoneet \cite{satya09,wang2015mobiscud}. 
 
+Käyttöjärjestelmän virtualisointi sisältää merkittävästi yleisrasitetta (overhead) \cite{xavier2013performance}. Etenkin tilanteissa joissa varsinainen reunasovellus on kevyt, voi kokonaisen käyttöjärjestelmän virtualisointi olla ylimitoitettua. Vaihtoehtoinen ratkaisu virtuaalikoneille ohjelmiston säiliöinti (container) \cite{soltesz2007container}.
+Säiliöinnillä tarkoitetaan käyttöjärjestelmätason virtualisointia, jossa käyttöjärjestelmä kutsut ja ABI-kerroksen (Application Binary Interface) kutsut ovat virtualisoituja \cite{soltesz2007container}.
+Säiliöinnin pääasiallisena etuna on pienempi yleisrasite verrattuna virtuaalikoneisiin, mutta se tulee heikomman eristyksen kustannuksella \cite{soltesz2007container}.
+Tämän tutkielman puitteissa reunasovelluksien toteutusmekanismiksi oletetaan virtuaalikoneet.
+
 %mitä se mahdollistaa
 Tulevissa kappaleissa perehdytään tarkemmin virtuaalikoneiden hyödyntämistä osana reunapalveluita.
 Kappaleessa \ref{livemigraatio} käsittellään virtuaalikoneiden siirtelyä suorituslaitteistolta toiselle, ilman että itse järjestelmän suorittamista tarvitsee keskeyttää siirron ajaksi. 
-Kappaleessa \ref{cloudlet} käsitellään cloudletiksi nimettyä  virtuaalikoneisiin pohjautuvaa reunapalvelun tuottamisjärjestelmää.
+Kappaleessa \ref{cloudlet} käsitellään cloudletiksi nimettyä virtuaalikoneisiin pohjautuvaa reunapalvelun tuottamisjärjestelmää.
 
 
 
