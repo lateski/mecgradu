@@ -211,7 +211,7 @@
 %Arkkitehtuuriratkaisut ovat riippuvaisia tarjottavista palveluista. Toiset arkkitehtuuriratkaisut tukevat toisia palveluita paremmin kuin toiset, kompromisseilta on siis vaikea välttyä.
 
 \subsection{Keskeiset käsitteet} 
-Tässä kappalessa esitellään reunajärjestelmään liittyvät keskeiset käsitteet ja toimijat. 
+Tässä kappaleessa esitellään reunajärjestelmään liittyvät keskeiset käsitteet ja toimijat. 
 Koska reunalaskentaa suorittava reunajärjestelmä sijoittuu osaksi olemassa olevaa hierarkiaa, esitellään myös reunan ympärillä sijaitsevat toimijat.
 Reunan itsensä lisäksi käsitellään siis asiakaslaitteet ja pilvi, niiltä osin kuin ne liittyvät reunajärjestelmän käyttöön tai toimintaan.
 Koska tässä tutkielmassa käsiteltävien reuna-arkkitehtuurien pyrkimyksenä on mahdollistaa reunalaskenta mobiiliverkkoa hyödyntäen, esitellään lopuksi LTE-tyyppisen mobiiliverkon rakenne ja keskeisimmät toimijat.
@@ -237,8 +237,8 @@ Edellä mainittujen teknologioiden lisäksi reunalaskentaa käsittelevien julkai
 \section{Ominaisuudet/Suunnittelupäätökset} \label{ominaisuudet}
 
 Reunalaskennan keskeisin tarkoitus on laskennan siirtäminen reunalla toimivalle reunalaskentaklusterille. Reunaa voidaan lähestyä pilven ja käyttäjälaitteiden puolelta. Käyttäjälaitteiden, kuten älypuhelimien laskentateho on suhteellisen heikkoa, lisäksi ne ovat akkuvirrasta riippuvaisia. 
-Mobiililaitteen käyttöajan pidentämiseksi voidaan pyrkiä tekemään mahdollisimman vähän akkuakuluttavaa laskentaa paikallisesti, siirtämällä sitä reunalaskentaklusterille (Etsi se lähde jossa verrataan tietokoneita ja mobiililaitteita - eroa oli yhden kertaluokan verran).
-Esimerkiksi verkkoliikenne mobiililaitteen ja kohdepalvelimen välillä on merkittävä viive toisi reunaklusteri palvelun huomattavasti lähemmäksi ja pienentäisi viivettä palvelussa. Viiveen pienenemisen seurauksena monet reaaliaikaisuuttaa tai nopeaa reagointia vaativat palvelut ovat mahdollisia. Lisäksi verkon viiveestä tai ruuhkasta johtuen, mobiililaitteella on usein huomattavasti nopeampi yhteys fyysisesti lähelle itseään verra
+Mobiililaitteen käyttöajan pidentämiseksi voidaan pyrkiä tekemään mahdollisimman vähän akkua kuluttavaa laskentaa paikallisesti, siirtämällä sitä reunalaskentaklusterille (Etsi se lähde jossa verrataan tietokoneita ja mobiililaitteita - eroa oli yhden kertaluokan verran).
+Esimerkiksi verkkoliikenne mobiililaitteen ja kohdepalvelimen välillä on merkittävä viive toisi reunaklusteri palvelun huomattavasti lähemmäksi ja pienentäisi viivettä palvelussa. Viiveen pienenemisen seurauksena monet reaaliaikaisuutta tai nopeaa reagointia vaativat palvelut ovat mahdollisia. Lisäksi verkon viiveestä tai ruuhkasta johtuen, mobiililaitteella on usein huomattavasti nopeampi yhteys fyysisesti lähelle itseään verra
 
 Lisäksi pilven tai konesalien suunnasta asiaa lähestyttäessä runkoverkko tukkeutuu. Siirtämällä osan palveluvastuusta reunalle, runkoverkon rasitteen tulisi ainakin periaatteessa pienentyä. 
 
@@ -274,7 +274,7 @@ Lisäksi pilven tai konesalien suunnasta asiaa lähestyttäessä runkoverkko tuk
 
 \section{Esitetyt ratkaisut} \label{ratkaisut}
 Reunalaskennan toteuttamiseksi on esitetty useita erilaisia ratkaisuja.
-Sen sijaan että esitettäisiin ratkaisu yksittäiselle toiminnolle, reunalaskenta-arkkitehtuuri pyrkii toteuttamaan tarpeeksi suuren osajoukon toteuttamisen kannalta kriittisistä ominaisuuksita.
+Sen sijaan että esitettäisiin ratkaisu yksittäiselle toiminnolle, reunalaskenta-arkkitehtuuri pyrkii toteuttamaan tarpeeksi suuren osajoukon toteuttamisen kannalta kriittisistä ominaisuuksista.
 Seuraavaksi käydään läpi ehdotettuja arkkitehtuureja ja lopuksi tarkastellaan ETSI:n
 dokumentaatioiden esittämä reunalaskennan referenssiarkkitehtuuri ja
 reunalaskennalle asetetut vaatimukset.
