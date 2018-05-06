@@ -236,11 +236,18 @@ Edellä mainittujen teknologioiden lisäksi reunalaskentaa käsittelevien julkai
 
 \section{Ominaisuudet/Suunnittelupäätökset} \label{ominaisuudet}
 
-Reunalaskennan keskeisin tarkoitus on laskennan siirtäminen reunalla toimivalle reunalaskentaklusterille. Reunaa voidaan lähestyä pilven ja käyttäjälaitteiden puolelta. Käyttäjälaitteiden, kuten älypuhelimien laskentateho on suhteellisen heikkoa, lisäksi ne ovat akkuvirrasta riippuvaisia. 
-Mobiililaitteen käyttöajan pidentämiseksi voidaan pyrkiä tekemään mahdollisimman vähän akkua kuluttavaa laskentaa paikallisesti, siirtämällä sitä reunalaskentaklusterille (Etsi se lähde jossa verrataan tietokoneita ja mobiililaitteita - eroa oli yhden kertaluokan verran).
-Esimerkiksi verkkoliikenne mobiililaitteen ja kohdepalvelimen välillä on merkittävä viive toisi reunaklusteri palvelun huomattavasti lähemmäksi ja pienentäisi viivettä palvelussa. Viiveen pienenemisen seurauksena monet reaaliaikaisuutta tai nopeaa reagointia vaativat palvelut ovat mahdollisia. Lisäksi verkon viiveestä tai ruuhkasta johtuen, mobiililaitteella on usein huomattavasti nopeampi yhteys fyysisesti lähelle itseään verra
+Tässä luvussa käsitellään reunalaskentaan liittyviä ominaisuuksia.
+Ominaisuudet ovat tyypiltään korkean tason suunnittelupäätöksiä. 
+Jokainen ominaisuus edustaa jotain reunalaskennan mahdollistavaa toiminnallisuutta tai toimijaa.
+Reuna-arkkitehtuureita analysoimalla voitiin erottaa neljä ominaisuutta.
+Live migraatio kuvaa reunajärjestelmän keinoja siirrellä reunasovelluksia reunasolmujen välillä.
+Integraatio mobiiliverkkoihin esittää reunajärjestelmän ja mobiiliverkon yhteistoiminnallisuuden tyyppiä. 
+Kommunikaatio käsittelee reunajärjestelmän ja asiakaslaitteen välistä tietoliikenneyhteyttä. 
+Viimeisenä käsitellään reunajärjestelmän hallintaa. Hallinta sisältää päätöksiä järjestelmän hallinnollisten toimien toteuttamiseksi, kuten hallinnollisten entiteettien sijainnin järjestelmässä.
+Ominaisuuksien käsittely on toteutettu yleisellä tasolla.
+Arkkitehtuurikohtaiset toteutusehdotukset näille ominaisuuksille käsitellään luvussa \ref{ratkaisut}.
 
-Lisäksi pilven tai konesalien suunnasta asiaa lähestyttäessä runkoverkko tukkeutuu. Siirtämällä osan palveluvastuusta reunalle, runkoverkon rasitteen tulisi ainakin periaatteessa pienentyä. 
+Ominaisuudet eivät ole luonteeltaan täysin itsenäisiä, vaan ne ovat toisistaan riippuvaisia. Riippuvuuksista seuraa, että kunkin ominaisuuden toteutuksen vahvuudet ja heikkoudet tulee ottaa huomioon laajemmassa kontekstissa. 
 
 
 

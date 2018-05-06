@@ -1,25 +1,40 @@
 
 \subsection{Integraatio mobiiliverkkoihin} \label{integraatio}
-\begin{quote}
-Tarkista onko käsitelty myös niin että laitteistovaatimukset tulevat esiin. Esimerkiksi vaatiiko reunalaskennan toteuttaminen erikoisvalmisteisia laitteita vai selvitäänkö tavallisilla palvelimilla?
-\end{quote}
+Lähes kaikki mobiiliverkossa toimivat asiakaslaitteet kuuluvat reunalaskennan kohderyhmään.
+Täten reunajärjestelmän integrointi osaksi mobiiliverkkoa on luonnollinen tavoite.
+Lisäksi mobiiliverkkoon sijoitettu reunajärjestelmä vaikuttaa hyvältä ratkaisulta tilanteessa jossa asiakaslaite on liikkuva \cite{gusev2018going}.
+Tässä yhteydessä integraatiolla tarkoitetaan mobiiliverkon ja reunajärjestelmän tapaa hoitaa reunapalveluiden tarjoaminen mobiiliverkon kautta.
 
+Tutkielmassa käsiteltävät reuna-arkkitehtuurit ovat esittäneet erilaisia keinoja reunajärjestelmän ja mobiiliverkon yhdistämiseksi.
+Kun reunajärjestelmää ollaan integroimassa osaksi olemassa olevaa mobiiliverkkoa, on tavoitteena pyrkiä pitämään uusittavan laitteiston määrä kohtuullisena. Pääasiallisena syynä tähän on mobiiliverkon suljettu ympäristö, johon mobiiliverkon operaattori joutuu erikseen hankkimaan tarvittavat toiminnallisuudet.
 
-Useat reunalaskentaan liittyvät arkkitehtuurit on suunniteltu integroitaviksi osaksi mobiiliverkkoa.
-Motivaatio on ilmeinen, koska lähes kaikki mobiiliverkossa toimivat laitteet kuuluvat reunalaskennan kohderyhmään.
-Reunalaskentatoiminnallisuutta lisättäessä olemassa olevaan järjestelmään, yhdeksi suurimmista tekijöistä tulee hinta. 
-Kuten aiemmin mainittu, mobiiliverkon laitteisto on usein suljettu, eikä siihen välttämättä ole mahdollista tehdä muutoksia tai laajennoksia.
-Tämä tarkoittaa että ainakin osa olemassa olevasta laitteistosta jouduttaisiin korvaamaan uudella, mikäli reunalaskentatoiminnallisuus halutaan lisätä.
-Tämän vuoksi on esitetty tekniikoita joiden avulla laitteiston uusimiselta voidaan välttyä, tai ainakin minimoida korvattavan laitteiston määrä.
-Yksi erottavata tekijä on reunalaskentaratkaisun sidonnaisuus mobiiliverkkoon. Tämä tarkoittaa että löyhästi sidonnaisten ratkaisujen tuottajana voi jokin kolmas osapuoli, mutta yleisesti tämä myös tarkoittaa että reunapalvelu tuotetaan kauempana reunasta.
-Jokaisessa ratkaisussa on siis hyvät ja huonot puolensa. 
+Vaihtoehtojen toisessa ääripäässä on koko järjestelmän uusiminen, siten että se tukee reunalaskentaa osana mobiiliverkon muita toiminnallisuuksia.
+Toisessa ääripäässä mobiiliverkkoon ei tehdä lainkaan muutoksia ja reunajärjestelmä lisätään joidenkin mobiiliverkon ulkopuolisten toimijoiden avulla. 
 
-%Tavat joilla reunalaskenta voidaan lisätä osaksi mobiiliverkkoa voidaan jakaa kolmeen pääryhmään
-Reunajärjestelmien tapa integroitua osaksi mobiiliverkkoa on jaettu tässä tutkielmassa kolmeen eri pääryhmään
+Integraation haasteena on mobiiliverkon jatkuva kehitys. Arkkitehtuuriehdotukset ovat jossain määrin ottaneet näitä kehityspolkuja huomioon. 
+Yksi näistä kehityspoluista on SDN ja NFV käyttöönotto mobiiliverkoissa \cite{heinonen2014dynamic, nfvwhite}. 
+Näiden avulla tavoitellaan mobiiliverkon laitteiston ja toiminnallisuuden välisen sidonnaisuuden vähentämistä sekä skaalautuvuuden parantamista.
+
+Integraation tyypistä seuraa epäsuorasti myös reunajärjestelmän Tarjoja.
+Varsinkin ehdotukset joissa reunajärjestelmä on tiukasti sidoksissa mobiiliverkkoon reunajärjestelmän tarjoaja on sama kuin mobiiliverkon operaattori. Heikompaa sidonnaisuutta ehdottavat ratkaisut saattavat tarjota mahdollisuuden että reunajärjestelmää tarjoaa jokin kolmas osapuoli. Kysymykseksi siis jää, onko integraation tuloksena yksi järjestelmä, vai kaksi järjestelmää joiden välillä on jonkinlainen yhteys.
+
+Reuna-arkkitehtuurien ehdottamat tavat mobiiliverkon ja reunajärjestelmän integraatioon on jaettu tässä tutkielmassa kolmeen ryhmään:
+
+%Useat reunalaskentaan liittyvät arkkitehtuurit on suunniteltu integroitaviksi osaksi mobiiliverkkoa.
+%Motivaatio on ilmeinen, koska lähes kaikki mobiiliverkossa toimivat laitteet kuuluvat reunalaskennan kohderyhmään.
+%Reunalaskentatoiminnallisuutta lisättäessä olemassa olevaan järjestelmään, yhdeksi suurimmista tekijöistä tulee hinta. 
+%Kuten aiemmin mainittu, mobiiliverkon laitteisto on usein suljettu, eikä siihen välttämättä ole mahdollista tehdä muutoksia tai laajennoksia.
+%Tämä tarkoittaa että ainakin osa olemassa olevasta laitteistosta jouduttaisiin korvaamaan uudella, mikäli reunalaskentatoiminnallisuus halutaan lisätä.
+%Tämän vuoksi on esitetty tekniikoita joiden avulla laitteiston uusimiselta voidaan välttyä, tai ainakin minimoida korvattavan laitteiston määrä.
+%Yksi erottavata tekijä on reunalaskentaratkaisun sidonnaisuus mobiiliverkkoon. Tämä tarkoittaa että löyhästi sidonnaisten ratkaisujen tuottajana voi jokin kolmas osapuoli, mutta yleisesti tämä myös tarkoittaa että reunapalvelu tuotetaan kauempana reunasta.
+%Jokaisessa ratkaisussa on siis hyvät ja huonot puolensa. 
+
+%%Tavat joilla reunalaskenta voidaan lisätä osaksi mobiiliverkkoa voidaan jakaa kolmeen pääryhmään
+%Reunajärjestelmien tapa integroitua osaksi mobiiliverkkoa on jaettu tässä tutkielmassa kolmeen eri pääryhmään
 
 \begin{itemize}
-\item \textbf{Suorat integraatiot} sisältävät uusien toimintojen lisäämistä osaksi olemassa olevaa arkkitehtuuria. Tämänkaltainen ratkaisu edellyttää muutoksia myös olemassa olevien komponenttien toimintaan. 
-\item \textbf{Epäsuorat itegraatiot} eivät edellytä toiminnallisia muutoksia mobiiliverkon toimintoihin.
+\item \textbf{Suorat integraatiot} sisältävät uusien toimintojen lisäämistä osaksi mobiiliverkkoa. Tämänkaltainen ratkaisu edellyttää muutoksia myös olemassa olevien komponenttien toimintaan. 
+\item \textbf{Epäsuorat integraatiot} tarjoavat reunalaskentaa mobiiliverkon ulkopuolella. Ei edellytä toiminnallisia muutoksia mobiiliverkkoon, mutta saattaa edellyttää muita mobiiliverkon muutoksia.
 \item \textbf{Läpinäkyvät integraatiot} vaativat muutoksia mobiiliverkkoon, mutta eivät vaadi muutoksia olemassa olevien komponenttien toimintaan.
 \end{itemize}
 
@@ -29,13 +44,15 @@ Pääasiassa nämä ratkaisut tähtäävät lisäämään reunalaskentaa viidenn
 Koska viidennen generaation määrittelytyö on vielä kesken, ehdotetut ratkaisut rakentuvat osittain oletuksien päälle.
 Esimerkkinä suorasta integraatiosta on CONCERT (esitellään kappaleessa \ref{concert}). Suora integraatio mahdollistaa reunalaskennan tuomisen niin lähelle reunaa kuin mahdollista.
 
-Epäsuoralla integraatiolla tarkoitetaan ratkaisuja, joiden pääasiallinen toiminnallisuus on sijoitetu mobiiliverkko-arkkitehtuurin ulkopuolelle. 
-Tällaiset ratkaisut mahdollistavat reunalaskentainfrastruktuurin tuottamisen kolmansilla osapuolilla. Esimerkkinä tällaisesta ratkaisusta on FMC (käsitellään tarkemmin kappaleessa \ref{fmc}). Haasteena tämänkaltaisissa ratkaisuissa on optimaalisen reunasolmun valinta, koska se joudutaan tekemään asiakaslaitteen antamien tietojen pohjalta. Onkin siis huomattava, että asiakaslaite joutuu osallistumaan reunalaskentaan liittyviin hallinnollisiin toimiin.
+Epäsuoralla integraatiolla tarkoitetaan ratkaisuja, joiden pääasiallinen toiminnallisuus on sijoitettu mobiiliverkkoarkkitehtuurin ulkopuolelle. 
+Tällaiset ratkaisut mahdollistavat reunajärjestelmän tuottamisen kolmansilla osapuolilla. Esimerkkinä tällaisesta ratkaisusta on FMC (käsitellään tarkemmin kappaleessa \ref{fmc}). Haasteena tämänkaltaisissa ratkaisuissa on optimaalisen reunasolmun valinta, koska se joudutaan tekemään asiakaslaitteen antamien tietojen pohjalta. Onkin siis huomattava, että asiakaslaite joutuu osallistumaan reunalaskentaan liittyviin hallinnollisiin toimiin.
 
-Läpinäkyvissä ratkaisuissa reunalaskennan mahdollistavat toiminnot on toteutettu siten että suoria yhteyksia mobiiliverkon toimintoihin ei ole. 
-Periaate on hieman samankaltainen kuin läpinäkyvässä välipalvelimessa.
-Käytännössä tämä tarkoittaa jonkinlaiseen tietoliikennemonitoriin pohjautuvaa ratkaisua. 
-Monitorin tehtävänä on tarkkailla mobiiliverkon tapahtumia, sekä mahdollistaa halutun tietoliikenteen ohjaaminen reunalaskennalle.
+Läpinäkyvissä ratkaisuissa reunalaskennan mahdollistavat toiminnot on toteutettu siten että suoria yhteyksiä mobiiliverkon toimintoihin ei ole. 
+Periaate on hieman samankaltainen kuin läpinäkyvässä välityspalvelin (transparent proxy).
+Ratkaisut ovat mobiiliverkon näkökulmasta "näkymättömiä".
+Käytännössä tarkoittaa että mobiiliverkon hallinnolliset komponentit eivät käsittele reunalaskennan 
+Tämä tarkoittaa jonkinlaiseen tietoliikennemonitoriin pohjautuvaa ratkaisua. 
+Monitorin tehtävänä on tarkkailla mobiiliverkon tapahtumia sekä ohjata haluttu tietoliikenne reunalaskennalle.
 Näiden toimintojen toteuttamisen helpottamiseksi käytössä on tai käyttöön oletetaan SDN, NFV tai molemmat.
-Joskaan läpinäkyvät ratkaisut eivät ole osa mobiiliverkkoa, ne sijaitsevat sen välittömässä yhteydessä. Tämä sitoo ne osaksi mobiiliverkon infrastruktuuria ja käytännössä tämä tarkoittaa että reunapalvelualustan tuottajana on mobiiliverkon-operaattori. 
-Esimerkkinä tällaisesta ratkaisusta on MobiScud, joka käydään tarkemmin läpi kappaleessa \ref{mobiscud}. Tämänkaltaiset ratkaisut ovat asiakaslaitteen näkökulmasta "näkymättömiä".
+Joskaan läpinäkyvillä ratkaisuilla ei ole kommunikaatiorajapintaa mobiiliverkon hallinnollisiin toimijoihin, niille oletetaan suora yhteys mobiiliverkon sisäisiin yhteyksiin. Tämä sitoo ne osaksi mobiiliverkon infrastruktuuria ja käytännössä tämä tarkoittaa että reunapalvelualustan tuottajana on mobiiliverkon operaattori. 
+Esimerkkinä tällaisesta ratkaisusta on MobiScud, joka käydään tarkemmin läpi kappaleessa \ref{mobiscud}. 
