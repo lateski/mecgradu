@@ -1,21 +1,34 @@
-\begin{figure}[tb]
-\includegraphics[width = \textwidth]{FMC.eps}
-\caption{FMC:n arkkitehtuuri jossa mobiiliverrko on hajautettu} \label{fig:fmc}
-\end{figure}
+\subsection{Follow me cloud} \label{fmc}
 
-\subsection{FMC - Follow me cloud} \label{fmc}
-\paragraph{NOTE} FCM jättää avoimeksi tavan jolla reunan ja reunapalvelun välinen tietoliikenteen ohajus toteutetaan. SDN ottaa tähän enemmän kantaa, mutta sitä ei tässä käsitellä koska se on hyvin samankaltainen kuin MobiScud sekä sijoittuu mobiiliverkon sijaan wlan maailmaan
-
-Asiakaslaitteiden määrän kasvu, sekä tietoliikenne-intensiivisien sovelluksien käytön yleistyminen aiheuttaa suurta kuormaa verkkoinfrastruktuurille. Ongelmat johtuvat pääasiassa keskitetystä rakenteesta, jossa tietoliikenneyhteydet kerätään kulkemaan keskitetyn pisteen kautta. Tämän lisäksi yhteyksissä on huomattavasti viivettä, koska asiakkaan ja palvelimen väliset yhteydet ovat pitkiä. FMC ehdottaa ratkaisua jossa operaattorin keskitetty verkkorakenne muutettaisiin hajautetuksi. \cite{taleb2013follow}
+Asiakaslaitteiden määrän kasvu, sekä tietoliikenne-intensiivisien sovelluksien käytön yleistyminen aiheuttaa suurta kuormaa verkkoinfrastruktuurille. Ongelmat johtuvat pääasiassa mobiiliverkon keskitetystä rakenteesta, jossa tietoliikenneyhteydet kerätään kulkemaan keskitetyn pisteen kautta. Tämän lisäksi yhteyksissä on huomattavasti viivettä, koska asiakkaan ja palvelimen väliset yhteydet ovat pitkiä. Follow me cloud (FMC) ehdottaa ratkaisua jossa operaattorin keskitetty verkkorakenne muutettaisiin hajautetuksi \cite{taleb2013follow}.
 Käytännössä tämä tarkoittaisi, että EPC:n ja ulkoverkon välisten yhdyskäytävien, eli P-GW, määrää lisättäisiin. 
 Toinen osa ideaa on, että P-GW:t voitaisiin hajauttaa palvelinsaleihin lähemmäksi asiakkaan käyttämiä palveluita. Tämä siksi, että myös palveluiden tarjoajat ovat huomanneet hajautustarpeen ja alkaneet hajauttaa palveluitaan. 
-FMC:n arkkitehtuuri koostuu hajautetusta EPC:stä ja hajautetusta palvelinkeskuksista. Asiakaslaitteen yhdistäessä verkkoon verkkoyhteyksien kiintopisteenä toimii todennäköisimmin lähimpänä sijaitseva P-GW. Perinteisessä mobiiliverkossa asiakaslaite pysyy samana P-GW:n asiakkaana, vaikka liikkuisi mobiiliverkossa. FMC lähteekin ratkaisemaan ongelmaa jossa asiakaslaitteelle tarjottaisiin aina optimaalisin\footnote{optimaalisella tarkoitetaan tässä yhteydessä parasta mahdollista, käyttäen mittareina fyysistä sijaintia ja kuormaa} yhteys tavoiteltuun palveluun.
+FMC:n arkkitehtuuri koostuu hajautetusta EPC:stä ja hajautetuista palvelinkeskuksista. Asiakaslaitteen yhdistäessä verkkoon, verkkoyhteyksien kiintopisteenä toimii todennäköisimmin lähimpänä sijaitseva P-GW. 
+Perinteisessä mobiiliverkossa keskitetystä rakenteesta johtuen, asiakaslaite pysyy yhden P-GW:n asiakkaana, vaikka liikkuisi mobiiliverkossa.
+FMC lähteekin ratkaisemaan ongelmaa jossa asiakaslaitteelle tarjottaisiin aina optimaalisin\footnote{optimaalisella tarkoitetaan tässä yhteydessä parasta mahdollista, käyttäen mittareina fyysistä sijaintia ja kuormaa} yhteys tavoiteltuun palveluun.
 
 FMC:n ratkaisemat ongelmat voidaan jakaa kahteen osaa, optimaalisen reitin valitseminen ja optimaalisen reitin ylläpitämiseen käyttäjän liikkuessa. 
+Optimaalisella reitinvalinnalla tarkoitetaan, että käyttäjän yhteys kohdepalveluun olisi mahdollisimman lyhyt tai nopea. Tämä jakautuu matkaan, jonka asiakkaan yhteys kulkee mobiiliverkossa, eli tarkemmin ottaen EPC:n sisällä, sekä matkaan P-GW:ltä kohdepalvelimeen. Tämän saavuttamiseksi mobiiliverkon arkkitehtuurin tarvitaan palvelinkeskuksien ja P-GW välisiä mappauksia tekevä entiteetti. 
 
-Optimaalisella reitinvalinnalla tarkoitetaan, että käyttäjän yhteys kohdepalveluun olisi mahdollisimman lyhyt tai nopea. Tämä jakautuu matkaan, jonka asiakkaan yhteys kulkee mobiiliverkossa, eli tarkemmin ottaen EPC:n sisällä, ja matkaan P-GW:ltä kohdepalvelimeen. Tämän saavuttamiseksi mobiiliverkon arkkitehtuurin tarvitaan palvelinkeskuksien ja P-GW välisiä mappauksia tekevä entiteetti. 
+\begin{figure}[tb]
+\includegraphics[width = \textwidth]{FMC.eps}
+\caption{Follow me cloud arkkitehtuuri, jossa mobiiliverrko on hajautettu useampaan yhdyskäytävään} \label{fig:fmc}
+\end{figure}
 
-FMC tarjoaa optimaalisen reitin löytämiseen ratkaisua, jossa mobiiliverkkoon lisättäisiin hallitseva entiteetti – FMC Controller. 
-Optimaalisen asiakaslaite-palvelinsali -yhteyden ylläpitäminen vaatii jonkin verran muutoksia tapaan jolla käyttäjän siirtymiseen mobiiliverkossa reagoidaan. P-GW:n vaihtaminen ja mahdollisesti myös palvelun tarjoavan konesalin vaihtaminen tarkoittavat että käyttäjän ja palvelun välinen IP-yhteys katkeaa osoitteiden muuttuessa. Kuten kappaleessa \ref{GTP} mainittiin, perinteisessä mobiiliverkko arkkitehtuurissa käyttäjän liikenne ulkoverkkoon kulkee GTP-tunnelia pitkin ja käyttäjän liikkuminen tukiasemien välillä ei näy asiakkaslaitteen yhteyksissä. FMC Controllerin tehtävänä on hoitaa avattujen yhteyksien yhteys-tunnisteita sekä tehdä päätöksiä palveluiden migratoinnista palvelinkeskuksien välillä asiakkaan liikkuessa.
+FMC tarjoaa optimaalisen reitin löytämiseen ratkaisua, jossa mobiiliverkkoon lisättäisiin hallinnolliset entiteetit FMC controller ja DC/GW mapper.
+Lisäksi ehdotuksessa mobiiliverkkoon lisätään tunnisteet joiden avulla asiakaslaitteen sijainti saadaan selville asiakaslaitteen käyttämästä yhteydestä.
+DC/GW mapper parittaa asiakaslaitteen käyttämän P-GW:n ja palvelinsalin.
+DC/GW mapperin paritus tehdään esimerkiksi yhdistämällä tietyn P-GW:n (voidaan päätellä esimerkiksi IP-vyöhykkeen avulla) kautta tulevat yhteydet ennalta määrättyyn palvelinsaliin. 
+Kuvassa \ref{fig:fmc} asiakaslaitteet ovat yhdistyneenä oman S-GW/P-GW-parin kautta kyseistä paria vastaavaan palvelinsaliin. 
 
-FMC eroaa muista mobiiliverkon ratkaisuista sillä, että se ei tuo palvelinresursseja osaksi mobiiliverkkoa ja pyrkii tekemään mobiili infrastruktuuriin mahdollisimman vähän muutoksia. Sen sijaan FMC pyrkii takaamaan nopeimman mahdollisen yhteyden haluttuun palveluun. FCM jättääkin auki mahdollisuuden, että reunapalvelut tarjoaa joku muu kuin operaattori itse.
+Toinen osa ratkaisua on asiakaslaite–palvelinsali-yhteyden ylläpitäminen.
+Yhteyden ylläpitäminen asiakkaan liikkuessa vaatii jonkin verran muutoksia tapaan jolla käyttäjän siirtymiseen mobiiliverkossa reagoidaan. 
+Hajautetussa mobiiliverkossa tutkiaseman vaihtuessa myös tietoliikenne yhteyskäytävänä toimiva P-GW saattaa vaihtua. Tämän seurauksena asiakaslaitteen IP-osoite vaihtuu jolloin yhteys reunapalveluun katkeaa.
+FMC on esittänyt että asiakas ja reunapalvelu yhdistettäisiin erillisen tunnisteen perusteella, joka generoidaan asiakastunnisteen ja palvelutunnisteen pohjalta.
+Tämä uusi tunniste korvaa IP-osoitteet ja mahdollistaan yhteyksien uudelleenmuodostuksen tilanteissa joissa asiakaslaitteen tai reunapalvelun IP-osoitteet vaihtuvat.
+
+FMC controllerin tehtävänä on laukaista palvelun siirtäminen optimaalisempaan palvelinsaliin esimerkiksi asiakaslaitteen yhteysmuutoksien seurauksena.
+FMC:n tehtävänä on tehdä päättelyä siitä kannattaako reunapalvelua siirtää.
+
+FMC eroaa muista mobiiliverkon ratkaisuista sillä, että se ei tuo palvelinresursseja osaksi mobiiliverkkoa ja pyrkii tekemään mobiili infrastruktuuriin mahdollisimman vähän muutoksia. Sen sijaan FMC pyrkii takaamaan nopeimman mahdollisen yhteyden haluttuun palveluun. FMC jättääkin auki mahdollisuuden, että reunapalvelut tarjoaa joku muu kuin operaattori itse.
+Koska reunapalvelimet sijaitsevat mobiiliverkon ulkopuolella FMC ei edellytä muutoksia mobiiliverkon sisäiseen reititykseen.
