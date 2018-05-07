@@ -1,6 +1,26 @@
+\begin{figure}[tb]
+\includegraphics[width = \textwidth]{SMORE.eps}
+\caption{Yksittäinen SMORE instanssi kuvattuna. Välissä sijaitseva harmaa alue kuvaa reunajärjestelmän sijaintia.} \label{fig:smore}
+\end{figure}
+
 \subsection{SMORE ja MobiScud} \label{smore}
-SMORE (Software defined network Mobile Offloading aRchitecturE) on toinen televerkkoihin suunniteltu MEC ratkaisu. \cite{cho2014smore}
-SMORE:n keskeisin sisältö on ottaa SDN (Software Defined Networking) käyttöön reunapalveluiden saavuttamiseksi. SDN käyttöönotolla tavoitellaan sitä, että televerkon toimintaan ei tarvitsisi tehdä muutoksia. Minkään olemassa olevan komponentin toiminta ei siis muutu. 
+SMORE (Software defined network Mobile Offloading aRchitecturE) on mobiiliverkkoihin suunnattu reunalaskentaratkaisu \cite{cho2014smore}.
+Keskeisin osa ratkaisua on SDN käyttöönotto mobiiliverkon sisäisissä yhteyksissä.
+SMORE:n tapauksessa reunajärjestelmä sijoittuu eNodeB ja S-GW välille. 
+
+Ratkaisun kantavana ideana on SDN kerros. Se sijaitsee alkuperäisen idean mukaan MTSO:ssa (Mobile Telephone Switching Office), joka on tukiasemien kokoumapiste.
+SDN kerroksessa sijaitsee SMORE monitor, joka tarkkailee SDN kerroksen läpi kulkevaa kontrollikerroksen liikennettä. SMORE monitor poimii tietoliikenteestä kontrollikerroksella esiintyviä tunnisteita kuten IMSI (International Mobile Subscriber Identity) ja GTP tunneleiden TEID tunnisteita. Nämä tunnisteet tallennetaan tietokantaan.
+SMORE controller on vastuussa reunasovelluksien käynnistämisestä sekä SDN reitityssääntöjen päivittämisestä. SMORE controller voi tietokantaan tallennettujen tietojen perusteella muokata reitityssääntöjä siten että asiakkaan tietoliikenne ohjautuu reunasolmuille. 
+
+Varsinainen tietoliikenteen haarauttaminen tehdään virtuaalisten porttien avulla jotka tarkkailevan GTP pakettien kohte IP-osoitteita. Mikäli kohde IP on reunasolmu virtuaalisen portin sisällä oleva toiminnallisuus purkaa GTP tunneloinnin ja ohjaa paketin reunasolmulle. Reunasolmulta asiakaslaitteelle suuntautuva liikenne hoituu siten että SMORE monitorin poimimista tiedoista saadaan asiakaslaitteen IP-osoitetta vastaava GTP TEID.
+Tämän avulla SDN kerroksessa voidaan suorittaa GTP paketointi ja paketti voidaan välittää normaalin toiminnallisuuden mukaisesti mobiiliverkossa. 
+
+SMORE controllerin vastuulle kuuluu myös reunasolmujen tarjoamien palveluiden hallinnointi. SMORE:n esittelyn yhteydessä laukaisumekanismiksi esitettiin....,
+
+Koska SDN kerros ei koske mobiiliverkon kontrollikerrokseen tai muuhun  internettiin suuntautuvaan tietoliikenteeseen järjestelmä on asiakaslaitteen ja mobiiliverkon näkökulmasta näkymätön.
+
+
+SDN käyttöönotolla tavoitellaan sitä, että televerkon toimintaan ei tarvitsisi tehdä muutoksia. Minkään olemassa olevan komponentin toiminta ei siis muutu. 
 SMORE:n toiminta on jaettu kahteen osaa, joita varten SDN on käytössä. 
 Ensimmäisenä on mobiiliverkon kontrollitasolla (control-plane) tapahtuva viestien monitorointi. 
 Toisena toimintona on monitoroitujen tietojen pohjalta tehtävät SDN hallintatoimenpiteet. Näiden avulla voidaan ohjata haluttu osa tietoliikenteestä haluttuihin reunalaskentayksikköihin.
