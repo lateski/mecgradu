@@ -9,6 +9,7 @@ SMORE:n tapauksessa reunajärjestelmä sijoittuu eNodeB ja S-GW välille. Kuvass
 \caption{Yksittäinen SMORE instanssi kuvattuna. Välissä sijaitseva harmaa alue kuvaa reunajärjestelmän sijaintia.} \label{fig:smore}
 \end{figure}
 
+%SMORE olettaa ettei tarvitse migraatiota koska laskentaresurssit sijaitsevat niin keskitetyssä pisteessä
 
 Ratkaisun kantavana ideana on SDN kerros. Se sijaitsee alkuperäisen idean mukaan MTSO:ssa (Mobile Telephone Switching Office), joka on tukiasemien yhteyksin kokoumapiste.
 SDN kerroksessa sijaitsee SMORE monitor, joka tarkkailee SDN kerroksen läpi kulkevaa mobiiliverkon kontrollikerroksen liikennettä. SMORE monitor poimii tietoliikenteestä kontrollikerroksella esiintyviä tunnisteita kuten IMSI (International Mobile Subscriber Identity), GTP tunneleiden TEID tunnisteita, asiakaslaitteen IP, S-GW IP, eNodeB IP. Nämä tunnisteet tallennetaan tietokantaan.
@@ -58,19 +59,33 @@ MobiScud ottaa myös huomioon mobiiliverkon hajautumista koskevan trendin.
 \caption{MobiScud arkkitehtuuriin } \label{fig:mobiscud}
 \end{figure}
 
-Kuten SMORE, myös MobiScud olettaa erillisen SDN kerroksen toteuttamista. MobiScudin tapauksessa reunalaskentaresurssien oletetaan sijaitsevan tukiaseman välittömässä läheisyydessä. Tämän lisäksi MobiScud olettaa hallinnollisen elementin olevan hajautettuna jokaisen SDN kerrokseen. MobiScud Controller (MC) sisältää samat toiminnallisuudet kuin SMORE:n controller ja monitor. 
+Kuten SMORE, myös MobiScud olettaa erillisen SDN kerroksen toteuttamista. MobiScudin tapauksessa reunalaskentaresurssien oletetaan sijaitsevan tukiaseman välittömässä läheisyydessä. 
+MobiScud olettaa reunalaskennan toteutusmetodiksi henkilökohtaiset virtuaalikoneet.
+Tämän lisäksi MobiScud olettaa hallinnollisen elementin olevan hajautettuna SDN kerroksiin. MobiScud Controller (MC) sisältää samat toiminnallisuudet kuin SMORE:n controller ja monitor. 
 MC tarjoaa uutena ominaisuutena mahdollisuuden reunalaskennan live migraatiolle.
 
-MobiScudin arkkitehtuuri vastaa kuvaa \ref{fig:mobiscud}. Reunajärjestelmän resurssien oletetaan sijaitsevan tukiasemien läheisyydessä.
-Toisistaan erillään olevat reunajärjestelmän osat pystyvät kommunikoimaan SDN verkon avulla toisilleen. Tämä muistuttaa loogisesti samaa järjestelmää kuin eNodeB tukiasemien välillä olevat X2 yhteydet.
-MC on hajautettuna verkossa...
+MobiScudin arkkitehtuuri on esitetty kuvassa \ref{fig:mobiscud}.
+Reunajärjestelmän resurssien oletetaan sijaitsevan tukiasemien läheisyydessä.
+Toisistaan erillään olevat reunajärjestelmän osat pystyvät kommunikoimaan SDN verkon avulla toisilleen.
+Tämä muistuttaa loogisesti samaa järjestelmää kuin eNodeB tukiasemien välillä olevat X2 yhteydet.
+MC on hajautettuna verkossa ja MC:n instanssit sijaitsevat reunasolmujen yhteydessä.
+MC instanssien hallinnollinen vastuu koskee omassa vaikutuspiirissä olevaa SDN verkkoa sekä reunasolmuja. Tämä tarkoittaa että MC hoitaa asiakaslaitteen ja reunasolmun väliset SDN reititykset. Lisäksi MC on yhteydessä muihin MC instansseihin.
 
-Reunalaskennalle suuntautuvan tietoliikenteen haarauttaminen on käytännössä ideoitu samoin kuin SMORE:ssa. 
+Reunalaskennalle suuntautuvan tietoliikenteen haarauttaminen on käytännössä toteutettu samoin kuin SMORE:ssa.
+SDN kerroksen sisällä tarkkaillaan ja tarpeen mukaan puretaan GTP tunnelointi paketeista, joiden kohteena on reunapalvelut. Reunapalveluilta asiakaslaitteelle suuntautuva tietoliikenne vastaavasti paketoidaa SDN kerroksessa GTP muotoon ja välitetään asiakaslaitteelle.
+SDN kerros
 
-Live migraatio MobiScudissa on toteutettu seuraavasti
+Reunalaskennan siirtäminen MobiScudissa koostuu yhteyden säilyttämisestä ja virtuaalikoneen live migraatiosta.
+Reunalaskennan siirron laukaisevana tekijänä toimii MC:n monitoritoiminnallisuuden havaitsema eNodeB:n handoveriin liittyvä kontrollikerroksen viestintä.
+Ensimmäisessä vaiheessa turvataan asiakaslaitteen yhteys reunasolmulle. 
+ENodeB:n handoveriin liittyvästä viestinnästä poimitaan handoverin kohteena olevan eNodeB:n tiedot.
+Näihin sisältyy muun muassa uuden GTP tunnelin TEID (kohteena olevan eNodeB:n ja S-GW:n välinen) ja kohteena olevan eNodeB:n IP.
+Lähde ja kohde MC:t yhdessä muodostavat näiden tietojen perusteella SDN reitityksen, jonka avulla reunasolmulle suuntautuva tietoliikenne kulkeutuu asiakkaan reunalaskennasta vastaavalle virtuaalikoneelle. Tästä seuraa pidentynyt yhteys reunapalvelun ja asikaslaitteen välillä joka ilmenee suurempana viiveenä. 
+Osittain samaan aikaan SDN verkon reititysmuutoksien kanssa, aloitetaan virtuaalikoneen live migraatio lähempänä sijaitsevalle reunasolmulle.
+Kun migraatio valmistuu, SDN reititykset vanhaan reunasolmuun korvataan uusilla, jotka ohjaavat liikenteen reunasolmulle, jolle virtuaalikone migratoitiin.
 
-
-
+%migraation seurauksena IP osoite vaihtuu ja MobiScud ei ota kantaa kuinka IP sessiot säästetään.
+Vastaavia SDN:nään ja monitorointiin reunalaskentaratkaisuja on ehdotettu myös muualla, esimerkiksi \cite{schiller2018cds}.
 
 %
 %Kuten SMORE, MobiScud käyttää hyödykseen SDN:n tarjoamia ominaisuuksia ja siten olettaa sen käyttöönottoa palveluntarjoajan infrastruktuurissa. Lisäksi MobiScudin toiminnallisuudet on ajateltu toteutettavan Network Function Virtualisantionin (NFV) avulla. 
