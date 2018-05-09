@@ -13,18 +13,25 @@ SMORE:n tapauksessa reunajärjestelmä sijoittuu eNodeB ja S-GW välille. Kuvass
 
 Ratkaisun kantavana ideana on SDN kerros. Se sijaitsee alkuperäisen idean mukaan MTSO:ssa (Mobile Telephone Switching Office), joka on tukiasemien yhteyksin kokoumapiste.
 SDN kerroksessa sijaitsee SMORE monitor, joka tarkkailee SDN kerroksen läpi kulkevaa mobiiliverkon kontrollikerroksen liikennettä. SMORE monitor poimii tietoliikenteestä kontrollikerroksella esiintyviä tunnisteita kuten IMSI (International Mobile Subscriber Identity), GTP tunneleiden TEID tunnisteita, asiakaslaitteen IP, S-GW IP, eNodeB IP. Nämä tunnisteet tallennetaan tietokantaan.
-Näiden poimittujen tietojen avulla mahdollistetaan GTP tunneloinnin purku ja GTP pakettien koostaminen.
-SMORE controller on vastuussa reunasovelluksien käynnistämisestä sekä SDN reitityssääntöjen päivittämisestä. SMORE controller voi tietokantaan tallennettujen tietojen perusteella muokata reitityssääntöjä siten että asiakkaan tietoliikenne ohjautuu reunasolmuille. 
+Näitä tietokantaan poimittuja tunnisteita käytetään SDN reittien muodostamiseen sekä mobiiliverkon tapahtumien tietojen välittämiseen SMORE controllerille.
+SMORE controller on vastuussa reunasovelluksien käynnistämisestä sekä SDN reitityssääntöjen päivittämisestä. SMORE controller voi tietokantaan tallennettujen tietojen perusteella muokata reitityssääntöjä, siten että asiakkaan tietoliikenne ohjautuu reunasolmuille. 
 
-Tietoliikenteen haarauttaminen tehdään SDN kerroksessa virtuaalisten porttien avulla, jotka tarkkailevan GTP pakettien sisäisten asiakkaan tietoliikennepakettien kohde IP-osoitteita. Mikäli kohde IP on reunasolmu, virtuaalisen portin sisällä oleva toiminnallisuus purkaa GTP tunneloinnin ja ohjaa paketin reunasolmulle. Reunasolmulta asiakaslaitteelle suuntautuva liikenne hoituu siten että SMORE monitorin poimimista tiedoista saadaan asiakaslaitteen IP-osoitetta vastaava GTP TEID.
-Tämän avulla SDN kerroksessa voidaan suorittaa GTP paketointi ja paketti voidaan välittää normaalin toiminnallisuuden mukaisesti mobiiliverkon kautta asiakaslaitteelle. 
+Tietoliikenteen haarauttaminen tehdään SDN kerroksessa virtuaalisten porttien avulla.
+Asiakkaan mobiiliverkon sisäinen GTP tunneloitu liikenne ohjautuu tähän porttiin.
+Portin sisällä on toiminnallisuus joka tarkkailee GTP pakettien sisällä olevan asiakkaan tietoliikennepakettien kohde IP-osoitteita \cite{cho2014smore}.
+Mikäli kohde IP on reunasolmu, virtuaalisen portin sisällä oleva toiminnallisuus purkaa GTP tunneloinnin ja ohjaa paketin reunasolmulle.
+Reunasolmulta asiakaslaitteelle suuntautuva liikenne hoituu siten että SMORE monitorin poimimista tiedoista saadaan asiakaslaitteen IP-osoitetta vastaava GTP TEID.
+Tämän avulla voidaan suorittaa GTP paketointi ja paketti voidaan välittää normaalin toiminnallisuuden mukaisesti mobiiliverkon kautta asiakaslaitetta palvelevalle eNodeB:lle ja siitä edelleen asiakaslaitteelle. 
 
 SMORE controllerin vastuulle kuuluu myös reunasolmujen tarjoamien palveluiden hallinnointi. 
 Esimerkiksi asiakaslaitteen liikkuessa verkossa SMORE monitor päivittää tietokantaan tarvittavat tunnisteet ja huomauttaa SMORE controlleria tapahtumasta. SMORE controller reagoi tähän päivittämällä SDN reititykset. Tämä varmistaa sen että asiakaslaitteen yhteys reunapalvelulle säilyy. SMORE controller on keskitetty entiteetti ja se voi hallita useampaa SDN kerrosta.
 
-Koska SDN kerros ei muokkaa mobiiliverkon sisäistä tai muuhun  internettiin suuntautuvaan tietoliikennettä, SMORE reunajärjestelmä on asiakaslaitteen ja mobiiliverkon näkökulmasta näkymätön. Koska asiakaslaitteella ei ole yhteyttä SMORE järjestelmään voidaan reunalaskentaa tarjota ehdotuksen mukaan kahdella tavalla. Ensimmäisessä tapauksessa reunalaskentaa voidaan pyytää ulkoisen palvelun kautta, joka pyytää SMORE controlleria ohjaamaan asiakaslaitteen tietoliikenteen reunapalveluun. Toinen vaihtoehto on että SMORE:n palveluita myydään tilauksesta ja SMORE:n omassa tietokannassa ylläpidetään niiden asiakkaiden tietoja joilla on reunalaskenta käytössä. 
+Koska SDN kerros ei muokkaa mobiiliverkon sisäistä tai muuhun  internettiin suuntautuvaan tietoliikennettä, SMORE-reunajärjestelmä on asiakaslaitteen ja mobiiliverkon näkökulmasta näkymätön.
+Koska asiakaslaitteella ei ole yhteyttä SMORE-järjestelmään, reunalaskentaa tarjotaan ehdotuksen mukaan kahdella tavalla. Ensimmäisessä tapauksessa reunalaskentaa voidaan pyytää ulkoisen palvelun kautta, joka pyytää SMORE controlleria ohjaamaan asiakaslaitteen tietoliikenteen reunapalveluun.
+SMORE controllerille oletetaan verkkoyhteys internettiin, jonka avulla reunapalveluita voidaan ottaa käyttöön esimerkiksi pilpipalvelusta käsin.
+Toinen ehdotettu vaihtoehto on että SMORE:n palveluita myydään tilauksesta ja SMORE:n omassa tietokannassa ylläpidetään niiden asiakkaiden tietoja joilla reunalaskenta on käytössä. 
 
-SMORE ehdotuksessaan tarjoaa reunajärjestelmän ilman muutoksia mobiiliverkon toiminnallisuuteen. Ainoana edellytyksenä on SDN kerroksen lisääminen tukiasemien ja EPC:n välille. 
+SMORE:n keskeinen ominaisuus on integraatio mobiiliverkkoon ilman että mobiiliverkkoon muuten tarvitsee tehdä muutoksia. Ainoana edellytyksenä on SDN kerroksen lisääminen tukiasemien ja EPC:n välille. SMORE ei tarjoa reunalaskennan siirtelylle keinoja, koska reunaresurssien oletetaan sijaitsevan niin keskitettyinä että siirtelylle ei ole tarvetta.
 
 %
 %SDN käyttöönotolla tavoitellaan sitä, että televerkon toimintaan ei tarvitsisi tehdä muutoksia. Minkään olemassa olevan komponentin toiminta ei siis muutu. 

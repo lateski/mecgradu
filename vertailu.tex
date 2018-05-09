@@ -6,7 +6,7 @@
 
 \subsection{Vertailu}
 Seuraavaksi käydään läpi edellä esitettyjen reuna-arkkitehtuuriehdotuksien ominaisuuksia ja käsitellään niiden vaikutuksia itse toteutettavaan järjestelmään.
-Kunkin arkkitehtuuriehdotuksen ominaisuusjoukko ohjaa toteutusta erilaisiin ratkaisuihin. Taulukossa \ref{table:features} on tiivistetysti koottu kunkin arkkitehtuuriratkaisun ominaisuudet.
+Kunkin arkkitehtuuriehdotuksen ominaisuusjoukko ohjaa toteutusta erilaisiin ratkaisuihin. Taulukoon \ref{table:features} on tiivistetysti koottu kunkin arkkitehtuuriratkaisun ominaisuudet.
 Lopuksi käsitellään reuna-arkkitehtuurien yhteneväisyyksiä ja eroja ETSI:n MEC spesifikaation kanssa.
 
 On tärkeää huomata että käsiteltyjen ominaisuuksien välillä on riippuvuksia. Tämän seurauksena jonkin ominaisuuden toteuttaminen tietyllä tavalla saattaa estää tai rajoittaa joidenkin toiminnallisuuksien toteuttamista. 
@@ -16,9 +16,9 @@ Reuna-arkkitehtuurien keskeisin ominaisuus on tapa jolla järjestelmä integroit
 Kuvassa \ref{fig:riippuvuudet} on esitetty ominaisuuksien väliset riippuvuudet.
 Rakenne on tyypiltään implisiittinen ominaisuus. Se ei siis pääsääntöisesti ole reuna-arkkitehtuurin määrittelemä, vaan sen toteutus on riippuvainen reuna-arkkitehtuurin muista ominaisuuksista.
 
-Kappaleessa \ref{integraatio} esitellyn jaon mukaan SCC ja CONCERT edustavat suoraa integraatiota, SMORE ja MobiScud edustavat läpinäkyvää integraatiota ja FMC edustaa epäsuoraa integraatiota.
+Kappaleessa \ref{integraatio} esiteltyjen integraatiotyyppien jaon mukaan SCC ja CONCERT edustavat suoraa integraatiota, SMORE ja MobiScud edustavat läpinäkyvää integraatiota ja FMC edustaa epäsuoraa integraatiota.
 
-SCC liittyy mobiiliverkon toimintoihin niin sanotusti natiivien yhteyksien avulla, joka edellyttää uusia rajapintoja mobiiliverkon nykyisiin komponentteihin. Tavoitteena on SCC:n hallinnollisten tarpeiden täyttämiseen. Lisäksi SCC edellyttää reunaresurssien integrointia osaksi tukiasemaa. 
+SCC liittyy mobiiliverkon toimintoihin niin sanotusti natiivien yhteyksien avulla. Se edellyttää uusia rajapintoja mobiiliverkon nykyisiin komponentteihin. Tavoitteena on SCC:n hallinnollisten tarpeiden täyttämiseen. Lisäksi SCC edellyttää reunaresurssien integrointia osaksi tukiasemaa. 
 Tukiasemaan sidottujen reunaresurssien vuoksi SCC:n rakenne on litteä. 
 SCC:n mukaan uudistetun tukiaseman, eli SCeNBce:n, tehtäviin kuuluu reunapalveluille tarkoitetun tietoliikenteen ohjaaminen. Tämä tarkoittaa että SCeNBce monitoroi tietoliikennettä ja ohjaa esimerkiksi kohde IP:n perusteella reunapalvelulle tarkoitetut paketit.
 
@@ -27,27 +27,36 @@ Mobiiliverkon ja reunalaskennan hallinnolliset toimet on yhdistetty Conductor ni
 
 MobiScud ja SMORE edustavat läpinäkyvää integraatiota.
 SDN-kerros eNodeB ja EPC:n komponenttien välillä mahdollistaa tietoliikenteen monitoroinnin sekä ohjaamisen.
-SDN-kerros mahdollistaa mobiiliverkon nykyisten toimintojen säilyttämisen.
-Koska tietoliikenne reunasolmuille ohjataan SDN-kerroksen sisällä, reunasolmujen sijoittelu riippuvaista mobiiliverkosta. 
-Täten reunasolmujen sijoittelu täysin vapaa.
-Koska SDN-kerros sijaitsee eNodeB:n ja EPC:n välillä joudutaan asiakaslaitteen ja reunasolmun välistä liikennettä muokkaamaan. Kyseisellä välillä tietoliikenne on GTP tunneloitua.
-Riippuen onko paketti menossa reunasolmulle vai tulossa reunasolmulta, joudutaan tunnelointi purkamaan tai paketoimaan. Tämä saattaa johtaa merkittävään viiveeseen yhdessä monitoroinnin kanssa.
-MobiScudissa SDN-kerros sijaitsee eNodeB:n välittömässä läheisyydessä, kun taas SMORE:ssa sen oletetaan sijaitsevan useamman eNodeB:n yhteyspisteessä. 
+SDN-kerros mahdollistaa mobiiliverkon nykyisten toimintojen säilyttämisen ennallaan.
+Koska tietoliikenne reunaresursseille ohjataan SDN-kerroksen sisällä, reunasolmujen sijoittelu ei ole suoranaisesti riippuvaista mobiiliverkosta.  
+Teoriassa reunasolmujen sijoittelu on täysin vapaa. 
+SMORE ja MobiScud ehdottavat toisistaan poikkeavaa sijaintia reunasolmuille. SMORE:ssa yhdelle reunasolmulle klusteroidaan suuri joukko tukiasemia, kun taas MobiScud ehdottaa reunasolmujen sijoittelua yksittäisten tukiasemien yhteyteen.
+Tämä tarkoittaa että järjestelmät eroavat yksittäiseen reunasolmuun sijoitettujen laskentaresurssien määrältä huomattavasti.
+SMORE:n tapauksessa yhden reunasolmun vastuualueeksi oletetaan niin suuri joukko tukiasemia, että laskennan siirrolle ei ole tarvetta, eli järjestelmä ei toteuta live migraatiota.
+MobiScud puolestaan hajautetummilla resursseillaan edellyttää reunalaskennan siirtoa ja ehdottaakin sille toiminnallisuutta.
+SMORE:n ja MobiScud:n yhteisenä ominaisuutena on mekaniikka, jolla tietoliikenne ohjataan reunasolmuille siten että se ei vaikuta mobiiliverkon toimintaan.
+Molemmissa ratkaisuissa SDN-kerros sisältää toiminnallisuuden, joka haarauttaa reunasolmuille tarkoitettua liikennettä monitoroimalla mobiiliverkon GTP liikennettä.
+Tarpeen mukaan GTP tunneloitujen pakettien GTP paketointi puretaan ja välitetään SDN-kerroksen sisällä reunasolmulle. 
+Samaa monitorointitoiminnallisuutta käytetään molemmissa ratkaisuissa myös mobiiliverkon kontrollitason seuraamiseen, joka mahdollistaa mobiiliverkon tapahtumiin reagoinnin.
+MobiScud perustaa reunalaskentaan siirtoon liittyvät päätökset näihin mobiiliverkon tapahtumien kautta saatuihin tietoihin.
+%
+%Koska SDN-kerros sijaitsee eNodeB:n ja EPC:n välillä joudutaan asiakaslaitteen ja reunasolmun välistä liikennettä muokkaamaan. Kyseisellä välillä tietoliikenne on GTP tunneloitua.
+%Riippuen onko paketti menossa reunasolmulle vai tulossa reunasolmulta, joudutaan tunnelointi purkamaan tai paketoimaan. Tämä saattaa johtaa merkittävään viiveeseen yhdessä monitoroinnin kanssa.
+%MobiScudissa SDN-kerros sijaitsee eNodeB:n välittömässä läheisyydessä, kun taas SMORE:ssa sen oletetaan sijaitsevan useamman eNodeB:n yhteyspisteessä. 
 
-Ainoa epäsuoraa integraatiota edustava ratkaisu on FMC. FMC:n tavoitteena on viedä mobiiliverkon yhteydet nopeammin ulkoverkossa sijaitseville palvelinresursseille. Mobiiliverkon ulkopuolelle sijoitetut resurssit mahdollistavat sen että reunajärjestelmää ylläpitää jokin ulkoinen taho.
+Ainoa epäsuoraa integraatiota edustava ratkaisu on FMC.
+FMC:n tavoitteena on viedä mobiiliverkon yhteydet nopeammin ulkoverkossa sijaitseville palvelinresursseille. Mobiiliverkon ulkopuolelle sijoitetut resurssit mahdollistavat sen että reunajärjestelmää voi ylläpitää jokin ulkoinen taho.
 FMC ei siis suoranaisesti ota kantaa tapaan jolla reunaresurssit on järjestetty. Mutta on perusteltua olettaa että ne sijaitsisivat mobiiliverkon P-GW komponenttien läheisyydessä.
-FMC:n tapa mahdollistaa reunapalvelun ja asiakaslaitteen välinen kommunikaatio perustuu sessiotunnistesiin. Se mahdollistaa asiakaslaitteen ja reunpalvelun IP-osoitteiden vaihtumisen, ilman että viitteet asiakaslaitteen ja reunapalvelun välillä katkeavat. Järjestelmä ei siis edellytä tavallisesta poikkeavaa mekaniikkaa tietoliikenteen reitittämiseksi.
+FMC:n tapa mahdollistaa reunapalvelun ja asiakaslaitteen välinen kommunikaatio perustuu sessiotunnistesiin. Se mahdollistaa asiakaslaitteen ja reunpalvelun IP-osoitteiden vaihtumisen, ilman että viitteet asiakaslaitteen ja reunapalvelun välillä katkeavat. Järjestelmä ei siis edellytä tavallisesta poikkeavaa mekaniikkaa tietoliikenteen reitittämiseksi. Ainoa edellytys on asiakaslaitteen sovellukseen sekä reunapalvelun toiminnallisuuden ohjelmallisen toimijan joka huolehtii yhteyksien varmistamisesta sessiotunnisteiden avulla.
 
-Hallinnollisten toimien toteuttaminen on myös osittain riippuvaista integraatiosta. Suoran integraation järjestelmissä hallinnollisella entiteetillä on oma rajapinta mobiiliverkon toimintojen kanssa. 
+Myös hallinnollisten toimien toteuttaminen on osittain riippuvaista integraatiosta. Suoran integraation järjestelmissä hallinnollisella entiteetillä on oma rajapinta mobiiliverkon toimintojen kanssa. 
 Toisaalta se edellyttää olemassa olevaan järjestelmään rajapinnan toteuttamisen, mutta lisäksi tarjoaa helpon keinon tehdä hallinnollisia toimia mobiiliverkon sisällä. 
 Läpinäkyvässä järjestelmässä hallinnollinen entiteetti on riippuvainen mobiiliverkon viestien monitoroinnin kautta saatavasta tiedosta. 
 MobiScud ja SMORE tarkkailevat SDN-kerroksen avulla mobiiliverkon kontrollitason viestintää. 
-Sen avulla on mahdollista reagoida esimerkiksi mobiiliverkon handover signalointiin. Tällöin voidaan esimerkiksi muokata SDN-kerroksen reitityksiä jotta asiakaslaitteen yhteys reunasolmuun säilyisi.
-MobiScud ja Smore tarkkailevat SDN-kerroksen avulla kontrollikerroksella muun muassa mobiiliverkon sisäisten kontrolliviestien kautta. Esimerkiksi monitoroimalla handover tapahtumia voi poimia tietoja, joiden avulla suoritetaan SDN kerroksen sisäisä reitityksiä.
 Vaikka läpinäkyvät integraatiot ovat loogisesti erillään mobiiliverkosta, edellyttävät ne pääsyä mobiiliverkon sisäisiin tietoliikenneväyliin.
-Todennäköisintä onkin siis että järjestelmää ylläpitää mobiiliverkon operaattori, eikä mikään ulkoinen taho. 
-Epäsuoraa integraatiota edustavassa FMC:ssä hallinnolliset toiminnot edellyttävät tietoja mobiiliverkosta. Tieto on tyypiltään staattista joten aktiivista tiedosiirtoa mobiiliverkon ja FMC:n välille ei tarvita. FMC:n hallinnollisista toiminnoista vastaava FMC Controller sijaitsee mobiiliverkon ulkopuolella. FMC vastaa pääasiassa mobiiliverkon ulkopuolisten yhteyksien jatkuvuudesta.
-Koska FMC:ssä asiakaslaitteen ja reunapalvelun välinen yhteys perustuu erilliseen sessiotunnisteeseen, edellyttää palveluiden käyttö erillistä toiminnallisuutta reunasolmuihin ja asiakaslaitteisiin. FMC Controller ylläpitää tämän tunnuksen toiminnallisuutta
+Todennäköisintä onkin siis että järjestelmää ylläpitää mobiiliverkon operaattori eikä ulkoinen taho. 
+Epäsuoraa integraatiota edustavassa FMC:ssä hallinnolliset toiminnot edellyttävät tietoja mobiiliverkosta. Tieto on tyypiltään staattista, joten aktiivista tiedosiirtoa mobiiliverkon ja FMC:n välille ei tarvita.
+Edellytyksenä on esimerkiksi taulukko, josta voidaan lukea asiakaslaitteen IP-osoittetta vastaava fyysinen alue tai P-GW:n sijainti. Tämä mahdollistaa FMC:n ohjata asiakaslaitteen yhteys lähimmälle palvelinsalille.
 
 \subsubsection*{Yhteensoppivuus ETSI MEC vaatimuksiin}
 %Reuna-arkkitehtuurien ominaisuuksien vertailu aloitetaan live migraatiosta.
