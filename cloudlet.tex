@@ -3,9 +3,9 @@
 
 %%
 Cloudlet on virtuaalikoneita hyödyntävä reuna-alusta ratkaisu \cite{satya09}.
-Tarkemmin ottaen cloudlet on enemmänkin arkkitehtuuri elementti kuin kokonainen arkkitehtuuri. Muihin tässä tutkielmassa käsiteltäviin arkkitehtuuriehdotuksiin verrattuna cloudlet onkin hieman suppeamman laajuinen konsepti.
-Sen merkitys reunalaskennan ilmentymisessä on kuitenkin niin huomattava että se käsitellään omana kokonaisuutenaan.
-Seuraavaksi käsitellään cloudletin perustoiminnallisuutta sekä toimintaperiaatteita
+Tarkemmin ottaen cloudlet on enemmänkin arkkitehtuurielementti kuin kokonainen arkkitehtuuri. Muihin tässä tutkielmassa käsiteltäviin arkkitehtuuriehdotuksiin verrattuna cloudlet onkin hieman suppeamman laajuinen konsepti.
+Sen merkitys reunalaskennan ilmentymisessä on kuitenkin niin huomattava että se käsitellään omana kokonaisuutenaan tässä tutkielmassa.
+Seuraavaksi käsitellään cloudletin perustoiminnallisuutta sekä toimintaperiaatteita.
 %%
 
 Cloudletin toiminta perustuu käyttäjäkohtaisten virtuaalikoneiden suorittamiseen reunasolmulla.
@@ -30,7 +30,7 @@ Yksinkertaistettuna pinnoite tehdään siten, että käyttäjän virtuaalikonett
 Satayanaran et al ensimmäisessä cloudletteja käsittelevässä julkaisussa \cite{satya09} virtuaalikoneen muutoksien tallentaminen pinnoitteeksi tuottaa noin 100-200 megatavun kokoisen tiedoston
 Suhteessa lähtökohtana toimineeseen virtuaalikoneeseen, pinnoite on tiedostokooltaan kertaluokkaa pienempi. \cite{satya09}
 
-Alkuperäisen idean mukaan pinnoitteen erottamisen jälkeen, pinnoite voitaisiin siirtää joko pilveen tai asiakaslaitteelle odottamaan seuraavaa käyttökertaa. Ideaa on kuitenkin jatkojalostettu tukemaan live migraatiota joka käsitellään tämän kappaleen loppupuolella.
+Alkuperäisen idean mukaan pinnoitteen erottamisen jälkeen, pinnoite voitaisiin siirtää joko pilveen tai asiakaslaitteelle odottamaan seuraavaa käyttökertaa. Ideaa on kuitenkin jatkojalostettu tukemaan live migraatiota, joka käsitellään tämän kappaleen loppupuolella.
 
 Kun käyttäjä haluaa jälleen ottaa virtuaalikoneensa käyttöön alkaa niin sanottu dynaaminen virtuaalikone synteesi (Dynamic VM synthesis), jossa pohja ja pinnoite yhdistetään suorituskelpoiseksi virtuaalikoneeksi.
 Pinnoitteen sisältämät muutokset palautetaan virtuaalikonepohjaan jotta se vastaisi tilaa johon käyttäjä oli sen jättänyt. Pohjan luomiseen, pinnoitteen erottamiseen ja dynaamiseen virtuaalikone synteesiin liittyy huomattava määrä yksityiskohtia joita ei käsitellä tässä tutkielmassa. Niiden sisältämistä yksityiskohdista on mahdollista lukea lisää \cite{ha2013just} tutkielmasta. 
@@ -85,5 +85,5 @@ Tutkimuksessa ei oteta kantaa useamman virtuaalikoneen siirtäminen samanaikaise
 Cloudlet kattaa reuna-arkkitehtuurista vain pienen osan, joka keskittyy yksittäisellä reunasolmulla suoritettavaan reuna-alustaan. Cloudletin keskeinen toiminnallisuus sisältää virtuaalikoneita hyödyntävän toimintaympäristön joka tukee laskennan suoritusaikaista siirtoa cloudletiltä toiselle VM handoff tekniikalla. 
 Cloudlet jättää toimintaympäristön avoimeksi eikä siis sitoudu esimerkiksi mobiiliverkkoihin.
 Cloudlet ei myöskään esitä keinoja, joilla tietoliikenne ohjataan virtuaalikoneelle tai kuinka yhteys siirrettyyn virtuaalikoneeseen säilytetään. 
-Näistä syistä johtuen cloudlettiä voidaan pitää hyvin suppeana reunalaskennan ratkaisuna, joka vaatii ympärilleen hallinnollisia toimintoja.
+Näistä syistä johtuen cloudlettiä voidaan pitää hyvin suppeana reunalaskennan ratkaisuna, joka vaatii ympärilleen hallinnollisia toimintoja, kuten seuraavaksi käsiteltävät reuna-arkkitehtuurit.
 %Lisätään kpl jossa käsitellään konkreettisia toteutuksia

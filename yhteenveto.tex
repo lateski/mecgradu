@@ -1,7 +1,40 @@
 \section{Yhteenveto} \label{yhteenveto}
-Tässä tutkielmassa esiteltiin reunalaskenta yleisenä paradigmana sekä käsiteltiin mobiiliverkon yhteyteen sijoitettavien reunalaskenta-arkkitehtuurien ehdotuksia.
-Luvussa \ref{perusteet} käsiteltiin reunalaskennan tavoitteet yleisellä tasolla ja määriteltiin reunalaskennan kannalta keskeiset käsitteet. Käsitteiden yhteydessä esiteltiin mobiiliverkkoon liitettävän reunajärjestelmän toimintaympäristö.
-Tämän jälkeen luvussa \ref{mahd} esiteltiin reunajärjestelmän toteuttamiseksi ehdotettujen teknologioiden joukko. 
-Luvussa \ref{ominaisuudet} esiteltiin reuna-arkkitehtuuriehdotuksien yhteydestä tunnistetut ominaisuudet.
+Reunalaskennan tarjoaminen mobiiliverkon kautta vaatii kahden eri järjestelmän yhteistoiminnallisuutta.
+Olemassa oleva mobiiliverkko on hajautettu ja suljettu järjestelmä.
+Tämän seurauksena siihen tehtävien muutoksien tulee olla tarkkaan harkittuja.
+Tässä tutkielmassa esiteltiin viisi erilaista reuna-arkkitehtuuriehdotusta, joista jokainen sisälsi uniikin joukon reunajärjestelmän ominaisuuksia.
 
-Luvussa \ref{ratkaisut} käsiteltiin reunalaskenta-arkkitehtuuriehdotukset sekä lopuksi käsiteltiin niiden yhtenevyyttä ETSI:n MEC spesifikaation kanssa.
+Tämä tutkielma identifioi reuna-arkkitehtuuriehdotuksista viisi ominaisuutta.
+Nämä ominaisuudet edustavat jonkin suunnittelupäätöksen vaikutusta johonkin reunalaskennan mahdollistavaan toimintoon tai toimijaan.
+Tunnistetut ominaisuudet olivat live migraatio, integraation tyyppi, kommunikaatio, hallinta ja rakenne.
+Rakenne oli muista ominaisuuksista poikkeava, koska se määräytyy implisiittisesti muiden arkkitehtuurissa tehtyjen päätöksien pohjalta.
+
+Ominaisuuksien joukossa ilmeni selkeitä riippuvuksia ja riippuvuuksien perusteella keskeisimmäksi arkkitehtuurissa tehtäväksi päätökseksi todettiin integraation tyyppi.
+Reunajärjestelmään toteuttamiseen käytettävällä integraation tyypillä on keskeinen vaikutus kaikkien muiden ominaisuuksien toteuttamiseen.
+Etenkin reunajärjestelmää toteutettaessa integraation tyyppi vaikuttaa siihen, kuinka paljon olemassa olevaa mobiiliverkkoa voidaan hyödyntää tai paljonko sitä tulee uusia. 
+
+Tukielman lopussa käsiteltiin reuna-arkkitehtuuriehdotuksien yhteensopivuutta ETSI MEC spesifikaation vaatimuksiin.
+Esitetyt arkkitehtuurit olivat pääsääntöisesti yhteensopivia, mutta parhaimmat lähtökohdat vaikuttivat olevan läpinäkyvää integraatiota edustavilla arkkitehtuureilla.
+Jokaisessa arkkitehtuurissa kuitenkin on omat kompromissinsa ja ehdotettujen arkkitehtuurien vertailu vaatisi yhdenmukaistettuja testejä. 
+Koska reunalaskennan keskeisenä muuttujana on asiakaslaitteen ja reunapalvelun välinen viive, ei pelkät ohjelmalliset simulaatiot välttämättä riitä antamaan tarpeeksi tarkkaa kuvaa järjestelmän toiminnasta.
+Etenkin NFV toiminnallisuuksiin nojautuvien ratkaisujen osalta kysymykseen tulee NFV:llä toteutettujen toimintojen suorituskyky.
+
+%
+%Ominaisuuksien esittelyn jälkeen käsiteltiin varsinaiset reuna-arkkitehtuurit sekä ETSI MEC spesifikaatio.
+%Näiden tietojen pohjalta suoritettiin ominaisuuksiin perustuvaa vertailua ja tarkasteltiin ehdotettujen reuna-arkkitehtuurien yhteensopivuutta ETSI MEC spesifikaatiossa esitettyihin vaatimuksiin.
+
+
+
+ 
+%
+%Tässä tutkielmassa esiteltiin mobiiliverkkoympäristöön integroitavia reunalaskenta-arkkitehtuuriehdotuksia. 
+%Luvussa \ref{perusteet} käsiteltiin reunalaskennan tavoitteet yleisellä tasolla ja määriteltiin reunalaskennan kannalta keskeiset käsitteet.
+%Koska reunalaskenta on vielä kehitysvaiheessa, sen määritelmä elää edelleen. Tässä tutkielmassa esitetty reunalaskennan terminologia ja määritelmät pohjautuvat ETSI MEC spesifikaatiossa käytettyyn. 
+%Käsitteiden yhteydessä esiteltiin mobiiliverkkoon liitettävän reunajärjestelmän toimintaympäristö.
+%
+%Tämän jälkeen luvussa \ref{mahd} esiteltiin reunajärjestelmän toteuttamiseksi ehdotettujen teknologioiden joukko.
+%Mahdollistavien teknologioiden joukko perustui tutkielman puitteissa käsiteltyjen arkkitehtuuriehdotuksien yhteydessä ilmenneisiin teknologisiin tarpeisiin.
+%
+%Luvussa \ref{ominaisuudet} esiteltiin reuna-arkkitehtuureista tunnistetut ominaisuudet.   
+%
+%Luvussa \ref{ratkaisut} käsiteltiin reunalaskenta-arkkitehtuuriehdotukset sekä lopuksi käsiteltiin niiden yhtenevyyttä ETSI:n MEC spesifikaation kanssa.

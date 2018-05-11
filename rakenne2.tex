@@ -2,10 +2,8 @@
 Seuraavaksi käydään läpi reunan rakennetta.
 Koska aihepiirinä on arkkitehtuurit, varsinaisten toteutettavien reunajärjestelmien rakennetta voidaan tarkastella ainoastaan implisiittisesti. 
 Eli mitä arkkitehtuuri mahdollistaa tai rajoittaa.
-Ensimmäiseksi käsitellään reuna-arkkitehtuurien vaikutuksen toteutettavaan järjestelmään.
-Tämän jälkeen esitellään reunan fyysisen rakenteen eri mallit, jossa keskeisessä osassa ovat reunasolmujen sijainnit.
-Lopuksi käydään läpi reunan rakenteen merkitystä järjestelmän toiminnalle.
-
+Ensimmäiseksi esitellään reunan fyysisen rakenteen eri mallit, jossa keskeisessä osassa ovat reunasolmujen sijainnit.
+Tämän jälkeen käsitellään reuna-arkkitehtuurien vaikutuksen toteutettavaan järjestelmään.
 
 \subsection{Rakennetyypit}
 Tässä kappaleessa käsitellään reunasolmujen muodostaman järjestelmän rakennetta. Rakenteet jakautuvat kahteen päätyyppiin: litteään ja hierarkkiseen.
@@ -63,7 +61,7 @@ Hierarkkinen järjestelmä on potentiaalinen vaihtoehto litteälle rakenteelle. 
 
 \subsection{Arkkitehtuurin vaikutus}
 Edellisessä kappaleessa järjestelmän rakenteen oletettiin olevan vapaa sijoittamaan reunasolmut haluamiinsa paikkoihin. 
-Todellisuudessa reuna-arkkitehtuurit kuitenkin asettavat joitakin rajoitteita reunasolmujen sijaintien suhteen. Seuraavaksi käsittelemme reuna-arkkitehtuurin vaikutusta reunasolmujen sijoitteluun.
+Todellisuudessa reuna-arkkitehtuurit kuitenkin asettavat joitakin rajoitteita reunasolmujen sijaintien suhteen. Seuraavaksi käsitellään reuna-arkkitehtuurin vaikutusta reunasolmujen sijoitteluun.
 
 %mobiiliverkko
 Koska mobiiliverkko on usein asiakaslaitetta lähimpänä sijaitseva verkko, reuna-arkkitehtuurit ovat pyrkineet muodostamaan integraation sen kanssa.
@@ -79,7 +77,7 @@ Reuna-arkkitehtuurin riippuvuutta ympäröiviin järjestelmiin voidaan yrittää
 
 Toinen ehdotettu ratkaisu on sitoa reunasolmut tukiasemiin. Tämä pakottaa järjestelmän reunasolmuille litteän rakenteen. Järjestelmä on siis reunasolmujen osalta sidoksissa mobiiliverkkoon. Small Cell Cloud (käsitellään kappaleessa \ref{scc}) käyttää tämänkaltaista ratkaisua. Ideana on että tukiasemat ovat tyypiltään \textit{pienisoluisia}, jolloin tukiaseman kantama olisi pieni ja täten palveltavien asiakaslaitteiden määrä myös vähäinen. Tämä mahdollistaisi reunalaskennan vaatimien laskentaresurssien sijoittaminen tukiaseman yhteyteen.
 
-Kolmas ja viimeinen tyyppi on kokonaan mobiiliverkon ulkopuolelle sijoitettu reunajärjestelmä. Tämä antaa käytännössä täydellisen vapauden sijoitella reunasolmuja. Esimerkki tämänkaltaisesta järjestelmästä on Follow Me Cloud (käsitellään kappaleessa \ref{fmc}). Reunajärjestelmän sijoittaminen mobiiliverkon ulkopuolelle tarkoittaa että asiakaslaitteen ja reunasolmun välinen viive on vähintään se aika joka tietoliikenteellä kuluu mobiiliverkossa. Follow Me Cloudin tapauksessa oletetaankin että mobiiliverkon sisäistä viivettä voitaisiin minimoida ja että reunasolmut sijaitsisivat välittömästi mobiiliverkon ulkopuolella. 
+Kolmas ja viimeinen tyyppi on kokonaan mobiiliverkon ulkopuolelle sijoitettu reunajärjestelmä. Tämä antaa käytännössä täydellisen vapauden sijoitella reunasolmuja. Esimerkki tämänkaltaisesta järjestelmästä on Follow Me Cloud (käsitellään kappaleessa \ref{fmc}). Reunajärjestelmän sijoittaminen mobiiliverkon ulkopuolelle tarkoittaa että asiakaslaitteen ja reunasolmun välinen viive on vähintään se aika joka tietoliikenteellä kuluu mobiiliverkossa. Follow Me Cloudin tapauksessa oletetaankin että mobiiliverkon sisäistä viivettä voitaisiin pienentää ja että reunasolmut sijaitsisivat välittömästi mobiiliverkon ulkopuolella. 
 
 %arkkitehtuurin asettamat rajoitteet
 %hallinnon sijainti
