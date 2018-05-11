@@ -1,0 +1,37 @@
+%Yleiset periaatteet ja vaatimukset
+ETSI MEC spesifikaation teknisiä vaatimuksia esittelevä dokumentti \cite{etsitechreq} määrittelee reunalaskennalle yleiset periaatteet ja konkreettisemmin määriteltyjä toiminnallisia vaatimuksia. 
+Yleiset periaatteet ovat korkean tason tavoitteita reunajärjestelmälle.
+Reuna-arkkitehtuurien kannalta merkityksellisimmät periaatteet ovat NFV yhteensopivuus, liikkuvuuden tukeminen ja käyttöönoton riippumattomuus.
+Toiminnallisuudet vaatimukset on jaettu useampaan kategoriaan, jotka esiteltiin kappaleessa \ref{etsi}.
+Ainoastaan osa toiminnallisista vaatimuksista on relevantteja arkkitehtuureja tarkasteltaessa ja suurin osa näistä vaatimuksista koskee reuna-alustan ohjelmallisia toimijoita, joihin ei reuna-arkkitehtuureissa oteta kantaa.
+Lisäksi suurin osa vaatimuksista on ainoastaan täsmennyksiä yleisiin periaatteisiin.
+Seuraavaksi käydään läpi yleisten periaatteiden toteutuminen ehdotetuissa reuna-arkkitehtuureissa.
+
+Tässä tukielmassa käsiteltyjen reuna-arkkitehtuurien yhteydessä ei esiintynyt NFV yhteensopivuutta rajoittavia tekijöitä. Eli kaikki käsitellyt arkkitehtuurit olivat pääsääntöisesti NFV yhteensopivia.
+CONCERT oli ainoa reuna-arkkitehtuuri joka nimenomaisesti rakentui NFV:n varaan. Muissa arkkitehtuureissa NFV:tä pidettiin enemmänkin mahdollisuutena.
+Esimerkiksi SCC:n yhteydessä esitettiin, että tukiasemaan sidottuja resursseja voisi käyttää myös tukiasemien omien toimintojen tuottamiseen NFV:n avulla. 
+
+
+Perinteisesti mobiiliverkoissa liikkuvuuden tukeminen tarkoittaa, että handover tapahtumat eivät ilmene asiakaskerroksella, esimerkiksi puheluissa ja tietoliikenneyhteyksissä.
+Samaa palveluvaatimusta on luonnollista olettaa myös reunajärjestelmältä. 
+Käytännössä reunajärjestelmän tulee vähintää ylläpitää asiakaslaitteen ja reunapalvelun välistä yhteyttä.
+Tämän lisäksi palvelun laadun takaamiseksi kyseeseen tulee myös reunapalveluiden siirto.
+Liikkuvuuden tukeminen reunajärjestelmissä koostuu siis yhteyden ylläpidosta ja reunapalveluiden siirtelystä.
+Tässä tukielmassa SMORE, MobiScud ja FMC esittivät mekanismin yhteyden ylläpitämiseksi asiakaslaitteen liikkuessa verkossa.
+SMORE ja MobiScud toteuttivat yhteyden ylläpitämisen SDN reititysmuutoksilla.
+FMC puolestaan nojaa erilliseen sessiotunnisteeseen, joka häivyttää IP-osoitteiden muutokset.
+Lähes kaikki reuna-arkkitehtuurit tiedostivat tarpeen reunapalveluiden siirtelyn tarpeelle.
+SMORE:a lukuunottamatta kaikki arkkitehtuurit olettivat virtuaalikoneiden live migraatiota jossain muodossa. SMORE oletti että reunasolmut sijaitsevat verkossa niin keskitetyssä pisteessä, että varsinaista reunasovelluksien live migraatiota ei ole tarpeen toteuttaa. 
+ETSI:n MEC referenssi arkkitehtuuri olettaa reunajärjestelmän toteuttavan Cloudlet VM handoff kaltaista toiminnallisuutta \cite{etsirefarch}.
+On kuitenkin täysin reunapalveluiden tyypistä riippuvaista, kuinka liikkuvuuteen on kannattavaa reagoida \cite{etsitechreq}. 
+
+Käyttöönoton riippumattomuudella tarkoitetaan, että reunajärjestelmän käyttöönottajalla olisi mahdollisuus sijoitella reunajärjestelmän osat omien vaatimuksiensa mukaan \cite{etsitechreq}. Pääasiassa tämä koskee reunasolmujen sijoittelua. Tässä tutkielmassa reunasolmujen sijoittelua on käsitelty implisiittisenä ominaisuutena, jonka määrittelevinä ominaisuuksina toimivat integraation tyyppi ja kommunikaatio. 
+Teoriassa eniten vapauksia reunajärjestelmän toteuttamiseen tarjoavat läpinäkyvää integraatiota toteuttavat SMORE ja MobiScud.
+Nämä järjestelmät edellyttävät ainoastaan yhden yhteyspisteen mobiiliverkkoon ja ovat muuten täysin vapaasti järjesteltävissä.
+Suoran integraation reuna-arkkitehtuureissa edellytetään jotain tiettyä rakennetta. 
+SCC edellyttää reunaresurssien sijoittamisen tukiasemiin. SCC kuitenkin loogisesti erottaa reunajärjestelmän ja mobiiliverkon haarauttamalla reunapalveluille tarkoitetun tietoliikenteen erillisellä monitoritoiminnallisuudella.
+Toinen suoraa integraatiota edustava järjestelmä, CONCERT, edellyttää hierarkista asettelua reunaresursseille. CONCERT:n NFV painotteisuus kuitenkin takaa toiminnallisuuksien vapaan sijoittelun. CONCERT tarjoaa SCC:hen verrattuna enemmän vapauksia resurssien sijoitteluun.
+FMC, ainoana epäsuorana itengraationa, tarjoaa myös vapauden sijoitella reunajärjestelmän, mutta ainoastaan mobiiliverkon ulkopuolelle.
+FMC:tä ei siis voi pitää erityisen riippumattomana, koska reunapalveluita tarjoavat resurssit joudutaan sijoittelemaan pakettiverkon yhdyskäytävien läheisyyteen.
+
+%Referenssi-arkkitehtuuri

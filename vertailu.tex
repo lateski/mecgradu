@@ -54,43 +54,55 @@ Toisaalta se edellyttää olemassa olevaan järjestelmään rajapinnan toteuttam
 Läpinäkyvässä järjestelmässä hallinnollinen entiteetti on riippuvainen mobiiliverkon viestien monitoroinnin kautta saatavasta tiedosta. 
 MobiScud ja SMORE tarkkailevat SDN-kerroksen avulla mobiiliverkon kontrollitason viestintää. 
 Vaikka läpinäkyvät integraatiot ovat loogisesti erillään mobiiliverkosta, edellyttävät ne pääsyä mobiiliverkon sisäisiin tietoliikenneväyliin.
-Todennäköisintä onkin siis että järjestelmää ylläpitää mobiiliverkon operaattori eikä ulkoinen taho. 
+Täten todennäköisintä on että järjestelmää ylläpitää mobiiliverkon operaattori eikä ulkoinen taho. 
 Epäsuoraa integraatiota edustavassa FMC:ssä hallinnolliset toiminnot edellyttävät tietoja mobiiliverkosta. Tieto on tyypiltään staattista, joten aktiivista tiedosiirtoa mobiiliverkon ja FMC:n välille ei tarvita.
-Edellytyksenä on esimerkiksi taulukko, josta voidaan lukea asiakaslaitteen IP-osoittetta vastaava fyysinen alue tai P-GW:n sijainti. Tämä mahdollistaa FMC:n ohjata asiakaslaitteen yhteys lähimmälle palvelinsalille.
+Edellytyksenä on esimerkiksi taulukko, josta voidaan lukea asiakaslaitteen IP-osoittetta vastaava fyysinen alue tai P-GW:n sijainti. Tämä mahdollistaa FMC:n ohjata asiakaslaitteen yhteys lähimmälle palvelinsalille. 
+
+
+SMORE, MobiScud ja FMC esittelevät toiminnot, joilla asiakaslaitteen liikkumisesta seuraavat yhteysmuutokset otetaan huomioon reunajärjestelmässä.
+Varsinaiseen reunapalvelun siirtämiseen oletetaan live migraation kaltainen mekanismi lähes kaikissa ehdotuksissa. Ainoastaan SMORE olettaa reunasolmun sijaitsevat niin keskeisessä yhteyspisteessä että reunapalveluiden siirtelylle ei ole tarvetta.
+Tällä arkkitehtuuritasolla ei ole kannattavaa ottaa kantaa reuna-alustan tehtäviin, koska se rajoittaisi arkkitehtuurin sovellettavuutta erilaisten reunapalveluiden tarjoamiseen.
 
 \subsubsection*{Yhteensoppivuus ETSI MEC vaatimuksiin}
 
-ETSI:n MEC spesifikaatio käsittelee reunalaskentaa korkealla tasolla.
-%Spesifikaatio asettaa vaatimuksia sekä tarjoaa mahdollisuuksia.
-ETSI MEC tekniset vaatimukset on jaettu kolmeen osaan: Yleisiin periaatteisiin, yleisiin vaatimuksiin ja muihin vaatimuksiin.
+\input{etsivaatimukset}
 
-Yleisien periaatteiden reuna-arkkitehtuurien kannalta tärkeät osuudet ovat NFV yhteensopivuus, liikkuvuuden tukeminen ja käyttöönoton riippumattomuus.
-NFV yhteensopivuus täyttyy tämän tutkielman reuna-arkkitehtuureissa. NFV yhteensopivuuden tavoitteena on että reunajärjestelmä ja mobiiliverkko voisivat jakaa resursseja.
+%ETSI MEC spesifikaatio edellyttävät reunajärjestelmältä tiettyjä ominaisuuksia.
+%Seuraavaksi käsitellään tässä tutkielmassa esiteltyjen reuna-arkkitehtuurien kykyä vastata näihin vaatimuksiin.
+%ETSI MEC spesifikaatio käsittelee reunalaskentaa korkealla tasolla, eikä siis ota kantaa teknisiin toteutuksiin.
+%%Spesifikaatio asettaa vaatimuksia sekä tarjoaa mahdollisuuksia.
+%ETSI MEC tekniset vaatimukset \cite{etsitechreq} on jaettu yleisiin periaatteisiin ja vaatimuksiin.
+%
+%Yleisien periaatteiden reuna-arkkitehtuurien kannalta tärkeät osuudet ovat NFV yhteensopivuus, liikkuvuuden tukeminen ja käyttöönoton riippumattomuus.
+%T
+%
+%Mobiiliverkoissa liikkuvuuden (mobility) tukeminen tarkoittaa, että handover tapahtumat eivät mobiiliverkkoa käyttäessä näy asiakaskerroksella, esimerkiksi puheluissa ja tietoliikenneyhteyksissä.
+%Täten samaa palveluvaatimusta oletetaan myös mobiiliverkossa toimivalta reunalaskennalta.
+%Tämä tarkoittaa että reunalaskennan tulee reagoida asiakaslaitteen liikkumiseen verkossa, jotta voidaan varmistaa palvelun jatkuminen.
+%Liikkuvuuden tukeminen tarkoittaa reuna-arkkitehtuureissa reunalaskennan siirtoa ja yhteyden päivittämistä.
+%Kaikki järjestelmät tukevat tätä, mutta yksityiskohdissa on eroa.
+%Mitään erityistä palvelun laadullista vaatimusta ei ole ETSI:n teknisten vaatimusten dokumenteissa asetettu, mutta osa reuna-arkkitehtuureista on ottanut lähtökohdakseen että pelkkä yhteyden ylläpitäminen reunalaskentaan ei riitä vaan sen tulee myös seurata asiakaslaitetta paremman palvelun laadun takaamiseksi.
+%
+%
+%Liikkuvuuden tukeminen tarkoittaa mobiiliverkkojen kontekstissa asiakaslaitteen handoverin tukemista. 
+%
+%Reunalaskennan siirtäminen on pääasiassa tuettuna live migraation avulla. 
+%
+%Käyttöönoton riippumattomuus esittää että reunajärjestelmän tulee tukea erilaisia variaatioita käyttöönotolle.
+%Tämä tarkoittaa esimerkiksi reunasolmujen sijoittelun tulisi olla täysin järjestelmän rakentajan valittavissa. 
+%SCC on ainoa esitellyistä reuna-arkkitehtuureista, joka pakottaa reunaresurssien sijoittamisen tukiasemaan.
+%MobiScud ja SMORE ehdottavat reunasolmuille sijainnit, mutta integraation tyylistä johtuen sijoittelu on käytännössä vapaa. 
+%FMC tarjoaa myös vapauden sijoitella reunasolmuja, mutta ainoastaan mobiiliverkon ulkopuolelle. 
+%CONCERT eroaa muista ehdotuksista ehdottamalla kolmiportaista hierarkkiaa reunalaskennan resursseille.
+%Johtuen CONCERT:n NFV painotteisuudesta fyysisiä reunasolmuja ei ole, vaan resurssit ovat vapaasti mobiiliverkon ja reunajärjestelmän käytettävissä. 
+%CONCERT:n tapauksessa reunapalveluiden sijoitteluun on siis mahdollista vaikuttaa ohjelmistotasolla.
+%
+%
+%Koska osa spesifikaatiosta käsittelee palvelun tuottamiseen liittyviä vaatimuksia, on niiden käsittely mahdollista ainoastaan niiltä osin kuin ne eivät koske reunapalveluiden tyyppejä.
+%Vaatimuksien osalta Mahdollistaa tai ei mahdollista
+%Tässä tutkielmassa esitettyjen reuna-arkkitehtuurien osalta vertailu
 
-Mobiiliverkoissa liikkuvuuden (mobility) tukeminen tarkoittaa että handover tapahtumat eivät mobiiliverkkoa käyttäessä näy asiakaskerroksella, esimerkiksi puheluissa ja tietoliikenneyhteyksissä.
-Samaa palveluvaatimusta oletetaan myös mobiiliverkossa toimivalta reunalaskennalta.
-Tämä tarkoittaa että reunalaskennan tulee reagoida asiakaslaitteen liikkumiseen verkossa, jotta voidaan varmistaa palvelun jatkuminen.
-Mitään erityistä palvelun laadullista vaatimusta ei ole ETSI:n dokumenteissa asetettu, mutta osa reuna-arkkitehtuureista on ottanut lähtökohdakseen että pelkkä yhteyden ylläpitäminen reunalaskentaan ei riitä vaan sen tulee myös seurata asiakaslaitetta paremman palvelun laadun takaamiseksi.
-
-
-Liikkuvuuden tukeminen tarkoittaa mobiiliverkkojen kontekstissa asiakaslaitteen handoverin tukemista. 
-Liikkuvuuden tukeminen tarkoittaa reuna-arkkitehtuureissa reunalaskennan siirtoa ja yhteyden päivittämistä. Reunalaskennan siirtäminen on pääasiassa tuettuna live migraation avulla. 
-
-Käyttöönoton riippumattomuus esittää että reunajärjestelmän tulee tukea erilaisia variaatioita käyttöönotolle.
-Tämä tarkoittaa esimerkiksi reunasolmujen sijoittelun tulisi olla täysin järjestelmän rakentajan valittavissa. 
-SCC on ainoa esitellyistä reuna-arkkitehtuureista, joka pakottaa reunaresurssien sijoittamisen tukiasemaan.
-MobiScud ja SMORE ehdottavat reunasolmuille sijainnit, mutta integraation tyylistä johtuen sijoittelu on käytännössä vapaa. 
-FMC tarjoaa myös vapauden sijoitella reunasolmuja, mutta ainoastaan mobiiliverkon ulkopuolelle. 
-CONCERT eroaa muista ehdotuksista ehdottamalla kolmiportaista hierarkkiaa reunalaskennan resursseille.
-Johtuen CONCERT:n NFV painotteisuudesta fyysisiä reunasolmuja ei ole, vaan resurssit ovat vapaasti mobiiliverkon ja reunajärjestelmän käytettävissä. 
-CONCERT:n tapauksessa reunapalveluiden sijoitteluun on siis mahdollista vaikuttaa ohjelmistotasolla.
-
-
-Koska osa spesifikaatiosta käsittelee palvelun tuottamiseen liittyviä vaatimuksia, on niiden käsittely mahdollista ainoastaan niiltä osin kuin ne eivät koske reunapalveluiden tyyppejä.
-Vaatimuksien osalta Mahdollistaa tai ei mahdollista
-Tässä tutkielmassa esitettyjen reuna-arkkitehtuurien osalta vertailu
-
-
+%=========
 
 
 
