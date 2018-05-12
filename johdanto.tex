@@ -1,57 +1,61 @@
 
 \section{Johdanto}
-Reunalaskennan (Multi-access edge computing, MEC) tavoitteena on tuoda laskentaresursseja lähemmäksi asiakasta.
-Verkkoyhteyksistä puhuttaessa läheisyyden merkitys laajenee loogiseen läheisyyteen, jonka mittarina toimii verkkoyhteyden viive asiakkaan ja palvelun välillä \cite{satyanarayanan2017emergence}.
-Asiakkaan lähelle sijoitetut laskentaresurssit mahdollistavat palveluiden tuottamisen pienemmällä viiveellä ja vakaammilla verkkoyhteyksillä.
+Reunalaskenta (Multi-access edge computing, MEC) tuo laskentaresursseja lähemmäksi asiakasta.
+Verkkoyhteyksistä puhuttaessa etäisyys tarkoittaa loogista etäisyyttä, jonka mittarina toimii verkkoyhteyden viive asiakkaan ja palvelun välillä \cite{satyanarayanan2017emergence}.
+Asiakkaan lähelle tuotavien laskentaresurssien on tarkoitus mahdollistavat palveluiden tuottaminen pienemmällä viiveellä ja vakaammalla verkkoyhteydellä.
 
 %Se tarjotaa laskentaresursseja ja muita palveluita asiakaslaitteille pienellä viiveellä.
 %Reunalaskennan kohderyhmänä puhutaan pääasiassa laitteista joiden resurssit ovat rajalliset.
 %Suuren osan tästä kohderyhmästä muodostavat mobiiliverkossa toimivat mobiililaitteet kuten älypuhelimet. Nämä laitteet ovat perinteisesti
 
 
-Suuren osan reunalaskennan kohderyhmästä muodostavat mobiililaitteet kuten älypuhelimet ja kannettavat. 
-Mobiililaite käyttää verkkoyhteyksiinsä langattomia verkkoja ja on riippuvainen akkuvirrasta.
-Mobiililaskennalla (Mobile Computing) tarkoitetaan kannettavilla laitteilla suoritettavaa ohjelmistojen suoritusta. 
-Mobiililaskenta on rajoittuneempaa kuin pöytätietokoneella suoritettava laskenta. Mobiililaskentaa rajoittaa mobiililaitteen laskentaresurssien määrä, verkkoyhteyden laadun vaihtelu, mobiililaitteen kestävyys ja käytettävissä olevan energian määrä \cite{satya96}. 
-Mobiililaitteiden valmistajat joutuvat tasapainottamaan laskentaresurssien määrää ja virrankulutusta yhdessä laitteen koon kanssa. Lisäksi akkuvirran rajallisuus johtaa kompromisseihin, jotka näkyvät mobiililaitteen suorituskyvyssä\cite{satya01pervasive}.
-
-Mobiililaitteiden suorituskykyyn liittyvien kasvavien odotuksien seurauksena, laskennan siirtäminen mobiililaitteilta muualle suoritettavaksi on nostanut reunalaskennan varteenotettavaksi ratkaisuvaihtoehdoksi. Reunalaskennan avulla mobiililaitteiden on mahdollista siirtää resurssi-intensiivistä laskentaa lähistöllä sijaitsevalle reunalaskennasta vastaavalle yksikölle. 
-Laskennan siirtämisen motiivina voi toimia esimerkiksi akkuvirran säästäminen tai suoritusajan lyhentäminen. Tämä tulee kuitenkin laskennan siirtoon kuluvan ajan ja energian kustannuksella. 
+Reunalaskennan kohderyhmä muodostuu pääasiassa mobiililaitteista. 
+Tässä yhteydessä mobiililaitteella tarkoitetaan akkuvirralla toimivia ja langattomia verkkoyhteyksiä käyttäviä laitteita, kuten älypuhelimia.
+Mobiililaskenta (Mobile Computing) on mobiililaitteilla suoritettavaa ohjelmistojen suoritusta. 
+Mobiililaskenta on luonteeltaan rajoittuneempaa kuin kiinteällä laitteistolla suoritettava laskenta \cite{ha2013just}.
+Mobiililaskentaa rajoittaa mobiililaitteen laskentaresurssien määrä, verkkoyhteyden laadun vaihtelu, mobiililaitteen kestävyys ja käytettävissä olevan energian määrä \cite{satya96}. 
+Mobiililaitteiden valmistajat joutuvat tasapainottamaan laskentaresurssien määrää ja virrankulutusta yhdessä laitteen koon kanssa.
+Lisäksi akkuvirran rajallisuus johtaa kompromisseihin mobiililaitteen suorituskyvyssä \cite{satya01pervasive}.
 
 Perinteiset verkkopalvelut sijaitsevat keskitetyissä palvelinsaleissa – pilvessä.
 Koska pilvi tarjoaa näennäisesti äärettömästi laskentaresursseja, se saattaa kuulostaa houkuttelevalta vaihtoehdolta siirtää laskentaa pilveen suoritettavaksi.
-Asiakkaasta kaukana sijaitseva pilvi sisältää muutamia ongelmia.
-Asiakkaan ja pilven välinen yhteys sisältää merkittävän määrän viivettä \cite{satya09}, jolloin se ei sovellu reaaliaikavaatimuksen sisältävien palveluiden suorittamiseen.
-WAN verkon viiveeseen ei juurikaan enää voida vaikuttaa, vaan ainoana vaihtoehtona on laskentaresurssien tuominen lähemmäksi asiakasta \cite{satya09}.
-Lisäksi tietoliikenteen määrän kasvun seurauksena, kaistanleveys internetin läpi kulkevan tietoliikenteen osalta ei välttämättä täytä vaatimuksia. 
-Esimerkki reaaliaikaisesti tehtävä kasvojen tunnistus mobiililaitteen välittämästä videovirrasta (video stream) vaatii kaistanleveyttä sekä pientä viivettä.
+Asiakkaasta nähden kaukana sijaitseva pilvi sisältää muutamia ongelmia.
+Asiakkaan ja pilven välinen yhteys sisältää merkittävän määrän viivettä \cite{satya09}, joten se ei sovellu reaaliaikavaatimuksen sisältävien palveluiden suorittamiseen.
+WAN-verkossa esiintyvään viiveeseen ei juurikaan enää voida vaikuttaa, vaan ainoana vaihtoehtona on laskentaresurssien tuominen lähemmäksi asiakasta \cite{satya09}.
+Lisäksi tietoliikenteen määrän kasvun seurauksena, kaistanleveys internetin läpi kulkevan tietoliikenteen osalta ei välttämättä kykene täyttämään palveluille asetettuja vaatimuksia. 
+Esimerkki reaaliaikaisesti tehtävä kasvojentunnistus mobiililaitteen välittämästä videovirrasta (video stream) vaatii kaistanleveyttä sekä pientä viivettä.
 
-Reunalaskentaa voi hyödyntää useaan eri käyttötarkoitukseen.
-Yhtenä reunalaskennan palvelumuotona on edellä kuvattu mahdollisuus siirtää resurssi-intensiivinen laskenta nopean yhteyden päässä sijaitsevalle palvelinlaitteistolle.
-Reunalaskenta myös mahdollistaa palveluiden tuottamisen lähempänä asiakasta. Tämä sisältää esimerkiksi mahdollisuuden hyödyntää reunalla sijaitsevia resursseja välimuistina. Toisena esimerkkinä viivekriittisten palveluiden, kuten pelipalvelimien suorittaminen, voi olla yksi reunalaskennan hyödyntämisen muoto.
+Myös mobiililaitteiden suorituskykyyn liittyvien kasvavien odotuksien seurauksena, laskennan siirtäminen mobiililaitteilta muualle suoritettavaksi on nostanut reunalaskennan varteenotettavaksi ratkaisuvaihtoehdoksi.
+Reunalaskenta muun muassa tarjoaa mobiililaitteille mahdollisuuden siirtää resurssi-intensiivistä laskentaa lähellä sijaitsevalle reunalaskennasta vastaavalle yksikölle. Laskennan siirrolla tarkoitetaan etälaskentaa (offload).
+Etälaskennan motivaationa voi toimia esimerkiksi akkuvirran säästäminen tai suoritusajan lyhentäminen. Tämä tulee kuitenkin laskennan siirtoon kuluvan ajan ja energian kustannuksella. 
+Reunalaskentaa voi hyödyntää myös muihin käyttötarkoituksiin.
+Se mahdollistaa palveluiden tuottamisen lähempänä asiakasta.
+Reunalaskennan tarjoamana palveluna voi olla esimerkiksi reunalla sijaitsevien resurssien hyödyntäminen välimuistina.
+Toinen esimerkki reunalaskennan mahdollistamasta palvelusta voisi olla jonkin viivekriittisen palvelun, kuten pelipalvelimen, suorittaminen reunalla sijaitsevilla resursseilla.
 
-Tutkielman kirjoitushetkellä missään ei ole reunalaskentaa laajamittaisessa käytössä. Reunalaskennan käyttöönottoa rajoittaa kokonaisvaltaisten ratkaisujen puute, sisältäen järjestelmän ja reunalaskentaa hyödyntävät ohjelmistot.
+
+
+Tutkielman kirjoitushetkellä reunalaskentaa ei ole yleisesti tarjolla.
+Reunalaskennan käyttöönottoa rajoittaa kokonaisvaltaisten ratkaisujen puute.
+Reunalaskennan käyttöönotto edellyttää reunalaskennan tarjoavan reunajärjestelmän kehittämistä ja rakentamista.
+Reunajärjestelmä koostuu laitteisto- ja ohjelmistokomponenteista.
 Reunalaskennan eteen on tehty paljon tutkimustyötä, mutta suuri osa siitä keskittyy matalamman tason yksityiskohtiin ja mekanismeihin. 
-Tällaisia ovat esimerkiksi ohjelmiston jakaminen etänä suoritettaviin osiin, sekä näiden osien siirrettävyyden kannattavuuden päättely suoritusaikana.
+Tällaisia ovat esimerkiksi ohjelmiston jakaminen etänä suoritettaviin osiin, sekä näiden osien siirrettävyyden kannattavuuden päättely suoritusaikana. 
 
+Tämä tutkielma käsittelee reunajärjestelmiä reunalaskenta-arkkitehtuurien avulla. Tällaiset arkkitehtuurit kuvaavat reunajärjestelmän toimintaa korkealla tasolla ja antavat yleiskuvan reunajärjestelmän keskeisimmistä ominaisuuksista.
+Tutkielmaan on valittu reunalaskenta-arkkitehtuurit, joiden tavoitteena on reunajärjestelmän toteuttaminen osaksi mobiiliverkkoja.
+%Käsittely keskittyy siis reunalaskennan tuottavan järjestelmän käsittelyyn.
+Nämä arkkitehtuuriehdotukset kuvaavat reunajärjestelmän ja mobiiliverkon mekanismeja, jotka mahdollistavat reunalaskennan tuottamisen mobiiliverkossa toimiville mobiililaitteille.
+Tutkielman tavoitteena on tunnistaa reunalaskenta-arkkitehtuureissa esiintyvät ominaisuudet. Tunnistettujen ominaisuuksien avulla arkkitehtuuriehdotuksien erojen jäsentäminen on helpompaa. 
 
-Tässä tutkielmassa reunalaskentaa käsitellään reuna-arkkitehtuurien avulla.
-Tutkielmaan on valittu reuna-arkkitehtuurit, joiden tavoitteena on reunajärjestelmän toteuttaminen osaksi mobiiliverkkoja.
-Käsittely keskittyy siis reunalaskennan tuottavan järjestelmän käsittelyyn.
-Aiheen rajaamiseksi matalamman tason toiminnallisuuksia ei käsitellä. 
-Reuna-arkkitehtuurit ovat luoteeltaan ehdotuksenomaisia ratkaisumalleja reunalaskennan tuottavalle järjestelmälle. 
-Ehdotukset kuvaavat reunajärjestelmän ja mobiiliverkon mekanismeja, jotka mahdollistavat reunalaskennan tuottamisen mobiiliverkossa toimiville mobiililaitteille. 
-
-Mobiiliverkkoon sijoittuvan reunajärjestelmän ymmärtämiseksi luvussa \ref{perusteet} määritellään keskeiset käsitteet, sekä täsmennetään tämän tutkielman kontekstin mukainen määritelmä reuna-arkkitehtuurille.
-Keskeiset käsitteet sisältävät reunalaskennan toimintaympäristön kuvaukset alkaen asiakaslaitteesta edeten reunan määrittelyn kautta mobiiliverkkoihin ja päättyen pilveen.
-Mobiiliverkkojen yhteydessä kuvataan LTE-tyyppisen mobiiliverkon toiminta yleisellä tasolla.
-
+Tutkielma jäsentyy seuraavasti. Luvussa \ref{perusteet} esitellään reunajärjestelmään liittyvät keskeiset käsitteet. 
+Keskeiset käsitteet sisältävät määritelmän reunajärjestelmän toimintaympäristölle ja reunalaskentaan liittyvää terminologiaa.
+Lisäksi, koska tutkielman kohteena on nimenomaan mobiiliverkkoihin sijoittuvat reunajärjestelmät, esitellään LTE-tyyppisen mobiiliverkon rakenne ja toiminta yleisellä tasolla.
 Reunalaskennan toteuttaminen vaatii erilaisten teknologioiden käyttöönottoa. Luvussa \ref{mahd} käsitellään reuna-arkkitehtuuriehdotuksien yhteydessä ilmenneet teknologiat. Ensimmäisenä käsiteltävänä teknologiana on pilvipalveluidenkin tuottamiseen käytettävät virtuaalikoneet.
-Virtuaalikoneiden lisäksi käsitellään SDN, jonka tavoitteena on mahdollistaa verkkoliikenteen ohjelmallisen ohjaamisen helpottaminen. 
+Virtuaalikoneiden lisäksi käsitellään SDN, jonka tavoitteena on  verkkoliikenteen ohjelmallisen ohjaamisen helpottaminen. 
 Viimeisenä käsitellään NFV, joka pyrkii verkkotoiminnallisuuksien virtualisointiin.
-
- Luvussa \ref{ominaisuudet} kuvataan reunajärjestelmän toiminnan edellytyksenä olevat ominaisuudet yleisellä tasolla. 
-Näiden ominaisuuksien pohjalta luvussa \ref{ratkaisut} käsitellään ehdotetut arkkitehtuurit. 
-Reuna-arkkitehtuurien esittelyn jälkeen ehdotuksia vertaillaan ominaisuuksien toteutuksien erojen pohjalta.
+Luvussa \ref{ominaisuudet} kuvataan reunalaskenta-arkkitehtuureista identifioidut ominaisuudet.
+Luvussa \ref{rakenne} kuvataan reunajärjestelmien rakennetta sekä arkkitehtuurin vaikutus rakenteeseen.
+Ehdotetut reunalaskenta-arkkitehtuurit esitellään luvussa \ref{ratkaisut}. Arkkitehtuurien esittelyn jälkeen kuvataan ehdotuksien eroavaisuudet tunnistettujen ominaisuuksien pohjalta. Lisäksi käsitellään tutkielmassa käsiteltyjen arkkitehtuurien yhteensopivuus ETSI MEC spesifikaation kanssa.
 Tutkielma päättyy luvussa \ref{yhteenveto} esitettävään yhteenvetoon.
 
