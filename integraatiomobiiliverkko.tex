@@ -45,14 +45,15 @@ Koska viidennen generaation määrittelytyö on vielä kesken, ehdotetut ratkais
 Esimerkkinä suorasta integraatiosta on CONCERT (esitellään kappaleessa \ref{concert}). Suora integraatio mahdollistaa reunalaskennan tuomisen niin lähelle reunaa kuin mahdollista.
 
 Epäsuoralla integraatiolla tarkoitetaan ratkaisuja, joiden pääasiallinen toiminnallisuus on sijoitettu mobiiliverkkoarkkitehtuurin ulkopuolelle. 
-Tällaiset ratkaisut mahdollistavat reunajärjestelmän tuottamisen kolmansilla osapuolilla. Esimerkkinä tällaisesta ratkaisusta on FMC (käsitellään tarkemmin kappaleessa \ref{fmc}). Haasteena tämänkaltaisissa ratkaisuissa on optimaalisen reunasolmun valinta, koska se joudutaan tekemään asiakaslaitteen antamien tietojen pohjalta. Onkin siis huomattava, että asiakaslaite joutuu osallistumaan reunalaskentaan liittyviin hallinnollisiin toimiin.
+Tällaiset ratkaisut mahdollistavat reunajärjestelmän tuottamisen kolmansilla osapuolilla. Esimerkkinä tällaisesta ratkaisusta on FMC (käsitellään kappaleessa \ref{fmc}). Haasteena tämänkaltaisissa ratkaisuissa on optimaalisen reunasolmun valinta, koska se joudutaan tekemään asiakaslaitteen antamien tietojen pohjalta. Onkin siis huomattava, että asiakaslaite joutuu osallistumaan reunalaskentaan liittyviin hallinnollisiin toimiin.
 
-Läpinäkyvissä ratkaisuissa reunalaskennan mahdollistavat toiminnot on toteutettu siten että suoria yhteyksiä mobiiliverkon toimintoihin ei ole. 
-Periaate on hieman samankaltainen kuin läpinäkyvässä välityspalvelin (transparent proxy).
+Läpinäkyvissä ratkaisuissa reunalaskennan mahdollistavat toiminnot on toteutettu siten, että suoria yhteyksiä mobiiliverkon toimintoihin ei ole. 
+Periaate on hieman samankaltainen kuin läpinäkyvässä välityspalvelimessa (transparent proxy).
 Ratkaisut ovat mobiiliverkon näkökulmasta "näkymättömiä".
-Käytännössä tarkoittaa että mobiiliverkon hallinnolliset komponentit eivät käsittele reunalaskennan 
-Tämä tarkoittaa jonkinlaiseen tietoliikennemonitoriin pohjautuvaa ratkaisua. 
+Läpinäkyvässä ratkaisussa mobiiliverkko ja reunajärjestelmä eivät jaa hallinnollisia entiteettejä. Molemmat järjestelmät ovat siis itsenäisiä järjestelmiä.
+Läpinäkyvyys tarkoittaa käytännössä, että johonkin kohtaa mobiiliverkon sisäisiä yhteyksiä, lisätään monitori, joka mahdollistaa tietoliikenteen seuraamisen ja muokkaamisen. 
 Monitorin tehtävänä on tarkkailla mobiiliverkon tapahtumia sekä ohjata haluttu tietoliikenne reunalaskennalle.
-Näiden toimintojen toteuttamisen helpottamiseksi käytössä on tai käyttöön oletetaan SDN, NFV tai molemmat.
-Joskaan läpinäkyvillä ratkaisuilla ei ole kommunikaatiorajapintaa mobiiliverkon hallinnollisiin toimijoihin, niille oletetaan suora yhteys mobiiliverkon sisäisiin yhteyksiin. Tämä sitoo ne osaksi mobiiliverkon infrastruktuuria ja käytännössä tämä tarkoittaa että reunapalvelualustan tuottajana on mobiiliverkon operaattori. 
-Esimerkkinä tällaisesta ratkaisusta on MobiScud, joka käydään tarkemmin läpi kappaleessa \ref{mobiscud}. 
+Monitoritoiminnallisuuden toteuttamisen helpottamiseksi käytössä on tai käyttöön oletetaan SDN, NFV tai molemmat.
+Vaikka läpinäkyvillä ratkaisuilla ei ole kommunikaatiorajapintaa mobiiliverkon hallinnollisiin toimijoihin, niille oletetaan yhteys mobiiliverkon sisäiseen verkkoon.
+Tämä sitoo ne osaksi mobiiliverkon infrastruktuuria ja käytännössä tämä tarkoittaa, että reunajärjestelmää ylläpitää mobiiliverkon operaattori. 
+Esimerkkinä läpinäkyvästä ratkaisusta on MobiScud, joka käydään tarkemmin läpi kappaleessa \ref{mobiscud}. 
