@@ -51,33 +51,35 @@ Mobiiliverkon kontrollikerroksen monitorointia voidaan hyödyntää reunajäreje
 
 \subsubsection*{Liikkuvuuden vaikutus kommunikaatioväyliin}
 
-Toinen ongelma liittyy tilanteeseen, jossa asiakaslaite siirtyy sijainnista toiseen. Tavoitetilana on että tietoliikenneyhteys asiakaslaitteen ja reunasovelluksen välillä säilyy liikkumisesta huolimatta.
+Toinen ongelma liittyy tilanteeseen, jossa asiakaslaite siirtyy sijainnista toiseen. Tavoitetilana on, että tietoliikenneyhteys asiakaslaitteen ja reunasovelluksen välillä säilyy liikkumisesta huolimatta.
 Mobiiliverkkoa käyttävän asiakaslaitteen liikkuminen johtaa yleensä jossain vaiheessa handoveriin.
 %Mobiiliverkossa toimivan asiakaslaitteen liikkuminen fyysisesti paikasta toiseen tarkoittaa usein että asiakaslaitteen yhteydelle tehdään handover.
 Verkkoyhteys siis siirtyy kulkemaan toisen tukiaseman kautta. 
-Asiakaslaitteen tietoverkkoyhteyksien kannalta handover on käytännössä huomaamaton.
+Asiakaslaitteen tietoliikenneyhteyksien kannalta handover on käytännössä huomaamaton.
 Handover on toiminnallisuutena mobiiliverkon sisäinen toiminnallisuus.
-Sen toiminnallisuus on suunniteltu tukemaan ulkoverkkoon S-GW:n ja P-GW:n kautta kulkevien yhteyksien muutoksia.
+Handover on suunniteltu tukemaan ulkoverkkoon S-GW:n ja P-GW:n kautta kulkevien yhteyksien muutoksia, siten että asiakaslaitteen tietoliikenneyhteydet eivät katkea.
 Reunajärjestelmä joutuu siis itse hallinnoimaan liikkuvuuteen liittyviä tapahtumia.
 Integraation tyypillä on tässäkin keskeinen merkitys.
-Esimerkiksi suoran integraation järjestelmissä on teoriassa mahdollistan vaikuttaa handoverien toimintaan.
-Läpinäkyvät järjestelmät joutuvat puolestaan toimimaan kokonaan oman toiminnallisuutensa varassa.
- 
+Esimerkiksi suoran integraation järjestelmissä on teoriassa mahdollista vaikuttaa handoverien toimintaan.
+Läpinäkyvät järjestelmät puolestaan joutuvat reagoimaan mobiiliverkon handovereihin monitorointitoiminnallisuutensa kautta.  
 
-Reunalaskenta-arkkitehtuurien yhteydessä on onnistuneesti esitetty ratkaisuja, jotka säilyttävät asiakaslaitteen yhteyden reunasolmuun handoverin yhteydessä. Ratkaisukenttää kuitenkin monimutkaistaa, jos myös reunasovelluksen sijaintia halutaan siirtää.
-Reunalaskennan siirto on oletettavasti toteutettu kuten live migraatio kappaleessa \ref{livemigraatio} käsiteltiin.
-Tilanteessa jossa ainoastaan asiakaslaitteen sijainti muuttuu yhteyden säilyttäminen vaatii reunasolmun sijainnista riippuen vain vähäisiä toimia. Esimerkiksi MobiScud arkkitehtuurissa yhteyden ylläpito handoverin yhteydessä tehdään siten, että SDN reitityssääntöjä (flow rule) päivitetään, jotta asiakaslaitteen yhteys reunasovellukseen säilyy. 
+Reunalaskenta-arkkitehtuurien yhteydessä on esitetty ratkaisuja, jotka säilyttävät asiakaslaitteen yhteyden reunasolmuun handoverin yhteydessä. Ratkaisut kuitenkin monimutkaistuvat, mikäli myös reunasovelluksen sijaintia halutaan siirtää.
+Reunalaskennan siirto oletetaan toteutetuksi kuten live migraatio kappaleessa \ref{livemigraatio} esitettiin.
+Tilanteessa jossa ainoastaan asiakaslaitteen sijainti muuttuu, yhteyden säilyttäminen vaatii reunasolmun sijainnista riippuen vain vähäisiä toimia. 
+Esimerkiksi MobiScud arkkitehtuurissa, monitorilta saadaan tieto handoverin vaiheista ja tämä tieto välitetään MobiScudin hallinnolliselle entiteetille.
+Tämän tiedon saatuaan hallinnollinen entiteetti päivittää SDN reitityssääntöjä (flow rule), siten että tietoliikenne virtaa mobiiliverkon yhteysmuutoksista huolimatta reunasovellukselle.
 
-Asiakaslaitteen liikkumisesta saattaa seurata palvelun laadun heikkenemistä. Esimerkiksi asiakaslaitteen ja reunasolmun välisen etäisyyden kasvaessa viiveet kasvavat.
-Kuten aiemmin mainittu, yleinen reuna-arkkitehtuurien ehdottama ratkaisu palvelun laadun varmistamiseksi on reunapalvelun tuottavan virtuaalikoneen live migraatio toiselle reunasolmulle.
-Migraation seurauksena virtuaalikoneen IP-osoite todennäköisesti vaihtuu ja koska palveluiden tavoittamiseen käytetään tavallisesti IP-osoitteisiin pohjautuvia yhteyksiä, aiheuttaa tämä muutos haasteita palvelun jatkuvuuden kannalta.
-Asiakaslaitteen ja reunapalvelun yhteyden tunnistamiseen on ehdotettu toisenlaisia ratkaisuja.
-Follow Me Cloud (FMC) yhteydessä ehdotetaan ratkaisuksi asiakaslaitteeseen liittyvän tunnisteeseen ja reunapalveluun liittyvän palvelutunnisteeseen perustuvaa sessio/palvelu tunnistetta (Session/Service ID) \cite{taleb2013follow}.
-FMC:ssä edellä mainituista tunnisteista generoidaan tunniste, jonka avulla asiakaslaitteeseen liittyvä reunapalvelu tai muu sessio voidaan tunnistaa.
-Sessio/palvelu tunnisteen avulla asiakaslaite ja reunapalvelu voidaan yhdistää IP-osoitteiden muutoksista riippumatta.
+Pelkän yhteyden varmistamisen ei kuitenkaan oleteta riittävän ja reuna-arkkitehtuurit esittävätkin reunapalvelun live migraatiota.
+Mikäli reunapalvelua ei siirretä, asiakaslaitteen ja reunasolmun välinen etäisyys saattaa kasvaa, joka näkyy palvelun laadussa kasvavina viiveinä \cite{taleb2013follow, wang2015mobiscud}.
+Lähes jokainen arkkitehtuuri ehdotti reunapalvelun live migraatiota reunasolmujen välillä.
+Migraation seurauksena virtuaalikoneen IP-osoite todennäköisesti vaihtuu. Koska tietoliikenneyhteydet pohjautuvat normaalist IP-osoitteisiin, aiheuttaa tämä muutos haasteita palvelun jatkuvuuden kannalta.
+Asiakaslaitteen ja reunapalvelun yhteyden muodostamiseen on ehdotettu toisenlaisia ratkaisuja.
+Follow Me Cloud (käsitellään tarkemmin kappaleessa \ref{fmc}) yhteydessä ehdotetaan ratkaisuksi asiakaslaite tunnisteeseen ja reunapalveluun liittyvän palvelutunnisteeseen perustuvaa tunnistetta.
+FMC:ssä edellä mainituista tunnisteista generoidaan sessio/palvelu tunniste (Session/Service ID), jonka avulla asiakaslaitteeseen liittyvä reunapalvelu tai muu sessio voidaan tunnistaa ja siihen sessioon liittyvät yhtedet uudelleenmuodostaa.
+Sessio/palvelu tunnisteen avulla asiakaslaite ja reunapalvelu voidaan siis yhdistää IP-osoitteiden muutoksista riippumatta.
 Tunnisteen lisääminen vaatii järjestelmään entiteetin, joka ylläpitää listaa käytössä olevista tunnisteista, sekä tarjoaa niiden aksessointiin menetelmän. Tämä saattaa monimutkaistaa palveluiden saavutettavuutta. 
 
-Asiakaslaitteen ja reunapalvelun välisen yhteyden säilyttäminen on hyvin riippuvainen reuna-arkkitehtuurin muista ominaisuuksista. Asiakaslaitteiden ja reunapalveluiden väliseen kommunikaatioon vaikuttavat esimerkiksi reunajärjestelmän virtuaalikoneiden migraatio politiikka sekä muut palveluiden tuottamiseen liittyvät valinnat.
+Asiakaslaitteen ja reunapalvelun välisen yhteyden säilyttäminen on hyvin riippuvainen reuna-arkkitehtuurin muista toiminnallisuuksista. Asiakaslaitteiden ja reunapalveluiden väliseen kommunikaatioon vaikuttavat esimerkiksi reunajärjestelmän virtuaalikoneiden migraatio politiikka sekä muut palveluiden tuottamiseen liittyvät valinnat.
 
 
 %Yhteenvetoon Reuna-arkkitehtuurien yleisenä tavoitteena on toiminnallisuuksien toteuttaminen siten että se rajoittaisi mahdollisimman vähän mahdollisten reunapalveluiden toimintaa. 

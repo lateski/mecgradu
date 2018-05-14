@@ -28,8 +28,11 @@ Aktiivisia toimia ovat muun muassa reuna-alustalla suoritettavien virtuaalikonei
 %Arkkitehtuurien esittelyiden yhteydessä hallinnosta vastaava entieetti esitellään kaikissa arkkitehtuureissa. Hallinnosta vastaavat entiteetit arkkitehtuureittain ovat SCM (Small Cell Cloud Manager) Small Cell Cloudissa \cite{lobillo15scc, gambetti15dist}, conductor CONCERT:ssa \cite{liu2014concert}, FMC Controller FMC:ssä \cite{taleb2013follow}, MC (MobiScud Controller) MobiScud:ssa \cite{wang2015mobiscud}, ja edge orchestrator ETSI MEC refenssiarkkitehtuurissa \cite{etsirefarch}. \textit{Tarkista onko kaikki}
 
 %Hajautettu & Keskitetty
-Hallinnollisten toimien osalta arkkitehtuuri voi olla hajautettu tai keskitetty. 
-Hajautetuissa malleissa lähestytään vertaisverkko -tyylistä ratkaisua. Siinä hallinnolliset entiteetit organisoivat hallinnolliset toimet keskenään. Hajautetussa mallissa hallinnolliset entiteetit usein vastaavat jostain osajoukosta reunasolmuja ja esimerkiksi virtuaalikoneiden migraation yhteydessä hoitavat hallinnollisen vastuun siirtämisen vertaiselleen. 
-Tämä muistuttaa eNodeB:n kaltaista ratkaisua, jossa handoverin yhteydessä vastuu asiakaslaitteen yhteydestä siirtyy handoverin kohteena olevalle eNodeB:lle. 
-Hallinnollisten toimien ollessa keskitettynä yhdelle entiteetille. Esimerkiksi SCM:n \cite{lobillo15scc} tapauksessa oletetaan, että SCM:llä on saatavillaan kokonaiskuva verkon tilasta ja sen pohjalta SCM voi tehdä päätöksiä esimerkiksi resurssien käyttöönotosta ja reunalaskennan migraatiosta. 
+Hallinnollinen vastuu voi olla reunajärjestelmässä hajautettuna tai keskitettynä.
+Hajautetussa mallissa hallinnollinen entiteetti vastaa jostain reunasolmujen osajoukosta \cite{lobillo15scc}. Hajautus voi myös olla hierarkinen jolloin yhdellä hallinnollisella entiteetillä on ylemmän tason hallinnollinen toimija joka tarpeen tullen vastaa reunalaskennan organisoinnista \cite{mach17mobile}.
+
+Kuten muutkin ominaisuudet, myös hallinnollisen toimijan sijainti riippuu reunajärjestelmän integraation tyypistä. 
+Suorassa integraatiossa hallinnollinen toimija on mahdollista sijoittaa käytännössä mihin tahansa \cite{mach17mobile}.
+Läpinäkyvässä integraatiossa hallinnollinen toimija sijaitsee yleensä lähellä monitoritoiminnallisuutta, mutta kuitenkin mobiiliverkon ulkopuolella. 
+Epäsuorassa integraatiossa hallinnolliset toimijat sijaitsevat mobiiliverkon ulkopuolella.
 
