@@ -30,9 +30,10 @@ Tällaisella monitorilla olisi mahdollisuus tarkkailla mobiiliverkossa kulkevan 
 Tämä jättäisi kaiken reunajärjestelmälle kuulumattoman tietoliikenteen koskemattomaksi.
 
 LIPA (Local IP Access) ja SIPTO (Selected IP Traffic Offload) ovat ehdotuksia mobiiliverkkoon tehtävästä reititysratkaisusta \cite{samdanis2012traffic,3gpplipa}.
-LIPA ja SIPTO lisäisivät tukiasemien yhteyteen L-GW:n (Local Gateway), jonka mahdollistaisi asiakaslaitteen tietoliikenteen ohjaamisen tukiaseman yhteydestä esimerkiksi reunasolmulle. tietoliikenne internettiin, ilman että tietoliikenteen tarvitsee kulkea EPC:n kautta. 
+LIPA ja SIPTO lisäisivät tukiasemien yhteyteen L-GW:n (Local Gateway), jonka mahdollistaisi asiakaslaitteen tietoliikenteen ohjaamisen tukiaseman yhteydestä esimerkiksi reunasolmulle. 
+Tällöin tietoliikenteen ei tarvitse kulkea EPC:n kautta. 
 L-GW:n tarkoitus olisi siis mahdollistaa nopeammat yhteydet tukiaseman läheisyydessä sijaitsevaan verkkoon. Tätä olisi mahdollista hyödyntää reunalaskennassa, mutta se monimutkaistaisi olemassa olevan mobiiliverkon toiminnallisuutta \cite{cho2014smore}.
-LIPA:a ja SIPTO:a ei varsinaisesti ole ehdotettu minkään reuna-arkkitehtuurin yhteydessä ratkaisuksi edellä kuvattuun ongelmaan. 
+LIPA:a ja SIPTO:a ei kuitenkaan ole ehdotettu minkään reuna-arkkitehtuurin yhteydessä ratkaisuksti tietoliikenteen ohjaamiseen. 
 
 Reuna-arkkitehtuureissa tietoliikenteen tarkkailua ja ohjausta mahdollistava toiminnallisuus on ehdotettu toteutettavan SDN:llä, NFV:llä tai jollain ratkaisuspesifillä toiminnallisuudella. 
 SDN:n käyttö ratkaisuna tarjoaa tavan reitittää liikennettä mobiiliverkon sisällä. Se lisäksi mahdollistaa reitityksien ohjelmallisen muokkaamisen, jolloin tiettyjen yhteyksien reittiä voidaan dynaamisesti muokata. SMORE:n yhteydessä esitetyssä ratkaisussa  E-UTRAN ja EPC:n välille sijoitetaan SDN kerros, jossa eNodeB ja EPC:n välistä tietoliikennettä voidaan monitoroida. 
@@ -50,14 +51,21 @@ Mobiiliverkon kontrollikerroksen monitorointia voidaan hyödyntää reunajäreje
 
 \subsubsection*{Liikkuvuuden vaikutus kommunikaatioväyliin}
 
-Toinen ongelma liittyy tilanteeseen jossa asiakaslaite siirtyy sijainnista toiseen. Tavoitetilana on että tietoliikenneyhteys asiakaslaitteen ja reunasovelluksen välillä säilyy liikkumisesta huolimatta.  
-Mobiiliverkossa toimivan asiakaslaitteen liikkuminen fyysisesti paikasta toiseen tarkoittaa usein että asiakaslaitteen yhteydelle tehdään handover.
+Toinen ongelma liittyy tilanteeseen, jossa asiakaslaite siirtyy sijainnista toiseen. Tavoitetilana on että tietoliikenneyhteys asiakaslaitteen ja reunasovelluksen välillä säilyy liikkumisesta huolimatta.
+Mobiiliverkkoa käyttävän asiakaslaitteen liikkuminen johtaa yleensä jossain vaiheessa handoveriin.
+%Mobiiliverkossa toimivan asiakaslaitteen liikkuminen fyysisesti paikasta toiseen tarkoittaa usein että asiakaslaitteen yhteydelle tehdään handover.
 Verkkoyhteys siis siirtyy kulkemaan toisen tukiaseman kautta. 
 Asiakaslaitteen tietoverkkoyhteyksien kannalta handover on käytännössä huomaamaton.
-Tavallisesti handover tarjoaa ratkaisun ainoastaan internettiin suuntautuvien yhteyksien hoitamiseen.
+Handover on toiminnallisuutena mobiiliverkon sisäinen toiminnallisuus.
+Sen toiminnallisuus on suunniteltu tukemaan ulkoverkkoon S-GW:n ja P-GW:n kautta kulkevien yhteyksien muutoksia.
+Reunajärjestelmä joutuu siis itse hallinnoimaan liikkuvuuteen liittyviä tapahtumia.
+Integraation tyypillä on tässäkin keskeinen merkitys.
+Esimerkiksi suoran integraation järjestelmissä on teoriassa mahdollistan vaikuttaa handoverien toimintaan.
+Läpinäkyvät järjestelmät joutuvat puolestaan toimimaan kokonaan oman toiminnallisuutensa varassa.
  
 
-Reunalaskenta-arkkitehtuurien yhteydessä on esitetty ratkaisuja, jotka säilyttävät asiakaslaitteen yhteyden reunasolmuun handoverin yhteydessä. Ratkaisukenttää kuitenkin monimutkaistaa jos myös reunalaskennan sijaintia halutaan siirtää, kuten live migraatio kappaleessa \ref{livemigraatio} käsiteltiin.
+Reunalaskenta-arkkitehtuurien yhteydessä on onnistuneesti esitetty ratkaisuja, jotka säilyttävät asiakaslaitteen yhteyden reunasolmuun handoverin yhteydessä. Ratkaisukenttää kuitenkin monimutkaistaa, jos myös reunasovelluksen sijaintia halutaan siirtää.
+Reunalaskennan siirto on oletettavasti toteutettu kuten live migraatio kappaleessa \ref{livemigraatio} käsiteltiin.
 Tilanteessa jossa ainoastaan asiakaslaitteen sijainti muuttuu yhteyden säilyttäminen vaatii reunasolmun sijainnista riippuen vain vähäisiä toimia. Esimerkiksi MobiScud arkkitehtuurissa yhteyden ylläpito handoverin yhteydessä tehdään siten, että SDN reitityssääntöjä (flow rule) päivitetään, jotta asiakaslaitteen yhteys reunasovellukseen säilyy. 
 
 Asiakaslaitteen liikkumisesta saattaa seurata palvelun laadun heikkenemistä. Esimerkiksi asiakaslaitteen ja reunasolmun välisen etäisyyden kasvaessa viiveet kasvavat.
