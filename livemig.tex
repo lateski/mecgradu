@@ -2,7 +2,7 @@
 
 %Alkukappale
 %% Mitä migraatio on ja miten se liittyy handoveriin
-Live migraatio, eli suorituksen aikanen siirto, tarkoittaa virtualisoidun ohjelman tai virtuaalikoneen siirtämistä laitteistolta toiselle, siten että ohjelman tai virtuaalikoneen käyttö ei keskeydy siirron ajaksi. 
+Live migraatio, eli suorituksen aikanen siirto, tarkoittaa virtualisoidun ohjelman tai virtuaalikoneen siirtämistä laitteistolta toiselle, siten että virtuaalikoneen käyttö ei keskeydy siirron ajaksi \cite{clark2005live}. 
 Useimmiten tällaista toiminnallisuutta käytetään palvelinkeskuksissa virtuaalikoneiden
 siirtelyyn. Palvelinkeskuksissa siirtämiseen käytetään nopeita sisäisiä yhteyksiä,
 jolloin tiedon siirtoon käytettävät väylät ovat nopeita. Syitä live migraation
@@ -30,13 +30,14 @@ Handoverin sisältämä asiakaskonteksti koostuu pääasiassa erilaisista asiaka
 Live migraatiossa virtuaalikone siirretään palvelimelta toiselle palvelimelle, ilman että virtuaalikoneen käyttö keskeytyy. 
 Perinteinen live migraatio on toteutettu siten, että virtuaalikoneen suoritustilan eli prosessorin tilan ja muistin siirretään toiselle palvelimelle.
 
-Siirtäminen suoritetaan iteraatioittan siten, että ensimmäisellä iteraatiolla kaikki muistisivut siirretään kohdelaitteelle.
+Siirtäminen suoritetaan iteraatioittan siten, että ensimmäisellä iteraatiolla kaikki muistisivut siirretään kohdelaitteelle \cite{clark2005live}.
 Seuraavilla kierroksilla lähtölaitteelta siirretään vain ne muistisivut joille on tapahtunut muutoksia edellisen siirron alkamisen jälkeen. 
 Tätä jatketaan kunnes muutoksia sisältävien muistisivujen määrä ei vähene iteraatioittan.
 Tässä vaiheessa lähtöpisteenä oleva virtuaalikone pysäytetään ja loput virtuaalikoneen muistisivut ja tilatiedot siirretään kohdelaitteelle. Tämän jälkeen virtuaalikone käynnistetään uudessa sijainnissa. 
 
-Live migraatioon liittyy myös erilaisia optimointeja ja lähestymistapoja joita ei tässä tutkielmassa sen tarkemmin avata. 
-Palvelinsaliympäristössä on myös yleistä että varsinaista tallennustilaa ei ole tarpeen siirtää, koska se on toteutettu levypalvelimen avulla, jolloin ainoastaan yhteys täytyy siirtää. Mikäli näin ei ole, myös tallennustila tulee siirtää laitteelta toiselle.
+Live migraatioon liittyy myös erilaisia optimointeja ja lähestymistapoja, joita ei tässä tutkielmassa sen tarkemmin avata. 
+Palvelinsaliympäristössä on myös yleistä, että virtuaalikoneen tallennustilaa ei ole tarpeen siirtää, koska se on toteutettu levypalvelimen avulla, jolloin ainoastaan yhteys täytyy siirtää \cite{clark2005live}. Mikäli näin ei ole, myös tallennustila tulee siirtää laitteelta toiselle.
+Live migraatio vaatii myös avoimina olleiden tietoliikenneyhteyksien siirtämisen \cite{clark2005live}.
 
 Live migraation suorituskykyä mitataan seuraavilla metriikoilla \cite{soni2013comparative}:
 
