@@ -1,17 +1,17 @@
 \section{Rakenne} \label{rakenne}
-Seuraavaksi käydään läpi reunan rakennetta.
+Seuraavaksi esitellään reunajärjestelmän rakennetta.
 Koska aihepiirinä on arkkitehtuurit, varsinaisten toteutettavien reunajärjestelmien rakennetta voidaan tarkastella ainoastaan implisiittisesti. 
-Eli mitä arkkitehtuuri mahdollistaa tai rajoittaa.
+Eli mitä arkkitehtuurit mahdollistavat tai rajoittavat.
 Ensimmäiseksi esitellään reunan fyysisen rakenteen eri mallit, jossa keskeisessä osassa ovat reunasolmujen sijainnit.
 Tämän jälkeen käsitellään reuna-arkkitehtuurien vaikutuksen toteutettavaan järjestelmään.
 
-\subsection{Rakennetyypit}
-Tässä kappaleessa käsitellään reunasolmujen muodostaman järjestelmän rakennetta. Rakenteet jakautuvat kahteen päätyyppiin: litteään ja hierarkkiseen.
-Litteä rakenne edustaa perinteisempää lähestymistapaa resurssien asetteluun. Hierarkkinen rakenne puolestaan uudempaa ajatusmallia, jossa reunasolmut voivat delegoivat tehtäviä suhteessa tehokkaammille ja keskitetymmille reunasolmuille. 
+Erilaiset rakenteet voidaan jakaa kahteen päätyyppiin: litteään ja hierarkkiseen.
+Litteä rakenne edustaa yksinkertaisempaa lähestymistapaa resurssien asetteluun. Hierarkkinen rakenne puolestaan edustaa hallinnollisesti monimutkaisempaa järjestelmää, jossa reunasolmut voivat delegoivat tehtäviä suhteessa tehokkaammille ja keskitetymmille reunasolmuille. 
 
-Reunan rakenteeseen vaikuttaa useampi tekijä. 
-Esimerkiksi tilanne jossa reunajärjestelmän tarjoaa kolmas osapuoli joka saattaa mahdollistaa esimerkiksi yrityksen hankkia omat paikalliset reunasolmut ja liittää sen osaksi reunajärjestelmää.
-Tällaisessa tilanteessa keskeiseksi tekijäksi nouseekin reunapalveluiden tuottamiseen käytettävä liiketoimintamalli. Yksinkertaisuuden vuoksi tässä kappaleessa aihetta käsitellään, kuin reunan rakenne olisi yhden entiteetin, esimerkiksi operaattorin, päätettävissä. 
+Reunan rakenteeseen vaikuttaa myös tapa jolla järjestelmä tuotetaan.
+Esimerkiksi tilanne jossa reunajärjestelmä toteutetaan siten, että yksityisen toimijat, kuten yritykset, voivat hankkia omia reunasolmuja ja liittää niitä osaksi reunajärjestelmää. Tällöin reunajärjestelmän rakenne on vaihteleva eikä siihen todennäköisesti litteä.
+Tällaisessa tilanteessa keskeiseksi tekijäksi nouseekin reunapalveluiden tuottamiseen käytettävä liiketoimintamalli.
+Yksinkertaisuuden vuoksi tässä kappaleessa aihetta käsitellään, kuin reunan rakenne olisi yhden entiteetin, esimerkiksi operaattorin, päätettävissä. 
 
 \paragraph*{Reunavyöhyke}
 Reunavyöhyke on tämän tutkielman puitteissa määritelty termi, jolla viitataan vyöhykkeeseen, jolla reunasolmut sijaitsevat. Reunavyöhyke voi olla kapea tai leveä, jotka vastaavat suurin piirtein seuraavaksi määriteltävää litteää ja hierarkkista rakennetta. Kapea vyöhyke tarkoittaa että reunasolmut sijaitsevat verkossa samalla tasolla. Leveä vyöhyke puolestaan viittaa rakenteeseen jossa reunasolmujen etäisyys asiakkaasta vaihtelee merkittävästi. Leveässä järjestelmässä reunasolmut voivat sijaita esimerkiksi lähimmillään tukiasemassa ja kauimmillaan mobiiliverkon ulkopuolella sijaitsevassa palvelinsalissa. 
@@ -24,18 +24,19 @@ Reunavyöhyke on tämän tutkielman puitteissa määritelty termi, jolla viitata
 \subsubsection{Litteä rakenne}
 Litteällä rakenteella tarkoitetaan että reunasolmut sijaitsevat vain yhdessä kerroksessa. Litteän järjestelmän keskeisin päätös on valita taso, jolle reunasolmut sijoitetaan.
 
-Yksinkertainen esimerkki litteästä toteutuksesta olisi reunajärjestelmä, jossa reunasolmut sijoitettaisiin mobiiliverkon tukiasemien yhteyteen kuten kuvassa \ref{fig:rakenne} a). Esimerkin järjestelmä  toteuttaisi äärimmäistä hajautusta ja lisäksi se olisi fyysisesti erittäin lähellä asiakaslaitetta. Tällaisessa rakenteessa on kuitenkin ilmeisiä ongelmia. Järjestelmän käyttö olisi teoriassa mahdollista ainoastaan niiden tukiasemien ympäristössä, joissa reunajärjestelmä sijaitsee. Tämän seurauksena reunalaskennan laajamittainen käyttöönotto olisi riippuvainen tukiasemiin sijoitettavien reunasolmujen hankinnasta. Mikäli oletetaan että siellä missä laskennan tarve on suurin, on myös eniten ihmisiä. Tästä yleensä seuraa että tällaisessa tilanteessa lähelle tuotu reunalaskenta on kalliimpaa tarvittavien tilojen hintojen vuoksi \cite{mao17}.
+Yksinkertainen esimerkki litteästä toteutuksesta olisi reunajärjestelmä, jossa reunasolmut sijoitettaisiin mobiiliverkon tukiasemien yhteyteen kuten kuvassa \ref{fig:rakenne} a). Esimerkin järjestelmä  toteuttaisi äärimmäistä hajautusta ja lisäksi se olisi fyysisesti erittäin lähellä asiakaslaitetta. Tällaisessa rakenteessa on kuitenkin ilmeisiä ongelmia. Järjestelmän käyttö olisi teoriassa mahdollista ainoastaan niiden tukiasemien ympäristössä, joissa reunajärjestelmä sijaitsee. Tämän seurauksena reunalaskennan laajamittainen käyttöönotto olisi riippuvainen tukiasemiin sijoitettavien reunasolmujen hankinnasta.
 
+Mikäli oletetaan, että siellä missä laskennan tarve on suurin, on myös eniten ihmisiä. Yleensä tällaisissa sijainneissa myös reunajärjestelmän resursseja varten tarvittavien tilojen hinnat ovat korkeammat, jolloin reunalaskennan tuominen lähelle asiakasta nostaa reunajärjestelmän hintaa \cite{mao17}.
 Vaihtoehtoinen ratkaisu olisi siirtää reunasolmuja kauemmaksi tukiasemista. Esimerkiksi siten että yksi reunasolmu vastaisikin useamman tukiaseman kautta tulevasta reunalaskennasta. Mobiiliverkko kontekstissa, reunasolmu sijaitsisi siis joko tukiasemien ja EPC:n välillä tai vasta EPC:n takana.  
 Useamman tukiaseman niputtamista yhden reunasolmun vastuulle kutsutaan klusteroinniksi. 
 Keskeisenä haasteena klusteroinnissa on valita oikean kokoiset klusterit ja sijoittaa oikea määrä resursseja kuhunkin klusteriin \cite{malandrino2016close}.
-Klusterin suuruus ja viive todennäköisesti korreloivat jolloin on varottava tekemästä klustereista tarpeettoman suuria.
-Reunasolmujen siirtäminen kauemmaksi asiakaslaitteista pitäisi siis mahdollistaa helpompi ja edullisempi käyttöönotto, koska tarvitaan suhteessa vähemmän reunasolmuja ja reunasolmujen ylläpito on näin ollen edullisempaa.
+Klusterin suuruus ja viive todennäköisesti korreloivat, jolloin on varottava tekemästä klustereista tarpeettoman suuria.
+Klusteroinnin pitäisi kuitenkin mahdollistaa helpompi ja edullisempi käyttöönotto, koska tarvitaan suhteessa vähemmän reunasolmuja ja reunasolmujen ylläpito on näin ollen edullisempaa.
 Kompromissina on kuitenkin suurempi viive reunasolmujen ja asiakaslaitteiden välillä. 
-Onkin siis tärkeää että reunasolmuja ei viedä liian kauas reunasta, jolloin palvelun laatu heikkenee \cite{mao17}. 
+Onkin siis tärkeää että reunasolmuja ei viedä liian kauas reunasta, jottei palvelun laatu heikkene \cite{mao17}. 
 
 
-Kuitenkin riippumatta litteän rakenteen sijainnista, sen pohjimmaisena ongelmana on resurssien kiinteys. Ympäristössä jossa reunalaskennan määrä vaihtelee, seuraa tilanne jossa reunasolmu on joko ylikuormitettuna tai alikuormitettuna suhteessa käytössä oleviin resursseihin \cite{tong2016hierarchical}. Jotta reunasolmut pystyisivät suoriutumaan kaikesta reunalaskennasta, reunasolmujen resurssit jouduttaisiin mitoittamaan rasitushuippujen mukaan. Tästä seuraa lähes jatkuvaa alikuormitusta, joka tarkoittaa että reunajärjestelmän kustannukset olisivat korkeammat kuin olisi tarpeen. 
+Kuitenkin riippumatta litteän rakenteen sijainnista, sen pohjimmaisena ongelmana on resurssien kohdistuminen jollekkin tietylle palvelualueelle. Ympäristössä jossa reunalaskennan määrä vaihtelee, seuraa tilanne jossa reunasolmu on joko ylikuormitettuna tai alikuormitettuna suhteessa käytössä oleviin resursseihin \cite{tong2016hierarchical}. Jotta reunasolmut pystyisivät suoriutumaan kaikesta reunalaskennasta, reunasolmujen resurssit jouduttaisiin mitoittamaan rasitushuippujen mukaan. Tästä seuraa lähes jatkuvaa alikuormitusta, joka tarkoittaa että reunajärjestelmän kustannukset kasvavat resurssihankintojen seurauksena. 
 Tämän ongelman ratkaisuksi on esitetty hierarkkista järjestelmää.
 
 
@@ -75,7 +76,8 @@ Ehdotettujen reuna-arkkitehtuurien keskuudessa on huomattavia eroja reunasolmuje
 
 Reuna-arkkitehtuurin riippuvuutta ympäröiviin järjestelmiin voidaan yrittää pienentää esimerkiksi ottamalla käyttöön SDN. SDN mahdollistaa tietoliikennevirtojen ohjaamisen siten että reunajärjestelmän tietoliikennevirrat eivät vaikuta mobiiliverkon toimintaan. Tämän seurauksena reunajärjestelmä on täysin vapaa sijoittamaan reunasolmut mobiiliverkon ulkopuolelle
 
-Toinen ehdotettu ratkaisu on sitoa reunasolmut tukiasemiin. Tämä pakottaa järjestelmän reunasolmuille litteän rakenteen. Järjestelmä on siis reunasolmujen osalta sidoksissa mobiiliverkkoon. Small Cell Cloud (käsitellään kappaleessa \ref{scc}) käyttää tämänkaltaista ratkaisua. Ideana on että tukiasemat ovat tyypiltään \textit{pienisoluisia}, jolloin tukiaseman kantama olisi pieni ja täten palveltavien asiakaslaitteiden määrä myös vähäinen. Tämä mahdollistaisi reunalaskennan vaatimien laskentaresurssien sijoittaminen tukiaseman yhteyteen.
+Toinen ehdotettu ratkaisu on sitoa reunasolmut tukiasemiin. Tämä pakottaa järjestelmän reunasolmuille litteän rakenteen.
+Tällainen järjestelmä on siis reunasolmujen osalta sidoksissa mobiiliverkkoon. Small Cell Cloud (käsitellään kappaleessa \ref{scc}) käyttää tämänkaltaista ratkaisua. Ideana on että tukiasemat ovat tyypiltään \textit{pienisoluisia}, jolloin tukiaseman kantama olisi pieni ja täten palveltavien asiakaslaitteiden määrä myös vähäinen. Tämä mahdollistaisi reunalaskennan vaatimien laskentaresurssien sijoittaminen tukiaseman yhteyteen.
 
 Kolmas ja viimeinen tyyppi on kokonaan mobiiliverkon ulkopuolelle sijoitettu reunajärjestelmä. Tämä antaa käytännössä täydellisen vapauden sijoitella reunasolmuja. Esimerkki tämänkaltaisesta järjestelmästä on Follow Me Cloud (käsitellään kappaleessa \ref{fmc}). Reunajärjestelmän sijoittaminen mobiiliverkon ulkopuolelle tarkoittaa että asiakaslaitteen ja reunasolmun välinen viive on vähintään se aika joka tietoliikenteellä kuluu mobiiliverkossa. Follow Me Cloudin tapauksessa oletetaankin että mobiiliverkon sisäistä viivettä voitaisiin pienentää ja että reunasolmut sijaitsisivat välittömästi mobiiliverkon ulkopuolella. 
 
