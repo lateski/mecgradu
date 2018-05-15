@@ -24,11 +24,14 @@ Reunavyöhyke on tämän tutkielman puitteissa määritelty termi, jolla viitata
 \subsubsection{Litteä rakenne}
 Litteällä rakenteella tarkoitetaan että reunasolmut sijaitsevat vain yhdessä kerroksessa. Litteän järjestelmän keskeisin päätös on valita taso, jolle reunasolmut sijoitetaan.
 
-Yksinkertainen esimerkki litteästä toteutuksesta olisi reunajärjestelmä, jossa reunasolmut sijoitettaisiin mobiiliverkon tukiasemien yhteyteen kuten kuvassa \ref{fig:rakenne} a). Esimerkin järjestelmä  toteuttaisi äärimmäistä hajautusta ja lisäksi se olisi fyysisesti erittäin lähellä asiakaslaitetta. Tällaisessa rakenteessa on kuitenkin ilmeisiä ongelmia. Järjestelmän käyttö olisi teoriassa mahdollista ainoastaan niiden tukiasemien ympäristössä, joissa reunajärjestelmä sijaitsee. Tämän seurauksena reunalaskennan laajamittainen käyttöönotto olisi riippuvainen tukiasemiin sijoitettavien reunasolmujen hankinnasta.
+Yksinkertainen esimerkki litteästä toteutuksesta olisi reunajärjestelmä, jossa reunasolmut sijoitettaisiin mobiiliverkon tukiasemien yhteyteen kuten kuvassa \ref{fig:rakenne} a). Tämän kuvan esimerkin järjestelmä  toteuttaisi äärimmäistä hajautusta. Se olisi fyysisesti erittäin lähellä asiakaslaitetta ja näin ollen pystyisi teoriassa tarjoamaan palvelua kaikkein pienimmällä viiveellä \cite{mach17mobile}.
+Vaikka viiveet olisivat pienet, on tällaisessa ratkaisussa ongelmia.
+Järjestelmän käyttö olisi teoriassa mahdollista ainoastaan niiden tukiasemien ympäristössä, joissa reunajärjestelmä sijaitsee. Tämän seurauksena reunalaskennan laajamittainen käyttöönotto olisi riippuvainen tukiasemiin sijoitettavien reunasolmujen hankinnasta. Kun otetaan huomioon trendi, jossa mobiiliverkon solut pienevät, niin ainoastaan tukiasemiin sijoitettavien reunasolmujen käyttöönotto vaikuttaa epärealistiselta skenaariolta.
 
 Mikäli oletetaan, että siellä missä laskennan tarve on suurin, on myös eniten ihmisiä. Yleensä tällaisissa sijainneissa myös reunajärjestelmän resursseja varten tarvittavien tilojen hinnat ovat korkeammat, jolloin reunalaskennan tuominen lähelle asiakasta nostaa reunajärjestelmän hintaa \cite{mao17}.
-Vaihtoehtoinen ratkaisu olisi siirtää reunasolmuja kauemmaksi tukiasemista. Esimerkiksi siten että yksi reunasolmu vastaisikin useamman tukiaseman kautta tulevasta reunalaskennasta. Mobiiliverkko kontekstissa, reunasolmu sijaitsisi siis joko tukiasemien ja EPC:n välillä tai vasta EPC:n takana.  
-Useamman tukiaseman niputtamista yhden reunasolmun vastuulle kutsutaan klusteroinniksi. 
+Vaihtoehtoinen ratkaisu olisi siirtää reunasolmuja kauemmaksi tukiasemista. Esimerkiksi siten, että yksi reunasolmu vastaisikin useamman tukiaseman kautta tulevasta reunalaskennasta.
+Mobiiliverkko kontekstissa, reunasolmu sijaitsisi siis joko tukiasemien ja EPC:n välillä tai vasta EPC:n takana.  
+Useamman tukiaseman niputtamista yhden reunasolmun vastuulle kutsutaan klusteroinniksi \cite{RefWorks:doc:59d4b224e4b015703b881ab9}. 
 Keskeisenä haasteena klusteroinnissa on valita oikean kokoiset klusterit ja sijoittaa oikea määrä resursseja kuhunkin klusteriin \cite{malandrino2016close}.
 Klusterin suuruus ja viive todennäköisesti korreloivat, jolloin on varottava tekemästä klustereista tarpeettoman suuria.
 Klusteroinnin pitäisi kuitenkin mahdollistaa helpompi ja edullisempi käyttöönotto, koska tarvitaan suhteessa vähemmän reunasolmuja ja reunasolmujen ylläpito on näin ollen edullisempaa.
@@ -65,21 +68,19 @@ Edellisessä kappaleessa järjestelmän rakenteen oletettiin olevan vapaa sijoit
 Todellisuudessa reuna-arkkitehtuurit kuitenkin asettavat joitakin rajoitteita reunasolmujen sijaintien suhteen. Seuraavaksi käsitellään reuna-arkkitehtuurin vaikutusta reunasolmujen sijoitteluun.
 
 %mobiiliverkko
-Koska mobiiliverkko on usein asiakaslaitetta lähimpänä sijaitseva verkko, reuna-arkkitehtuurit ovat pyrkineet muodostamaan integraation sen kanssa.
-Mobiiliverkon ja reunajärjestelmän integraatioissa voidaan puhua integraation sitovuudesta. 
-Tällä tarkoitetaan kuinka sidoksissa reunajärjestelmä on mobiiliverkon rakenteeseen.
-Monet ehdotetuista reuna-arkkitehtuureista ovat pyrkineet pitämään sidonnaisuutta mahdollisimman vähäisenä, jotta reunajärjestelmän käyttöönotto ei vaatisi mobiiliverkon uusimista.
-Mutta mobiiliverkosta saatava tieto esimerkiksi tukiasemien handoverit ovat reunajärjestelmän kannalta oleellista tietoa, kun päätetään asiakaslaitteen laskennan suorittavasta reunasolmusta.
-Tämä tarkoittaa siis että on lähes pakollista sijoittaa hallinnollisia toimia mobiiliverkon yhteyteen.
-Vaikka reunan hallinnolliset toimet olisivat sidottuina mobiiliverkkoon, reunasolmujen sijoitteluun on yleensä enemmän vapauksia. Etenkin tilanteessa jossa reunasolmulla ei itsellään ole hallinnollisia tehtäviä.
-Ehdotettujen reuna-arkkitehtuurien keskuudessa on huomattavia eroja reunasolmujen mahdollisten sijaintien suhteen. Näitä käydään tarkemmin läpi luvussa \ref{ratkaisut}, jossa jokaisen arkkitehtuuriehdotuksen toiminnallisuus esitellään. 
+Tutkielmaan valitut arkkitehtuurit sitovat jo lähtökohtaisesti reunajärjestelmää osaksi mobiiliverkkoa. Integraation tyypillä on tässäkin yhteydessä vaikutus siihen, kuinka paljon reunajärjestelmän rakenne on sidoksissa mobiiliverkkoon.
+Tämän lisäksi kommunikaatioväylien toteutus vaikuttaa rakenteeseen. 
+Arkkitehtuureissa joiden kommunikaatioväylät eivät nojaa mobiiliverkon sisällä tapahtuvaan reititykseen ovat vapaampia sijoittamaan reunasolmuja. 
+Hallinnolliset toimijat ovat, joko mobiiliverkkoon integroituina tai mobiiliverkon ulkopuolella. Hallinnollisien entiteettien sijaintiin vaikuttaa pääasiassa se, onko niillä rajapintaa mobiiliverkon sisäisten toimijoiden kanssa. Mikäli on, niin ne sijaitsevat loogisesti osana mobiiliverkkoa. 
+Koska reunasolmujen sijoittuminen on hyvin riippuvaista arkkitehtuuristaehdotuksesta, reunasolmujen sijoittumista käsitellään seuraavassa kappaleessa jokaisen arkkitehtuuriehdotuksen yhteydessä.
 
-Reuna-arkkitehtuurin riippuvuutta ympäröiviin järjestelmiin voidaan yrittää pienentää esimerkiksi ottamalla käyttöön SDN. SDN mahdollistaa tietoliikennevirtojen ohjaamisen siten että reunajärjestelmän tietoliikennevirrat eivät vaikuta mobiiliverkon toimintaan. Tämän seurauksena reunajärjestelmä on täysin vapaa sijoittamaan reunasolmut mobiiliverkon ulkopuolelle
+Reunanajärjestelmän riippuvuutta mobiiliverkkoon voidaan yrittää pienentää, esimerkiksi ottamalla SDN käyttöön. SDN mahdollistaa tietoliikennevirtojen ohjaamisen siten, että reunajärjestelmän tietoliikennevirrat eivät vaikuta mobiiliverkon toimintaan. Tämän seurauksena reunajärjestelmä on täysin vapaa sijoittamaan reunasolmut haluamiinsa sijainteihi. Keskeinen viiveeseen vaikuttava ratkaisu on SDN verkon sijoittuminen mobiiliverkon hierarkiassa.
 
-Toinen ehdotettu ratkaisu on sitoa reunasolmut tukiasemiin. Tämä pakottaa järjestelmän reunasolmuille litteän rakenteen.
-Tällainen järjestelmä on siis reunasolmujen osalta sidoksissa mobiiliverkkoon. Small Cell Cloud (käsitellään kappaleessa \ref{scc}) käyttää tämänkaltaista ratkaisua. Ideana on että tukiasemat ovat tyypiltään \textit{pienisoluisia}, jolloin tukiaseman kantama olisi pieni ja täten palveltavien asiakaslaitteiden määrä myös vähäinen. Tämä mahdollistaisi reunalaskennan vaatimien laskentaresurssien sijoittaminen tukiaseman yhteyteen.
+Toinen ehdotettu ratkaisu on liittä reunasolmut tukiasemiin. Tämä pakottaa järjestelmälle litteän rakenteen.
+Tällainen järjestelmä on siis reunasolmujen osalta sidoksissa mobiiliverkon rakenteeseen. Small Cell Cloud (käsitellään kappaleessa \ref{scc}) esittää tämänkaltaista ratkaisua.
+Ideana on että tukiasemien tarjoamat solut ovat pieniä, jolloin tukiaseman kantama olisi pieni ja täten palveltavien asiakaslaitteiden määrä myös vähäinen. Tällöin tukiasemaan tarvittavien reunalaskentaresurssien määrä on myös vähäisempi, verrattuna tilanteeseen jossa tukiasemalla olisi enemmän palveltavia. 
 
-Kolmas ja viimeinen tyyppi on kokonaan mobiiliverkon ulkopuolelle sijoitettu reunajärjestelmä. Tämä antaa käytännössä täydellisen vapauden sijoitella reunasolmuja. Esimerkki tämänkaltaisesta järjestelmästä on Follow Me Cloud (käsitellään kappaleessa \ref{fmc}). Reunajärjestelmän sijoittaminen mobiiliverkon ulkopuolelle tarkoittaa että asiakaslaitteen ja reunasolmun välinen viive on vähintään se aika joka tietoliikenteellä kuluu mobiiliverkossa. Follow Me Cloudin tapauksessa oletetaankin että mobiiliverkon sisäistä viivettä voitaisiin pienentää ja että reunasolmut sijaitsisivat välittömästi mobiiliverkon ulkopuolella. 
+Kolmas ja viimeinen tyyppi on kokonaan mobiiliverkon ulkopuolelle sijoitetut reunasolmut. Tämä antaa käytännössä täydellisen vapauden sijoitella reunasolmuja. Esimerkki tämänkaltaisesta arkkitehtuurista on Follow Me Cloud (käsitellään kappaleessa \ref{fmc}). Reunajärjestelmän sijoittaminen mobiiliverkon ulkopuolelle tarkoittaa, että asiakaslaitteen ja reunasolmun välinen viive on vähintään se aika joka tietoliikenteellä kuluu mobiiliverkossa. Follow Me Cloudin tapauksessa oletetaankin, että mobiiliverkon aiheuttamaa viivettä voitaisiin pienentää ja että reunasolmut sijaitsisivat välittömästi mobiiliverkon ulkopuolella. 
 
 %arkkitehtuurin asettamat rajoitteet
 %hallinnon sijainti
