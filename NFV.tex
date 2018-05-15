@@ -1,16 +1,16 @@
-\subsection{Network Function Virtualization} \label{nfv}
+\subsection{Network function virtualization} \label{nfv}
 NFV (Network function virtualization) lähtee liikkeelle ongelmasta, jossa nykyisen verkkolaitteiston käyttöikä on lyhyttä ja toiminnot ovat hajautettuina useisiin suljettuihin (proprietary) laitteisiin \cite{nfvwhite}. 
 
 NFV:n tarkoituksena on eriyttää verkkolaitteisto ja verkkotoiminnot. Tämä toteutuisi siten, että erillistä verkkolaitteistoa ei enää tarvittaisi ja nykyisten verkkolaitteiden toiminnallisuudet toteutettaisiin tavallisella palvelinlaitteistolla ohjelmatasolla. Periaate on hyvin samankaltainen kuin perinteisten palvelimien siirtyminen virtuaalikoneita hyödyntävään ympäristöön.
 Virtualisoidulla verkkotoiminnallisuudella (jossain yhteyksissä VNF, Virtualized network function) tarkoitetaan ohjelmallisesti toteutettua verkkotoimintoa. Tämä mahdollistaa verkkotoiminnallisuuksien suorittamisen tavallisella palvelinlaitteistoilla hyprvisorin päällä. 
 
-Verkkotoimintojen toteuttaminen virtuaalisina, mahdollistaisi useamman toiminnon sijoittamisen samaan laitteistoon. Tämä ainakin teoriassa mahdollistaisi myös paremman skaalautuvuuden. Myös verkkotoiminnallisuuksien käyttöönotto helpottuu mikäli erillisen laitteiston asennusta ei tarvita. Virtuaalisten verkkotoimintojen avulla on myös mahdollista säästää kaappitilaa, sekä pienentää sähkönkulutusta \cite{nfvedge}.
+Verkkotoimintojen toteuttaminen virtuaalisina, mahdollistaisi useamman toiminnon sijoittamisen samaan laitteistoon. Tämä ainakin teoriassa mahdollistaisi myös paremman skaalautuvuuden. Myös verkkotoiminnallisuuksien käyttöönotto helpottuu mikäli erillisen laitteiston asennusta ei tarvita. Virtuaalisten verkkotoimintojen avulla on myös mahdollista säästää kaappitilaa sekä pienentää sähkönkulutusta \cite{nfvedge}.
 
-NFV on soveltuva mille tahansa data-tason prosessoinnille ja kontrolli-tason toiminnoille \cite{nfvwhite}. NFV siis soveltuu toteutustavaksi monille erilaisille verkkoitoiminnoille mobiiliverkoissa ja perinteisissä tietoliikenneverkoissa. Esimerkkeinä käyttökohteista ETSI:n NFV whitepaperissä on esitetty muunmuassa reitittimet, palomuurit, kuormantasaajat, eNodeB:t ja MME:t. ETSI on pohtinut NFV:n laajamittaisen käyttöönoton mahdollisuuksia 5G-verkkoingrastruktuurissa ja mainitsee reunalaskennan yhtenä sen käyttötapauksena \cite{etsinfv5g}.
+NFV on soveltuva mille tahansa datatason (data plane) prosessoinnille ja kontrollitason (control plane) toiminnoille \cite{nfvwhite}. NFV siis soveltuu toteutustavaksi monille erilaisille verkkoitoiminnoille mobiiliverkoissa ja perinteisissä tietoliikenneverkoissa. Esimerkkeinä käyttökohteista ETSI:n NFV white paperissä on esitetty muun muassa reitittimet, palomuurit, kuormantasaajat, eNodeB:t ja MME:t. ETSI on pohtinut NFV:n laajamittaisen käyttöönoton mahdollisuuksia 5G-verkkoingrastruktuurissa ja mainitsee reunalaskennan yhtenä sen käyttötapauksena \cite{etsinfv5g}.
 
-Yksi NFV:hen pohjautuvista ideoista on C-RAN (Cloud radio acceess network), joka pyrkii virtualisoimaan tukiaseman toinnot. Käytännössä tukiaseman fyysiseen sijaintiin vietäisiin kuituyhteys ja RRU (Remote radio unit).
-RRU sisältäisi radiosignalointiin tarvittavan laitteiston sekä laitteiston joka muuttaa radion ja kuituyhteyden välillä olevaa tietoliikennettä analogisen ja digitaalisen muodon välillä.
-Kuituyhteys välittää signaalin ohjelmallisesti toteutetulle BBU:lle (Baseband Unit), joka hoitaa kaikki tukiaseman toiminnot\cite{chih2014recent}.
+Yksi NFV:hen pohjautuvista ideoista on C-RAN (Cloud radio acceess network), joka pyrkii virtualisoimaan tukiaseman toinnot \cite{chih2014recent}. Käytännössä tukiaseman fyysiseen sijaintiin vietäisiin kuituyhteys ja RRU (Remote radio unit).
+RRU sisältäisi radiosignalointiin tarvittavan laitteiston sekä laitteiston, joka muuttaa radion ja kuituyhteyden välillä olevaa tietoliikennettä analogisen ja digitaalisen muodon välillä.
+Kuituyhteys välittää signaalin ohjelmallisesti toteutetulle BBU:lle (Baseband Unit), joka hoitaa kaikki tukiaseman toiminnot \cite{chih2014recent}.
 BBU:t voitaisiin virtualisoida ja suorittaa keskitetysti palvelinsaleissa.
 Toistaiseksi tukiaseman resurssit on mitoitettu suurimman mahdollisen kuorman mukaan. Virtualisoinnin avulla BBU:n resurssit olisivat paremmin skaalattavissa.
 Kappaleessa \ref{concert} esitellään reuna-arkkitehtuuri, joka rakentuu C-RAN tyyliseen verkkoon.

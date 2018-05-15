@@ -21,7 +21,7 @@ Reunavyöhyke on tämän tutkielman puitteissa määritelty termi, jolla viitata
 \caption{Esimerkki rakenteet a) litteä rakenne b) hierarkkinen rakenne kolmella tasolla} \label{fig:rakenne}
 \end{figure}
 
-\subsubsection{Litteä rakenne}
+\subsection{Litteä rakenne}
 Litteällä rakenteella tarkoitetaan että reunasolmut sijaitsevat vain yhdessä kerroksessa. Litteän järjestelmän keskeisin päätös on valita taso, jolle reunasolmut sijoitetaan.
 
 Yksinkertainen esimerkki litteästä toteutuksesta olisi reunajärjestelmä, jossa reunasolmut sijoitettaisiin mobiiliverkon tukiasemien yhteyteen kuten kuvassa \ref{fig:rakenne} a). Tämän kuvan esimerkin järjestelmä  toteuttaisi äärimmäistä hajautusta. Se olisi fyysisesti erittäin lähellä asiakaslaitetta ja näin ollen pystyisi teoriassa tarjoamaan palvelua kaikkein pienimmällä viiveellä \cite{mach17mobile}.
@@ -46,7 +46,7 @@ Tämän ongelman ratkaisuksi on esitetty hierarkkista järjestelmää.
 %In 2012, Flavio Bonomi and his colleagues introduced the term fog computing to refer to this dispersed cloud infrastructure. F. Bonomi et al., “Fog Computing and Its Role in the Internet of Things,”Proc. 1st Edition MCC Workshop Mobile Cloud Computing (MCC 12)
 
 
-\subsubsection{Hierarkkinen rakenne}
+\subsection{Hierarkkinen rakenne}
 Hierarkkinen rakenne on parannusehdotus reunalaskennan oletetulle litteälle rakenteelle \cite{tong2016hierarchical}.
 Reunasolmujen hierarkkisella asettelulla tarkoitetaan järjestelmää, jossa reunasolmut on jaettu kerroksiin. Alimmalla kerroksella sijaitsevat reunasolmut ovat lähimpänä asiakaslaitetta, mutta niiden sisältämät laskentaresurssit ovat vähäisiä. 
 Ideana on että alemmalla kerroksessa sijaitsevat reunasolmut voivat siirtää laskentaa ylemmällä kerroksella sijaitsevalle reunasolmulle, jolla on enemmän resursseja. Tasojen määrälle ei ole mitään rajaa, mutta useimmat ehdotukset sisältävät kaksi tai kolme tasoa. Kuvassa \ref{fig:rakenne} b) esimerkki kolmetasoisesta hierarkiasta.
@@ -59,7 +59,7 @@ Tong et al. esittävät tutkimuksessaan vertailua litteälle ja erilaisille hier
 Vertailun mittarina käytettiin aikaa joka reunapalvelulla kului vastata annettuihin laskennallisiin tehtäviin. Kolmikerroksisen mallin etuina oli laskentaresurssien määrä ylemmillä kerroksilla. Tällöin etenkin ruuhkaisissa tilanteissa se suoriutui tehtävistään nopeammin kuin litteä. Lisäksi tutkimuksessa todettiin, että ylemmillä tasoilla sijaitseva tehokkaampi laskenta pystyy kompensoimaan siirtämisestä aiheutuvaa viivettä. Huomattakoon kuitenkin että tutkimuksessa käytettävä kuorma oli tyypiltään hienojakoista ja pientä. 
 
 
-\subsubsection{Yhteenveto}
+\subsection{Yhteenveto}
 Hierarkkinen järjestelmä on potentiaalinen vaihtoehto litteälle rakenteelle. Koska reunalaskennalle on monia hyvin erilaisia sovelluskohteita, hierarkkinen rakenne vaatii tarkempaa tutkimusta erilaisilla reunalaskennan tyypeillä. Litteän rakenteen heikkoina puolina voidaan pitää sen kyvyttömyyttä sopeutua kuorman epätasaisuuteen, sekä järjestelmän ylläpidon kustannuksia, mikäli järjestelmää päätetään hajauttaa aggressiivisesti. Litteä järjestelmä on rakenteeltaan yksinkertainen ja se tukee esimerkiksi olemassa olevaa mobiiliverkon tukiasemien rakennetta. 
 
 
