@@ -1,18 +1,26 @@
 \subsection{CONCERT} \label{concert}
+
+\begin{figure}[tb]
+\includegraphics[width = \textwidth]{CONCERT.eps}
+\caption{CONCERT arkkitehtuuri} \label{fig:concert}
+\end{figure}
+
+
 CONCERT on virtualisointiin keskittyvä mobiiliverkon ja reunalaskennan arkkitehtuuri \cite{liu2014concert}.
 Nykyinen LTE-verkko kostuu joukosta erilaisia laitteita, joilla jokaisella on jokin spesifi tehtävä.
 CONCERT pyrkii virtualisoinnilla vähentämään tällaisten laitteiden määrää.
 Kyseessä on siis NFV:tä hyödyntävä ratkaisu.
 Ehdotuksen tavoitteena on että virtualisoinnille yleiset hyödyt pätisivät myös tässä.
-Tavoitteena on että toimintojen käyttöönotto olisi vähemmän riippuvainen fyysisiten laitteiden asentamisesta, toimintojen tuottamiseen käytettävät resurssit skaalautuisivat paremmin sekä resurssien käyttöaste olisi parempi.
-Näiden tavoitteiden ehtona on käytännössä kaikkien mobiiliverkon toimintojen siirtämisen virtualisoituun muotoon, alkaen tukiasemista aina EPC:n toimintoihin asti.
+Tavoitteena on että toimintojen käyttöönotto olisi vähemmän riippuvainen fyysisiten laitteiden asentamisesta, toimintojen tuottamiseen käytettävät resurssit skaalautuisivat paremmin ja että resurssien käyttöaste olisi parempi.
+Näiden tavoitteiden ehtona on käytännössä kaikkien mobiiliverkon toimintojen muuntaminen ohjelmalliseen muotoon ja virtualisoida ne.
+Tämä pätee kaikkiin laitteisiin alkaen tukiasemista ja edeten aina EPC:n komponentteihin asti.
 Koska muutos on suuri, CONCERT:n tavoitteena on seuraavan sukupolven mobiiliverkko, eikä integraatio nykyisiin mobiiliverkkoihin.
-CONCERTin idea on pääpiirteittäin yhdenmukainen ETSI:n NFV näkemyksen \cite{etsinfv5g} kanssa, NFV:n hyödyntämisestä viidennen generaation mobiiliverkkojen yhteydessä.
+CONCERT:n idea on pääpiirteittäin yhdenmukainen ETSI:n NFV näkemyksen \cite{etsinfv5g} kanssa, NFV:n hyödyntämisestä viidennen generaation mobiiliverkkojen yhteydessä.
 
 Yleisen palvelinlaitteiston hyödyntäminen palveluiden tuottamiseen mahdollistaa useiden eri toimintojen sijoittamisen virtualisoituina samaaan fyysiseen laitteistoon.
 CONCERT ehdotuksen on tuottaa sekä mobiiliverkon toiminnallisuudet, että reunapalvelut samalla laitteistolla. 
-Mobiiliverkon toimintojen virtualisointia on ehdotettu ennenkin. Esimerkiksi kappaleessa \ref{nfv} käsiteltiin C-RAN tyyppistä ratkaisua. C-RAN tavoitteena on virtualisoida tukiaseman toiminnalliset osat, siten että ne voitaisiin keskittää virtualisoituina palvelinsaleihin. 
-CONCERT:n mukaan tämänkaltainen ratkaisu johtaisi liiallisesti keskitettyyn ja fyysisesti kaukana sijaitsevaan toteutukseen, jossa reunalaskennan tai muiden lyhyistä viiveistä riippuvaisten palveluiden toteuttaminen ei onnistuisi. Lisäksi CONCERT haluaisi tukiasemien toimintojen lisäksi virtualisoi nykyisen EPC:n alaiset toiminnot.
+Mobiiliverkon toimintojen virtualisointia on ehdotettu ennenkin. Esimerkiksi kappaleessa \ref{nfv} käsiteltiin C-RAN tyyppistä ehdotusta. C-RAN tavoitteena on virtualisoida tukiaseman toiminnalliset osat, siten että ne voitaisiin keskittää virtualisoituina palvelinsaleihin. 
+CONCERT:n mukaan tämänkaltainen ratkaisu johtaisi liiallisesti keskitettyyn ja fyysisesti kaukana sijaitsevaan toteutukseen, jossa reunalaskennan tai muiden lyhyistä viiveistä riippuvaisten palveluiden toteuttaminen ei onnistuisi \cite{liu2014concert}. Lisäksi CONCERT haluaisi tukiasemien toimintojen lisäksi virtualisoi nykyisen EPC:n alaiset toiminnot.
 CONCERT ehdottaa liiallisen keskittämisen välttämisesksi resurssien sijoittelua hierarkiseen malliin.
 Kolmetasoisen hierarkian resurssit on jaettu kolmeen tasoon: paikalliseen, alueelliseen ja keskus. 
 Paikallisen tason resurssit olisivat kaikkein vähäisimmät ja ne sijatsisivat tukiasemien välittömässä yhteydessä.
