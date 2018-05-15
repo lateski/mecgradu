@@ -1,9 +1,6 @@
 \subsection{CONCERT} \label{concert}
 
-\begin{figure}[tb]
-\includegraphics[width = \textwidth]{CONCERT.eps}
-\caption{CONCERT arkkitehtuuri} \label{fig:concert}
-\end{figure}
+
 
 
 CONCERT on virtualisointiin keskittyvä mobiiliverkon ja reunalaskennan arkkitehtuuri \cite{liu2014concert}.
@@ -16,6 +13,11 @@ Näiden tavoitteiden ehtona on käytännössä kaikkien mobiiliverkon toimintoje
 Tämä pätee kaikkiin laitteisiin alkaen tukiasemista ja edeten aina EPC:n komponentteihin asti.
 Koska muutos on suuri, CONCERT:n tavoitteena on seuraavan sukupolven mobiiliverkko, eikä integraatio nykyisiin mobiiliverkkoihin.
 CONCERT:n idea on pääpiirteittäin yhdenmukainen ETSI:n NFV näkemyksen \cite{etsinfv5g} kanssa, NFV:n hyödyntämisestä viidennen generaation mobiiliverkkojen yhteydessä.
+
+\begin{figure}[tb]
+\includegraphics[width = \textwidth]{CONCERT.eps}
+\caption{CONCERT arkkitehtuuri. Mukaelma julkaisussa \cite{liu2014concert} esitetystä kuvasta} \label{fig:concert}
+\end{figure}
 
 Yleisen palvelinlaitteiston hyödyntäminen palveluiden tuottamiseen mahdollistaa useiden eri toimintojen sijoittamisen virtualisoituina samaaan fyysiseen laitteistoon.
 CONCERT ehdotuksen on tuottaa sekä mobiiliverkon toiminnallisuudet, että reunapalvelut samalla laitteistolla. 
@@ -39,5 +41,6 @@ Lisäksi kontrollikerroksen tehtävänä on lisäksi konfiguroida SDN reititykse
 CONCERTin arkkitehtuurikuvaus sisältää maininnan virtualisoitujen palveluiden dynaamisesta migratoinninsta, mutta ei määrittele sen tarkempaa kuvausta sen toiminnasta. Voidaan kuitenkin olettaa että se kattaa reunalaskennan siirtämistä esimerkiksi tilanteissa joissa käytössä olevan reunasolmun resurssit eivät riitä tai aikavaatimuksiin voitasiin vastata paremmin jollain toisella sijainnilla.
 
 Virtualisoinnin voidaan sanoa olevan CONCERT:n ydin. CONCERT hyödyntää virtualisointia mobiiliverkon toimintojen tuottamiseen ja reunalaskennan tarjoamiseen. Tämän mahdollistaa yhtenäiset resurssit molemmille, sekä vähentää tarvetta erillisille laitteitoille.
-Hierarkisen rakenteen avulla CONCERT tavoittelee parempaa resurssien käyttöastetta sekä  reunapalveluiden vaatimien aikavaatimuksien täyttämistä.
-NFV, SDN ja mobiiliverkon toimintojen toteuttaminen ohjelmallisina ovat kaikki edellytyksiä CONCERT:n toteutumiseksi. Kyseessä on siis hyvin suuri muutos myös mobiiliverkon toimintoihin.
+Hierarkkisen rakenteen avulla CONCERT tavoittelee parempaa resurssien käyttöastetta sekä  reunapalveluiden vaatimien aikavaatimuksien täyttämistä.
+NFV, SDN ja mobiiliverkon toimintojen toteuttaminen ohjelmallisina ovat kaikki edellytyksiä CONCERT:n toteutumiseksi. Toistaiseksi kaikki näistä ovat vasta kehityksessä.
+Kyseessä on kokonaisuudessaan hyvin suuri muutos mobiiliverkon toimintaan, eikä ainoastaan vanhojen toiminnallisuuksien uudellentoteutus virtuaalisina.

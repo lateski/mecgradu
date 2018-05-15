@@ -1,16 +1,16 @@
 \begin{figure}[tb]
 \includegraphics[width = \textwidth]{SCC.eps}
-\caption{SCC arkkitehtuuri jossa SCM on integroitu osaksi EPC:tä} \label{fig:scc}
+\caption{SCC arkkitehtuuri, jossa SCM on integroitu osaksi EPC:tä \cite{lobillo15scc} } \label{fig:scc}
 \end{figure}
 
 \subsection{Small Cell Cloud} \label{scc}
 
-Small Cell Cloud (SCC) on reuna-arkkitehtuuri ehdotus LTE tyyppiseen mobiiliverkkoon.
+Small Cell Cloud (SCC) on reuna-arkkitehtuuri ehdotus LTE-tyyppiseen mobiiliverkkoon.
 Idean premisseinä toimivat laskentaresurssien lisääminen mobiiliverkon tukiasemiin ja mobiiliverkon solujen pieneneminen.
 Näillä toimilla voitaisiin vastata tietoliikenteen määrän kasvuun sekä tarjota reunalaskentaa uutena palveluna.
 SCC:n ratkaisuympäristönä toimii LTE verkko, jonka kehitystä ehdotettu ratkaisu pyrkii myötäilemään.
 Pienemmät solut tarkoittavat että tukiasemat sijaitsevat lähempänä asiakasta, joka puolestaan implikoi asiakaslaitteille nopeampaa tiedonsiirtoväylää radiorajapinnassa \cite{lobillo15scc}.
-Seuraavaksi käsitellään SCC:n toiminnallisuus aloittaen läpikäynti toimijoista. Lopuksi käsitellään tietoliikenneratkaisuja joita SCC:n yhteydessä on ehdotettu.
+Seuraavaksi esitellään SCC yleisellä tasolla, aloittaen läpikäynti toimijoista. Lopuksi käsitellään tietoliikenneratkaisuja, joita SCC:n yhteydessä on ehdotettu.
 
 SCC:ssä laskentaresurssit on sijoitettu eNodeB tukiasemiin. SCC:n tapauksessa puhutaan SCeNBce:stä (Small-cell eNodeB computing-enhanced), eli laskentaresursseilla varustetusta piensolutukiasemasta \cite{lobillo15scc}.
 Reunalaskentaan käytettävät resurssit ovat integroituina osaksi tukiasemaa \cite{puente15seamless}.
@@ -20,7 +20,7 @@ Yhteistoiminta mahdollistaa esimerkiksi radiorajapinnasta saatavien tietojen hy�
 Lisäksi yhteisillä jaetuilla resursseilla vältyttäisiin erillisen laitteiston lisäämiseltä \cite{puente15seamless}.
 
 SCC:n hallinnollisista toimista vastaava entiteetti on Small Cell Manager (SCM) \cite{lobillo15scc}.
-SCM olisi MME:n kaltainen itsenäinen toimija, mutta vastaisi reunalaskentaan liittyvistä hallinnollisista toimista.
+SCM on MME:n kaltainen itsenäinen toimija, mutta vastaa ainoastaan reunalaskentaan liittyvistä hallinnollisista toimista.
 Tarkoituksena on että SCM on tietoinen reunasolmujen resurssien tilasta ja on kykenevä tekemään päätöksiä reunasovelluksien siirtämisestä sijainnista toiseen. 
 Lisäksi SCM:n tehtävänä on vastata muun muassa asiakaslaitteiden pyyntöihin laskentaresursseista osoittamalla käytettävissä oleva virtuaalikone \cite{dolezal2016performance}.
 SCM voi myös sähkön säästämiseksi sulkea SCeNBce:n reunalaskentatoiminnallisuuden.
@@ -43,20 +43,22 @@ Laskentaresurssien sijoittaminen tukiasemaan tekee resursseista hyvin paikallise
 %SCeNBce tukiasemien hankkiminen vaatii operaattoreilta investointeja sekä lisää ylläpitotyön määrää. (Näiden vuoksi ehkä kantsis miettii, että miksi se on niin tiukasti kiinni siinä televerkossa. Muutenkin useampi operaattori samalla alueella tarkoittaa että jokaisella on myös omat reunapalvelut, joka taas meinaa kokonaiskuvassa että sama palvelu pitää duplikoida monelle operaattorille.)
 
 \subsubsection{Kommunikointi reunapalveluun} \label{GTP}
-Kuten kappaleessa \ref{kommunikaatio} käsiteltiin, tavallisesti asiakaslaitteen tietoliikenne kulkee mobiiliverkon läpi koskemattomana GTP tunnelin sisällä. 
+Kuten kappaleessa \ref{kommunikaatio} käsiteltiin, tavallisesti asiakaslaitteen tietoliikenne kulkee mobiiliverkon läpi koskemattomana GTP-tunnelin sisällä. 
 SCC:n asiakaslaitteen ja reunalaskennan välisen tietoliikenteen reititys on esitelty julkaisussa \cite{puente15seamless}, johon tämä kappale pohjautuu.
 SCC:n tapauksessa asiakaslaitteen liikenne haluttaisiin ohjata kohteesta riippuen joko tukiasemassa sijaitsevalle reunasolmulle tai normaalia reittiä pitkin ulkoverkkoon.
 SCC:ssä on päädytty lisäämään SCeNBce tukiasemaan tietoliikennettä monitoroiva toiminnallisuus.
 
 Kommunikaatio asiakaslaitteen ja tukiaseman välillä suoritetaan DRB väylällä (Data Radio Bearer).
-Perinteisesti tukiasema identifioi asiakaslaitteet radiorajapinnassa DRB ID:n (Data Radio Bearer ID) avulla.
-Tämän jälkeen asiakaslaitteen tietoliikenne on tukiasema kapseloi asiakkaan tietoliikenteen GTP tunneliin, jonka tunnisteena toimii TEID (Tunnel Endopoint ID).
+Tukiasema identifioi asiakaslaitteet radiorajapinnassa DRB ID:n (Data Radio Bearer ID) avulla.
+Asiakaslaitteelta verkkoon suuntautuva liikenne paketoidaan tukiaseman toimesta GTP-tunneliin. Jokaisen GTP-tunnelin tunnisteena toimii TEID (Tunnel Endopoint ID).
 Asiakaslaitteen tietoliikenteen välitys tukiaseman sisällä vaatii siis DRB ID:n ja TEID:n sisältävän muunnostaulun käyttämistä.
 Tätä samaa periaatetta voi hyödyntää reunasolmulle suuntautuvan tietoliikenteen identifiointiin.
 
 Tukiasemaan lisättävän monitoritoiminnallisuus tarkkailee asiakaslaitteen lähettämien pakettien kohde IP-osoitetta, ja mikäli kyseessä on reunapalvelun IP-osoite, monitori ohjaa paketin reunapalvelulle.
+Monitorointi tehdään ennen GTP-tunnelointia.
 Samalla paketista voidaan poimia asiakaslaitteen IP-osoite, joka kirjataan muunnostauluun asiakasta vastaavan TEID:n ja DRB ID:n kanssa.
-Toiseen suuntaan tietoliikenne toimii siten että reunapalvelun asiakaslaitteelle lähettämästä tietoliikenteestä poimitaan kohde IP. Kohde IP:tä vastaava DRB ID poimitaan muunnostaulusta reunapalvelun paketit kapseloidaan DRB väylälle sopiviksi.
+Toiseen suuntaan tietoliikenne toimii siten, että reunapalvelun asiakaslaitteelle lähettämästä tietoliikenteestä poimitaan kohde IP.
+Kohde IP:tä vastaava DRB ID poimitaan muunnostaulusta ja reunapalvelulta tulevat paketit muutetaan DRB väylälle sopiviksi.
 Tällaisen toiminnallisuuden toteuttamisen seurauksena kommunikaatio on asiakaslaitteen ja reunapalvelun näkökulmasta kuin mikä tahansa muukin IP-pohjainen kommunikaatio.
 
 Asiakaslaiteen ja reunasolmun välisen kommunikaation säilymiseen, tilanteessa, jossa asiakaslaite siirtyy toiselle tukiasemalle, ei oteta kantaa. 
