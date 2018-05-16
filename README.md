@@ -3,6 +3,8 @@ Pro Gradu -tutkielma reunalaskenta-arkkitehtuureista. Tutkielma on tyypiltään 
 Ajantasaisin pdf muotoon käännetty kappale löytyy [täältä](https://github.com/lateski/mecgradu/raw/master/reunalaskenta.pdf)
 
 ## Tilannekatsaus
+16.05.2018 - Gradu on nyt viimeistä oikolukua vaille valmis. Jos uudelleen pitäisi tehdä niin valitsisin vieläkin pienemmän sektorin tarkasteltavaksi. Lisäksi tutkimuskysymyksen määrittelyä ei voi tarpeeksi painottaa.
+
 19.04.2018 - Gradun piti olla jo valmis :/ Kirjastossa on tuskallisen kuuma etenkin iltapäivisin. Talvella oli kylmä. Pitää muistaa olla laittamatta lasiseiniä omaan asuntoon. Gradusta sen verran että aivan viimeinen päivä palauttaa gradu on 21.5, siihen mennessä gradu pitäisi olla puristettuna viimeiseen muotoonsa. Tällä hetkellä gradusta puuttuu käytännössä kaikki kuvat, ne ovatkin seuraavaksi työstettävänä. Lisäksi kokonaan puuttuvia tekstikappalaita on vielä muutama: johdanto, vertailu ja yhteenveto. Myös refaktoroitavaa on, etenkin ratkaisuesityksien osalta. 
 
 09.04.2018 - Sivuja on nyt noin 28. Sisältö on pääosin hiomatonta ja erityisesti kappaleiden väliset siirtymät vaativat vielä parantelua. Lisäksi kuvien tuottaminen on vaiheessa. Sisällysluettelo vastaa pääpiirteittäin lopullista rakennetta.
