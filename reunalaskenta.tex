@@ -81,32 +81,49 @@
 \level{Pro gradu -tutkielma}
 \abstract{
 %Context - the context or background of the study.
-Mobiililaitteiden suorituskykyä rajoittaa akkuvirran rajallisuus sekä fyysinen koko, mutta tarpeet nillä suoritettavalle laskennalle kasvavat,
-Mobiililaitteiden suorituskykyä rajoittavat pääasiassa akkuvirran rajallisuus sekä fyysinen koko. 
+Mobiililaitteiden suorituskykyä rajoittaa akkuvirran rajallisuus sekä laitteiden fyysinen koko, mutta tarpeet mobiililaitteilla suoritettavalle laskennalle kasvavat.
 Yhtenä vaihtoehtona suorituskyvyn parantamiseksi on etälaskenta, jossa laskentaa siirretään mobiililaitteelta verkon yli esimerkiksi pilven suoritettavaksi.
-Tiedonsiirtoon kuluva aika, viive, johtaa laskennan tuloksien viivästymiseen, joka puolestaan näkyy palvelun laadussa.
-Viiveen vähentämiseksi on ehdotettu että laskentaresurssit tuotaisiin lähemmäksi mobiililaitetta, verkon reunalle.
-
-Reunalaskennassa palvelinresursseja sijoitetaan lähelle mobiililaitetta. Mobiililaite 
-Mobiiliverkkoihin liitettävä reunalaskentatoiminnallisuus.
+Kauas siirretty etälaskenta johtaa suureen tiedonsiirron viiveeseen, eikä täten ole soveltuva tiukan aikavaatimuksen sisältävään laskentaan.
+Viiveen vähentämiseksi on ehdotettu, että laskentaresurssit tuotaisiin lähemmäksi mobiililaitetta.
 
 %Objective - the aim(s) of the study.
-Tutkielmassa esitetään reunalaskenta-arkkitehtuurien eroja.
+Reunalaskennassa laskentaresursseja sijoitetaan verkkohierarkiassa lähemmäksi asiakaslaitteita.
+Tässä tutkielmassa esitellään ehdotettuja reunalaskenta\hyp arkkitehtuureja, jotka pyrkivät lisäämään reunalaskennan osaksi mobiiliverkkoa.
+Mobiiliverkko on reunalaskennan tuottamiselle erinomainen ympäristö, koska se tarjoaa valmiin hajautetun infrastruktuurin, joka on hajautettu sekä sijaitsee lähellä mobiililaitteita.
 
 %Method - the method(s) used to address the aims.
-Reunalaskenta-arkkitehtuureista identifioitiin ominaisuuksia, joiden perusteella ehdotuksien vertailtiin.
+Ehdotetuista arkkitehtuureista tunnistettiin niiden yleiset ominaisuudet, jotka toimivat pohjana arkkitehtuuriehdotuksien vertailulle.
+Yksittäinen ominaisuus kuvaa tapaa jolla jokin tietty toiminnallisuus on toteutettu.
+Esimerkiksi tapa jolla tietoliikenteen reititys mobiiliverkosta reunalaskennalle toteutetaan.
+Kunkin ehdotetun reunalaskenta\hyp arkkitehtuurin muodostama ominaisuusjoukko on uniikki ja täten johtaa erilaiseen järjestelmään.
+
+%Lopuksi analysoitiin  ehdotettujen reunalaskanta-arkkitehtuurien yhteensopivuutta ETSI (European Telecommunications Standards Institute) MEC (Multi-access edge computing) spesifikaation esittämien vaatimuksien kanssa
 
 %Results - a very concise summary of the most important result(s).
-Reunalaskenta-arkkitehtuurit esittivät kolme eri tyyliä integroida reunalaskenta osaksi mobiiliverkkoa.
-Integraation tyyppi todettiin keskeisimmäksi päätökseksi, koska muut ominaisuudet vaikuttivat seuraavan siitä.  
+Ominaisuuksien välillä todettiin olevan riippuvuuksia ja keskeisimmäksi ominaisuudeksi havaittiin integraation tyyli. Itengraation tyyli tarkoittaa tapaa, jolla reunalaskenta\hyp arkkitehtuuri olettaa reunalaskennan integroituvan osaksi mobiiliverkkoa. 
+Lisäksi analysoitiin ehdotettujen arkkitehtuurien yhteensopivuutta ETSI (European Telecommunications Standards Institute) MEC (Multi-access edge computing) spesifikaation  vaatimuksiin ja huomattiin, että läpinäkyvää integraatiota toteuttavat arkkitehtuuriehdotukset vaikuttavat täyttävän esitetyt vaatimukset parhaiten.
 
 %Conclusions - a very concise summary of the implications of the study.
-Tutkielma esittää reunalaskenta-arkkitehtuureille 
+Reunalaskennan tuottaminen mobiiliverkossa vaatii useita erilaisia päätöksiä.
+Tämä tutkielma esitti arkkitehtuuritasolla esitetyt ominaisuudet, jotka olivat korkean tason suunnittelupäätöksiä.
+Parhaiten ETSI MEC spesifikaatiota tukivat arkkitehtuurit, jotka edellyttivät vähiten muutoksia olemassa olevaan mobiiliverkkoon.
+%Objective - the aim(s) of the study.
+%Tutkielmassa esitetään reunalaskenta-arkkitehtuurien eroja.
+
+%Method - the method(s) used to address the aims.
+%Reunalaskenta-arkkitehtuureista identifioitiin ominaisuuksia, joiden perusteella ehdotuksien vertailtiin.
+
+%Results - a very concise summary of the most important result(s).
+%Reunalaskenta-arkkitehtuurit esittivät kolme eri tyyliä integroida reunalaskenta osaksi mobiiliverkkoa.
+%Integraation tyyppi todettiin keskeisimmäksi päätökseksi, koska muut ominaisuudet vaikuttivat seuraavan siitä.  
+%
+%%Conclusions - a very concise summary of the implications of the study.
+%Tutkielma esittää reunalaskenta-arkkitehtuureille 
 }
 
 % The following can be used to specify keywords and classification of the paper:
 
-\keywords{Reunalaskenta, MEC, Edge computing}
+\keywords{Reunalaskenta, MEC, Mobiiliverkko}
 
 % classification according to ACM Computing Classification System (http://www.acm.org/about/class/)
 % This is probably mostly relevant for computer scientists
