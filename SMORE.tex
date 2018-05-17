@@ -16,22 +16,22 @@ SDN-kerroksessa sijaitsee SMORE monitor, joka tarkkailee SDN-kerroksen läpi kul
 Näitä tietokantaan poimittuja tunnisteita käytetään SDN reittien muodostamiseen sekä mobiiliverkon tapahtumien tietojen välittämiseen SMORE controllerille.
 SMORE controller on vastuussa reunasovelluksien käynnistämisestä sekä SDN reitityssääntöjen päivittämisestä. SMORE controller voi tietokantaan tallennettujen tietojen perusteella muokata reitityssääntöjä, siten että asiakkaan tietoliikenne ohjautuu reunasolmuille. 
 
-Tietoliikenteen haarauttaminen tehdään SDN-kerroksessa virtuaalisten porttien avulla.
+Tietoliikenteen haarauttaminen tehdään SDN-kerroksessa virtuaalisten porttien avulla \cite{cho2014smore}.
 Asiakkaan mobiiliverkon sisäinen GTP tunneloitu liikenne ohjautuu tähän porttiin.
-Portin sisällä on toiminnallisuus joka tarkkailee GTP pakettien sisällä olevan asiakkaan tietoliikennepakettien kohde IP-osoitteita \cite{cho2014smore}.
+Portin sisällä on toiminnallisuus, joka tarkkailee GTP pakettien sisällä olevan asiakkaan tietoliikennepakettien kohde IP-osoitteita \cite{cho2014smore}.
 Mikäli kohde IP on reunasolmu, virtuaalisen portin sisällä oleva toiminnallisuus purkaa GTP tunneloinnin ja ohjaa paketin reunasolmulle.
-Reunasolmulta asiakaslaitteelle suuntautuva liikenne hoituu siten että SMORE monitorin poimimista tiedoista saadaan asiakaslaitteen IP-osoitetta vastaava GTP TEID.
+Reunasolmulta asiakaslaitteelle suuntautuva liikenne hoituu siten, että SMORE monitorin poimimista tiedoista saadaan asiakaslaitteen IP-osoitetta vastaava GTP TEID.
 Tämän avulla voidaan suorittaa GTP paketointi ja paketti voidaan välittää normaalin toiminnallisuuden mukaisesti mobiiliverkon kautta asiakaslaitetta palvelevalle eNodeB:lle ja siitä edelleen asiakaslaitteelle. 
 
 SMORE controllerin vastuulle kuuluu myös reunasolmujen tarjoamien palveluiden hallinnointi. 
 Esimerkiksi asiakaslaitteen liikkuessa verkossa SMORE monitor päivittää tietokantaan tarvittavat tunnisteet ja huomauttaa SMORE controlleria tapahtumasta. SMORE controller reagoi tähän päivittämällä SDN reititykset. Tämä varmistaa sen että asiakaslaitteen yhteys reunapalvelulle säilyy. SMORE controller on keskitetty entiteetti ja se voi hallita useampaa SDN-kerrosta.
 
 Koska SDN-kerros ei muokkaa mobiiliverkon sisäistä tai muuhun  internettiin suuntautuvaan tietoliikennettä, SMORE-reunajärjestelmä on asiakaslaitteen ja mobiiliverkon näkökulmasta näkymätön.
-Koska asiakaslaitteella ei ole yhteyttä SMORE-järjestelmään, reunalaskentaa tarjotaan ehdotuksen mukaan kahdella tavalla. Ensimmäisessä tapauksessa reunalaskentaa voidaan pyytää ulkoisen palvelun kautta, joka pyytää SMORE controlleria ohjaamaan asiakaslaitteen tietoliikenteen reunapalveluun.
-SMORE controllerille oletetaan verkkoyhteys internettiin, jonka avulla reunapalveluita voidaan ottaa käyttöön esimerkiksi pilpipalvelusta käsin.
-Toinen ehdotettu vaihtoehto on että SMORE:n palveluita myydään tilauksesta ja SMORE:n omassa tietokannassa ylläpidetään niiden asiakkaiden tietoja joilla reunalaskenta on käytössä. 
+Koska asiakaslaitteella ei ole yhteyttä SMORE-järjestelmään, reunalaskentaa tarjotaan ehdotuksen mukaan kahdella tavalla. Ensimmäisessä tapauksessa reunalaskentaa voidaan pyytää ulkoisen, esim pilveen sijoitetun, palvelun kautta. Ulkoinen palvelu pyytää SMORE controlleria ohjaamaan asiakaslaitteen tietoliikenteen reunapalveluun.
+SMORE controllerille oletetaan verkkoyhteys internettiin, jonka avulla siihen voidaan olla yhteydessä internetistä.
+Toinen ehdotettu vaihtoehto on, että SMORE:n palveluita myydään tilauksesta ja SMORE:n omassa tietokannassa ylläpidetään niiden asiakkaiden tietoja, joilla reunalaskenta on käytössä. 
 
-SMORE:n keskeinen ominaisuus on integraatio mobiiliverkkoon ilman että mobiiliverkkoon muuten tarvitsee tehdä muutoksia. Ainoana edellytyksenä on SDN-kerroksen lisääminen tukiasemien ja EPC:n välille. SMORE ei tarjoa reunalaskennan siirtelylle keinoja, koska reunaresurssien oletetaan sijaitsevan niin keskitettyinä että siirtelylle ei ole tarvetta.
+SMORE:n keskeinen ominaisuus on integraatio mobiiliverkkoon ilman että mobiiliverkkoon muuten tarvitsee tehdä muutoksia. Ainoana edellytyksenä on SDN-kerroksen lisääminen tukiasemien ja EPC:n välille. SMORE ei tarjoa reunalaskennan siirtelylle keinoja, koska reunaresurssien oletetaan sijaitsevan niin keskitettyinä, että siirtelylle ei ole tarvetta.
 
 %
 %SDN käyttöönotolla tavoitellaan sitä, että televerkon toimintaan ei tarvitsisi tehdä muutoksia. Minkään olemassa olevan komponentin toiminta ei siis muutu. 
@@ -58,6 +58,7 @@ SMORE:n keskeinen ominaisuus on integraatio mobiiliverkkoon ilman että mobiiliv
 
 \subsubsection{MobiScud} \label{mobiscud}
 MobiScud on SMORE:n ideoihin pohjautuva reunalaskenta-arkkitehtuuri \cite{wang2015mobiscud}.
+Kappaleessa esitelty toiminnallisuus perustuu MobiScud:n esittelevään julkaisuun \cite{wang2015mobiscud}.
 MobiScud:n perustoiminnallisuus on hyvin samankaltainen kuin SMORE:ssa. MobiScud painottaa enemmän käyttäjän tarvetta liikkua verkossa ja SMORE:sta poiketen toteuttaa mekanismin reunalaskennan migraatiolle. 
 MobiScud ottaa myös huomioon mobiiliverkon hajautumista koskevan trendin.
 
@@ -73,24 +74,24 @@ MC kuitenkin laajentaa toimintoja lisäämällä mahdollisuuden reunalaskennan l
 
 MobiScudin arkkitehtuuri on esitetty kuvassa \ref{fig:mobiscud}. Kuvasta on jätetty pois eNodeB:n ja MME:n väliset kontrolliyhteydet kuvan yksinkertaistamiseksi.
 Reunajärjestelmän resurssien oletetaan sijaitsevan tukiasemien läheisyydessä.
-Toisistaan erillään olevat reunajärjestelmän osat pystyvät kommunikoimaan SDN verkon avulla toisilleen.
+Toisistaan erillään olevat reunajärjestelmän osat pystyvät kommunikoimaan SDN-verkon avulla toisilleen.
 Tämä muistuttaa loogisesti samaa järjestelmää kuin eNodeB-tukiasemien välillä olevat X2 yhteydet.
 MC on hajautettuna verkossa ja MC:n instanssit sijaitsevat reunasolmujen yhteydessä.
-MC instanssien hallinnollinen vastuu koskee omassa vaikutuspiirissä olevaa SDN verkkoa sekä reunasolmuja. Tämä tarkoittaa että MC hoitaa asiakaslaitteen ja reunasolmun väliset SDN reititykset. Lisäksi MC on yhteydessä muihin MC instansseihin.
+MC instanssien hallinnollinen vastuu koskee omassa vaikutuspiirissä olevaa SDN-verkkoa sekä reunasolmuja. Tämä tarkoittaa että MC hoitaa asiakaslaitteen ja reunasolmun väliset SDN reititykset. Lisäksi MC on yhteydessä muihin MC instansseihin.
 
 Reunalaskennalle suuntautuvan tietoliikenteen haarauttaminen on käytännössä toteutettu samoin kuin SMORE:ssa.
-SDN kerroksen sisällä tarkkaillaan ja tarpeen mukaan puretaan GTP-tunnelointi paketeista, joiden kohteena on reunapalvelut. Reunapalveluilta asiakaslaitteelle suuntautuva tietoliikenne vastaavasti paketoidaa SDN kerroksessa GTP muotoon ja välitetään asiakaslaitteelle.
+SDN-kerroksen sisällä tarkkaillaan ja tarpeen mukaan puretaan GTP-tunnelointi paketeista, joiden kohteena on reunapalvelut. Reunapalveluilta asiakaslaitteelle suuntautuva tietoliikenne vastaavasti paketoidaa SDN kerroksessa GTP muotoon ja välitetään asiakaslaitteelle.
 %SDN kerros
 
 Reunalaskennan migraatiotoiminnallisuus MobiScud:ssa koostuu yhteyden säilyttämisestä ja virtuaalikoneen live migraatiosta.
 Reunalaskennan siirron laukaisevana tekijänä toimii MC:n monitoritoiminnallisuuden havaitsema eNodeB:n handoveriin liittyvä kontrollikerroksen viestintä.
 Ensimmäisessä vaiheessa varmistetaan asiakaslaitteen yhteys reunasolmulle. 
-Se tehdään siten että ENodeB:n handoveriin liittyvästä viestinnästä poimitaan handoverin kohteena olevan eNodeB:n tiedot.
+Se tehdään siten että eNodeB:n handoveriin liittyvästä viestinnästä poimitaan handoverin kohteena olevan eNodeB:n tiedot.
 Näihin sisältyy muun muassa uuden GTP-tunnelin TEID (kohteena olevan eNodeB:n ja S-GW:n välinen) ja kohteena olevan eNodeB:n IP.
 Lähde ja kohde MC:t muodostavat yhdessä näiden tietojen perusteella SDN reitityksen, jonka avulla reunasolmulle suuntautuva tietoliikenne kulkeutuu asiakkaan reunalaskennasta vastaavalle virtuaalikoneelle uuden tukiaseman kautta.
-Tästä seuraa yhteyden pituuden kasvua reunapalvelun ja asikaslaitteen välillä, joka ilmenee suurempana viiveenä. 
-Osittain samaan aikaan SDN verkon reititysmuutoksien kanssa, aloitetaan virtuaalikoneen live migraatio lähempänä sijaitsevalle reunasolmulle.
-Kun migraatio valmistuu, SDN reititykset vanhaan reunasolmuun korvataan uusilla, jotka ohjaavat liikenteen reunasolmulle, jolle virtuaalikone migratoitiin.
+Tästä seuraa yhteyden pituuden kasvua reunapalvelun ja asiakaslaitteen välillä, joka ilmenee suurempana viiveenä. 
+Osittain samaan aikaan SDN-verkon reititysmuutoksien kanssa, aloitetaan virtuaalikoneen live migraatio lähempänä sijaitsevalle reunasolmulle.
+Kun migraatio valmistuu, SDN reititykset vanhaan reunasolmuun korvataan uusilla, jotka ohjaavat liikenteen uudelle reunasolmulle.
 
 %migraation seurauksena IP osoite vaihtuu ja MobiScud ei ota kantaa kuinka IP sessiot säästetään.
 Vastaavia SDN ja monitorointiin pohjautuvia reunalaskentaratkaisuja on ehdotettu myös muualla, esimerkiksi \cite{schiller2018cds}.

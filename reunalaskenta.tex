@@ -290,8 +290,8 @@ Live migraatio kuvaa reunajärjestelmän keinoja siirrellä reunasovelluksia reu
 Integraatio mobiiliverkkoihin esittää reunajärjestelmän ja mobiiliverkon yhteistoiminnallisuuden tyyppiä. 
 Kommunikaatio käsittelee reunajärjestelmän ja asiakaslaitteen välistä tietoliikenneyhteyttä. 
 Viimeisenä käsitellään reunajärjestelmän hallintaa. Hallinta sisältää päätöksiä järjestelmän hallinnollisten toimien toteuttamiseksi, kuten hallinnollisten entiteettien sijainnin järjestelmässä.
-Ominaisuuksien käsittely on toteutettu yleisellä tasolla.
-Arkkitehtuurikohtaiset toteutusehdotukset näille ominaisuuksille käsitellään luvussa \ref{ratkaisut}.
+Tässä kappaleessa ominaisuuksien käsittely on toteutettu yleisellä tasolla.
+Arkkitehtuurikohtaiset toteutusehdotukset sekä tarkempia yksityiskohtia näille ominaisuuksille käsitellään luvussa \ref{ratkaisut}.
 
 Ominaisuudet eivät ole luonteeltaan täysin itsenäisiä, vaan ne ovat toisistaan riippuvaisia. Riippuvuuksista seuraa, että kunkin ominaisuuden toteutuksen vahvuudet ja heikkoudet tulee ottaa huomioon laajemmassa kontekstissa. 
 
@@ -328,9 +328,10 @@ Ominaisuudet eivät ole luonteeltaan täysin itsenäisiä, vaan ne ovat toisista
 \section{Esitetyt ratkaisut} \label{ratkaisut}
 Reunalaskennan toteuttamiseksi on esitetty useita erilaisia ratkaisuja.
 Sen sijaan että esitettäisiin ratkaisu yksittäiselle toiminnolle, reunalaskenta-arkkitehtuuri pyrkii toteuttamaan tarpeeksi suuren osajoukon toteuttamisen kannalta kriittisistä ominaisuuksista.
-Seuraavaksi käydään läpi ehdotettuja arkkitehtuureja ja lopuksi tarkastellaan ETSI:n
-dokumentaatioiden esittämä reunalaskennan referenssiarkkitehtuuri ja
+Seuraavaksi käydään läpi ehdotettuja arkkitehtuureja ja niiden lisäksi ETSI:n
+MEC spesifikaation esittämä reunalaskennan referenssiarkkitehtuuri ja
 reunalaskennalle asetetut vaatimukset.
+Lopuksi vertaillaan ehdotettuja arkkitehtuureja sekä tarkastellaan ehdotettujen arkkitehtuurien yhteensopivuutta ETSI:n spesifikaatioon.
 
 
 \input{cloudlet}

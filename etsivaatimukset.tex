@@ -8,7 +8,7 @@ Lisäksi suurin osa vaatimuksista on ainoastaan täsmennyksiä yleisiin periaatt
 Seuraavaksi käydään läpi yleisten periaatteiden toteutuminen ehdotetuissa reuna-arkkitehtuureissa.
 
 Tässä tukielmassa käsiteltyjen reuna-arkkitehtuurien yhteydessä ei esiintynyt NFV yhteensopivuutta rajoittavia tekijöitä. Eli kaikki käsitellyt arkkitehtuurit olivat pääsääntöisesti NFV yhteensopivia.
-CONCERT oli ainoa reuna-arkkitehtuuri joka nimenomaisesti rakentui NFV:n varaan. Muissa arkkitehtuureissa NFV:tä pidettiin enemmänkin mahdollisuutena.
+CONCERT oli ainoa reuna-arkkitehtuuri, joka nimenomaisesti rakentui NFV:n varaan. Muissa arkkitehtuureissa NFV:tä pidettiin enemmänkin mahdollisuutena.
 Esimerkiksi SCC:n yhteydessä esitettiin, että tukiasemaan sidottuja resursseja voisi käyttää myös tukiasemien omien toimintojen tuottamiseen NFV:n avulla. 
 
 
@@ -31,8 +31,8 @@ Teoriassa eniten vapauksia reunajärjestelmän toteuttamiseen tarjoavat läpinä
 Nämä järjestelmät edellyttävät ainoastaan yhden yhteyspisteen mobiiliverkkoon ja ovat muuten täysin vapaasti järjesteltävissä.
 Suoran integraation reuna-arkkitehtuureissa edellytetään jotain tiettyä rakennetta. 
 SCC edellyttää reunaresurssien sijoittamisen tukiasemiin. SCC kuitenkin loogisesti erottaa reunajärjestelmän ja mobiiliverkon haarauttamalla reunapalveluille tarkoitetun tietoliikenteen erillisellä monitoritoiminnallisuudella.
-Toinen suoraa integraatiota edustava järjestelmä, CONCERT, edellyttää hierarkista asettelua reunaresursseille. CONCERT:n NFV painotteisuus kuitenkin takaa toiminnallisuuksien vapaan sijoittelun. CONCERT tarjoaa SCC:hen verrattuna enemmän vapauksia resurssien sijoitteluun.
-FMC, ainoana epäsuorana itengraationa, tarjoaa myös vapauden sijoitella reunajärjestelmän, mutta ainoastaan mobiiliverkon ulkopuolelle.
+Toinen suoraa integraatiota edustava järjestelmä, CONCERT, edellyttää hierarkkista asettelua reunaresursseille. CONCERT:n NFV painotteisuus kuitenkin takaa toiminnallisuuksien vapaan sijoittelun. CONCERT tarjoaa SCC:hen verrattuna enemmän vapauksia resurssien sijoitteluun.
+FMC, ainoana epäsuorana itengraationa, tarjoaa myös vapauden sijoitella reunasolmut, mutta ainoastaan mobiiliverkon ulkopuolelle.
 FMC:tä ei siis voi pitää erityisen riippumattomana, koska reunapalveluita tarjoavat resurssit joudutaan sijoittelemaan pakettiverkon yhdyskäytävien läheisyyteen.
 
 %Referenssi-arkkitehtuuri

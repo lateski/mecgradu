@@ -71,12 +71,11 @@ Cloudlet ympäristössä suoritusaikaista virtuaalikoneen siirtoa kutsutaan term
 Kappaleessa \ref{livemigraatio} esitettyjen live migraation metriikkojen osalta VM handoff eroaa palvelinsalista. VM handoff tavoittelee mahdollisimman lyhyttä migraation kestoa, verrattuna palvelinsalien mahdollisimman lyhyeen katkon kestoon.
 Syyksi tälle esitetään että asiakaslaitteen ja virtuaalikoneen heikentyneen yhteyden korjaaminen on korkeammalla prioriteetilla kuin varsinaisen katkon keston lyhentäminen \cite{ha2015adaptive}.
 Toisin kuin palvelinsaliympäristössä käytössä olevat lähiverkkoyhteydet, cloudlettien välinen yhteys ei välttämättä ole kovin nopea. 
-Perinteisen live migraation iteratiivinen toiminta ole hitailla yhteyksillä kannattavaa. 
+Perinteisen live migraation iteratiivinen toiminta ei ole hitailla yhteyksillä kannattavaa. 
 Viimeinen ero tavallisen live migraation ja VM handoffin välillä on cloudletin pohjaan ja pinnoitteeseen perustuva toimintamalli.
 
 Cloudletit voivat hyödyntää yhteistä pohjaa VM handoffin yhteydessä, jolloin siirrettävän tiedon määrä on vähäisempi. 
-Etenkin hitailla yhteyksillä siirrettävän tiedon määrän minimointi on keskeisiä tavoitteita. 
-VM handoffin tehokkuutta on vertailtu tavalliseen live migraatioon tutkimuksessa \cite{ha2017you}. Siinä todettiin, että etenkin hitailla yhteyksillä VM handoff saavutti merkittävästi lyhyemmän migraation keston ja selvisi lähes kaikissa tapauksissa huomattavasti pienemmällä tiedonsiirrolla. VM handoffin aiheuttaman katkon kesto oli hieman pidempi verrattuna live migraatioon. 
+VM handoffin tehokkuutta on vertailtu tavalliseen live migraatioon tutkimuksessa \cite{ha2017you}. Siinä todettiin, että etenkin hitailla yhteyksillä VM handoff saavutti merkittävästi lyhyemmän migraation keston ja selvisi lähes kaikissa tapauksissa huomattavasti pienemmällä kokonaistiedonsiirrolla. VM handoffin aiheuttaman katkon kesto oli hieman pidempi verrattuna live migraatioon. 
 VM handoff on kuitenkin erittäin resurssi-intensiivinen toimenpide, eikä tutkimuksessa otettu tarkemmin kantaa sen vaikutukseen reunasolmun muuhun toiminnallisuuteen. 
 Tutkimuksessa ei myöskään oteta kantaa useamman virtuaalikoneen siirtäminen samanaikaisesti. 
 %migraatiotulva

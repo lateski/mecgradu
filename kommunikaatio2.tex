@@ -1,7 +1,7 @@
 \subsection{Kommunikaatio} \label{kommunikaatio}
 Reunalaskenta vaatii toimiakseen kommunikaatioväylän asiakaslaitteen ja reunajärjestelmän välille. 
 Asiakaslaitteen ja reunajärjestelmän välisen kommunikaatioväylän toteuttamisen haasteena on tapa, jolla mobiiliverkkojen sisällä tapahtuva reititys on toteutettu. 
-Kuten jo aiemmin mainittu, mobiiliverkon sisäisen reititys ei käytä reitittämiseen asiakastietoliikenteen IP-osoitteita, vaan asiakastietoliikenne ohjataan GTP tunneloituna P-GW:n kautta Internettiin. 
+Kuten jo aiemmin mainittu, mobiiliverkon sisäisen reititys ei käytä reitittämiseen asiakastietoliikenteen IP-osoitteita, vaan asiakastietoliikenne ohjataan GTP tunneloituna P-GW:n kautta internettiin. 
 Reunajärjestelmän integraation tyypillä on selkeä vaikutus tapaan, jolla kommunikaatioväylä toteutetaan. Reuna-arkkitehtuurit esittivät erilaisia keinoja kommunikaatioväylän toteuttamiseksi.
 
 
@@ -24,24 +24,24 @@ Tämän lisäksi joudutaan ottamaan huomioon tilanteet, jossa asiakaslaitteen ta
 %Perustoiminnallisuus eli pakettin tarkkailu "sisääntuloväylällä" jolloin voidaan ohajata tietoliikennettä
 Ensimmäiseen ongelmaan on ehdotettu erilaisia ratkaisuja, joiden toimintamalli riippuu pääasiassa siitä, kuinka tiukasti reunajärjestelmä on integroitu osaksi mobiiliverkkoa.
 Ongelman ratkaisussa on otettava huomioon, että tietoliikennettä on aina kahteen suuntaan. Tämän lisäksi asiakaslaitteen tietoliikenne pitää jatkossa haarauttaa suuntautumaan joko reunajärjestelmälle tai internettiin. 
-Koska perinteisesti asiakaslaitteen tietoliikenne on voitu ohjata P-GW:n kautta ulos verkkoon, ei mobiiliverkon sisällä ole valmiiksi mekanismia jonka avulla asiakkaan tietoliikennettä voisi ohjata.
+Koska perinteisesti asiakaslaitteen tietoliikenne on voitu ohjata P-GW:n kautta ulos verkkoon, ei mobiiliverkon sisällä ole valmiiksi mekanismia, jonka avulla asiakkaan tietoliikennettä voisi ohjata.
 Tähän ongelmaan on ehdotettu ratkaisumallia, joka perustuu ajatukseen tietoliikennettä monitoroivasta entiteetistä.
-Tällaisella monitorilla olisi mahdollisuus tarkkailla mobiiliverkossa kulkevan tietoliikenteen kohdetta, esimerkiksi kohde IP-osoitetta, ja ohjata paketit tarvittaessa reunajärjestelmälle tai asiakaslaitteelle (mikäli ne ovat lähtöisin reunajärjestelmältä).
+Tällaisella monitorilla olisi mahdollisuus tarkkailla mobiiliverkossa kulkevan asiakastietoliikenteen kohdetta, esimerkiksi kohde IP-osoitetta ja ohjata paketit tarvittaessa reunajärjestelmälle tai asiakaslaitteelle (mikäli ne ovat lähtöisin reunajärjestelmältä).
 Tämä jättäisi kaiken reunajärjestelmälle kuulumattoman tietoliikenteen koskemattomaksi.
 
 LIPA (Local IP Access) ja SIPTO (Selected IP Traffic Offload) ovat ehdotuksia mobiiliverkkoon tehtävästä reititysratkaisusta \cite{samdanis2012traffic}.
-LIPA ja SIPTO lisäisivät tukiasemien yhteyteen L-GW:n (Local Gateway), jonka mahdollistaisi asiakaslaitteen tietoliikenteen ohjaamisen tukiaseman yhteydestä esimerkiksi reunasolmulle. 
+LIPA ja SIPTO lisäisivät tukiasemien yhteyteen L-GW:n (Local Gateway), joka mahdollistaisi asiakaslaitteen tietoliikenteen ohjaamisen tukiaseman yhteydestä esimerkiksi reunasolmulle. 
 Tällöin tietoliikenteen ei tarvitse kulkea EPC:n kautta. 
 L-GW:n tarkoitus olisi siis mahdollistaa nopeammat yhteydet tukiaseman läheisyydessä sijaitsevaan verkkoon. Tätä olisi mahdollista hyödyntää reunalaskennassa, mutta se monimutkaistaisi olemassa olevan mobiiliverkon toiminnallisuutta \cite{cho2014smore}.
-LIPA:a ja SIPTO:a ei kuitenkaan ole ehdotettu minkään reuna-arkkitehtuurin yhteydessä ratkaisuksti tietoliikenteen ohjaamiseen. 
+LIPA:a ja SIPTO:a ei kuitenkaan ole ehdotettu minkään reunalaskenta-arkkitehtuurin yhteydessä ratkaisuksi tietoliikenteen ohjaamiseen. 
 
-Reuna-arkkitehtuureissa tietoliikenteen tarkkailua ja ohjausta mahdollistava toiminnallisuus on ehdotettu toteutettavan SDN:llä, NFV:llä tai jollain ratkaisuspesifillä toiminnallisuudella. 
-SDN:n käyttö ratkaisuna tarjoaa tavan reitittää liikennettä mobiiliverkon sisällä. Se lisäksi mahdollistaa reitityksien ohjelmallisen muokkaamisen, jolloin tiettyjen yhteyksien reittiä voidaan dynaamisesti muokata. SMORE:n yhteydessä esitetyssä ratkaisussa  E-UTRAN ja EPC:n välille sijoitetaan SDN kerros, jossa eNodeB ja EPC:n välistä tietoliikennettä voidaan monitoroida. 
+Reunalaskenta-arkkitehtuureissa tietoliikenteen monitorointia ja ohjausta mahdollistava toiminnallisuus on ehdotettu toteutettavan SDN:llä, NFV:llä tai jollain ratkaisuspesifillä toiminnallisuudella. 
+SDN:n käyttö ratkaisuna tarjoaa tavan reitittää liikennettä mobiiliverkon sisällä. Se lisäksi mahdollistaa reitityksien ohjelmallisen muokkaamisen, jolloin tiettyjen yhteyksien reittiä voidaan dynaamisesti muokata. SMORE:n (käsitellään kappaleesa \ref{smore} yhteydessä esitetyssä ratkaisussa  E-UTRAN ja EPC:n välille sijoitetaan SDN kerros, jossa eNodeB ja EPC:n välistä tietoliikennettä voidaan monitoroida. 
 Koska tällä välillä oleva tietoliikenne on GTP tunneloitua, paketteja joudutaan purkamaan ja uudelleen paketoimaan. 
 Tilanteessa jossa paketin suunta on asiakaslaitteelta reunalle, paketin tunnelointi joudutaan purkamaan ja varsinainen paketti välitetään reunapalvelulle. 
 Reunalta asiakaslaitteelle suuntautuvat paketit joudutaan uudelleen kapseloimaan GTP:n mukaisiksi.
 Uudelleen kapselointi vaatii erinäisten mobiiliverkon sisäisten tunnisteiden seurantaa ja hyödyntämistä.
-Tarkempi kuvaus toiminnasta annetaan SMORE:n käsittelyn yhteydessä kappaleessa \ref{smore}.
+Tarkempi kuvaus toiminnasta annetaan SMORE:n käsittelyn yhteydessä.
 Ratkaisu spesifisen toiminnallisuuksien yhteydessä noudatetaan hyvin samankaltaista toimintamallia. Esimerkiksi Small Cell Cloud (käsitellään kappaleessa \ref{scc}) ratkaisun yhteydessä pakettien monitorointi on sijoitettu tukiasemiin, josta GTP tunnelointi alkaa.
 Täten paketit voidaan monitoroida ennen GTP tunnelointia ja välittää tarpeen mukaan reunasolmuille.
 
@@ -74,10 +74,10 @@ Mikäli reunapalvelua ei siirretä, asiakaslaitteen ja reunasolmun välinen etä
 Lähes jokainen arkkitehtuuri ehdotti reunapalvelun live migraatiota reunasolmujen välillä.
 Migraation seurauksena virtuaalikoneen IP-osoite todennäköisesti vaihtuu. Koska tietoliikenneyhteydet pohjautuvat normaalist IP-osoitteisiin, aiheuttaa tämä muutos haasteita palvelun jatkuvuuden kannalta.
 Asiakaslaitteen ja reunapalvelun yhteyden muodostamiseen on ehdotettu toisenlaisia ratkaisuja.
-Follow Me Cloud (käsitellään tarkemmin kappaleessa \ref{fmc}) yhteydessä ehdotetaan ratkaisuksi asiakaslaite tunnisteeseen ja reunapalveluun liittyvän palvelutunnisteeseen perustuvaa tunnistetta.
+Follow Me Cloud (FMC, käsitellään tarkemmin kappaleessa \ref{fmc}) yhteydessä ehdotetaan ratkaisuksi asiakaslaite tunnisteeseen ja reunapalveluun liittyvän palvelutunnisteeseen perustuvaa tunnistetta.
 FMC:ssä edellä mainituista tunnisteista generoidaan sessio/palvelu tunniste (Session/Service ID), jonka avulla asiakaslaitteeseen liittyvä reunapalvelu tai muu sessio voidaan tunnistaa ja siihen sessioon liittyvät yhtedet uudelleenmuodostaa.
 Sessio/palvelu tunnisteen avulla asiakaslaite ja reunapalvelu voidaan siis yhdistää IP-osoitteiden muutoksista riippumatta.
-Tunnisteen lisääminen vaatii järjestelmään entiteetin, joka ylläpitää listaa käytössä olevista tunnisteista, sekä tarjoaa niiden aksessointiin menetelmän. Tämä saattaa monimutkaistaa palveluiden saavutettavuutta. 
+Tunnisteen lisääminen vaatii järjestelmään entiteetin, joka ylläpitää listaa käytössä olevista tunnisteista, sekä tarjoaa niiden aksessointiin menetelmän. Tämä saattaa monimutkaistaa palveluiden toteuttamista. 
 
 Asiakaslaitteen ja reunapalvelun välisen yhteyden säilyttäminen on hyvin riippuvainen reuna-arkkitehtuurin muista toiminnallisuuksista. Asiakaslaitteiden ja reunapalveluiden väliseen kommunikaatioon vaikuttavat esimerkiksi reunajärjestelmän virtuaalikoneiden migraatio politiikka sekä muut palveluiden tuottamiseen liittyvät valinnat.
 

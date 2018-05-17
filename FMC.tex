@@ -25,12 +25,13 @@ Kuvassa \ref{fig:fmc} asiakaslaitteet ovat yhdistyneenä oman S-GW/P-GW-parin ka
 
 Toinen osa ratkaisua on asiakaslaite–palvelinsali-yhteyden ylläpitäminen.
 Yhteyden ylläpitäminen asiakkaan liikkuessa vaatii jonkin verran muutoksia tapaan, jolla käyttäjän siirtymiseen mobiiliverkossa reagoidaan. 
-Hajautetussa mobiiliverkossa tutkiaseman vaihtuessa myös tietoliikenne yhteyskäytävänä toimiva P-GW saattaa vaihtua. Tämän seurauksena asiakaslaitteen IP-osoite vaihtuu ja yhteys reunapalveluun katkeaa.
-FMC on esittänyt että asiakas ja reunapalvelu yhdistettäisiin erillisen tunnisteen perusteella, joka generoidaan asiakastunnisteen ja palvelutunnisteen pohjalta.
-Tämä uusi tunniste korvaa IP-osoitteet ja mahdollistaan yhteyksien uudelleenmuodostuksen tilanteissa joissa asiakaslaitteen tai reunapalvelun IP-osoitteet vaihtuvat.
+Hajautetussa mobiiliverkossa tutkiaseman vaihtuessa, myös tietoliikenne yhteyskäytävänä toimiva P-GW saattaa vaihtua.
+Tämän seurauksena asiakaslaitteen IP-osoite vaihtuu ja yhteys reunapalveluun katkeaa.
+FMC on esittänyt, että asiakas ja reunapalvelu yhdistettäisiin erillisen tunnisteen perusteella, joka generoidaan asiakastunnisteen ja palvelutunnisteen pohjalta.
+Tämä uusi tunniste korvaa IP-osoitteet ja mahdollistaan yhteyksien uudelleenmuodostuksen tilanteissa, joissa asiakaslaitteen tai reunapalvelun IP-osoitteet vaihtuvat.
 
 FMC controllerin tehtävänä on laukaista palvelun siirtäminen optimaalisempaan palvelinsaliin esimerkiksi asiakaslaitteen yhteysmuutoksien seurauksena.
 FMC controller tekee päättelyä siitä kannattaako reunapalvelua siirtää.
 
-FMC eroaa muista mobiiliverkon ratkaisuista sillä, että se ei tuo palvelinresursseja osaksi mobiiliverkkoa. Lisäksi FMC ei tee mobiiliverkon infrastruktuuriin minkäänlaisia muutoksia. FMC pyrkii takaamaan nopeimman mahdollisen yhteyden haluttuun palveluun. FMC jättääkin auki mahdollisuuden, että reunapalvelut tarjoaa joku muu kuin operaattori itse.
+FMC eroaa muista mobiiliverkon ratkaisuista sillä, että se ei tuo palvelinresursseja osaksi mobiiliverkkoa. Lisäksi FMC ei tee mobiiliverkon toiminnallisuuksiin muutoksia. FMC pyrkii takaamaan nopeimman mahdollisen yhteyden haluttuun palveluun. FMC jättääkin auki mahdollisuuden, että reunapalvelut tarjoaa joku muu kuin mobiiliverkon operaattori.
 Koska reunapalvelimet sijaitsevat mobiiliverkon ulkopuolella FMC ei edellytä muutoksia myöskään mobiiliverkon sisäiseen reititykseen.

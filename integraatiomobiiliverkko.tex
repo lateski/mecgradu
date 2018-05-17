@@ -8,17 +8,19 @@ Tässä yhteydessä integraatiolla tarkoitetaan mobiiliverkon ja reunajärjestel
 Tutkielmassa käsiteltävät reuna-arkkitehtuurit ovat esittäneet erilaisia keinoja reunajärjestelmän ja mobiiliverkon yhdistämiseksi.
 Kun reunajärjestelmää ollaan integroimassa osaksi olemassa olevaa mobiiliverkkoa, on tavoitteena pyrkiä pitämään uusittavan laitteiston määrä kohtuullisena. Pääasiallisena syynä tähän on mobiiliverkon suljettu ympäristö, johon mobiiliverkon operaattori joutuu erikseen hankkimaan tarvittavat toiminnallisuudet.
 
-Vaihtoehtojen toisessa ääripäässä on koko järjestelmän uusiminen, siten että se tukee reunalaskentaa osana mobiiliverkon muita toiminnallisuuksia.
+Reunajärjestelmän toteuttamisen vaihtoehtojen ääripäässä on koko järjestelmän uusiminen, siten että se tukee reunalaskentaa osana mobiiliverkon muita toiminnallisuuksia.
 Toisessa ääripäässä mobiiliverkkoon ei tehdä lainkaan muutoksia ja reunajärjestelmä lisätään joidenkin mobiiliverkon ulkopuolisten toimijoiden avulla. 
 
 Integraation haasteena on mobiiliverkon jatkuva kehitys. Arkkitehtuuriehdotukset ovat jossain määrin ottaneet näitä kehityspolkuja huomioon. 
 Yksi näistä kehityspoluista on SDN ja NFV käyttöönotto mobiiliverkoissa \cite{heinonen2014dynamic, nfvwhite}. 
 Näiden avulla tavoitellaan mobiiliverkon laitteiston ja toiminnallisuuden välisen sidonnaisuuden vähentämistä sekä skaalautuvuuden parantamista.
 
-Integraation tyypistä seuraa epäsuorasti myös reunajärjestelmän Tarjoja.
-Varsinkin ehdotukset joissa reunajärjestelmä on tiukasti sidoksissa mobiiliverkkoon reunajärjestelmän tarjoaja on sama kuin mobiiliverkon operaattori. Heikompaa sidonnaisuutta ehdottavat ratkaisut saattavat tarjota mahdollisuuden että reunajärjestelmää tarjoaa jokin kolmas osapuoli. Kysymykseksi siis jää, onko integraation tuloksena yksi järjestelmä, vai kaksi järjestelmää joiden välillä on jonkinlainen yhteys.
+Integraation tyypistä voidaan päätellä epäsuorasti myös reunajärjestelmän tarjoaja.
+Varsinkin ehdotukset joissa reunajärjestelmä on tiukasti sidoksissa mobiiliverkkoon, reunajärjestelmän tarjoaja on oletattavasti sama kuin mobiiliverkon operaattori.
+Tämä siksi että reunajärjestelmällä on saattaa olla pääsy kaikkiin mobiiliverkon tietoliikenteeseen.
+Heikompaa sidonnaisuutta ehdottavat ratkaisut saattavat tarjota mahdollisuuden, että reunajärjestelmää tarjoaa jokin kolmas osapuoli. Kysymykseksi siis jää, onko integraation tuloksena yksi järjestelmä vai kaksi järjestelmää, joiden välillä on epäsuora yhteys.
 
-Reuna-arkkitehtuurien ehdottamat tavat mobiiliverkon ja reunajärjestelmän integraatioon on jaettu tässä tutkielmassa kolmeen ryhmään:
+Reunalaskenta-arkkitehtuurien ehdottamat tavat mobiiliverkon ja reunajärjestelmän integraatioon on tässä tutkielmassa jaettu kolmeen ryhmään:
 
 %Useat reunalaskentaan liittyvät arkkitehtuurit on suunniteltu integroitaviksi osaksi mobiiliverkkoa.
 %Motivaatio on ilmeinen, koska lähes kaikki mobiiliverkossa toimivat laitteet kuuluvat reunalaskennan kohderyhmään.
@@ -34,14 +36,14 @@ Reuna-arkkitehtuurien ehdottamat tavat mobiiliverkon ja reunajärjestelmän inte
 
 \begin{itemize}
 \item \textbf{Suorat integraatiot} sisältävät uusien toimintojen lisäämistä osaksi mobiiliverkkoa. Tämänkaltainen ratkaisu edellyttää muutoksia myös olemassa olevien komponenttien toimintaan. 
-\item \textbf{Epäsuorat integraatiot} tarjoavat reunalaskentaa mobiiliverkon ulkopuolella. Ei edellytä toiminnallisia muutoksia mobiiliverkkoon, mutta saattaa edellyttää muita mobiiliverkon muutoksia.
+\item \textbf{Epäsuorat integraatiot} tarjoavat reunalaskentaa mobiiliverkon ulkopuolella. Ne eivät edellytä toiminnallisia muutoksia mobiiliverkkoon, mutta saattaa edellyttää muita mobiiliverkon muutoksia.
 \item \textbf{Läpinäkyvät integraatiot} vaativat muutoksia mobiiliverkkoon, mutta eivät vaadi muutoksia olemassa olevien komponenttien toimintaan.
 \end{itemize}
 
-Suorat integraatiot edustavat niiden ratkaisujen joukkoa jotka muokkaavat olemassa olevan mobiiliverkkoarkkitehtuuria.
+Suorat integraatiot edustavat niiden ratkaisujen joukkoa, jotka muokkaavat olemassa olevan mobiiliverkkoarkkitehtuuria.
 Näiden ratkaisujen voidaan olettaa olevan kalleimpia, koska yhteistoiminnallisten toimijoiden lisääminen olemassa olevaan infrastruktuuriin vaatii muidenkin toimijoiden päivittämistä.
 Pääasiassa nämä ratkaisut tähtäävät lisäämään reunalaskentaa viidennen generaation mobiiliverkkoihin, mutta myös LTE:hen pohjautuvia ratkaisuja on esitetty.
-Koska viidennen generaation määrittelytyö on vielä kesken, ehdotetut ratkaisut rakentuvat osittain oletuksien päälle.
+Koska viidennen generaation määrittelytyö on vielä kesken, siihen ehdotetut ratkaisut rakentuvat osittain oletuksien päälle.
 Esimerkkinä suorasta integraatiosta on CONCERT (esitellään kappaleessa \ref{concert}). Suora integraatio mahdollistaa reunalaskennan tuomisen niin lähelle reunaa kuin mahdollista.
 
 Epäsuoralla integraatiolla tarkoitetaan ratkaisuja, joiden pääasiallinen toiminnallisuus on sijoitettu mobiiliverkkoarkkitehtuurin ulkopuolelle. 
@@ -54,6 +56,6 @@ Läpinäkyvässä ratkaisussa mobiiliverkko ja reunajärjestelmä eivät jaa hal
 Läpinäkyvyys tarkoittaa käytännössä, että johonkin kohtaa mobiiliverkon sisäisiä yhteyksiä, lisätään monitori, joka mahdollistaa tietoliikenteen seuraamisen ja muokkaamisen. 
 Monitorin tehtävänä on tarkkailla mobiiliverkon tapahtumia sekä ohjata haluttu tietoliikenne reunalaskennalle.
 Monitoritoiminnallisuuden toteuttamisen helpottamiseksi käytössä on tai käyttöön oletetaan SDN, NFV tai molemmat.
-Vaikka läpinäkyvillä ratkaisuilla ei ole kommunikaatiorajapintaa mobiiliverkon hallinnollisiin toimijoihin, niille oletetaan yhteys mobiiliverkon sisäiseen verkkoon.
-Tämä sitoo ne osaksi mobiiliverkon infrastruktuuria ja käytännössä tämä tarkoittaa, että reunajärjestelmää ylläpitää mobiiliverkon operaattori. 
+Vaikka läpinäkyvillä ratkaisuilla ei ole kommunikaatiorajapintaa mobiiliverkon hallinnollisiin toimijoihin, niille oletetaan yhteys mobiiliverkon sisäiseen verkkoon. Sen avulla voidaan seurata mobiiliverkon hallinnollisia tapahtumia.
+Tämä sitoo reunajärjestelmän huomattavasti heikommin osaksi mobiiliverkkoa kuin suora integraatio.
 Esimerkkinä läpinäkyvästä ratkaisusta on MobiScud, joka käydään tarkemmin läpi kappaleessa \ref{mobiscud}. 
