@@ -3,11 +3,11 @@
 %Tähän voisi laittaa kuvan komponenttien asemmoitumisesta toisiinsa.
 \subsubsection{Asiakaslaite}
 Asiakaslaite (user equipment) on yleisnimitys reunan tai pilven palveluita kuluttavalla laitteelle.
-Asiakaslaite -käsitettä ei ole rajattu mihinkään tiettyihin laitteisiin ja asiakaslaite voikin olla esimerkiksi älypuhelin, älylasit tai verkkoyhteydellä varustettu auto. 
+Asiakaslaite käsitettä ei ole rajattu mihinkään tiettyihin laitteisiin ja asiakaslaite voikin olla esimerkiksi älypuhelin, älylasit tai verkkoyhteydellä varustettu auto. 
 Asiakaslaitteiden yhdistävänä tekijänä on siis jonkinlainen yhteys reuna- tai pilvipalveluihin. Yleisesti asiakaslaitteen käyttämä yhteys on tyypiltään langaton. 
 Yksinkertaisuuden vuoksi tässä tutkielmassa asiakaslaitteen voi ajatella älypuhelimena, jollei toisin mainita.
 
-Verkkohierarkian näkökulmasta asiakaslaitteet ovat lehtisolmuja. Tämä tarkoittaa että asiakaslaitteet toimivat ainoastaan palveluiden kuluttajina eivätkä siis tarjoa itse palveluita. Myöskään kulutettavien palveluiden tyypillä ei ole juurikaan merkitystä, kun asiaa käsitellään infrastruktuuri tai arkkitehtuuritasolla.
+Verkkohierarkkian näkökulmasta asiakaslaitteet ovat lehtisolmuja. Tämä tarkoittaa että asiakaslaitteet toimivat ainoastaan palveluiden kuluttajina eivätkä siis tarjoa itse palveluita. Myöskään kulutettavien palveluiden tyypillä ei ole juurikaan merkitystä, kun asiaa käsitellään infrastruktuuri- tai arkkitehtuuritasolla.
 
 Konkreettinen esimerkki asiakaslaitteesta, joka hyödyntää reunapalvelua, voisi olla jokin ajoneuvo.
 Ajoneuvolla on mobiiliyhteys reunapalveluun, jonka tarkoitus on välittää tietoa liikenteestä muille ajoneuvoille. Esimerkiksi tilanteessa jossa edellä on ruuhkaa, voitaisiin muille lähistöllä oleville ajoneuvoille välittää tieto tästä, jolloin voidaan valita jokin toinen reitti määränpäähän.
@@ -25,14 +25,14 @@ Lopuksi esitellään pääasiassa ohjelmallisella tasolla ilmenevät toimijat re
 
 
 \paragraph{Reuna-alue} 
-Reunalla viitataan alueeseen, joka alkaa asiakaslaitteen yhteyspisteestä. Tämä yhteyspiste voi olla esimerkiksi WLAN-tukiasema tai mobiiliverkon tukiasema. Tästä ensimmäisestä yhteyspisteestä reuna-alue laajenee kohti runkoverkkoa ja pilveä.
-Kuvassa \ref{fig:asiakasedgecloud} reuna on kuvattu alkavan mobiiliverkon tukiasemasta tai WLAN-tukiasemasta.
+Reunalla tai reuna-alueella viitataan alueeseen, joka alkaa asiakaslaitteen yhteyspisteestä. Tämä yhteyspiste voi olla esimerkiksi WLAN-tukiasema tai mobiiliverkon tukiasema. Tästä ensimmäisestä yhteyspisteestä reuna-alue laajenee kohti runkoverkkoa ja pilveä.
+Kuvassa \ref{fig:asiakasedgecloud} reuna on kuvattu alkavan mobiiliverkon tukiasemasta tai WLAN-tukiasemasta ja laajenevan pilveä kohti.
 Joidenkin näkemyksien mukaan myös asiakaslaitteet luetaan osaksi reunaa, tällöin niihin viitataan termillä reunalaite (edge device) \cite{garcia}.
 Tämän tutkielman puitteissa asiakaslaitteet luetaan omaksi osakseen reuna-alueen toisella laidalla.
-Reunan laajuudelle ei siis ole yksiselitteistä määritelmää, vaan termiä usein sovelletaan käytettävän kontekstin mukaan siten, että reuna-alue rajautuu kontekstissa esiintyvien toimijoiden mukaan edellä mainitulle välille.
+Reunan laajuudelle ei siis ole yksiselitteistä määritelmää, vaan termiä usein sovelletaan käytettävän kontekstin mukaan siten, että reuna-alue rajautuu kontekstissa esiintyvien toimijoiden mukaan edellä kuvatulle välille.
 Esimerkiksi mobiiliverkon tukiasemien yhteyteen rakennettua reunajärjestelmää käsiteltäessä, reunalla tarkoitetaan ainoastaan reunajärjestelmän asiakaslaitteita palvelevien osien muodostamaa vyöhykettä. 
 Kuten jo aiemmin mainittu, reunan keskeisenä etuna muihin palveluihin voidaan pitää reunapalveluiden ja asiakaslaitteen välisen viiveen vähäisyyttä.
-Yleisenä nyrkkisääntönä reunalle voidaankin pitää verkkoyhteyksien viivettä suhteessa muuhun internettiin, koska reuna-alueella palveluiden viiveiden tulisi siis olla muuta internettiä nopeampia. Toisin sanoen reunan palveluiden tulisi sijaita lähempänä kuin pilvessä sijaitsevien palveluiden.
+Tämän pohjalta yleisenä nyrkkisääntönä reunalle voidaankin pitää verkkoyhteyksien viivettä suhteessa muuhun internettiin, koska reuna-alueella palveluiden viiveiden tulisi siis olla muuta internettiä nopeampia. Toisin sanoen reunan palveluiden tulisi sijaita lähempänä kuin pilvessä sijaitsevien palveluiden.
 
 \begin{figure}[tb]
 \includegraphics[width = \textwidth]{reunajarjestelma.eps}
@@ -42,11 +42,11 @@ Yleisenä nyrkkisääntönä reunalle voidaankin pitää verkkoyhteyksien viivet
 
 \paragraph{Reunasolmu} 
 Tämän tutkielman kontekstissa reunasolmulla (mobile edge host) tarkoitetaan yksittäistä reunalaskentaa tarjoavaa entiteettiä\cite{etsirefarch}.
-Reunasolmu -termillä viitataan reunasolmun fyysiseen laitteiston ja reunasolmun toiminnalliseen kokonaisuuteen.
+Reunasolmu termillä viitataan reunasolmun fyysiseen laitteiston ja reunasolmun toiminnalliseen kokonaisuuteen.
 Reunasolmu sisältää reunasovelluksien suorittamiseen tarvittavat resurssit, jotka ovat pääasiassa tavallisia palvelinresursseja kuten laskenta, tallennustila ja verkkoyhteydet.
 Reunasolmu voi koostua esimerkiksi mobiilitukiaseman ja palvelinlaitteiston muodostamasta kokonaisuudesta. 
 Reunasolmun toiminnallinen kokonaisuus sisältää erinäisiä toimintoja, joiden tehtävänä on mahdollistaa reunasovelluksien suorittaminen.
-Tällaisia ovat muun muassa tietoliikenteen reitittäminen ja virtualisointi-alustan tarjoaminen, sekä sen hallinnointi.
+Tällaisia ovat muun muassa tietoliikenteen reitittäminen ja virtualisointialustan tarjoaminen, sekä sen hallinnointi.
 Kuvassa \ref{fig:reunajarjestelma} on esitetty esimerkki reunasolmun sisällä olevista entiteeteistä. 
 Seuraavaksi käsiteltävä reuna-alusta kattaa osan reunasolmun toiminnoista.
 
@@ -78,7 +78,7 @@ Reunalaskenta puolestaan viittaa reunajärjestelmän palveluiden käyttämiseen.
 
 Reunalaskennan tyyppejä ovat etälaskenta (offloading) ja asiakaslaitetta tukevat erilaiset reunapalvelut.
 Arkkitehtuuritasolla reunalaskennan tyyppiin ei oteta juurikaan kantaa. 
-Jotkin suunnittelupäätökset voivat kuitenkin vaikuttaa siihen millaisia reunalaskennan tyyppejä reunajärjestelmä lopulta tukee tai painottaa.
+Jotkin suunnittelupäätökset voivat kuitenkin vaikuttaa siihen, millaisia reunalaskennan tyyppejä reunajärjestelmä lopulta tukee tai painottaa.
 Etälaskennalla tarkoitetaan työyksiköiden (task) siirtämistä ulkoiselle laskentaa suorittavalle instanssille, joka palauttaa asiakaslaitteelle laskennan lopputuloksen. 
 Reunajärjestelmässä suoritettava etälaskenta voidaan jakaa kahteen alakategoriaan: kokonaan reunalla suoritettaviin ja osittain reunalla suoritettaviin sovelluksiin\cite{mach17mobile}.
 Kokonaan reunalla suoritettava laskenta on tyypiltään sellaista, että sitä ei voi jakaa useamman instanssin suoritettavaksi.
@@ -95,20 +95,20 @@ Reunapalvelu voi olla tyypiltään asiakaslaitteella suoritettavan sovelluksen t
 \subsubsection{Pilvi}
 %pilven alk peräinen määritelmä
 Armbrust et al. esittävät artikkelissaan määritelmän pilvelle \cite{armbrust2010view}. 
-Pilvellä viitataan sekä pilvessä tuotettaviin palveluihin, että itse järjestelmään.
+Pilvellä viitataan sekä pilvessä tuotettaviin palveluihin, että itse tekniseen järjestelmään.
 Järjestelmällä tarkoitetaan pilvialustaa, joka mahdollistaa palveluiden tuottamisen.
 Artikkelin mukaan pilven tuottamisen yhtenä keskeisimpänä mahdollistajana on toiminut edullisille sijainneille rakennetut suuret palvelinsalit.
 Toisin sanottuna pilvipalvelut tuotetaan palvelinsaleissa, jotka ovat keskitettyjä ja sijaitsevat kauempana asutuksesta. 
 
-Keskeinen osa pilvi paradigmaa on myös tapa, jolla palveluita tuotetaan.
+Keskeinen osa pilven paradigmaa on myös tapa, jolla palveluita tuotetaan.
 Pilvialusta tarjoaa asiakkailleen mahdollisuuden skaalata palveluitaan näennäisesti äärettömyyksiin.
 Tämän lisäksi aika, jossa käytössä olevien resurssien lisäys tai poisto voidaan tehdä, on huomattavasti lyhyempi verrattuna perinteiseen palvelinsaliin, jossa palvelun käyttäjä omistaisi itse palvelun tuottamiseen käytettävän laitteiston.
 Tässä tutkielmassa pilvellä viitataan kuitenkin enemmänkin järjestelmän rakenteeseen ja sijaintiin, kuin palveluiden tuottamiseen käytettävään malliin.
 
-Reunan ei ole tarkoitus korvata pilveä, vaan täydentää sitä. Myöskään pilven ja reunan välinen raja ei ole tarkka. Tässä tutkielmassa pilvellä tarkoitetaan suhteessa reunaa kauempana sijaitsevia palveluita. Pilvi ulottuu verkon ytimestä kohti asiakaslaitetta ja saattaa olla osittain päällekkäin reunan kanssa. Kuten aiemmin mainittu, reuna lähestyy verkon ydintä asiakaslaitteen suunnasta. 
+Reunan ei ole tarkoitus korvata pilveä, vaan täydentää sitä. Pilven ja reunan välinen raja ei ole tarkka. Tässä tutkielmassa pilvellä tarkoitetaan suhteessa reunaa kauempana tuotettuja palveluita. Pilvi ulottuu verkon ytimestä kohti asiakaslaitetta ja saattaa olla osittain päällekkäin reunan kanssa. Vastoin kuin aiemmin mainittu reuna, joka lähestyy verkon ydintä asiakaslaitteen suunnasta. Kuvassa \ref{fig:asiakasedgecloud} esitetty reunan ja pilven laajenemissuunnat.
 
 Pilven ja reunan väliin on ehdotettu vielä yhtä toteutusparadigmaa – sumua (fog computing).
-Sumun tavoitteet ovat samankaltaisia kuin reunan. Sumun tavoitteita ovat muun muassa pienet viiveet, maantieteellisesti hajautettu rakenne ja langattomien laitteiden palvelu \cite{bonomi2012fog}. Sumun on tarkoitus olla hieman kuten pilvi, mutta hajautetumpana ja pilveen verrattuna huomattavasti lähempänä käyttäjää. Reunaan verrattuna sumu on hieman kuin reuna, joka on viety kauemmaksi verkon reunasta.
+Sumun tavoitteet ovat samankaltaisia kuin reunan. Sumun tavoitteita ovat muun muassa pienet viiveet, maantieteellisesti hajautettu rakenne ja langattomien laitteiden palvelu \cite{bonomi2012fog}. Sumun on tarkoitus olla hieman kuten pilvi, mutta hajautetumpana ja pilveen verrattuna huomattavasti lähempänä käyttäjää. Reunaan verrattuna sumu on hieman samankaltainen, mutta vietynä kauemmaksi verkon reunasta.
 Sumua ei käsitellä tämän enempää tässä tutkielmassa, vaan keskitytään lähempänä reunaa sijaitsevaan laskentaan.
 
 
@@ -118,23 +118,23 @@ Sumua ei käsitellä tämän enempää tässä tutkielmassa, vaan keskitytään 
 
 \input{mobiiliverkko}
 
-\subsection{Reuna-arkkitehtuuri}
+\subsection{Reunalaskenta-arkkitehtuuri}
 %Määrittele mikä on reuna-arkkitehtuuri
 
 %REUNA-ARKKITEHTUURI ON JOUKKO SUUNNITTELUPÄÄTÖKSIÄ!
 
 Tässä tutkielmassa käsiteltävät arkkitehtuurit koostuvat oletusarkkitehtuurin (framework) tai suunnittelumallin (design model) tyylisistä arkkitehtuurikuvauksista. 
 Oletusarkkitehtuuri jakaa järjestelmän jonkin tehtävän toteuttaviin kokonaisuuksiin, kuten komponentteihin ja moduuleihin \cite{ohark}. 
-Suunnittelumallit puolestaan kuvaavat tarkemmin järjestelmän komponentteja sekä niiden toimintoja. Suunnittelumallit ovat kuitenkin ainoastaan osajoukko suunnittelupäätöksistä \cite{ohark2}, joten ne jättävät osan päätöksistä toteuttajalle. Lisäksi suunnittelumallit kuvaavat järjestelmää ainoastaan jollain tietyllä abstraktiotasolla ja koko järjestelmän kattavaan kuvaamiseen tarvittaisiin useita sisäkkäisiä ja hierarkkisia suunnittelumalleja. 
-Tässä tutkielmassa käsiteltävät reuna-arkkitehtuurit ovat korkean tason luonnehdintoja järjestelmän ja sen osien toiminnasta, jossain tietyssä ympäristössä.
-Myös ETSI:n MEC referenssiarkkitehtuuri \cite{etsirefarch} sisältää vaatimusmaisesti esitetyt tarvittavat toimet, mutta ei kuvaa niiden toteutusta.
+Suunnittelumallit puolestaan kuvaavat tarkemmin järjestelmän komponentteja sekä niiden toimintoja. Suunnittelumallit ovat kuitenkin ainoastaan osajoukko suunnittelupäätöksistä \cite{ohark2}, joten ne jättävät osan päätöksistä toteuttajalle. Lisäksi suunnittelumallit kuvaavat järjestelmää ainoastaan jollain tietyllä abstraktiotasolla ja koko järjestelmän kattavaan kuvaamiseen tarvittaisiin useita sisäkkäisiä ja hierarkkisia suunnittelumalleja \cite{ohark2}. 
+Tässä tutkielmassa käsiteltävät reunalaskenta\hyp arkkitehtuurit ovat korkean tason luonnehdintoja järjestelmän ja sen osien toiminnasta jossain tietyssä ympäristössä.
+Myöhemmin tutkielmassa esitettävä ETSI:n MEC spesifikaatio sisältää vaatimusmaisesti esitettyinä tarvittavat toimet, mutta eivät kuvaa niiden toteutusta.
 Toisin sanoen tutkielmassa käsiteltävät arkkitehtuurit kattavat vain osajoukon kaikista järjestelmän toteuttamiseksi tarvittavista suunnittelupäätöksistä.
  
-Reuna-arkkitehtuurissa toiminnalliset osat on jaettu loogisiin kokonaisuuksiin, eli tehtävien mukaan kasattuihin komponentteihin. Reuna-arkkitehtuurit asettavat rajoitteita myös toimintojen fyysiselle sijoittumiselle, jolloin osa toimijoista on jaoteltu fyysisiin komponentteihin. Joskin kappaleessa \ref{nfv} esiteltävä NFV tekee toimintojen fyysisestä sijoittumisesta dynaamisempaa ja vähemmän laitteistoon sidonnaista. 
+Reunalaskenta-arkkitehtuurissa toiminnalliset osat on jaettu loogisiin kokonaisuuksiin, eli tehtävien mukaan kasattuihin komponentteihin. Reunalaskenta\hyp arkkitehtuurit asettavat rajoitteita myös toimintojen fyysiselle sijoittumiselle, jolloin osa toimijoista on jaoteltu fyysisiin komponentteihin. Joskin kappaleessa \ref{nfv} esiteltävä NFV tekee toimintojen fyysisestä sijoittumisesta dynaamisempaa ja vähemmän laitteistoon sidonnaista. 
 %Oletusarkkitehtuuria voidaan hyödyntää varsinaista toteutettavaa järjestelmää suunniteltaessa ja sovellusaluemallit kuvaavat järjestelmän osia suhteessa myös reunajärjestelmää ympäröiviin toimijoihin.
-Kappaleessa \ref{reunatoimijat} käsiteltyjen reunan keskeisten käsitteiden mukaan tässä tutkielmassa reuna-arkkitehtuurit keskittyvät reunasolmun ja reuna-alustan toiminnalliseen määrittelyyn. 
+Kappaleessa \ref{reunatoimijat} käsiteltyjen reunaan liittyvien termien puitteissa, tässä tutkielmassa reunalaskenta-arkkitehtuurit keskittyvät reunasolmun ja reuna-alustan toiminnalliseen määrittelyyn. 
 Tämän lisäksi reunajärjestelmää käsitellään alijärjestelmänä, eli osana suurempaa kokonaisjärjestelmää, joka koostuu muun muassa mobiiliverkosta.
-Kuten jo aiemmin mainittiin reuna-arkkitehtuurit eivät ota kantaa reunasovelluksien toimintaan
+Reunalaskenta\hyp arkkitehtuurit eivät siis tämän tutkielman puitteissa osa kantaa suoritettaviin reunasovelluksiin tai niiden toimintaan.
 
 %Tämän tutkielman puitteissa arkkitehtuurilla tarkoitetaan reuna-alustan ja reunasolmujen muodostamaa järjestelmää. Reuna-alustan toiminnallisuuksia voisi eritellä vielä tarkemmin, etenkin reunasovelluksien hallinnan osalta. Cloudlet on konkreettinen toteutus reuna-alustan reunasovelluksia hallinnoivasta osasta, mutta se ei kata kuin yhden reunasolmun kerrallaan. 
 %Tämän lisäksi olemassa on reunasolmujen välisestä hallinnasta vastaava kerros, tosin tämä kerros voi olla ulkoistettu erillisille hallinnolliselle toimijalle, jolloin hallinnollinen osa reuna-alustasta on varsinaisten reunasolmujen ulkopuolella. 

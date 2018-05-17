@@ -4,43 +4,43 @@
 %%
 Cloudlet on virtuaalikoneita hyödyntävä reuna-alusta ratkaisu \cite{satya09}.
 Tarkemmin ottaen cloudlet on enemmänkin arkkitehtuurielementti kuin kokonainen arkkitehtuuri. Muihin tässä tutkielmassa käsiteltäviin arkkitehtuuriehdotuksiin verrattuna cloudlet onkin hieman suppeamman laajuinen konsepti.
-Sen merkitys reunalaskennan ilmentymisessä on kuitenkin niin huomattava että se käsitellään omana kokonaisuutenaan tässä tutkielmassa.
+Sen merkitys reunalaskennan ilmentymisessä on kuitenkin niin huomattava, että se käsitellään omana kokonaisuutenaan tässä tutkielmassa.
 Seuraavaksi käsitellään cloudletin perustoiminnallisuutta sekä toimintaperiaatteita.
 %%
 
 Cloudletin toiminta perustuu käyttäjäkohtaisten virtuaalikoneiden suorittamiseen reunasolmulla.
 Virtuaalikoneiden käyttö tuo järjestelmään useita haluttuja ominaisuuksia.
 Koska cloudletin tapauksessa reunalaskennan oletetaan olevan ainoastaan hetkellistä tai väliaikaista\cite{satya09}, on virtuaalikoneinstanssien käyttö luonnollista.
-Virtuaalikoneet tarjoavat erinomaisen tavan jakaa suoritusalustan resursseja käyttäjäkohtaisille instansseille. 
-Koska virtuaalikoneet eivät ole tiukasti sidoksissa suoritusalustaan, voidaan niitä ainakin teoriassa siirrellä helposti.
+Virtuaalikoneet tarjoavat helpon tavan jakaa suoritusalustan resursseja käyttäjäkohtaisille instansseille. 
+Lisäksi koska virtuaalikoneet eivät ole tiukasti sidoksissa suoritusalustaan, voidaan niitä ainakin teoriassa siirrellä helposti.
 Tietoturva näkökulmasta virtuaalikoneet tarjoavat myös vahvan eristyksen jokaiselle virtuaalikoneinstanssille. \cite{ha2015adaptive} 
-Lisäksi virtuaalikone ei ota kantaa suoritettavaan ohjelmistoon, jolloin se tarjoaa valinnanvapauden ohjelmointikielten ja käyttöjärjestelmän suhteen
+Lisäksi virtuaalikone ei ota kantaa suoritettavaan ohjelmistoon, jolloin se tarjoaa valinnanvapauden ohjelmointikielten ja käyttöjärjestelmän suhteen.
 
 Vaikka virtuaalikoneet ovat helposti alustalta toiselle siirrettävässä muodossa, on otettava huomioon reunakonteksti. Tavallinen virtuaalikoneen tilavaatimus muodostuu virtuaalisesta kovalevystä, muistin kopiosta, prosessorin tilatiedosta ja metatiedoista.  
-Virtuaalikoneiden koot vaihtelevat, mutta esimerkkitapauksissa Ha et al ja Satyanarayanan et al käyttämien virtuaalikoneiden suuruus oli 8GB kovalevyä ja  1GB RAM \cite{ha2013just, satya09}. Reunaympäristössä tämän kokoisten tiedostojen siirtely aiheuttaisi varmasti ruuhkaa ja odottelua.
-Tämän kokoisten virtuaalikoneiden siirtely vaatii siis aikaa ja kaistaa. Myöskään näin suurten tiedostojen tallentaminen ei ole erityisen mielekäs vaihtoehto.
-Alkuperäisen cloudlet ehdotuksen keskeinen sisältö onkin optimoida reunalaskennassa käytettävien virtuaalikoneiden kokoa siten että niiden tallentaminen, sekä siirtäminen olisi mielekästä \cite{satya09}.
+Virtuaalikoneiden koot vaihtelevat, mutta esimerkkitapauksissa Ha et al ja Satyanarayanan et al käyttämien virtuaalikoneiden suuruus oli 8GB kovalevy ja  1GB RAM \cite{ha2013just, satya09}. Reunaympäristössä tämän kokoisten tiedostojen siirtely aiheuttaisi varmasti ruuhkaa ja odottelua.
+Virtuaalikoneiden siirtely vaatii siis aikaa ja kaistaa. Myöskään näin suurten virtuaalikoneiden säilöminen reunalla ei ole erityisen mielekäs vaihtoehto.
+Alkuperäisen cloudlet ehdotuksen keskeinen sisältö onkin optimoida reunalaskennassa käytettävien virtuaalikoneiden kokoa, siten että niiden tallentaminen sekä siirtäminen olisi mielekästä \cite{satya09}.
 
 Cloudletin keskeinen oivallus on käyttää virtuaalikoneissa yhteistä pohjaa (base) ja erottaa pohjasta käytön aikana muuttuneet osat erilliseksi pinnoitteeksi (VM overlay).
-Pohjalla tarkoitetaan virtuaalikoneen lähtötilaa, joka voidaan uudelleen käyttää useamman käyttäjän virtuaalikoneiden käyttöönotossa.
+Pohjalla tarkoitetaan virtuaalikoneen lähtötilaa, jota voidaan uudelleenkäyttää useamman käyttäjän virtuaalikoneiden käyttöönotossa.
 Käytön aikana pohjana toimineeseen virtuaalikoneeseen tulee muutoksia käyttäjän toiminnan mukaan, esimerkiksi asennettujen sovelluksien osalta. 
 Näiden käyttäjän tekemien muutoksien seurauksena tallennustilan ja muistin tila eroaa joiltain osin pohjan mukaisesta lähtötilasta. 
 Kun käyttäjä lopettaa virtuaalikoneen käytön, cloudlet järjestelmä alkaa muodostamaan käyttäjäkohtaista pinnoitetta. 
 Yksinkertaistettuna pinnoite tehdään siten, että käyttäjän virtuaalikonetta verrataan pohjana toimineeseen virtuaalikone-kuvaan. Tämän jälkeen muuttuneet osat kerätään omaan tiedostoonsa ja tämä tiedosto pakataan pienemmän tiedostokoon saavuttamiseksi.
-Satayanaran et al ensimmäisessä cloudletteja käsittelevässä julkaisussa \cite{satya09} virtuaalikoneen muutoksien tallentaminen pinnoitteeksi tuottaa noin 100-200 megatavun kokoisen tiedoston
-Suhteessa lähtökohtana toimineeseen virtuaalikoneeseen, pinnoite on tiedostokooltaan kertaluokkaa pienempi. \cite{satya09}
+Satayanaran et al ensimmäisessä cloudletteja käsittelevässä julkaisussa \cite{satya09} virtuaalikoneen muutoksien tallentaminen pinnoitteeksi tuottaa noin 100-200 megatavun kokoisen tiedoston.
+Edällä mainittujen virtuaalikoneiden kokoon (noin 9 gigatavua) verrattuna, pinnoite on tiedostokooltaan kertaluokkaa pienempi.
 
 Alkuperäisen idean mukaan pinnoitteen erottamisen jälkeen, pinnoite voitaisiin siirtää joko pilveen tai asiakaslaitteelle odottamaan seuraavaa käyttökertaa. Ideaa on kuitenkin jatkojalostettu tukemaan live migraatiota, joka käsitellään tämän kappaleen loppupuolella.
 
 Kun käyttäjä haluaa jälleen ottaa virtuaalikoneensa käyttöön alkaa niin sanottu dynaaminen virtuaalikone synteesi (Dynamic VM synthesis), jossa pohja ja pinnoite yhdistetään suorituskelpoiseksi virtuaalikoneeksi.
-Pinnoitteen sisältämät muutokset palautetaan virtuaalikonepohjaan jotta se vastaisi tilaa johon käyttäjä oli sen jättänyt. Pohjan luomiseen, pinnoitteen erottamiseen ja dynaamiseen virtuaalikone synteesiin liittyy huomattava määrä yksityiskohtia joita ei käsitellä tässä tutkielmassa. Niiden sisältämistä yksityiskohdista on mahdollista lukea lisää \cite{ha2013just} tutkielmasta. 
+Pinnoitteen sisältämät muutokset palautetaan virtuaalikonepohjaan, jotta se vastaisi tilaa johon käyttäjä on sen jättänyt. Pohjan luomiseen, pinnoitteen erottamiseen ja dynaamiseen virtuaalikone synteesiin liittyy huomattava määrä yksityiskohtia, joita ei käsitellä tässä tutkielmassa. Niiden sisältämistä yksityiskohdista on mahdollista lukea lisää julkaisusta \cite{ha2013just}. 
 
-Tiedostokooltaan pienempi virtuaalikoneen tallennusmuoto ei kuitenkaan tule ilman kustannuksia. Pinnoitteen erottaminen ja pakkaaminen vaativat huomattavan määrän laskentaresursseja. Alkuperäisessä ideassa pinnoitteen luominen oli prosessi joka voitiin tehdä ilman aikarajoitetta. Kun järjestelmään lisättiin VM handoff, siihen kuluva aika muuttui merkittäväksi tekijäksi. Myös dynaaminen virtuaalikoneen synteesi vaatii resursseja. Jaetussa suoritusympäristössä korkea yleisrasite näkyy muiden samalla laitteistolla tarjottavien palveluiden laadun heikkenemisessä, tässä tapauksessa siis muiden virtuaalikoneiden.
+Tiedostokooltaan pienempi virtuaalikoneen tallennusmuoto ei kuitenkaan tule ilman kustannuksia. Pinnoitteen erottaminen ja pakkaaminen vaativat huomattavan määrän laskentaresursseja. Alkuperäisessä ideassa pinnoitteen luominen oli prosessi, joka voitiin tehdä ilman aikarajoitetta. Kun järjestelmään lisättiin VM handoff, siihen kuluva aika muuttui merkittäväksi tekijäksi. Myös dynaaminen virtuaalikoneen synteesi vaatii resursseja. Jaetussa suoritusympäristössä korkea yleisrasite näkyy muiden samalla laitteistolla tarjottavien palveluiden laadun heikkenemisessä, tässä tapauksessa siis muiden virtuaalikoneiden.
 Lisäksi cloudlet ympäristössä virtuaalikoneen käynnistäminen vaatii virtuaalikoneen syntetisoinnin pohjasta ja pinnoitteesta, joka luonnollisesti vie myös aikaa, eikä virtuaalikone käynnisty yhtä nopeasti kuin perinteinen virtuaalikone. 
 
-Cloudletin toiminnallisuuden edellytyksenä on joukko pohja-aihioita, joita käyttäjät voivat ottaa käyttöön. 
+Lisäksi cloudlet toiminnallisuuden edellytyksenä on joukko pohja-aihioita, joita käyttäjät voivat ottaa käyttöön. 
 Sujuvan toiminnan takaamiseksi reunasolmulla tulisi olla tarvittavat pohjat jo valmiiksi. 
-Eräs toimintamalli on säilöä reunasolmulla ainoastaan suosituimpien pohjien joukko ja tarpeen mukaan puuttuvia pohjia voitaisiin ladata pilvestä lisää.
+Eräs toimintamalli olisi säilöä reunasolmulla ainoastaan suosituimpien pohjien joukko ja tarpeen mukaan puuttuvia pohjia voitaisiin ladata pilvestä lisää.
 
 
 %Tavallisen virtuaalikone-instanssin suuruus tallennettuna on noin 8 gigatavua.
@@ -67,23 +67,23 @@ Eräs toimintamalli on säilöä reunasolmulla ainoastaan suosituimpien pohjien 
 
 \subsubsection*{VM handoff} \label{vmhandoff}
 
-Cloudlet ympäristössä suoritusaikaista virtuaalikoneen siirtoa kutsutaan termillä \textit{VM handoff} \cite{ha2015adaptive}. Cloudletiltä toiselle tehtävä live migraatio muistuttaa toiminnaltaan mobiiliverkon tukiasemien välistä handoffia, mutta sovellettuna virtuaalikoneisiin.
+Cloudlet ympäristössä suoritusaikaista virtuaalikoneen siirtoa kutsutaan termillä \textit{VM handoff} \cite{ha2015adaptive}.Cloudlettien reunasolmulta toiselle tehtävä live migraatio muistuttaa toiminnaltaan mobiiliverkon tukiasemien välistä handoffia, koska cloudlettien oletetaan seuraavan asiakaslaitetta samoin kuin yhteys mobiiliverkossa.
 Kappaleessa \ref{livemigraatio} esitettyjen live migraation metriikkojen osalta VM handoff eroaa palvelinsalista. VM handoff tavoittelee mahdollisimman lyhyttä migraation kestoa, verrattuna palvelinsalien mahdollisimman lyhyeen katkon kestoon.
 Syyksi tälle esitetään että asiakaslaitteen ja virtuaalikoneen heikentyneen yhteyden korjaaminen on korkeammalla prioriteetilla kuin varsinaisen katkon keston lyhentäminen \cite{ha2015adaptive}.
-Toisin kuin palvelinsaliympäristössä olevat lähiverkkoyhteydet, cloudlettien välinen yhteys ei välttämättä ole kovin nopea. 
+Toisin kuin palvelinsaliympäristössä käytössä olevat lähiverkkoyhteydet, cloudlettien välinen yhteys ei välttämättä ole kovin nopea. 
 Perinteisen live migraation iteratiivinen toiminta ole hitailla yhteyksillä kannattavaa. 
 Viimeinen ero tavallisen live migraation ja VM handoffin välillä on cloudletin pohjaan ja pinnoitteeseen perustuva toimintamalli.
 
 Cloudletit voivat hyödyntää yhteistä pohjaa VM handoffin yhteydessä, jolloin siirrettävän tiedon määrä on vähäisempi. 
 Etenkin hitailla yhteyksillä siirrettävän tiedon määrän minimointi on keskeisiä tavoitteita. 
-VM handoffin tehokkuutta on vertailtu tavalliseen live migraatioon Ha et al tutkimuksessa \cite{ha2017you}. Siinä todettiin että etenkin hitailla yhteyksillä VM handoff saavutti merkittävästi lyhyemmän migraation keston ja selvisi lähes kaikissa tapauksissa huomattavasti pienemmällä tiedonsiirrolla. VM handoffin aiheuttaman katkon kesto oli hieman pidempi verrattuna live migraatioon. 
-VM handoff on kuitenkin erittäin resurssi-intensiivinen toimenpide, eikä tutkimuksessa otettu tarkemmin kantaa sen vaikutukseen reunasolmun muuhun toiminnallisuuteen.
-Tutkimuksessa ei oteta kantaa useamman virtuaalikoneen siirtäminen samanaikaisesti. 
+VM handoffin tehokkuutta on vertailtu tavalliseen live migraatioon tutkimuksessa \cite{ha2017you}. Siinä todettiin, että etenkin hitailla yhteyksillä VM handoff saavutti merkittävästi lyhyemmän migraation keston ja selvisi lähes kaikissa tapauksissa huomattavasti pienemmällä tiedonsiirrolla. VM handoffin aiheuttaman katkon kesto oli hieman pidempi verrattuna live migraatioon. 
+VM handoff on kuitenkin erittäin resurssi-intensiivinen toimenpide, eikä tutkimuksessa otettu tarkemmin kantaa sen vaikutukseen reunasolmun muuhun toiminnallisuuteen. 
+Tutkimuksessa ei myöskään oteta kantaa useamman virtuaalikoneen siirtäminen samanaikaisesti. 
 %migraatiotulva
 %Kpl jossa oikei toteutuksia
 \subsubsection*{Yhteenveto}
-Cloudlet kattaa reuna-arkkitehtuurista vain pienen osan, joka keskittyy yksittäisellä reunasolmulla suoritettavaan reuna-alustaan. Cloudletin keskeinen toiminnallisuus sisältää virtuaalikoneita hyödyntävän toimintaympäristön joka tukee laskennan suoritusaikaista siirtoa cloudletiltä toiselle VM handoff tekniikalla. 
+Cloudlet kattaa reunalaskenta-arkkitehtuurista vain pienen osan, joka keskittyy yksittäisellä reunasolmulla suoritettavaan reuna-alustaan. Cloudletin keskeinen toiminnallisuus sisältää virtuaalikoneita hyödyntävän toimintaympäristön, joka tukee laskennan suoritusaikaista siirtoa reunasolmulta toiselle VM handoff tekniikalla. 
 Cloudlet jättää toimintaympäristön avoimeksi eikä siis sitoudu esimerkiksi mobiiliverkkoihin.
 Cloudlet ei myöskään esitä keinoja, joilla tietoliikenne ohjataan virtuaalikoneelle tai kuinka yhteys siirrettyyn virtuaalikoneeseen säilytetään. 
-Näistä syistä johtuen cloudlettiä voidaan pitää hyvin suppeana reunalaskennan ratkaisuna, joka vaatii ympärilleen hallinnollisia toimintoja, kuten seuraavaksi käsiteltävät reuna-arkkitehtuurit.
+Näistä syistä johtuen cloudlettiä voidaan pitää hyvin suppeana reunalaskennan ratkaisuna, joka vaatii ympärilleen hallinnollisia toimintoja, kuten seuraavaksi käsiteltävät reunalaskenta-arkkitehtuurit.
 %Lisätään kpl jossa käsitellään konkreettisia toteutuksia
