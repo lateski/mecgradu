@@ -10,7 +10,7 @@ Yksinkertaisuuden vuoksi tässä tutkielmassa asiakaslaitteen voi ajatella älyp
 Verkkohierarkian näkökulmasta asiakaslaitteet ovat lehtisolmuja. Tämä tarkoittaa että asiakaslaitteet toimivat ainoastaan palveluiden kuluttajina eivätkä siis tarjoa itse palveluita. Myöskään kulutettavien palveluiden tyypillä ei ole juurikaan merkitystä, kun asiaa käsitellään infrastruktuuri tai arkkitehtuuritasolla.
 
 Konkreettinen esimerkki asiakaslaitteesta, joka hyödyntää reunapalvelua, voisi olla jokin ajoneuvo.
-Ajoneuvolla on mobiiliyhteys reunapalveluun jonka tarkoitus on välittää tietoa liikenteestä muille ajoneuvoille. Esimerkiksi tilanteessa jossa edellä on ruuhkaa, voitaisiin muille lähistöllä oleville ajoneuvoille välittää tieto tästä, jolloin voidaan valita jokin toinen reitti määränpäähän.
+Ajoneuvolla on mobiiliyhteys reunapalveluun, jonka tarkoitus on välittää tietoa liikenteestä muille ajoneuvoille. Esimerkiksi tilanteessa jossa edellä on ruuhkaa, voitaisiin muille lähistöllä oleville ajoneuvoille välittää tieto tästä, jolloin voidaan valita jokin toinen reitti määränpäähän.
 
 \begin{figure}[tb]
 \includegraphics[width = \textwidth]{asiakasedgecloud.eps}
@@ -96,11 +96,11 @@ Reunapalvelu voi olla tyypiltään asiakaslaitteella suoritettavan sovelluksen t
 %pilven alk peräinen määritelmä
 Armbrust et al. esittävät artikkelissaan määritelmän pilvelle \cite{armbrust2010view}. 
 Pilvellä viitataan sekä pilvessä tuotettaviin palveluihin, että itse järjestelmään.
-Järjestelmällä tarkoitetaan pilvi-alustaa, joka mahdollistaa palveluiden tuottamisen.
+Järjestelmällä tarkoitetaan pilvialustaa, joka mahdollistaa palveluiden tuottamisen.
 Artikkelin mukaan pilven tuottamisen yhtenä keskeisimpänä mahdollistajana on toiminut edullisille sijainneille rakennetut suuret palvelinsalit.
 Toisin sanottuna pilvipalvelut tuotetaan palvelinsaleissa, jotka ovat keskitettyjä ja sijaitsevat kauempana asutuksesta. 
 
-Keskeinen osa pilvi paradigmaa on myös tapa jolla palveluita tuotetaan.
+Keskeinen osa pilvi paradigmaa on myös tapa, jolla palveluita tuotetaan.
 Pilvialusta tarjoaa asiakkailleen mahdollisuuden skaalata palveluitaan näennäisesti äärettömyyksiin.
 Tämän lisäksi aika, jossa käytössä olevien resurssien lisäys tai poisto voidaan tehdä, on huomattavasti lyhyempi verrattuna perinteiseen palvelinsaliin, jossa palvelun käyttäjä omistaisi itse palvelun tuottamiseen käytettävän laitteiston.
 Tässä tutkielmassa pilvellä viitataan kuitenkin enemmänkin järjestelmän rakenteeseen ja sijaintiin, kuin palveluiden tuottamiseen käytettävään malliin.
